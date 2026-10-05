@@ -114,8 +114,7 @@ export const PAPER_BAG_DATA: Record<string, BagCategoryData> = {
       { label: "Cosmetics & Perfumes", desc: "Skincare sets & beauty gifts" }
     ],
     colors: [
-      { name: "Brown", hex: "#6E553F" },
-      { name: "Green", hex: "#2E523A" }
+      { name: "White", hex: "#FAF8F5" }
     ],
     faqs: [
       { q: "Is the lamination environmentally friendly?", a: "We offer recyclable film laminates and eco-friendly water-based dispersion coatings upon request." },
@@ -163,8 +162,7 @@ export const PAPER_BAG_DATA: Record<string, BagCategoryData> = {
       { label: "Premium Gifting", desc: "Curated gift suites" }
     ],
     colors: [
-      { name: "Sage Green", hex: "#9CAF88" },
-      { name: "Orange", hex: "#D97724" }
+      { name: "White", hex: "#FAF8F5" }
     ],
     faqs: [
       { q: "Can we print complex images on textured card?", a: "Yes. However, we recommend solid colors, line art, or foil stamps, as heavy textures can slightly diffuse photographic print details." }

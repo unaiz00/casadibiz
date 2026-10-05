@@ -2,88 +2,129 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { SiteHeader, SiteFooter, Breadcrumbs } from "@/components/site-chrome";
-
-export const WRAP_CATEGORIES: Record<
-  string,
-  { title: string; short: string; long: string; image: string }
-> = {
-  "wrapping-paper": {
-    title: "Wrapping Paper",
-    short: "Heavyweight wrapping paper in signature brand colours and prints.",
-    long: "Premium coated and uncoated wrapping paper — printed in your brand palette, foiled and finished for a considered, gift-worthy wrap.",
-    image: "/assets/cats/wraps.png",
-  },
-  "tissue-paper": {
-    title: "Tissue Paper",
-    short: "Delicate tissue paper for a soft, luxurious unboxing layer.",
-    long: "Acid-free tissue paper in solid colours, prints and custom logos — the whisper-soft first layer inside every premium package.",
-    image: "/assets/cats/wraps.png",
-  },
-  "custom-printed-wraps": {
-    title: "Custom Printed Wraps",
-    short: "Fully bespoke printed wraps built around your brand story.",
-    long: "Full-surface printed wraps in your artwork, colours and finishes — from seasonal patterns to signature monograms and campaign designs.",
-    image: "/assets/allimages.jpeg",
-  },
-  "speciality-wraps": {
-    title: "Speciality Wraps",
-    short: "Textured, foiled and finished wraps for standout gifting.",
-    long: "Speciality papers with foil accents, embossed textures and soft-touch coatings — reserved for launches, VIP gifting and hero product moments.",
-    image: "/assets/giftim.jpeg",
-  },
-};
+import { getAllWrapProducts } from "@/data/wraps-data";
 
 export const metadata: Metadata = {
-  title: "Wraps — Wrapping, Tissue, Custom & Speciality | CASA DI BIZ",
-  description: "Explore CASA DI BIZ luxury wrap collections — wrapping paper, tissue, custom printed and speciality wraps for premium brands.",
+  title: "Luxury Wrapping Paper & Tissue Paper | CASA DI BIZ",
+  description:
+    "Explore CASA DI BIZ luxury wrapping papers, tissue paper and bespoke wrapping materials crafted for jewellery, gift and premium packaging presentation.",
+  alternates: {
+    canonical: "https://casadibiz.com/wraps",
+  },
   openGraph: {
-    title: "Luxury Wraps by CASA DI BIZ",
-    description: "Wrapping paper, tissue, custom printed and speciality wraps for premium brands.",
+    title: "Luxury Wrapping Paper & Tissue Paper | CASA DI BIZ",
+    description:
+      "Explore CASA DI BIZ luxury wrapping papers, tissue paper and bespoke wrapping materials crafted for jewellery, gift and premium packaging presentation.",
+    url: "https://casadibiz.com/wraps",
+    siteName: "CASA DI BIZ",
+    images: [{ url: "/assets/cats/wraps.png" }],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Luxury Wrapping Paper & Tissue Paper | CASA DI BIZ",
+    description:
+      "Explore CASA DI BIZ luxury wrapping papers, tissue paper and bespoke wrapping materials crafted for jewellery, gift and premium packaging presentation.",
+    images: ["/assets/cats/wraps.png"],
   },
 };
 
 export default function WrapsPage() {
-  const items = Object.entries(WRAP_CATEGORIES).map(([slug, c]) => ({ slug, ...c }));
+  const wrapProducts = getAllWrapProducts();
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        "@id": "https://casadibiz.com/wraps#webpage",
+        name: "Luxury Wrapping Paper & Tissue Paper | CASA DI BIZ",
+        description:
+          "Explore CASA DI BIZ luxury wrapping papers, tissue paper and bespoke wrapping materials crafted for jewellery, gift and premium packaging presentation.",
+        url: "https://casadibiz.com/wraps",
+        isPartOf: {
+          "@type": "WebSite",
+          name: "CASA DI BIZ Luxury Packaging",
+          url: "https://casadibiz.com",
+        },
+      },
+      {
+        "@type": "ItemList",
+        "@id": "https://casadibiz.com/wraps#itemlist",
+        name: "CASA DI BIZ Wrapping Paper Materials",
+        itemListElement: wrapProducts.map((prod, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          name: prod.name,
+          url: `https://casadibiz.com/wraps/${prod.categorySlug}/${prod.slug}`,
+          image: `https://casadibiz.com${prod.image.src}`,
+        })),
+      },
+    ],
+  };
+
   return (
-    <div className="min-h-screen bg-ivory">
+    <div className="min-h-screen bg-white text-navy">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <SiteHeader />
       <main>
-        <section className="w-full bg-cream">
-          <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12 pt-10 pb-6 sm:pt-14">
+        {/* HERO SECTION */}
+        <section className="w-full bg-white border-b border-[#0F2744]/5">
+          <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12 pt-6 pb-4 sm:pt-14 sm:pb-6">
             <Breadcrumbs items={[{ label: "Home", to: "/" }, { label: "Wraps" }]} />
-            <p className="mt-8 text-[11px] tracking-[0.32em] text-gold font-medium">THE WRAP COLLECTION</p>
-            <h1 className="mt-3 font-display text-4xl sm:text-5xl md:text-6xl text-navy leading-[1.05]">
-              Wraps worth <span className="italic text-gradient-gold">unwrapping.</span>
+            <p className="mt-3.5 sm:mt-8 text-[10px] sm:text-[11px] tracking-[0.3em] sm:tracking-[0.32em] text-gold font-medium uppercase">
+              THE WRAP COLLECTION
+            </p>
+            <h1 className="mt-2 sm:mt-3 font-display text-[28px] sm:text-5xl md:text-6xl text-navy leading-[1.12] sm:leading-[1.05]">
+              Wrapping papers crafted to make unboxing{" "}
+              <span className="italic text-gradient-gold">unforgettable.</span>
             </h1>
-            <p className="mt-5 max-w-2xl text-sm sm:text-base text-muted-luxe leading-relaxed">
-              Four signature wrap styles, printed and finished in the papers, colours and foils that fit your brand.
+            <p className="mt-2.5 sm:mt-5 max-w-2xl text-[13px] sm:text-base text-muted-luxe leading-relaxed">
+              Four signature wrapping paper materials, precision-calendered, printed, and finished in the papers, textures, and dimensions tailored to your brand.
             </p>
           </div>
         </section>
 
-        <section className="w-full bg-ivory">
-          <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12 py-12 sm:py-16">
-            <div className="grid gap-6 sm:gap-8 sm:grid-cols-2 lg:grid-cols-4">
-              {items.map((it, i) => (
+        {/* MATERIAL CATALOGUE SECTION */}
+        <section className="w-full bg-white">
+          <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12 pt-6 pb-12 sm:pt-12 sm:pb-16">
+            <div className="mb-4 sm:mb-10">
+              <p className="text-[10px] sm:text-[11px] tracking-[0.3em] sm:tracking-[0.32em] text-gold font-medium uppercase">
+                MATERIAL CATALOGUE
+              </p>
+              <h2 className="mt-1.5 sm:mt-3 font-display text-2xl sm:text-3xl lg:text-4xl text-navy leading-tight">
+                Our Wrapping Paper Materials
+              </h2>
+            </div>
+
+            <div className="grid gap-5 sm:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+              {wrapProducts.map((it, i) => (
                 <Link
                   key={it.slug}
-                  href={`/wraps/${it.slug}`}
-                  className="group flex flex-col bg-cream rounded-[14px] overflow-hidden hover:-translate-y-1.5 transition-all duration-500 animate-fade-up"
+                  href={`/wraps/${it.categorySlug}/${it.slug}`}
+                  className="group flex flex-col bg-[#FAF8F5] border border-[#C7A86A]/25 rounded-[14px] overflow-hidden hover:border-[#C7A86A]/70 hover:-translate-y-1.5 transition-all duration-500 animate-fade-up"
                   style={{ animationDelay: `${i * 0.08}s` }}
                 >
                   <div className="relative overflow-hidden aspect-[4/3] bg-white">
                     <img
-                      src={it.image}
-                      alt={it.title}
+                      src={it.image.src}
+                      alt={it.image.alt}
                       loading="lazy"
                       className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
                     />
                   </div>
-                  <div className="p-5 sm:p-6 flex-1 flex flex-col">
-                    <h3 className="font-display text-xl sm:text-2xl text-navy leading-tight">{it.title}</h3>
-                    <p className="mt-3 text-sm text-muted-luxe leading-relaxed flex-1">{it.short}</p>
-                    <span className="mt-5 inline-flex items-center gap-2 text-[11px] tracking-[0.28em] font-semibold text-gold group-hover:gap-3 transition-all">
-                      EXPLORE COLLECTION <ArrowRight className="h-4 w-4" />
+                  <div className="p-4 sm:p-6 flex-1 flex flex-col">
+                    <h3 className="font-display text-lg sm:text-2xl text-navy leading-tight">
+                      {it.name}
+                    </h3>
+                    <p className="mt-2 sm:mt-3 text-xs sm:text-sm text-muted-luxe leading-relaxed flex-1">
+                      {it.shortDescription}
+                    </p>
+                    <span className="mt-3.5 sm:mt-5 inline-flex items-center gap-2 text-[10px] sm:text-[11px] tracking-[0.25em] sm:tracking-[0.28em] font-semibold text-gold group-hover:gap-3 transition-all">
+                      EXPLORE DETAILS <ArrowRight className="h-4 w-4" />
                     </span>
                   </div>
                 </Link>

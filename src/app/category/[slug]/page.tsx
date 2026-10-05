@@ -16,6 +16,12 @@ interface Props {
   params: Promise<{ slug: string }>;
 }
 
+export async function generateStaticParams() {
+  return Object.keys(CATEGORIES).map((slug) => ({
+    slug,
+  }));
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const c = CATEGORIES[slug] ?? { title: "Category", description: "Luxury packaging by CASA DI BIZ." };

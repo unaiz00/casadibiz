@@ -89,6 +89,58 @@ export default function BoxesPage() {
                 </Link>
               ))}
             </div>
+
+            {/* JEWELLERY BOXES BY CATEGORY */}
+            <div className="mt-20 pt-16 border-t border-border-luxe/60">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-10 gap-4">
+                <div>
+                  <p className="text-[11px] tracking-[0.32em] text-gold font-medium uppercase">BESPOKE JEWELLERY CASES</p>
+                  <h2 className="mt-2 font-display text-3xl sm:text-4xl text-navy">Jewellery Boxes by Category</h2>
+                </div>
+                <span className="text-xs text-muted-luxe font-medium">Bespoke luxury manufacturing</span>
+              </div>
+
+              <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+                {[
+                  { name: "Ring Boxes", slug: "ring-boxes", desc: "Solitaire, eternity, octagonal & contour cases", count: "6 models", image: "/assets/boxim.jpeg" },
+                  { name: "Earring Boxes", slug: "earring-boxes", desc: "Drop, stud, hoop & chandelier presentation", count: "4 models", image: "/assets/imsec2.jpeg" },
+                  { name: "Chain Boxes", slug: "chain-boxes", desc: "Elongated channels for fine chains & collar links", count: "3 models", image: "/assets/goodimm.jpeg" },
+                  { name: "Pendant Boxes", slug: "pendant-boxes", desc: "Square, oval & medallion statement cases", count: "3 models", image: "/assets/allim.jpeg" },
+                  { name: "Bracelet Boxes", slug: "bracelet-boxes", desc: "Slimline tennis lines & wide cuff bolsters", count: "3 models", image: "/assets/imsec1.jpeg" },
+                  { name: "Necklace Boxes", slug: "necklace-boxes", desc: "Grand collar, choker & princess V-neck pads", count: "3 models", image: "/assets/allllllimm.jpeg" },
+                  { name: "Bangle Boxes", slug: "bangle-boxes", desc: "Single, double pair & stacking barrel rolls", count: "3 models", image: "/assets/rigidd.jpeg" },
+                  { name: "Full Set Boxes", slug: "full-set-boxes", desc: "Coordinated 4-piece suites & bridal chests", count: "3 models", image: "/assets/allimages.jpeg" },
+                ].map((cat, idx) => (
+                  <Link
+                    key={cat.slug}
+                    href={`/boxes/${cat.slug}`}
+                    className="group flex flex-col bg-cream border border-border-luxe/60 rounded-[14px] overflow-hidden hover:-translate-y-1.5 transition-all duration-500 shadow-xs"
+                    style={{ animationDelay: `${idx * 0.05}s` }}
+                  >
+                    <div className="relative aspect-[16/10] bg-white overflow-hidden">
+                      <img
+                        src={cat.image}
+                        alt={cat.name}
+                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                        loading="lazy"
+                      />
+                      <div className="absolute top-2.5 right-2.5 bg-navy/85 px-2 py-0.5 rounded text-[9px] font-medium tracking-wider text-cream">
+                        {cat.count}
+                      </div>
+                    </div>
+                    <div className="p-4.5 flex-1 flex flex-col justify-between">
+                      <div>
+                        <h3 className="font-display text-lg text-navy group-hover:text-gold transition-colors">{cat.name}</h3>
+                        <p className="mt-1.5 text-xs text-muted-luxe leading-relaxed">{cat.desc}</p>
+                      </div>
+                      <span className="mt-4 inline-flex items-center gap-1.5 text-[10px] tracking-[0.25em] font-semibold text-gold group-hover:gap-2.5 transition-all">
+                        VIEW MODELS <ArrowRight className="h-3 w-3" />
+                      </span>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
       </main>

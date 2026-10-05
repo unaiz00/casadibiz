@@ -1,8 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  devIndicators: {
-    buildActivity: true,
+  output: "export",
+  trailingSlash: true,
+  images: {
+    unoptimized: true,
   },
+  devIndicators: false,
 };
 
 export default nextConfig;

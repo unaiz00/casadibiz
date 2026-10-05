@@ -38,7 +38,12 @@ const PRODUCT_TYPES: Record<string, string[]> = {
   Boxes: ["Rigid Boxes", "Magnetic Closure Boxes", "Drawer Boxes", "Jewellery Boxes"],
   Bags: ["Paper Bags", "Luxury Shopping Bags", "Boutique Bags", "Gift Bags"],
   Pouches: ["Velvet Pouches", "Satin Pouches", "Cotton Pouches", "Suede Pouches"],
-  Wraps: ["Wrapping Paper", "Tissue Paper", "Custom Printed Wraps", "Speciality Wraps"],
+  Wraps: [
+    "130 GSM Gloss Coated Art Paper",
+    "Flat Matte Velvet Finish Paper",
+    "Recycled Brown Kraft Paper",
+    "17 GSM Luxury Tissue Paper",
+  ],
   Ribbons: ["Satin Ribbons", "Grosgrain Ribbons", "Printed Ribbons", "Custom Ribbons"],
   Collections: [
     "Jewellery Collection",

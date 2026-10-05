@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, HelpCircle, ChevronDown, X, ChevronLeft, ChevronRight, Maximize2, Ribbon } from "lucide-react";
+import { ArrowRight, HelpCircle, ChevronDown, Ribbon } from "lucide-react";
 import { SiteHeader, SiteFooter, Breadcrumbs } from "@/components/site-chrome";
+import PaperBagImageGallery from "@/components/bags/PaperBagImageGallery";
 
 // =====================================================
 // SPECIAL PAPER BAG — PRODUCT CONTENT
@@ -84,8 +85,6 @@ const product = {
 // =====================================================
 
 export default function SpecialPaperPage() {
-  const [activeImageIdx, setActiveImageIdx] = useState(0);
-  const [lightboxOpen, setLightboxOpen] = useState(false);
   const [activeSizeIdx, setActiveSizeIdx] = useState(0);
   const [activeColorIdx, setActiveColorIdx] = useState(0);
   const [openFaqIdx, setOpenFaqIdx] = useState<number | null>(0);
@@ -94,21 +93,6 @@ export default function SpecialPaperPage() {
   const selectedSize = product.sizes[activeSizeIdx]?.value || "";
   const whatsappMsg = `Hello CASA DI BIZ, I would like to request a quote for the ${product.name} (Size: ${selectedSize})`;
   const dynamicWhatsappUrl = `https://wa.me/919995255846?text=${encodeURIComponent(whatsappMsg)}`;
-
-  useEffect(() => {
-    if (!lightboxOpen) return;
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setLightboxOpen(false);
-      if (e.key === "ArrowRight") {
-        setActiveImageIdx((prev) => (prev + 1) % product.images.length);
-      }
-      if (e.key === "ArrowLeft") {
-        setActiveImageIdx((prev) => (prev - 1 + product.images.length) % product.images.length);
-      }
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [lightboxOpen]);
 
   return (
     <div className="min-h-screen bg-[#FAF8F5] font-sans selection:bg-[#C7A86A]/20 selection:text-[#0F2744]">
@@ -134,91 +118,10 @@ export default function SpecialPaperPage() {
 
             {/* LEFT: Product Image Gallery */}
             <div className="lg:col-span-7">
-              {/* Desktop layout: 1 + 2 + 2 */}
-              <div className="hidden md:flex flex-col gap-4">
-                {/* Large full-width image at the top */}
-                <div
-                  onClick={() => {
-                    setActiveImageIdx(0);
-                    setLightboxOpen(true);
-                  }}
-                  className="group relative aspect-[16/10] rounded-md overflow-hidden border border-[#C7A86A]/20 bg-white cursor-zoom-in shadow-xs"
-                >
-                  <img
-                    src={product.images[0].src}
-                    alt={product.images[0].alt}
-                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.02]"
-                    loading="eager"
-                  />
-                  <div className="absolute inset-0 bg-[#0F2744]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <div className="absolute bottom-6 right-6 h-12 w-12 rounded-full bg-[#0F2744]/95 text-[#F6F0E8] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-1">
-                    <Maximize2 className="h-5 w-5 text-[#C7A86A]" />
-                  </div>
-                </div>
-
-                {/* Two equal-sized images side-by-side underneath */}
-                <div className="grid grid-cols-2 gap-4">
-                  {product.images.slice(1, 3).map((img, idx) => (
-                    <div
-                      key={idx + 1}
-                      onClick={() => {
-                        setActiveImageIdx(idx + 1);
-                        setLightboxOpen(true);
-                      }}
-                      className="group relative aspect-[4/3] rounded-md overflow-hidden border border-[#C7A86A]/20 bg-white cursor-zoom-in shadow-xs"
-                    >
-                      <img
-                        src={img.src}
-                        alt={img.alt}
-                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.02]"
-                        loading="lazy"
-                      />
-                      <div className="absolute inset-0 bg-[#0F2744]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                      <div className="absolute bottom-4 right-4 h-10 w-10 rounded-full bg-[#0F2744]/95 text-[#F6F0E8] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-                        <Maximize2 className="h-4 w-4 text-[#C7A86A]" />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Mobile layout: large active image + scrollable thumbnail strip underneath */}
-              <div className="md:hidden w-full flex flex-col gap-3">
-                {/* Active Image */}
-                <div
-                  onClick={() => setLightboxOpen(true)}
-                  className="relative aspect-[4/3] rounded-md overflow-hidden border border-[#C7A86A]/20 bg-white shadow-xs"
-                >
-                  <img
-                    src={product.images[activeImageIdx].src}
-                    alt={product.images[activeImageIdx].alt}
-                    className="absolute inset-0 h-full w-full object-cover"
-                  />
-                  <div className="absolute bottom-4 right-4 h-9 w-9 rounded-full bg-[#0F2744]/90 text-[#F6F0E8] flex items-center justify-center">
-                    <Maximize2 className="h-4 w-4 text-[#C7A86A]" />
-                  </div>
-                </div>
-
-                {/* Horizontal scrollable thumbnails */}
-                <div className="flex gap-3 overflow-x-auto py-1 scrollbar-none snap-x w-full">
-                  {product.images.map((img, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => setActiveImageIdx(idx)}
-                      className={`relative h-14 w-20 rounded-md overflow-hidden border transition-all duration-300 shrink-0 snap-start cursor-pointer ${activeImageIdx === idx
-                        ? "border-[#C7A86A] ring-2 ring-[#C7A86A]/30 scale-95"
-                        : "border-[#C7A86A]/10 opacity-70 hover:opacity-100"
-                        }`}
-                    >
-                      <img
-                        src={img.src}
-                        alt={img.alt}
-                        className="h-full w-full object-cover"
-                      />
-                    </button>
-                  ))}
-                </div>
-              </div>
+              <PaperBagImageGallery
+                images={product.images}
+                productTitle={product.name}
+              />
             </div>
 
             {/* RIGHT: Product Information & CTAs */}
@@ -608,52 +511,6 @@ export default function SpecialPaperPage() {
 
       {/* FOOTER */}
       <SiteFooter />
-
-      {/* LIGHTBOX MODAL */}
-      {lightboxOpen && (
-        <div
-          className="fixed inset-0 z-[100] bg-[#FAF8F5]/98 flex items-center justify-center p-4 animate-fade-up"
-          onClick={() => setLightboxOpen(false)}
-        >
-          {/* Close */}
-          <button
-            onClick={() => setLightboxOpen(false)}
-            className="absolute top-6 right-6 h-10 w-10 rounded-full bg-transparent text-[#0F2744] grid place-items-center hover:bg-[#C7A86A] hover:text-[#0F2744] transition-all duration-300 border border-[#0F2744]/10 hover:border-[#C7A86A]"
-          >
-            <X className="h-5 w-5" />
-          </button>
-
-          {/* Controls */}
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              setActiveImageIdx((prev) => (prev - 1 + product.images.length) % product.images.length);
-            }}
-            className="absolute left-4 sm:left-8 h-10 w-10 rounded-full bg-transparent text-[#0F2744] grid place-items-center hover:bg-[#C7A86A] hover:text-[#0F2744] transition-all duration-300 border border-[#0F2744]/10 hover:border-[#C7A86A]"
-          >
-            <ChevronLeft className="h-5 w-5" />
-          </button>
-
-          <div className="relative max-h-[85vh] max-w-[85vw] flex items-center justify-center">
-            <img
-              src={product.images[activeImageIdx].src}
-              alt={product.images[activeImageIdx].alt}
-              className="max-h-[85vh] max-w-[85vw] object-contain rounded-lg border border-[#0F2744]/10"
-              onClick={(e) => e.stopPropagation()}
-            />
-          </div>
-
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              setActiveImageIdx((prev) => (prev + 1) % product.images.length);
-            }}
-            className="absolute right-4 sm:right-8 h-10 w-10 rounded-full bg-transparent text-[#0F2744] grid place-items-center hover:bg-[#C7A86A] hover:text-[#0F2744] transition-all duration-300 border border-[#0F2744]/10 hover:border-[#C7A86A]"
-          >
-            <ChevronRight className="h-5 w-5" />
-          </button>
-        </div>
-      )}
     </div>
   );
 }
