@@ -69,9 +69,9 @@ function Hero() {
     return () => clearInterval(t);
   }, [slides.length]);
   return (
-    <section className="relative w-full overflow-hidden flex flex-col items-center sm:items-center sm:flex-row h-[620px] xs:h-[660px] sm:h-auto sm:min-h-screen pt-10 xs:pt-12 sm:pt-0 pb-8 sm:pb-0">
-      {/* Background image on mobile (covers entire hero with products at bottom) / Desktop full-screen background */}
-      <div className="absolute inset-0 w-full h-full z-0 flex justify-center items-end sm:items-center pointer-events-none animate-hero-image-luxe">
+    <section className="relative w-full overflow-hidden flex flex-col items-center sm:items-center sm:flex-row h-[390px] xs:h-[420px] sm:h-auto sm:min-h-screen pt-7 xs:pt-9 sm:pt-0 pb-4 sm:pb-0 justify-start sm:justify-center">
+      {/* Background image on mobile (covers controlled hero with products positioned) / Desktop full-screen background */}
+      <div className="absolute inset-0 w-full h-full z-0 flex justify-center items-center pointer-events-none animate-hero-image-luxe">
         {slides.map((src, idx) => (
           <img
             key={src}
@@ -79,14 +79,14 @@ function Hero() {
             alt="Luxury CASA DI BIZ packaging"
             width={1408}
             height={1200}
-            className={`absolute inset-0 w-full h-full object-cover object-[68%_85%] sm:object-center transition-opacity duration-[900ms] ease-in-out ${
+            className={`absolute inset-0 w-full h-full object-cover object-[72%_75%] sm:object-center transition-opacity duration-[900ms] ease-in-out ${
               i === idx ? "opacity-100" : "opacity-0"
             }`}
             loading="eager"
           />
         ))}
         {/* Subtle top gradient overlay for text legibility on mobile */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0F2744]/75 via-[#0F2744]/35 to-transparent sm:hidden pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0F2744]/80 via-[#0F2744]/40 to-transparent sm:hidden pointer-events-none" />
         {/* Soft overall ambient gradient on desktop */}
         <div className="hidden sm:block absolute inset-0 bg-gradient-to-r from-navy/25 via-navy/10 to-transparent pointer-events-none" />
       </div>
@@ -96,24 +96,24 @@ function Hero() {
         <div className="relative max-w-3xl animate-fade-up text-center sm:text-left mx-auto sm:mx-0 flex flex-col items-center sm:items-start">
           <div className="relative z-10 max-w-[340px] xs:max-w-[380px] sm:max-w-[580px] lg:max-w-[620px] flex flex-col items-center sm:items-start">
             {/* Heading */}
-            <h1 className="animate-hero-heading-luxe font-display font-medium text-[30px] xs:text-[34px] sm:text-6xl lg:text-7xl leading-[1.18] sm:leading-[1.1] tracking-tight mb-3.5 sm:mb-0 text-center sm:text-left">
+            <h1 className="animate-hero-heading-luxe font-display font-medium text-[28px] xs:text-[32px] sm:text-6xl lg:text-7xl leading-[1.16] sm:leading-[1.1] tracking-tight mb-2 sm:mb-0 text-center sm:text-left">
               <span className="text-[#FAF8F5] block">Packaging worth</span>
               <span className="italic text-[#C7A86A] block">unwrapping.</span>
             </h1>
 
             {/* Supporting text */}
-            <p className="animate-hero-support-luxe text-[14px] sm:text-lg lg:text-xl text-[#FAF8F5] sm:text-[#FAF8F5]/90 font-light leading-relaxed max-w-[320px] xs:max-w-[340px] sm:max-w-[560px] mt-2 sm:mt-6 text-center sm:text-left drop-shadow-sm sm:drop-shadow-none">
+            <p className="animate-hero-support-luxe text-[13px] xs:text-[14px] sm:text-lg lg:text-xl text-[#FAF8F5] sm:text-[#FAF8F5]/90 font-light leading-snug sm:leading-relaxed max-w-[300px] xs:max-w-[340px] sm:max-w-[560px] mt-2 sm:mt-6 text-center sm:text-left drop-shadow-sm sm:drop-shadow-none">
               Boxes, bags and ribbons made for brands people keep on the shelf.
             </p>
 
             {/* CTA Button */}
-            <div className="animate-hero-cta flex justify-center sm:justify-start w-full mt-6 sm:mt-10">
+            <div className="animate-hero-cta flex justify-center sm:justify-start w-full mt-5 sm:mt-10">
               <button
                 onClick={() => {
                   const el = document.getElementById("categories");
                   if (el) el.scrollIntoView({ behavior: "smooth" });
                 }}
-                className="inline-flex items-center justify-center gap-2 sm:gap-3 rounded-full px-7 sm:px-10 py-3.5 sm:py-5 text-xs sm:text-sm tracking-[0.25em] font-semibold bg-[#C7A86A] text-[#0F2744] hover:bg-[#FAF8F5] hover:text-[#0F2744] transition-all duration-300 ease-out cursor-pointer shadow-lg sm:shadow-none"
+                className="inline-flex items-center justify-center gap-2 sm:gap-3 rounded-full px-6 xs:px-7 sm:px-10 py-3 xs:py-3.5 sm:py-5 text-xs sm:text-sm tracking-[0.25em] font-semibold bg-[#C7A86A] text-[#0F2744] hover:bg-[#FAF8F5] hover:text-[#0F2744] transition-all duration-300 ease-out cursor-pointer shadow-lg sm:shadow-none"
               >
                 EXPLORE NOW <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5" />
               </button>
@@ -138,7 +138,7 @@ function Categories() {
   ];
   return (
     <section id="categories" className="w-full bg-white">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-10 pt-16 pb-12 sm:pt-20 sm:pb-16 md:pt-24 md:pb-20">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-10 pt-8 pb-12 sm:pt-20 sm:pb-16 md:pt-24 md:pb-20">
         <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-4 sm:gap-6">
           {items.map(({ label, img, slug }, i) => {
             const isVideo = img.endsWith(".mp4");
@@ -207,9 +207,12 @@ function Featured() {
           </h2>
           <p className="text-[#FAF8F5] italic font-display text-lg sm:text-xl mt-6">Minimal. Elegant. Memorable.</p>
 
-          <button className="mt-8 inline-flex items-center gap-3 rounded-md bg-gradient-to-r from-[#d9bd85] to-[#c8a15a] text-cream px-7 py-3.5 text-xs tracking-[0.28em] font-medium hover:-translate-y-0.5 transition">
+          <Link
+            href="/collections"
+            className="mt-8 inline-flex items-center gap-3 rounded-md bg-gradient-to-r from-[#d9bd85] to-[#c8a15a] text-cream px-7 py-3.5 text-xs tracking-[0.28em] font-medium hover:-translate-y-0.5 transition"
+          >
             VIEW COLLECTION <ArrowRight className="h-4 w-4" />
-          </button>
+          </Link>
         </div>
       </div>
     </section>

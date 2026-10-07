@@ -190,29 +190,29 @@ export default function ContactPage() {
       <SiteHeader />
       <main>
         {/* HERO */}
-        <section className="relative w-full overflow-hidden sm:bg-[#0F2744] sm:bg-grain-navy flex flex-col items-center min-h-[580px] xs:min-h-[620px] sm:min-h-0 sm:h-[780px] lg:h-[850px] pt-10 xs:pt-12 sm:pt-10 lg:pt-12 pb-8 sm:pb-0">
-          {/* Background image on mobile (covers entire hero with products at bottom) / Desktop bottom image */}
-          <div className="absolute inset-0 w-full h-full z-0 sm:top-auto sm:bottom-0 sm:h-auto flex justify-center items-end pointer-events-none animate-hero-image-luxe">
+        <section className="relative w-full overflow-hidden sm:bg-[#0F2744] sm:bg-grain-navy flex flex-col items-center h-[450px] xs:h-[480px] sm:min-h-0 sm:h-[780px] lg:h-[850px] pt-8 xs:pt-10 sm:pt-10 lg:pt-12 pb-4 sm:pb-0 justify-start sm:justify-start">
+          {/* Background image on mobile (covers controlled hero cropped at red boundary) / Desktop bottom image */}
+          <div className="absolute inset-0 w-full h-full z-0 sm:top-auto sm:bottom-0 sm:h-auto flex justify-center items-center sm:items-end pointer-events-none animate-hero-image-luxe">
             <img
               src="/assets/contactim1.png"
               alt="CASA DI BIZ premium packaging products still life"
-              className="w-full h-full object-cover object-bottom sm:object-contain sm:h-auto block"
+              className="w-full h-full object-cover object-[50%_46%] sm:object-contain sm:h-auto block"
               loading="eager"
             />
             {/* Subtle top gradient overlay for text legibility on mobile */}
-            <div className="absolute inset-0 bg-gradient-to-b from-[#0F2744]/75 via-[#0F2744]/35 to-transparent sm:hidden pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#0F2744]/80 via-[#0F2744]/40 to-transparent sm:hidden pointer-events-none" />
           </div>
 
           {/* Text Content Block (Layered ON TOP of image on mobile) */}
           <div className="relative mx-auto max-w-4xl px-5 sm:px-8 lg:px-12 text-center flex flex-col items-center pt-0 z-10 w-full">
             {/* Heading */}
-            <h1 className="animate-hero-heading-luxe font-display font-normal text-[30px] xs:text-[34px] sm:text-3xl md:text-4xl lg:text-[42px] leading-[1.18] tracking-tight mb-3.5 sm:mb-5 max-w-4xl text-center">
+            <h1 className="animate-hero-heading-luxe font-display font-normal text-[28px] xs:text-[32px] sm:text-3xl md:text-4xl lg:text-[42px] leading-[1.18] tracking-tight mb-2.5 sm:mb-5 max-w-4xl text-center">
               <span className="block sm:inline text-[#C7A86A]">Custom packaging </span>
               <span className="block sm:inline italic text-[#C7A86A] font-normal">done for you</span>
             </h1>
 
             {/* Paragraph */}
-            <p className="animate-hero-support-luxe text-[14px] sm:text-base text-[#FAF8F5] sm:text-[#FAF8F5]/85 font-light leading-relaxed max-w-[340px] sm:max-w-[700px] mb-6 sm:mb-8 text-center drop-shadow-sm">
+            <p className="animate-hero-support-luxe text-[13px] xs:text-[14px] sm:text-base text-[#FAF8F5] sm:text-[#FAF8F5]/85 font-light leading-snug sm:leading-relaxed max-w-[320px] xs:max-w-[340px] sm:max-w-[700px] mb-5 sm:mb-8 text-center drop-shadow-sm">
               Tell us what you need, and we'll help shape the right packaging for your product from boxes and bags to pouches, ribbons, and finishing details
             </p>
 
@@ -220,7 +220,7 @@ export default function ContactPage() {
             <div className="animate-hero-cta flex justify-center w-full">
               <button
                 onClick={() => setFormOpen(true)}
-                className="w-[195px] h-[50px] sm:w-auto sm:h-auto sm:px-8 sm:py-4 bg-[#F6F0E8] text-[#0F2744] hover:bg-[#FAF8F5] transition-colors duration-300 text-[11px] sm:text-xs font-semibold tracking-[0.25em] rounded-[6px] sm:rounded-[4px] uppercase flex items-center justify-center gap-2 shadow-lg"
+                className="w-[185px] xs:w-[195px] h-[46px] xs:h-[50px] sm:w-auto sm:h-auto sm:px-8 sm:py-4 bg-[#F6F0E8] text-[#0F2744] hover:bg-[#FAF8F5] transition-colors duration-300 text-[11px] sm:text-xs font-semibold tracking-[0.25em] rounded-[6px] sm:rounded-[4px] uppercase flex items-center justify-center gap-2 shadow-lg cursor-pointer"
               >
                 CONTACT US <span className="text-xs">→</span>
               </button>
