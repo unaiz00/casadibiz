@@ -3,7 +3,6 @@ import Link from "next/link";
 import {
   ArrowRight,
   ArrowDown,
-  Sparkles,
   ShieldCheck,
   Layers,
   Palette,
@@ -253,8 +252,7 @@ export default function RibbonsHubPage() {
                 <Palette className="h-4 w-4 text-[#C7A86A] shrink-0" />
                 <span className="text-[#0F2744]/80 font-medium">Pantone Colour Matching</span>
               </div>
-              <div className="flex items-center gap-2.5">
-                <Sparkles className="h-4 w-4 text-[#C7A86A] shrink-0" />
+              <div className="flex items-center">
                 <span className="text-[#0F2744]/80 font-medium">Hot Foil Stamping & Screen Print</span>
               </div>
             </div>
@@ -682,7 +680,6 @@ export default function RibbonsHubPage() {
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {/* Foil Stamping */}
               <div className="bg-[#FAF8F5]/5 border border-[#C7A86A]/20 rounded-2xl p-6 hover:border-[#C7A86A]/60 transition-all duration-300">
-                <Sparkles className="h-6 w-6 text-[#C7A86A] mb-4" />
                 <h3 className="font-display text-lg text-[#FAF8F5] font-medium">
                   Hot Foil Stamping
                 </h3>

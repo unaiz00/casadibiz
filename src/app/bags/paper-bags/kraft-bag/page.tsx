@@ -172,17 +172,28 @@ export default function KraftBagPage() {
 
               {/* Sizes Section */}
               <div className="w-full mb-8">
-                <div className="flex flex-row gap-3 overflow-x-auto lg:overflow-x-visible w-full pb-2 lg:pb-0 scrollbar-none snap-x">
+                <div
+                  className={`grid ${
+                    product.sizes.length === 1
+                      ? "grid-cols-1"
+                      : product.sizes.length === 2
+                      ? "grid-cols-2"
+                      : product.sizes.length === 3
+                      ? "grid-cols-3"
+                      : "grid-cols-2 sm:grid-cols-3"
+                  } gap-2 w-full lg:flex lg:flex-row lg:gap-3 lg:w-auto`}
+                >
                   {product.sizes.map((size, idx) => (
                     <button
                       key={idx}
                       onClick={() => setActiveSizeIdx(idx)}
-                      className={`flex items-center justify-center h-12 px-5 border rounded-md shrink-0 snap-start transition-all duration-300 cursor-pointer ${activeSizeIdx === idx
-                        ? "border-[#C7A86A] bg-[#F6F0E8]"
-                        : "border-[#C7A86A]/20 bg-[#FAF8F5] hover:border-[#C7A86A]/50 hover:bg-[#F6F0E8]/20 hover:translate-y-[-1px]"
-                        }`}
+                      className={`flex items-center justify-center min-h-[48px] py-2 px-1.5 sm:px-3 lg:px-5 lg:h-12 border rounded-md transition-all duration-300 cursor-pointer text-center ${
+                        activeSizeIdx === idx
+                          ? "border-[#C7A86A] bg-[#F6F0E8]"
+                          : "border-[#C7A86A]/20 bg-[#FAF8F5] hover:border-[#C7A86A]/50 hover:bg-[#F6F0E8]/20 hover:translate-y-[-1px]"
+                      }`}
                     >
-                      <span className="text-[12px] font-medium tracking-[0.08em] text-[#0F2744]">
+                      <span className="text-[11px] xs:text-[11.5px] sm:text-[12px] font-medium tracking-[0.02em] sm:tracking-[0.08em] text-[#0F2744] leading-tight text-center whitespace-normal break-words">
                         {size.value}
                       </span>
                     </button>
@@ -217,21 +228,22 @@ export default function KraftBagPage() {
               </div>
 
               {/* B2B CTAs */}
-              <div className="flex flex-col sm:flex-row gap-4 w-full">
+              <div className="grid grid-cols-2 gap-2 sm:gap-3 lg:flex lg:flex-row lg:gap-4 w-full">
                 <Link
                   href={`/contact?size=${encodeURIComponent(selectedSize)}&product=${encodeURIComponent(product.name)}`}
-                  className="flex-1 inline-flex items-center justify-center gap-3 rounded-md px-8 py-4.5 text-xs tracking-[0.25em] font-bold bg-[#0F2744] text-[#FAF8F5] hover:bg-[#C7A86A] hover:text-[#0F2744] transition-all duration-300 text-center"
+                  className="flex-1 inline-flex items-center justify-center gap-1.5 sm:gap-2 lg:gap-3 min-h-[52px] h-[52px] sm:h-auto sm:py-4.5 px-2 sm:px-4 lg:px-8 rounded-md text-[10px] xs:text-[11px] sm:text-xs tracking-[0.12em] sm:tracking-[0.2em] lg:tracking-[0.25em] font-bold bg-[#0F2744] text-[#FAF8F5] hover:bg-[#C7A86A] hover:text-[#0F2744] transition-all duration-300 text-center uppercase"
                 >
-                  REQUEST A QUOTE <ArrowRight className="h-4 w-4" />
+                  <span>REQUEST A QUOTE</span>
+                  <ArrowRight className="h-3.5 w-3.5 shrink-0" />
                 </Link>
                 <a
                   href={dynamicWhatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex-1 inline-flex items-center justify-center gap-3 rounded-md px-8 py-4.5 text-xs tracking-[0.25em] font-semibold border border-[#C7A86A]/40 text-[#0F2744] hover:bg-[#F6F0E8]/40 transition-all duration-300"
+                  className="group flex-1 inline-flex items-center justify-center gap-1.5 sm:gap-2 lg:gap-3 min-h-[52px] h-[52px] sm:h-auto sm:py-4.5 px-2 sm:px-4 lg:px-8 rounded-md text-[10px] xs:text-[11px] sm:text-xs tracking-[0.12em] sm:tracking-[0.2em] lg:tracking-[0.25em] font-semibold border border-[#C7A86A]/40 bg-[#FAF8F5] text-[#0F2744] hover:bg-[#F6F0E8]/60 transition-all duration-300 text-center uppercase"
                 >
-                  <span>ENQUIRE VIA WHATSAPP</span>
-                  <ArrowRight className="h-3 w-3 text-[#C7A86A] transition-transform duration-300 group-hover:translate-x-1" />
+                  <span>QUICK QUOTE</span>
+                  <ArrowRight className="h-3 w-3 text-[#C7A86A] shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
                 </a>
               </div>
 

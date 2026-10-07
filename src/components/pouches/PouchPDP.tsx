@@ -6,7 +6,6 @@ import {
   ArrowRight,
   MessageCircle,
   ShieldCheck,
-  Sparkles,
   Layers,
   Check,
   ChevronDown,
@@ -14,6 +13,24 @@ import {
 import { SiteHeader, SiteFooter, Breadcrumbs } from "@/components/site-chrome";
 import PouchImageViewer from "@/components/pouches/PouchImageViewer";
 import type { PouchProduct } from "@/data/pouches-data";
+
+const POUCH_TABS = [
+  {
+    id: "overview" as const,
+    label: "MATERIAL OVERVIEW",
+    mobileLines: ["MATERIAL", "OVERVIEW"],
+  },
+  {
+    id: "specs" as const,
+    label: "TECHNICAL SPECIFICATIONS",
+    mobileLines: ["TECHNICAL", "SPECIFICATIONS"],
+  },
+  {
+    id: "branding" as const,
+    label: "BRANDING METHODS",
+    mobileLines: ["BRANDING", "METHODS"],
+  },
+];
 
 interface PouchPDPProps {
   product: PouchProduct;
@@ -102,8 +119,7 @@ export default function PouchPDP({ product, relatedProducts }: PouchPDPProps) {
                   </div>
                 </div>
 
-                <div className="bg-[#F6F0E8] border border-[#C7A86A]/20 rounded-2xl p-4 flex flex-col justify-between">
-                  <Sparkles className="h-5 w-5 text-[#C7A86A] mb-2" />
+                <div className="bg-[#F6F0E8] border border-[#C7A86A]/20 rounded-2xl p-4 flex flex-col justify-end">
                   <div>
                     <span className="text-[10px] font-bold tracking-[0.2em] text-[#0F2744]/70 uppercase block mb-0.5">
                       BRANDING
@@ -277,52 +293,53 @@ export default function PouchPDP({ product, relatedProducts }: PouchPDPProps) {
               </h2>
             </div>
 
-            {/* Tabs Header */}
-            <div className="flex border-b border-[#0F2744]/10 mb-10 justify-center gap-6 sm:gap-12 overflow-x-auto scrollbar-none snap-x">
-              <button
-                type="button"
-                onClick={() => setActiveTab("overview")}
-                className={`pb-4 text-xs font-semibold tracking-[0.2em] uppercase transition-all duration-300 relative whitespace-nowrap cursor-pointer snap-start ${
-                  activeTab === "overview"
-                    ? "text-[#0F2744] font-bold"
-                    : "text-[#0F2744]/50 hover:text-[#0F2744]"
-                }`}
-              >
-                MATERIAL OVERVIEW
-                {activeTab === "overview" && (
-                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#C7A86A]" />
-                )}
-              </button>
+            {/* Mobile 3-Column Segmented Control Header (Mobile Only) */}
+            <div className="lg:hidden w-full mb-8">
+              <div className="grid grid-cols-3 gap-1 bg-[#F6F0E8] border border-[#C7A86A]/25 rounded-2xl p-1.5 w-full min-h-[56px]">
+                {POUCH_TABS.map((tab) => {
+                  const isActive = activeTab === tab.id;
+                  return (
+                    <button
+                      key={tab.id}
+                      type="button"
+                      onClick={() => setActiveTab(tab.id)}
+                      className={`flex flex-col items-center justify-center py-2 px-1 rounded-xl text-center transition-all duration-300 cursor-pointer min-h-[48px] ${
+                        isActive
+                          ? "bg-[#FAF8F5] text-[#0F2744] border border-[#C7A86A]/40 shadow-xs"
+                          : "bg-transparent text-[#0F2744]/65 hover:text-[#0F2744] border border-transparent"
+                      }`}
+                    >
+                      <span className="text-[9.5px] xs:text-[10px] sm:text-[11px] font-bold tracking-[0.04em] sm:tracking-[0.08em] uppercase leading-tight text-center block">
+                        {tab.mobileLines[0]}
+                      </span>
+                      <span className="text-[9.5px] xs:text-[10px] sm:text-[11px] font-bold tracking-[0.04em] sm:tracking-[0.08em] uppercase leading-tight text-center block">
+                        {tab.mobileLines[1]}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
 
-              <button
-                type="button"
-                onClick={() => setActiveTab("specs")}
-                className={`pb-4 text-xs font-semibold tracking-[0.2em] uppercase transition-all duration-300 relative whitespace-nowrap cursor-pointer snap-start ${
-                  activeTab === "specs"
-                    ? "text-[#0F2744] font-bold"
-                    : "text-[#0F2744]/50 hover:text-[#0F2744]"
-                }`}
-              >
-                TECHNICAL SPECIFICATIONS
-                {activeTab === "specs" && (
-                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#C7A86A]" />
-                )}
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setActiveTab("branding")}
-                className={`pb-4 text-xs font-semibold tracking-[0.2em] uppercase transition-all duration-300 relative whitespace-nowrap cursor-pointer snap-start ${
-                  activeTab === "branding"
-                    ? "text-[#0F2744] font-bold"
-                    : "text-[#0F2744]/50 hover:text-[#0F2744]"
-                }`}
-              >
-                BRANDING METHODS
-                {activeTab === "branding" && (
-                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#C7A86A]" />
-                )}
-              </button>
+            {/* Desktop Tabs Header (Unchanged on Desktop lg+) */}
+            <div className="hidden lg:flex border-b border-[#0F2744]/10 mb-10 justify-center gap-12">
+              {POUCH_TABS.map((tab) => (
+                <button
+                  key={tab.id}
+                  type="button"
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`pb-4 text-xs font-semibold tracking-[0.2em] uppercase transition-all duration-300 relative whitespace-nowrap cursor-pointer ${
+                    activeTab === tab.id
+                      ? "text-[#0F2744] font-bold"
+                      : "text-[#0F2744]/50 hover:text-[#0F2744]"
+                  }`}
+                >
+                  {tab.label}
+                  {activeTab === tab.id && (
+                    <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#C7A86A]" />
+                  )}
+                </button>
+              ))}
             </div>
 
             {/* TAB CONTENT: OVERVIEW */}
@@ -426,11 +443,10 @@ export default function PouchPDP({ product, relatedProducts }: PouchPDPProps) {
                 {product.brandingOptions.map((brand, idx) => (
                   <div key={idx} className="bg-[#FAF8F5] border border-[#C7A86A]/25 rounded-2xl p-6 flex flex-col justify-between">
                     <div>
-                      <div className="flex items-center justify-between mb-3">
-                        <span className="text-[10px] font-bold tracking-[0.2em] text-[#C7A86A] uppercase">
+                      <div className="mb-3">
+                        <span className="text-[10px] font-bold tracking-[0.2em] text-[#C7A86A] uppercase block">
                           {brand.method}
                         </span>
-                        <Sparkles className="h-4 w-4 text-[#C7A86A]" />
                       </div>
                       <h4 className="font-display text-xl text-[#0F2744] mb-2">{brand.title}</h4>
                       <p className="text-xs text-[#0F2744]/80 leading-relaxed">{brand.description}</p>

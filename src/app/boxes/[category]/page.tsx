@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, Sparkles, Shield, Ruler } from "lucide-react";
+import { ArrowRight, Shield, Ruler } from "lucide-react";
 import { SiteHeader, SiteFooter, Breadcrumbs } from "@/components/site-chrome";
 import {
   BOX_CATEGORIES_DATA,

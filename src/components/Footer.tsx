@@ -9,7 +9,7 @@ export function SiteFooter() {
     {
       title: "PRODUCTS",
       items: [
-        { label: "Boxes", to: "/boxes" },
+        { label: "Boxes", to: "/boxes/#jewellery-boxes" },
         { label: "Bags", to: "/bags" },
         { label: "Pouches", to: "/pouches" },
         { label: "Wraps", to: "/wraps" },

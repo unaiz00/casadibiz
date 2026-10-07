@@ -147,12 +147,12 @@ export default function WrapImageViewer({ src, alt, productName }: WrapImageView
           type="button"
           onClick={openLightbox}
           aria-label={`View larger image of ${productName}`}
-          className="group relative w-full aspect-[16/11] sm:aspect-[4/3] rounded-2xl sm:rounded-3xl overflow-hidden border border-[#C7A86A]/25 bg-white cursor-zoom-in text-left transition-all duration-300 hover:border-[#C7A86A]/60 shadow-xs focus:outline-hidden focus:ring-2 focus:ring-[#C7A86A]"
+          className="group relative w-full aspect-square sm:aspect-[4/3] rounded-2xl sm:rounded-3xl overflow-hidden border border-[#C7A86A]/25 bg-white cursor-zoom-in text-left transition-all duration-300 hover:border-[#C7A86A]/60 shadow-xs focus:outline-hidden focus:ring-2 focus:ring-[#C7A86A]"
         >
           <img
             src={src}
             alt={alt}
-            className="absolute inset-0 h-full w-full object-contain p-3 sm:p-5 transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+            className="absolute inset-0 h-full w-full object-contain p-2.5 sm:p-5 transition-transform duration-700 ease-out group-hover:scale-[1.02]"
             loading="eager"
           />
 

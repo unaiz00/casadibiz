@@ -6,9 +6,10 @@ import {
   ArrowRight,
   HelpCircle,
   ChevronDown,
+  ChevronLeft,
+  ChevronRight,
   X,
   Maximize2,
-  Sparkles,
   ShieldCheck,
   Layers,
   Check,
@@ -16,6 +17,24 @@ import {
 } from "lucide-react";
 import { SiteHeader, SiteFooter, Breadcrumbs } from "@/components/site-chrome";
 import type { BoxModel } from "@/data/boxes-data";
+
+const BOX_TABS = [
+  {
+    id: "description" as const,
+    label: "OVERVIEW & CRAFTSMANSHIP",
+    mobileLines: ["OVERVIEW", "& CRAFTSMANSHIP"],
+  },
+  {
+    id: "specifications" as const,
+    label: "TECHNICAL SPECIFICATIONS",
+    mobileLines: ["TECHNICAL", "SPECIFICATIONS"],
+  },
+  {
+    id: "customization" as const,
+    label: "TAILORED CUSTOMISATION",
+    mobileLines: ["TAILORED", "CUSTOMISATION"],
+  },
+];
 
 interface BoxPDPViewProps {
   model: BoxModel;
@@ -49,7 +68,7 @@ Selected Specs:
   // Dynamic Contact Page URL with prefilled query
   const quoteUrl = `/contact?category=${encodeURIComponent(model.categorySlug)}&model=${encodeURIComponent(model.name)}&size=${encodeURIComponent(activeSize?.dimensions || "")}&material=${encodeURIComponent(activeMaterial?.name || "")}&finish=${encodeURIComponent(activeFinish?.name || "")}`;
 
-  // Keyboard navigation for lightbox
+  // Keyboard navigation & body scroll lock for lightbox
   useEffect(() => {
     if (!lightboxOpen) return;
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -62,13 +81,18 @@ Selected Specs:
       }
     };
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = prevOverflow;
+    };
   }, [lightboxOpen, model.images.length]);
 
   const breadcrumbItems = [
     { label: "Home", to: "/" },
     { label: "Boxes", to: "/boxes" },
-    { label: "Jewellery Boxes", to: "/boxes/jewellery-boxes" },
+    { label: model.categoryName, to: `/boxes/${model.categorySlug}` },
     { label: model.name },
   ];
 
@@ -104,11 +128,6 @@ Selected Specs:
                     loading="eager"
                   />
                   <div className="absolute inset-0 bg-[#0F2744]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  
-                  {/* Subtle catalogue badge on top left */}
-                  <div className="absolute top-5 left-5 bg-[#0F2744]/90 backdrop-blur-sm px-3.5 py-1.5 rounded-md border border-[#C7A86A]/40 text-[#F6F0E8] text-[10px] tracking-[0.2em] font-semibold uppercase">
-                    {model.name}
-                  </div>
 
                   {/* Zoom indicator button */}
                   <div className="absolute bottom-5 right-5 h-11 w-11 rounded-full bg-[#0F2744]/95 text-[#F6F0E8] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-1 hover:bg-[#C7A86A] hover:text-[#0F2744]">
@@ -158,9 +177,6 @@ Selected Specs:
                     alt={model.images[activeImageIdx]?.alt || `${model.name} luxury jewellery box`}
                     className="absolute inset-0 h-full w-full object-cover"
                   />
-                  <div className="absolute top-4 left-4 bg-[#0F2744]/90 px-3 py-1 rounded text-[#F6F0E8] text-[9px] tracking-[0.2em] font-semibold uppercase">
-                    {model.name}
-                  </div>
                   <div className="absolute bottom-4 right-4 h-9 w-9 rounded-full bg-[#0F2744]/90 text-[#F6F0E8] flex items-center justify-center">
                     <Maximize2 className="h-4 w-4 text-[#C7A86A]" />
                   </div>
@@ -201,8 +217,7 @@ Selected Specs:
                     <span className="text-xs font-semibold text-[#0F2744] truncate block">1200+ GSM Board</span>
                   </div>
                 </div>
-                <div className="bg-[#F6F0E8] border border-[#C7A86A]/20 rounded-lg p-3.5 flex items-center gap-3">
-                  <Sparkles className="h-5 w-5 text-[#C7A86A] shrink-0" />
+                <div className="bg-[#F6F0E8] border border-[#C7A86A]/20 rounded-lg p-3.5 flex items-center">
                   <div className="min-w-0">
                     <span className="text-[9px] font-bold tracking-[0.2em] text-[#0F2744]/60 uppercase block">BESPOKE EMBELLISH</span>
                     <span className="text-xs font-semibold text-[#0F2744] truncate block">Foil & 3D Crest</span>
@@ -399,7 +414,7 @@ Selected Specs:
         </section>
 
         {/* EDITORIAL PRODUCT DETAILS SECTION */}
-        <section className="bg-white border-y border-[#C7A86A]/20 pt-12 pb-20 lg:pt-16 lg:pb-24">
+        <section className="bg-white border-y border-[#C7A86A]/20 pt-12 pb-16 lg:pt-16 lg:pb-20">
           <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12">
             <div className="text-center max-w-2xl mx-auto mb-10">
               <span className="text-[10px] font-semibold tracking-[0.3em] text-[#C7A86A] uppercase mb-2 block">
@@ -410,75 +425,79 @@ Selected Specs:
               </h2>
             </div>
 
-            {/* Tabs Header */}
-            <div className="flex border-b border-[#0F2744]/10 mb-10 justify-center gap-6 sm:gap-12 overflow-x-auto scrollbar-none snap-x">
-              <button
-                type="button"
-                onClick={() => setActiveDetailTab("description")}
-                className={`pb-4 text-xs font-semibold tracking-[0.2em] uppercase transition-all duration-300 relative whitespace-nowrap cursor-pointer snap-start ${
-                  activeDetailTab === "description"
-                    ? "text-[#0F2744] font-bold"
-                    : "text-[#0F2744]/50 hover:text-[#0F2744]"
-                }`}
-              >
-                OVERVIEW & CRAFTSMANSHIP
-                {activeDetailTab === "description" && (
-                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#C7A86A]" />
-                )}
-              </button>
+            {/* Mobile 3-Column Segmented Control Header (Mobile Only) */}
+            <div className="lg:hidden w-full mb-8">
+              <div className="grid grid-cols-3 gap-1 bg-[#F6F0E8] border border-[#C7A86A]/25 rounded-2xl p-1.5 w-full min-h-[56px]">
+                {BOX_TABS.map((tab) => {
+                  const isActive = activeDetailTab === tab.id;
+                  return (
+                    <button
+                      key={tab.id}
+                      type="button"
+                      onClick={() => setActiveDetailTab(tab.id)}
+                      className={`flex flex-col items-center justify-center py-2 px-1 rounded-xl text-center transition-all duration-300 cursor-pointer min-h-[48px] ${
+                        isActive
+                          ? "bg-[#FAF8F5] text-[#0F2744] border border-[#C7A86A]/40 shadow-xs"
+                          : "bg-transparent text-[#0F2744]/65 hover:text-[#0F2744] border border-transparent"
+                      }`}
+                    >
+                      <span className="text-[9.5px] xs:text-[10px] sm:text-[11px] font-bold tracking-[0.04em] sm:tracking-[0.08em] uppercase leading-tight text-center block">
+                        {tab.mobileLines[0]}
+                      </span>
+                      <span className="text-[9.5px] xs:text-[10px] sm:text-[11px] font-bold tracking-[0.04em] sm:tracking-[0.08em] uppercase leading-tight text-center block">
+                        {tab.mobileLines[1]}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
 
-              <button
-                type="button"
-                onClick={() => setActiveDetailTab("specifications")}
-                className={`pb-4 text-xs font-semibold tracking-[0.2em] uppercase transition-all duration-300 relative whitespace-nowrap cursor-pointer snap-start ${
-                  activeDetailTab === "specifications"
-                    ? "text-[#0F2744] font-bold"
-                    : "text-[#0F2744]/50 hover:text-[#0F2744]"
-                }`}
-              >
-                TECHNICAL SPECIFICATIONS
-                {activeDetailTab === "specifications" && (
-                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#C7A86A]" />
-                )}
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setActiveDetailTab("customization")}
-                className={`pb-4 text-xs font-semibold tracking-[0.2em] uppercase transition-all duration-300 relative whitespace-nowrap cursor-pointer snap-start ${
-                  activeDetailTab === "customization"
-                    ? "text-[#0F2744] font-bold"
-                    : "text-[#0F2744]/50 hover:text-[#0F2744]"
-                }`}
-              >
-                TAILORED CUSTOMISATION
-                {activeDetailTab === "customization" && (
-                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#C7A86A]" />
-                )}
-              </button>
+            {/* Desktop Tabs Header */}
+            <div className="hidden lg:flex border-b border-[#0F2744]/10 mb-10 justify-center gap-12">
+              {BOX_TABS.map((tab) => (
+                <button
+                  key={tab.id}
+                  type="button"
+                  onClick={() => setActiveDetailTab(tab.id)}
+                  className={`pb-4 text-xs font-semibold tracking-[0.2em] uppercase transition-all duration-300 relative whitespace-nowrap cursor-pointer ${
+                    activeDetailTab === tab.id
+                      ? "text-[#0F2744] font-bold"
+                      : "text-[#0F2744]/50 hover:text-[#0F2744]"
+                  }`}
+                >
+                  {tab.label}
+                  {activeDetailTab === tab.id && (
+                    <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#C7A86A]" />
+                  )}
+                </button>
+              ))}
             </div>
 
             {/* Tab 1: Overview & Craftsmanship */}
             {activeDetailTab === "description" && (
-              <div className="max-w-4xl mx-auto animate-fade-up">
+              <div className="max-w-4xl mx-auto animate-fade-in">
                 <span className="text-[10px] font-semibold tracking-[0.25em] text-[#C7A86A] uppercase mb-2 block">
                   {model.name} MANIFESTO
                 </span>
-                <h3 className="font-display text-2xl sm:text-3xl text-[#0F2744] leading-tight mb-5 font-medium">
+                <h3 className="font-display text-2xl sm:text-3xl text-[#0F2744] leading-tight mb-4 font-medium">
                   {model.heroHeadline}
                 </h3>
-                <p className="text-[#0F2744]/80 text-base leading-relaxed mb-8">
+                <p className="text-[#0F2744]/80 text-sm sm:text-base leading-relaxed mb-8">
                   {model.longDescription}
                 </p>
 
-                {/* Highlights Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6 border-t border-[#C7A86A]/20">
+                {/* Highlights Information Cards Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 pt-6 border-t border-[#C7A86A]/20">
                   {model.highlights.map((hl, idx) => (
-                    <div key={idx} className="bg-[#FAF8F5] border border-[#C7A86A]/20 rounded-xl p-5">
-                      <span className="block text-[10px] tracking-[0.2em] font-bold text-[#C7A86A] uppercase mb-1">
+                    <div
+                      key={idx}
+                      className="bg-[#FAF8F5] border border-[#C7A86A]/25 rounded-2xl p-5 sm:p-6 flex flex-col justify-between"
+                    >
+                      <span className="block text-[10px] tracking-[0.2em] font-bold text-[#C7A86A] uppercase mb-1.5">
                         {hl.label}
                       </span>
-                      <span className="block font-display text-base text-[#0F2744] font-semibold">
+                      <span className="block font-display text-base sm:text-lg text-[#0F2744] font-semibold">
                         {hl.value}
                       </span>
                     </div>
@@ -489,92 +508,81 @@ Selected Specs:
 
             {/* Tab 2: Technical Specifications */}
             {activeDetailTab === "specifications" && (
-              <div className="max-w-4xl mx-auto animate-fade-up">
-                <div className="border border-[#C7A86A]/25 rounded-xl overflow-hidden bg-[#FAF8F5]">
-                  <table className="w-full text-left text-xs border-collapse">
-                    <tbody>
-                      <tr className="border-b border-[#C7A86A]/15">
-                        <td className="p-4 sm:p-5 font-semibold text-[#0F2744]/70 uppercase tracking-wider bg-[#F6F0E8]/50 w-1/3">
-                          Outer Shell
-                        </td>
-                        <td className="p-4 sm:p-5 text-[#0F2744] font-medium">
-                          {model.specifications.outerMaterial}
-                        </td>
-                      </tr>
-                      <tr className="border-b border-[#C7A86A]/15">
-                        <td className="p-4 sm:p-5 font-semibold text-[#0F2744]/70 uppercase tracking-wider bg-[#F6F0E8]/50">
-                          Interior Lining
-                        </td>
-                        <td className="p-4 sm:p-5 text-[#0F2744] font-medium">
-                          {model.specifications.innerMaterial}
-                        </td>
-                      </tr>
-                      <tr className="border-b border-[#C7A86A]/15">
-                        <td className="p-4 sm:p-5 font-semibold text-[#0F2744]/70 uppercase tracking-wider bg-[#F6F0E8]/50">
-                          Hinge / Mechanism
-                        </td>
-                        <td className="p-4 sm:p-5 text-[#0F2744] font-medium">
-                          {model.specifications.hingeClosure}
-                        </td>
-                      </tr>
-                      <tr className="border-b border-[#C7A86A]/15">
-                        <td className="p-4 sm:p-5 font-semibold text-[#0F2744]/70 uppercase tracking-wider bg-[#F6F0E8]/50">
-                          Fitted Insert
-                        </td>
-                        <td className="p-4 sm:p-5 text-[#0F2744] font-medium">
-                          {model.specifications.insertType}
-                        </td>
-                      </tr>
-                      <tr className="border-b border-[#C7A86A]/15">
-                        <td className="p-4 sm:p-5 font-semibold text-[#0F2744]/70 uppercase tracking-wider bg-[#F6F0E8]/50">
-                          Branding Placement
-                        </td>
-                        <td className="p-4 sm:p-5 text-[#0F2744] font-medium">
-                          {model.specifications.brandingPlacement}
-                        </td>
-                      </tr>
-                      <tr className="border-b border-[#C7A86A]/15">
-                        <td className="p-4 sm:p-5 font-semibold text-[#0F2744]/70 uppercase tracking-wider bg-[#F6F0E8]/50">
-                          Minimum Order (MOQ)
-                        </td>
-                        <td className="p-4 sm:p-5 text-[#0F2744] font-bold text-[#C7A86A]">
-                          {model.specifications.moq}
-                        </td>
-                      </tr>
-                      <tr className="border-b border-[#C7A86A]/15">
-                        <td className="p-4 sm:p-5 font-semibold text-[#0F2744]/70 uppercase tracking-wider bg-[#F6F0E8]/50">
-                          Production Lead Time
-                        </td>
-                        <td className="p-4 sm:p-5 text-[#0F2744] font-medium">
-                          {model.specifications.leadTime}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="p-4 sm:p-5 font-semibold text-[#0F2744]/70 uppercase tracking-wider bg-[#F6F0E8]/50">
-                          Sample Prototyping
-                        </td>
-                        <td className="p-4 sm:p-5 text-[#0F2744] font-medium">
-                          {model.specifications.sampleAvailability}
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+              <div className="max-w-4xl mx-auto animate-fade-in">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="bg-[#FAF8F5] border border-[#C7A86A]/25 rounded-2xl p-6">
+                    <h4 className="font-display text-lg text-[#0F2744] mb-4">Material & Architecture</h4>
+                    <div className="space-y-3 text-xs divide-y divide-[#0F2744]/10">
+                      <div className="flex justify-between items-center pt-2">
+                        <span className="text-[#0F2744]/70 font-medium">Outer Shell</span>
+                        <span className="font-semibold text-[#0F2744] text-right">{model.specifications.outerMaterial}</span>
+                      </div>
+                      <div className="flex justify-between items-center pt-3">
+                        <span className="text-[#0F2744]/70 font-medium">Interior Lining</span>
+                        <span className="font-semibold text-[#0F2744] text-right">{model.specifications.innerMaterial}</span>
+                      </div>
+                      <div className="flex justify-between items-center pt-3">
+                        <span className="text-[#0F2744]/70 font-medium">Hinge & Mechanism</span>
+                        <span className="font-semibold text-[#0F2744] text-right">{model.specifications.hingeClosure}</span>
+                      </div>
+                      <div className="flex justify-between items-center pt-3">
+                        <span className="text-[#0F2744]/70 font-medium">Fitted Insert</span>
+                        <span className="font-semibold text-[#0F2744] text-right">{model.specifications.insertType}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-[#FAF8F5] border border-[#C7A86A]/25 rounded-2xl p-6">
+                    <h4 className="font-display text-lg text-[#0F2744] mb-4">Production & Procurement</h4>
+                    <div className="space-y-3 text-xs divide-y divide-[#0F2744]/10">
+                      <div className="flex justify-between items-center pt-2">
+                        <span className="text-[#0F2744]/70 font-medium">Branding Placement</span>
+                        <span className="font-semibold text-[#0F2744] text-right">{model.specifications.brandingPlacement}</span>
+                      </div>
+                      <div className="flex justify-between items-center pt-3">
+                        <span className="text-[#0F2744]/70 font-medium">Minimum Order (MOQ)</span>
+                        <span className="font-bold text-[#C7A86A] text-right">{model.specifications.moq}</span>
+                      </div>
+                      <div className="flex justify-between items-center pt-3">
+                        <span className="text-[#0F2744]/70 font-medium">Production Lead Time</span>
+                        <span className="font-semibold text-[#0F2744] text-right">{model.specifications.leadTime}</span>
+                      </div>
+                      <div className="flex justify-between items-center pt-3">
+                        <span className="text-[#0F2744]/70 font-medium">Sample Prototyping</span>
+                        <span className="font-semibold text-[#0F2744] text-right">{model.specifications.sampleAvailability}</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             )}
 
             {/* Tab 3: Tailored Customisation */}
             {activeDetailTab === "customization" && (
-              <div className="max-w-4xl mx-auto animate-fade-up">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div className="max-w-4xl mx-auto animate-fade-in">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {model.customisationFeatures.map((feat, idx) => (
-                    <div key={idx} className="bg-[#FAF8F5] border border-[#C7A86A]/25 rounded-xl p-6">
-                      <h4 className="font-display text-lg text-[#0F2744] font-medium mb-2">
-                        {feat.title}
-                      </h4>
-                      <p className="text-xs text-[#0F2744]/75 leading-relaxed">
-                        {feat.description}
-                      </p>
+                    <div
+                      key={idx}
+                      className="bg-[#FAF8F5] border border-[#C7A86A]/25 rounded-2xl p-6 flex flex-col justify-between"
+                    >
+                      <div>
+                        <div className="mb-2">
+                          <span className="text-[10px] font-bold tracking-[0.2em] text-[#C7A86A] uppercase block">
+                            BESPOKE EMBELLISHMENT
+                          </span>
+                        </div>
+                        <h4 className="font-display text-xl text-[#0F2744] mb-2 font-medium">
+                          {feat.title}
+                        </h4>
+                        <p className="text-xs text-[#0F2744]/80 leading-relaxed">
+                          {feat.description}
+                        </p>
+                      </div>
+                      <div className="mt-5 pt-3 border-t border-[#0F2744]/10 flex items-center justify-between text-[11px] text-[#0F2744]/70">
+                        <span>Available across all box formats</span>
+                        <span className="text-[#C7A86A] font-semibold">Bespoke Tooling</span>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -639,7 +647,7 @@ Selected Specs:
                   </h2>
                 </div>
                 <Link
-                  href="/boxes/jewellery-boxes"
+                  href="/boxes/#jewellery-boxes"
                   className="hidden sm:inline-flex items-center gap-2 text-xs font-semibold text-[#C7A86A] tracking-[0.15em] hover:gap-3 transition-all"
                 >
                   VIEW FULL CATALOGUE <ArrowRight className="h-4 w-4" />
@@ -692,19 +700,57 @@ Selected Specs:
 
       {/* LIGHTBOX MODAL */}
       {lightboxOpen && (
-        <div className="fixed inset-0 z-50 bg-[#0F2744]/95 backdrop-blur-md flex items-center justify-center p-4">
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${model.name} enlarged view`}
+          className="fixed inset-0 z-50 bg-white flex items-center justify-center p-4 sm:p-8 select-none"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setLightboxOpen(false);
+          }}
+        >
+          {/* Close button */}
           <button
             type="button"
             onClick={() => setLightboxOpen(false)}
-            className="absolute top-6 right-6 h-11 w-11 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-white/20 transition-colors cursor-pointer"
+            aria-label="Close image viewer"
+            className="absolute top-5 right-5 sm:top-7 sm:right-7 z-50 h-10 w-10 sm:h-11 sm:w-11 rounded-full bg-[#FAF8F5] text-[#0F2744] flex items-center justify-center border border-[#C7A86A]/30 hover:bg-[#C7A86A] hover:text-[#0F2744] transition-all duration-300 cursor-pointer shadow-xs"
           >
-            <X className="h-6 w-6" />
+            <X className="h-5 w-5" />
           </button>
+
+          {/* Navigation controls if multiple images */}
+          {model.images.length > 1 && (
+            <>
+              <button
+                type="button"
+                onClick={() =>
+                  setActiveImageIdx((prev) => (prev - 1 + model.images.length) % model.images.length)
+                }
+                aria-label="Previous image"
+                className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-50 h-10 w-10 sm:h-11 sm:w-11 rounded-full bg-[#FAF8F5] text-[#0F2744] flex items-center justify-center border border-[#C7A86A]/30 hover:bg-[#C7A86A] hover:text-[#0F2744] transition-all duration-300 cursor-pointer shadow-xs"
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </button>
+              <button
+                type="button"
+                onClick={() =>
+                  setActiveImageIdx((prev) => (prev + 1) % model.images.length)
+                }
+                aria-label="Next image"
+                className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-50 h-10 w-10 sm:h-11 sm:w-11 rounded-full bg-[#FAF8F5] text-[#0F2744] flex items-center justify-center border border-[#C7A86A]/30 hover:bg-[#C7A86A] hover:text-[#0F2744] transition-all duration-300 cursor-pointer shadow-xs"
+              >
+                <ChevronRight className="h-5 w-5" />
+              </button>
+            </>
+          )}
+
+          {/* Centered Image against pure white background */}
           <div className="max-w-5xl max-h-[85vh] w-full flex items-center justify-center relative">
             <img
               src={model.images[activeImageIdx]?.src}
-              alt={model.images[activeImageIdx]?.alt}
-              className="max-h-[85vh] max-w-full object-contain rounded-lg"
+              alt={model.images[activeImageIdx]?.alt || model.name}
+              className="max-h-[85vh] max-w-full object-contain"
             />
           </div>
         </div>

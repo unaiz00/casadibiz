@@ -2,8 +2,8 @@
 
 import { useState, useMemo } from "react";
 import Link from "next/link";
-import { ArrowRight, MessageCircle } from "lucide-react";
-import { SiteHeader, SiteFooter } from "@/components/site-chrome";
+import { ArrowRight } from "lucide-react";
+import { SiteHeader, SiteFooter, Breadcrumbs } from "@/components/site-chrome";
 import { getAllBoxModels, type BoxModel } from "@/data/boxes-data";
 
 const FILTER_TABS = [
@@ -35,14 +35,6 @@ const COLLECTIONS_LIST = [
   { name: "Box Collection 14 — Premium Leather", material: "Premium Leather", desc: "Structured edge-stitched full grain leatherette" },
 ];
 
-const CUSTOMISATION_ITEMS = [
-  { title: "Material Options", desc: "Velvet, micro-suede, fine leatherette, textured papers, and wood composite cores." },
-  { title: "Bespoke Colour", desc: "Colours and finishes can be customised to your brand requirements." },
-  { title: "Fitted Interior", desc: "Precision CNC foam cavities, anti-tarnish linings, ring channels, and bolster pillows." },
-  { title: "Logo Finishes", desc: "Metallic hot foil stamping (gold/silver), blind debossing, metallic stickers, or screen printing." },
-  { title: "Dimensions", desc: "Select from standard catalogue sizes or request custom millimeter-calibrated dimensions." },
-  { title: "Branding Placement", desc: "Inner lid hot stamping, exterior lid insignia, or 3D electroformed metal crests." },
-];
 
 export default function JewelleryBoxesClient() {
   const [activeFilter, setActiveFilter] = useState("all");
@@ -77,100 +69,23 @@ export default function JewelleryBoxesClient() {
     return allModels;
   }, [activeFilter, allModels]);
 
-  const whatsappUrl = `https://wa.me/919995255846?text=${encodeURIComponent(
-    "Hello CASA DI BIZ, I would like to request a quote for bespoke Jewellery Boxes."
-  )}`;
-
   return (
     <div className="min-h-screen bg-[#FAF8F5] text-[#0F2744] font-sans selection:bg-[#C7A86A]/20 selection:text-[#0F2744]">
       {/* HEADER */}
       <SiteHeader />
 
       <main>
-        {/* HERO SECTION */}
-        <section className="relative w-full overflow-hidden bg-[#0F2744] bg-grain-navy text-[#FAF8F5] pt-10 sm:pt-14 pb-16 lg:pb-20">
-          <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 w-full">
-            {/* Breadcrumbs */}
-            <div className="mb-8">
-              <nav aria-label="Breadcrumb" className="text-xs">
-                <ol className="flex flex-wrap items-center gap-2 text-[#FAF8F5]/60">
-                  <li>
-                    <Link href="/" className="hover:text-[#C7A86A] transition-colors">
-                      Home
-                    </Link>
-                  </li>
-                  <li>/</li>
-                  <li>
-                    <Link href="/boxes" className="hover:text-[#C7A86A] transition-colors">
-                      Boxes
-                    </Link>
-                  </li>
-                  <li>/</li>
-                  <li className="text-[#C7A86A] font-medium" aria-current="page">
-                    Jewellery Boxes
-                  </li>
-                </ol>
-              </nav>
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-              {/* Left Column: Copy & Actions */}
-              <div className="lg:col-span-7 flex flex-col items-start text-left">
-                <span className="text-[11px] tracking-[0.32em] text-[#C7A86A] font-semibold uppercase mb-3 block">
-                  JEWELLERY BOXES
-                </span>
-
-                <h1 className="font-display font-normal text-3xl sm:text-4xl md:text-5xl lg:text-[52px] leading-[1.1] tracking-tight text-[#FAF8F5] mb-5">
-                  Bespoke Jewellery <span className="italic text-[#C7A86A]">Packaging</span>
-                </h1>
-
-                <p className="text-sm sm:text-base text-[#FAF8F5]/85 font-light leading-relaxed max-w-xl mb-8">
-                  A curated selection of jewellery boxes crafted in distinctive materials, finishes and configurations for luxury presentation.
-                </p>
-
-                <div className="flex flex-wrap items-center gap-4 w-full sm:w-auto">
-                  <Link
-                    href="/contact?product=Jewellery+Boxes"
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#F6F0E8] text-[#0F2744] hover:bg-[#FAF8F5] text-xs font-semibold tracking-[0.2em] rounded-[4px] uppercase transition-all duration-300 shadow-md"
-                  >
-                    REQUEST A QUOTE <span className="text-xs">→</span>
-                  </Link>
-
-                  <a
-                    href={whatsappUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-4 border border-[#C7A86A]/50 text-[#FAF8F5] hover:bg-[#C7A86A] hover:text-[#0F2744] text-xs font-semibold tracking-[0.2em] rounded-[4px] uppercase transition-all duration-300"
-                  >
-                    <MessageCircle className="h-4 w-4 text-[#C7A86A] group-hover:text-[#0F2744]" />
-                    ENQUIRE ON WHATSAPP
-                  </a>
-                </div>
-              </div>
-
-              {/* Right Column: Hero Image Showcase */}
-              <div className="lg:col-span-5 w-full flex justify-center lg:justify-end">
-                <div className="relative w-full max-w-md lg:max-w-none aspect-[4/3] rounded-[10px] overflow-hidden border border-[#C7A86A]/30 shadow-2xl">
-                  <img
-                    src="/assets/boxim.jpeg"
-                    alt="CASA DI BIZ luxury bespoke jewellery boxes"
-                    className="w-full h-full object-cover"
-                    loading="eager"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0F2744]/60 via-transparent to-transparent pointer-events-none" />
-                  <div className="absolute bottom-4 left-4 right-4 text-left">
-                    <span className="text-[10px] tracking-[0.25em] text-[#C7A86A] font-semibold uppercase block">
-                      HAND-FINISHED LUXURY
-                    </span>
-                    <p className="text-xs text-[#FAF8F5]/90 font-light">
-                      Silk velvet, micro-suede, and fine leatherette jewellery boxes
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+        {/* TOP BREADCRUMB STRIP */}
+        <div className="w-full bg-[#FAF8F5] border-b border-[#C7A86A]/15 pt-5 pb-3">
+          <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
+            <Breadcrumbs
+              items={[
+                { label: "Home", to: "/" },
+                { label: "Boxes" },
+              ]}
+            />
           </div>
-        </section>
+        </div>
 
         {/* JEWELLERY TYPE FILTER / NAVIGATION */}
         <section className="sticky top-[65px] z-40 bg-[#FAF8F5] border-b border-[#0F2744]/10 shadow-xs py-3.5 sm:py-4">
@@ -199,19 +114,14 @@ export default function JewelleryBoxesClient() {
         </section>
 
         {/* FEATURED PRODUCT GRID */}
-        <section className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 py-14 sm:py-20">
-          <div className="flex justify-between items-baseline mb-8 pb-4 border-b border-[#0F2744]/10">
-            <div>
-              <span className="text-[10px] tracking-[0.3em] text-[#C7A86A] font-semibold uppercase block mb-1">
-                PRODUCT CATALOGUE
-              </span>
-              <h2 className="font-display text-2xl sm:text-3xl text-[#0F2744] font-normal">
-                Jewellery Boxes
-              </h2>
-            </div>
-            <span className="text-xs text-[#0F2744]/60">
-              Colours and finishes customised to brand requirements
+        <section id="jewellery-boxes" className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 pt-8 sm:pt-10 pb-14 sm:pb-20 scroll-mt-24">
+          <div className="mb-8 pb-4 border-b border-[#0F2744]/10">
+            <span className="text-[10px] tracking-[0.3em] text-[#C7A86A] font-semibold uppercase block mb-1">
+              PRODUCT CATALOGUE
             </span>
+            <h2 className="font-display text-2xl sm:text-3xl text-[#0F2744] font-normal">
+              Jewellery Boxes
+            </h2>
           </div>
 
           {/* Grid Container: Desktop 4-col, Mobile horizontal snap scroll */}
@@ -313,51 +223,6 @@ export default function JewelleryBoxesClient() {
           </div>
         </section>
 
-        {/* CRAFTED AROUND YOUR BRAND (CUSTOMISATION SECTION) */}
-        <section className="w-full bg-[#0F2744] bg-grain-navy text-[#FAF8F5] py-16 sm:py-24">
-          <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-              {/* Left Column */}
-              <div className="lg:col-span-5 text-left">
-                <span className="text-[11px] tracking-[0.3em] text-[#C7A86A] font-semibold uppercase mb-3 block">
-                  BESPOKE SPECIFICATIONS
-                </span>
-                <h2 className="font-display text-3xl sm:text-4xl text-[#FAF8F5] font-normal leading-tight mb-5">
-                  Crafted Around <span className="italic text-[#C7A86A]">Your Brand</span>
-                </h2>
-                <p className="text-sm text-[#FAF8F5]/80 font-light leading-relaxed mb-8">
-                  Every parameter of our jewellery boxes can be tailored to match your brand guidelines, product dimensions, and retail experience.
-                </p>
-                <Link
-                  href="/contact?product=Jewellery+Boxes"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#C7A86A] text-[#0F2744] hover:bg-[#FAF8F5] text-xs font-semibold tracking-[0.2em] rounded-[4px] uppercase transition-colors shadow-md"
-                >
-                  REQUEST A QUOTE <span className="text-xs">→</span>
-                </Link>
-              </div>
-
-              {/* Right Column: Factual Customization Grid */}
-              <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-5">
-                {CUSTOMISATION_ITEMS.map((item) => (
-                  <div
-                    key={item.title}
-                    className="p-5 rounded-[6px] border border-[#C7A86A]/20 bg-[#FAF8F5]/5 backdrop-blur-xs text-left"
-                  >
-                    <span className="text-[10px] tracking-[0.25em] text-[#C7A86A] font-semibold uppercase block mb-1">
-                      SPECIFICATION
-                    </span>
-                    <h3 className="font-display text-lg text-[#FAF8F5] font-normal mb-2">
-                      {item.title}
-                    </h3>
-                    <p className="text-xs text-[#FAF8F5]/75 font-light leading-relaxed">
-                      {item.desc}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
       </main>
 
       {/* FOOTER */}

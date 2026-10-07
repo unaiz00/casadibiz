@@ -483,7 +483,7 @@ export default function ProductDetailClient({
 
               <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6">
                 {applications.map((app, idx) => {
-                  const Icon = app.iconName ? getIcon(app.iconName) : Lucide.Sparkles;
+                  const Icon = app.iconName ? getIcon(app.iconName) : Lucide.HelpCircle;
                   return (
                     <div key={idx} className="flex flex-col items-center text-center group">
                       <div className="h-16 w-16 rounded-full border border-gold/45 grid place-items-center text-gold bg-ivory group-hover:bg-gold group-hover:text-cream transition-all duration-300 shadow-xs mb-3.5">

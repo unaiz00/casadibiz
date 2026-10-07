@@ -1,6 +1,6 @@
 "use client";
 
-import { Sparkles, Palette } from "lucide-react";
+import { Palette } from "lucide-react";
 
 interface SpecDetail {
   name?: string;
@@ -40,7 +40,7 @@ export default function PaperBagFinishing({
           {hasFinishes && (
             <div className="bg-[#F6F0E8] rounded-2xl p-8 border border-[#C7A86A]/20">
               <h3 className="font-display text-xl text-[#0F2744] font-semibold mb-6 flex items-center gap-3">
-                <Sparkles className="h-5 w-5 text-[#C7A86A]" /> Surface Finishes
+                Surface Finishes
               </h3>
               <ul className="space-y-6">
                 {finishes.map((item, idx) => (

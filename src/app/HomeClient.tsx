@@ -9,18 +9,7 @@ import { useEffect, useState } from "react";
 import { SiteHeader, SiteFooter } from "@/components/site-chrome";
 import CollectionsGrid from "@/components/CollectionsGrid";
 
-/* ---------------- Sparkles + ribbons decoration ---------------- */
-function Sparkle({ className = "", delay = 0 }: { className?: string; delay?: number }) {
-  return (
-    <svg
-      className={`absolute animate-sparkle text-gold ${className}`}
-      style={{ animationDelay: `${delay}s` }}
-      viewBox="0 0 20 20" fill="currentColor" aria-hidden
-    >
-      <path d="M10 0 L11.5 8.5 L20 10 L11.5 11.5 L10 20 L8.5 11.5 L0 10 L8.5 8.5 Z" />
-    </svg>
-  );
-}
+/* ---------------- Ribbons decoration ---------------- */
 
 function RibbonSwoopTopLeft({ className = "" }: { className?: string }) {
   return (
@@ -169,7 +158,7 @@ function Categories() {
               </>
             );
             const cls = "group flex flex-col items-center gap-2 sm:gap-3";
-            if (slug === "boxes") return <Link key={label} href="/boxes" className={cls}>{inner}</Link>;
+            if (slug === "boxes") return <Link key={label} href="/boxes/#jewellery-boxes" className={cls}>{inner}</Link>;
             if (slug === "bags") return <Link key={label} href="/bags" className={cls}>{inner}</Link>;
             if (slug === "pouches") return <Link key={label} href="/pouches" className={cls}>{inner}</Link>;
             if (slug === "wraps") return <Link key={label} href="/wraps" className={cls}>{inner}</Link>;

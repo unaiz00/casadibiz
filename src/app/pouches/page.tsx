@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, ShieldCheck, Sparkles, Layers, Ruler } from "lucide-react";
+import { ArrowRight, ShieldCheck, Layers, Ruler } from "lucide-react";
 import { SiteHeader, SiteFooter, Breadcrumbs } from "@/components/site-chrome";
 import { POUCH_PRODUCTS } from "@/data/pouches-data";
 
@@ -104,8 +104,7 @@ export default function PouchesHubPage() {
                 <Layers className="h-4 w-4 text-[#C7A86A] shrink-0" />
                 <span className="text-[#0F2744]/80 font-medium">Pantone Colour Formulation</span>
               </div>
-              <div className="flex items-center gap-2.5">
-                <Sparkles className="h-4 w-4 text-[#C7A86A] shrink-0" />
+              <div className="flex items-center">
                 <span className="text-[#0F2744]/80 font-medium">Hot Foil & Engraved Hardware</span>
               </div>
             </div>

@@ -18,7 +18,7 @@ const CARDS: CardItem[] = [
     title: "BOXES",
     copy: "Structured forms. Refined finishes.",
     img: "/assets/rigidd.jpeg",
-    link: "/boxes",
+    link: "/boxes/#jewellery-boxes",
   },
   {
     id: "bags",

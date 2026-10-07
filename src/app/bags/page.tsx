@@ -45,9 +45,9 @@ export default function BagsPage() {
       <SiteHeader />
       <main>
         <section className="w-full bg-cream">
-          <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12 pt-10 pb-6 sm:pt-14">
+          <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12 pt-6 pb-6 sm:pt-14">
             <Breadcrumbs items={[{ label: "Home", to: "/" }, { label: "Bags" }]} />
-            <p className="mt-8 text-[11px] tracking-[0.32em] text-gold font-medium">THE BAG COLLECTION</p>
+            <p className="mt-4 sm:mt-8 text-[11px] tracking-[0.32em] text-gold font-medium uppercase">THE BAG COLLECTION</p>
             <h1 className="mt-3 font-display text-4xl sm:text-5xl md:text-6xl text-navy leading-[1.05]">
               Paper Bags made <span className="italic text-gradient-gold">with intent.</span>
             </h1>

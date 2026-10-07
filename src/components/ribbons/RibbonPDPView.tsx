@@ -9,7 +9,6 @@ import {
   ChevronRight,
   Maximize2,
   X,
-  Sparkles,
   ShieldCheck,
   Layers,
   Check,
@@ -17,6 +16,29 @@ import {
 } from "lucide-react";
 import { SiteHeader, SiteFooter, Breadcrumbs } from "@/components/site-chrome";
 import type { RibbonMaterial, RibbonWidth } from "@/data/ribbons-data";
+
+const RIBBON_TABS = [
+  {
+    id: "overview" as const,
+    label: "MATERIAL OVERVIEW",
+    mobileLines: ["MATERIAL", "OVERVIEW"],
+  },
+  {
+    id: "specs" as const,
+    label: "TECHNICAL SPECIFICATIONS",
+    mobileLines: ["TECHNICAL", "SPECIFICATIONS"],
+  },
+  {
+    id: "branding" as const,
+    label: "CUSTOM BRANDING & PRINTING",
+    mobileLines: ["BRANDING", "& PRINTING"],
+  },
+  {
+    id: "applications" as const,
+    label: "APPLICATIONS & BEST USE",
+    mobileLines: ["APPLICATIONS", "& BEST USE"],
+  },
+];
 
 interface RibbonPDPViewProps {
   material: RibbonMaterial;
@@ -165,10 +187,7 @@ Please share MOQ, sample lead time, and branding options.`;
                 </div>
 
                 {/* Card 3: Branding */}
-                <div className="bg-[#F6F0E8] border border-[#C7A86A]/20 rounded-2xl p-5 lg:p-3.5 snap-start shrink-0 w-[80vw] lg:w-auto lg:shrink flex flex-col justify-between min-h-[115px] lg:min-h-0">
-                  <div className="mb-3 lg:mb-2">
-                    <Sparkles className="h-5 w-5 text-[#C7A86A] shrink-0" />
-                  </div>
+                <div className="bg-[#F6F0E8] border border-[#C7A86A]/20 rounded-2xl p-5 lg:p-3.5 snap-start shrink-0 w-[80vw] lg:w-auto lg:shrink flex flex-col justify-end min-h-[115px] lg:min-h-0">
                   <div>
                     <span className="text-[10px] font-bold tracking-[0.2em] text-[#0F2744]/70 uppercase block mb-1">
                       BRANDING
@@ -322,67 +341,53 @@ Please share MOQ, sample lead time, and branding options.`;
               </h2>
             </div>
 
-            {/* Tabs Header */}
-            <div className="flex border-b border-[#0F2744]/10 mb-10 justify-center gap-6 sm:gap-12 overflow-x-auto scrollbar-none snap-x">
-              <button
-                type="button"
-                onClick={() => setActiveTab("overview")}
-                className={`pb-4 text-xs font-semibold tracking-[0.2em] uppercase transition-all duration-300 relative whitespace-nowrap cursor-pointer snap-start ${
-                  activeTab === "overview"
-                    ? "text-[#0F2744] font-bold"
-                    : "text-[#0F2744]/50 hover:text-[#0F2744]"
-                }`}
-              >
-                MATERIAL OVERVIEW
-                {activeTab === "overview" && (
-                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#C7A86A]" />
-                )}
-              </button>
+            {/* Mobile Segmented Control Header (Mobile Only - Single Line 4-Column Row) */}
+            <div className="lg:hidden w-full mb-8">
+              <div className="grid grid-cols-4 gap-0.5 xs:gap-1 bg-[#F6F0E8] border border-[#C7A86A]/25 rounded-xl sm:rounded-2xl p-1 w-full min-h-[52px]">
+                {RIBBON_TABS.map((tab) => {
+                  const isActive = activeTab === tab.id;
+                  return (
+                    <button
+                      key={tab.id}
+                      type="button"
+                      onClick={() => setActiveTab(tab.id)}
+                      className={`flex flex-col items-center justify-center py-2 px-0.5 xs:px-1 rounded-lg sm:rounded-xl text-center transition-all duration-300 cursor-pointer min-h-[48px] h-full ${
+                        isActive
+                          ? "bg-[#FAF8F5] text-[#0F2744] border border-[#C7A86A]/40 shadow-xs"
+                          : "bg-transparent text-[#0F2744]/65 hover:text-[#0F2744] border border-transparent"
+                      }`}
+                    >
+                      <span className="text-[8px] xs:text-[8.5px] sm:text-[9.5px] md:text-[10px] font-bold tracking-[0.01em] xs:tracking-[0.02em] sm:tracking-[0.04em] uppercase leading-[1.2] text-center block w-full truncate sm:overflow-visible">
+                        {tab.mobileLines[0]}
+                      </span>
+                      <span className="text-[8px] xs:text-[8.5px] sm:text-[9.5px] md:text-[10px] font-bold tracking-[0.01em] xs:tracking-[0.02em] sm:tracking-[0.04em] uppercase leading-[1.2] text-center block w-full truncate sm:overflow-visible">
+                        {tab.mobileLines[1]}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
 
-              <button
-                type="button"
-                onClick={() => setActiveTab("specs")}
-                className={`pb-4 text-xs font-semibold tracking-[0.2em] uppercase transition-all duration-300 relative whitespace-nowrap cursor-pointer snap-start ${
-                  activeTab === "specs"
-                    ? "text-[#0F2744] font-bold"
-                    : "text-[#0F2744]/50 hover:text-[#0F2744]"
-                }`}
-              >
-                TECHNICAL SPECIFICATIONS
-                {activeTab === "specs" && (
-                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#C7A86A]" />
-                )}
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setActiveTab("branding")}
-                className={`pb-4 text-xs font-semibold tracking-[0.2em] uppercase transition-all duration-300 relative whitespace-nowrap cursor-pointer snap-start ${
-                  activeTab === "branding"
-                    ? "text-[#0F2744] font-bold"
-                    : "text-[#0F2744]/50 hover:text-[#0F2744]"
-                }`}
-              >
-                CUSTOM BRANDING & PRINTING
-                {activeTab === "branding" && (
-                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#C7A86A]" />
-                )}
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setActiveTab("applications")}
-                className={`pb-4 text-xs font-semibold tracking-[0.2em] uppercase transition-all duration-300 relative whitespace-nowrap cursor-pointer snap-start ${
-                  activeTab === "applications"
-                    ? "text-[#0F2744] font-bold"
-                    : "text-[#0F2744]/50 hover:text-[#0F2744]"
-                }`}
-              >
-                APPLICATIONS & BEST USE
-                {activeTab === "applications" && (
-                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#C7A86A]" />
-                )}
-              </button>
+            {/* Desktop Tabs Header (Unchanged on Desktop lg+) */}
+            <div className="hidden lg:flex border-b border-[#0F2744]/10 mb-10 justify-center gap-12">
+              {RIBBON_TABS.map((tab) => (
+                <button
+                  key={tab.id}
+                  type="button"
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`pb-4 text-xs font-semibold tracking-[0.2em] uppercase transition-all duration-300 relative whitespace-nowrap cursor-pointer ${
+                    activeTab === tab.id
+                      ? "text-[#0F2744] font-bold"
+                      : "text-[#0F2744]/50 hover:text-[#0F2744]"
+                  }`}
+                >
+                  {tab.label}
+                  {activeTab === tab.id && (
+                    <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#C7A86A]" />
+                  )}
+                </button>
+              ))}
             </div>
 
             {/* TAB CONTENT: OVERVIEW */}
@@ -521,11 +526,10 @@ Please share MOQ, sample lead time, and branding options.`;
                 {material.brandingOptions.map((brand, idx) => (
                   <div key={idx} className="bg-[#FAF8F5] border border-[#C7A86A]/25 rounded-2xl p-6 flex flex-col justify-between">
                     <div>
-                      <div className="flex items-center justify-between mb-3">
-                        <span className="text-[10px] font-bold tracking-[0.2em] text-[#C7A86A] uppercase">
+                      <div className="mb-3">
+                        <span className="text-[10px] font-bold tracking-[0.2em] text-[#C7A86A] uppercase block">
                           {brand.method}
                         </span>
-                        <Sparkles className="h-4 w-4 text-[#C7A86A]" />
                       </div>
                       <h4 className="font-display text-xl text-[#0F2744] mb-2">{brand.title}</h4>
                       <p className="text-xs text-[#0F2744]/80 leading-relaxed">{brand.description}</p>
