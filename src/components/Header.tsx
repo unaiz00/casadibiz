@@ -27,7 +27,8 @@ const PRODUCT_LINKS: NavLink[] = [
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
-  const [productsOpen, setProductsOpen] = useState(false);
+  const [desktopProductsOpen, setDesktopProductsOpen] = useState(false);
+  const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-border-luxe/60">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between gap-4">
@@ -40,24 +41,24 @@ export function SiteHeader() {
                   href="#"
                   onClick={(e) => {
                     e.preventDefault();
-                    setProductsOpen((v) => !v);
+                    setDesktopProductsOpen((v) => !v);
                   }}
                   className="relative flex items-center gap-1 tracking-wide transition-colors hover:text-gold text-navy py-2 cursor-pointer"
                 >
                   {l.label}
                   <ChevronDown
-                    className={`h-3.5 w-3.5 transition-transform duration-300 ${productsOpen ? "rotate-180" : ""
+                    className={`h-3.5 w-3.5 transition-transform duration-300 ${desktopProductsOpen ? "rotate-180" : ""
                       }`}
                   />
                 </a>
-                {productsOpen && (
+                {desktopProductsOpen && (
                   <div className="absolute left-1/2 -translate-x-1/2 top-full pt-3 z-50">
                     <div className="min-w-[230px] rounded-[12px] border border-border-luxe/60 bg-ivory shadow-[0_24px_60px_-22px_rgba(22,35,60,0.35)] p-2 animate-fade-up">
                       {PRODUCT_LINKS.map((p) => (
                         <Link
                           key={p.label}
                           href={p.href}
-                          onClick={() => setProductsOpen(false)}
+                          onClick={() => setDesktopProductsOpen(false)}
                           className="block rounded-[8px] px-4 py-2.5 text-sm text-navy/85 hover:bg-cream hover:text-gold transition-colors"
                         >
                           {p.label}
@@ -97,16 +98,16 @@ export function SiteHeader() {
                   <div key={l.label}>
                     <button
                       type="button"
-                      aria-expanded={productsOpen}
-                      onClick={() => setProductsOpen((v) => !v)}
+                      aria-expanded={mobileProductsOpen}
+                      onClick={() => setMobileProductsOpen((v) => !v)}
                       className="w-full flex items-center justify-between py-3 text-sm tracking-wide text-navy hover:text-gold transition"
                     >
                       {l.label}
                       <ChevronDown
-                        className={`h-4 w-4 transition-transform duration-300 ${productsOpen ? "rotate-180" : ""}`}
+                        className={`h-4 w-4 transition-transform duration-300 ${mobileProductsOpen ? "rotate-180" : ""}`}
                       />
                     </button>
-                    {productsOpen && (
+                    {mobileProductsOpen && (
                       <div className="pb-3 pl-3 flex flex-col">
                         {PRODUCT_LINKS.map((p) => (
                           <Link
@@ -132,7 +133,6 @@ export function SiteHeader() {
                   </Link>
                 ),
               )}
-
             </nav>
             <div className="mt-5 pt-5 border-t border-border-luxe/60">
               <div className="text-[11px] tracking-[0.3em] font-semibold text-gold mb-3">PRODUCTS</div>

@@ -136,37 +136,40 @@ export default async function BoxCategoryListingPage({ params }: CategoryPagePro
                     loading="lazy"
                   />
                   <div className="absolute top-4 left-4 bg-[#0F2744]/90 px-3 py-1 rounded text-[#F6F0E8] text-[10px] tracking-[0.2em] font-semibold uppercase">
-                    {model.modelCode}
+                    {model.collection}
                   </div>
                   <div className="absolute bottom-3 right-3 bg-white/90 backdrop-blur-xs px-2.5 py-1 rounded text-[10px] font-mono text-[#0F2744] font-medium border border-[#C7A86A]/30">
                     {model.sizes[0]?.dimensions}
                   </div>
                 </div>
 
-                {/* Content */}
-                <div className="p-6 flex-1 flex flex-col justify-between">
-                  <div>
-                    <span className="text-[10px] tracking-[0.25em] text-[#C7A86A] font-semibold uppercase block mb-1">
-                      {model.subtitle}
-                    </span>
-                    <h2 className="font-display text-2xl text-[#0F2744] font-medium group-hover:text-[#C7A86A] transition-colors">
-                      {model.name}
-                    </h2>
-                    <p className="mt-3 text-sm text-[#0F2744]/75 leading-relaxed font-sans line-clamp-2">
-                      {model.shortDescription}
-                    </p>
-                  </div>
+                  {/* Card Body */}
+                  <div className="p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                      <span className="text-[10px] tracking-[0.25em] text-[#C7A86A] font-semibold uppercase block mb-1">
+                        {model.subtitle}
+                      </span>
+                      <h2 className="font-display text-2xl text-[#0F2744] font-medium group-hover:text-[#C7A86A] transition-colors">
+                        {model.name}
+                      </h2>
+                      <p className="mt-2 text-xs text-[#0F2744]/70">
+                        Available in multiple sizes
+                      </p>
+                      <p className="mt-3 text-sm text-[#0F2744]/75 leading-relaxed font-sans line-clamp-2">
+                        {model.shortDescription}
+                      </p>
+                    </div>
 
-                  {/* Highlights & CTA */}
-                  <div className="mt-6 pt-4 border-t border-[#C7A86A]/15 flex items-center justify-between">
-                    <span className="text-xs text-[#0F2744]/70 font-medium">
-                      {model.materials.length} Materials • {model.colours.length} Colours
-                    </span>
-                    <span className="inline-flex items-center gap-1.5 text-xs tracking-[0.2em] font-bold text-[#C7A86A] group-hover:gap-2.5 transition-all">
-                      EXPLORE <ArrowRight className="h-3.5 w-3.5" />
-                    </span>
+                    {/* Highlights & CTA */}
+                    <div className="mt-6 pt-4 border-t border-[#C7A86A]/15 flex items-center justify-between">
+                      <span className="text-xs text-[#0F2744]/70 font-medium">
+                        {model.sizes.length} Catalogue Sizes
+                      </span>
+                      <span className="inline-flex items-center gap-1.5 text-xs tracking-[0.2em] font-bold text-[#C7A86A] group-hover:gap-2.5 transition-all">
+                        VIEW DETAILS <ArrowRight className="h-3.5 w-3.5" />
+                      </span>
+                    </div>
                   </div>
-                </div>
               </Link>
             ))}
           </div>

@@ -102,14 +102,14 @@ export default function BoxesPage() {
 
               <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
                 {[
-                  { name: "Ring Boxes", slug: "ring-boxes", desc: "Solitaire, eternity, octagonal & contour cases", count: "6 models", image: "/assets/boxim.jpeg" },
-                  { name: "Earring Boxes", slug: "earring-boxes", desc: "Drop, stud, hoop & chandelier presentation", count: "4 models", image: "/assets/imsec2.jpeg" },
-                  { name: "Chain Boxes", slug: "chain-boxes", desc: "Elongated channels for fine chains & collar links", count: "3 models", image: "/assets/goodimm.jpeg" },
-                  { name: "Pendant Boxes", slug: "pendant-boxes", desc: "Square, oval & medallion statement cases", count: "3 models", image: "/assets/allim.jpeg" },
-                  { name: "Bracelet Boxes", slug: "bracelet-boxes", desc: "Slimline tennis lines & wide cuff bolsters", count: "3 models", image: "/assets/imsec1.jpeg" },
-                  { name: "Necklace Boxes", slug: "necklace-boxes", desc: "Grand collar, choker & princess V-neck pads", count: "3 models", image: "/assets/allllllimm.jpeg" },
-                  { name: "Bangle Boxes", slug: "bangle-boxes", desc: "Single, double pair & stacking barrel rolls", count: "3 models", image: "/assets/rigidd.jpeg" },
-                  { name: "Full Set Boxes", slug: "full-set-boxes", desc: "Coordinated 4-piece suites & bridal chests", count: "3 models", image: "/assets/allimages.jpeg" },
+                  { name: "Ring Boxes", slug: "ring-boxes", desc: "Ring Box (S), Ring Box (L), and multi-ring formats", image: "/assets/boxim.jpeg" },
+                  { name: "Earring Boxes", slug: "earring-boxes", desc: "Earring Box, Earring Box (S), and Earring Box (L)", image: "/assets/imsec2.jpeg" },
+                  { name: "Chain & Pendant Boxes", slug: "chain-boxes", desc: "Chain Box, Pendant Box, and Chain / PN formats", image: "/assets/goodimm.jpeg" },
+                  { name: "Pendant Boxes", slug: "pendant-boxes", desc: "Pendant Box, Pn Box, and E/R Pn Box cases", image: "/assets/allim.jpeg" },
+                  { name: "Bracelet Boxes", slug: "bracelet-boxes", desc: "Bracelet Box, Bracelet / Chain cases", image: "/assets/imsec1.jpeg" },
+                  { name: "Necklace Boxes", slug: "necklace-boxes", desc: "Necklace Box (S), Necklace Box (M), and Necklace Box (L)", image: "/assets/allllllimm.jpeg" },
+                  { name: "Bangle Boxes", slug: "bangle-boxes", desc: "Bangle Box, T Bangle, and ER Bangle Box", image: "/assets/rigidd.jpeg" },
+                  { name: "Set Boxes", slug: "full-set-boxes", desc: "Set Box (S), Set Box (M), Set Box (L), and Full Set Box", image: "/assets/allimages.jpeg" },
                 ].map((cat, idx) => (
                   <Link
                     key={cat.slug}
@@ -124,9 +124,6 @@ export default function BoxesPage() {
                         className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                         loading="lazy"
                       />
-                      <div className="absolute top-2.5 right-2.5 bg-navy/85 px-2 py-0.5 rounded text-[9px] font-medium tracking-wider text-cream">
-                        {cat.count}
-                      </div>
                     </div>
                     <div className="p-4.5 flex-1 flex flex-col justify-between">
                       <div>
@@ -134,7 +131,7 @@ export default function BoxesPage() {
                         <p className="mt-1.5 text-xs text-muted-luxe leading-relaxed">{cat.desc}</p>
                       </div>
                       <span className="mt-4 inline-flex items-center gap-1.5 text-[10px] tracking-[0.25em] font-semibold text-gold group-hover:gap-2.5 transition-all">
-                        VIEW MODELS <ArrowRight className="h-3 w-3" />
+                        VIEW CATALOGUE <ArrowRight className="h-3 w-3" />
                       </span>
                     </div>
                   </Link>

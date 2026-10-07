@@ -11,7 +11,7 @@ import {
   Clock,
   MessageCircle,
   X,
-  Sparkles,
+  UserRound,
   PenTool,
   Factory,
   Zap,
@@ -65,7 +65,7 @@ const PRINTING = [
 ];
 
 const WHY = [
-  { Icon: Sparkles, title: "Expert Packaging Consultation", text: "Talk it through with people who make packaging every day, not a sales script." },
+  { Icon: UserRound, title: "Expert Packaging Consultation", text: "Talk it through with people who make packaging every day, not a sales script." },
   { Icon: PenTool, title: "Custom Design Support", text: "Dielines, mockups and finish samples prepared around your brand guidelines." },
   { Icon: Factory, title: "Bulk Manufacturing", text: "In-house production capacity for repeat runs without losing hand-finished quality." },
   { Icon: Zap, title: "Fast Response", text: "Enquiries answered the same working day, with a costing to follow shortly after." },
@@ -190,45 +190,47 @@ export default function ContactPage() {
       <SiteHeader />
       <main>
         {/* HERO */}
-        <section className="relative w-full overflow-hidden bg-[#0F2744] bg-grain-navy pt-8 sm:pt-10 lg:pt-12 pb-0 flex flex-col items-center h-[620px] sm:h-[780px] lg:h-[850px]">
-          {/* Inner container for text content */}
-          <div className="relative mx-auto max-w-4xl px-5 sm:px-8 lg:px-12 text-center flex flex-col items-center pt-0 z-10">
+        <section className="relative w-full overflow-hidden sm:bg-[#0F2744] sm:bg-grain-navy flex flex-col items-center min-h-[580px] xs:min-h-[620px] sm:min-h-0 sm:h-[780px] lg:h-[850px] pt-10 xs:pt-12 sm:pt-10 lg:pt-12 pb-8 sm:pb-0">
+          {/* Background image on mobile (covers entire hero with products at bottom) / Desktop bottom image */}
+          <div className="absolute inset-0 w-full h-full z-0 sm:top-auto sm:bottom-0 sm:h-auto flex justify-center items-end pointer-events-none animate-hero-image-luxe">
+            <img
+              src="/assets/contactim1.png"
+              alt="CASA DI BIZ premium packaging products still life"
+              className="w-full h-full object-cover object-bottom sm:object-contain sm:h-auto block"
+              loading="eager"
+            />
+            {/* Subtle top gradient overlay for text legibility on mobile */}
+            <div className="absolute inset-0 bg-gradient-to-b from-[#0F2744]/75 via-[#0F2744]/35 to-transparent sm:hidden pointer-events-none" />
+          </div>
+
+          {/* Text Content Block (Layered ON TOP of image on mobile) */}
+          <div className="relative mx-auto max-w-4xl px-5 sm:px-8 lg:px-12 text-center flex flex-col items-center pt-0 z-10 w-full">
             {/* Heading */}
-            <h1 className="animate-hero-heading-luxe font-display font-normal text-2xl sm:text-3xl md:text-4xl lg:text-[42px] leading-tight tracking-tight mb-6 max-w-4xl">
-              <span className="text-[#C7A86A]">Custom packaging </span>
-              <span className="italic text-[#C7A86A] font-normal">done for you</span>
+            <h1 className="animate-hero-heading-luxe font-display font-normal text-[30px] xs:text-[34px] sm:text-3xl md:text-4xl lg:text-[42px] leading-[1.18] tracking-tight mb-3.5 sm:mb-5 max-w-4xl text-center">
+              <span className="block sm:inline text-[#C7A86A]">Custom packaging </span>
+              <span className="block sm:inline italic text-[#C7A86A] font-normal">done for you</span>
             </h1>
 
             {/* Paragraph */}
-            <p className="animate-hero-support-luxe text-sm sm:text-base text-[#FAF8F5]/85 font-light leading-relaxed max-w-[650px] sm:max-w-[700px] mb-8 sm:mb-10 text-center">
+            <p className="animate-hero-support-luxe text-[14px] sm:text-base text-[#FAF8F5] sm:text-[#FAF8F5]/85 font-light leading-relaxed max-w-[340px] sm:max-w-[700px] mb-6 sm:mb-8 text-center drop-shadow-sm">
               Tell us what you need, and we'll help shape the right packaging for your product from boxes and bags to pouches, ribbons, and finishing details
             </p>
 
-            {/* CTA */}
-            <div className="animate-hero-cta">
+            {/* CTA Button */}
+            <div className="animate-hero-cta flex justify-center w-full">
               <button
                 onClick={() => setFormOpen(true)}
-                className="bg-[#F6F0E8] text-[#0F2744] hover:bg-[#FAF8F5] transition-colors duration-300 text-[11px] sm:text-xs font-semibold tracking-[0.25em] px-6 sm:px-8 py-3.5 sm:py-4 rounded-[4px] uppercase flex items-center gap-2"
+                className="w-[195px] h-[50px] sm:w-auto sm:h-auto sm:px-8 sm:py-4 bg-[#F6F0E8] text-[#0F2744] hover:bg-[#FAF8F5] transition-colors duration-300 text-[11px] sm:text-xs font-semibold tracking-[0.25em] rounded-[6px] sm:rounded-[4px] uppercase flex items-center justify-center gap-2 shadow-lg"
               >
                 CONTACT US <span className="text-xs">→</span>
               </button>
             </div>
           </div>
-
-          {/* Product Image */}
-          <div className="absolute bottom-0 left-0 right-0 w-full flex justify-center items-end z-0 animate-hero-image-luxe">
-            <img
-              src="/assets/contactim1.png"
-              alt="CASA DI BIZ premium packaging products still life"
-              className="w-full h-auto block"
-              loading="eager"
-            />
-          </div>
         </section>
 
         {/* reach us */}
         <SectionHeader eyebrow="REACH US" title="Four ways to start a conversation" bg="cream" />
-        <section className="w-full bg-cream">
+        <section className="w-full bg-[#F6F0E8]">
           <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12 pb-14 sm:pb-20">
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               <InfoCard
@@ -270,7 +272,7 @@ export default function ContactPage() {
         <SectionHeader eyebrow="OUR STUDIO" title="Find us in Dubai" bg="ivory" />
         <section className="w-full bg-ivory">
           <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12 pb-14 sm:pb-20">
-            <div className="overflow-hidden rounded-[14px] shadow-[0_16px_42px_-18px_rgba(22,35,60,0.22)]">
+            <div className="overflow-hidden rounded-[14px]">
               <iframe
                 title="CASA DI BIZ location map"
                 src={mapSrc}
@@ -295,13 +297,13 @@ export default function ContactPage() {
 
         {/* WHY CONTACT US */}
         <SectionHeader eyebrow="WHY CONTACT US" title="What you get when you write in" bg="cream" />
-        <section className="w-full bg-cream">
+        <section className="w-full bg-[#F6F0E8]">
           <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12 pb-14 sm:pb-20">
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {WHY.map(({ Icon, title, text }, i) => (
                 <div
                   key={title}
-                  className="bg-ivory rounded-[14px] p-6 sm:p-7 shadow-[0_16px_42px_-18px_rgba(22,35,60,0.18)] hover:-translate-y-1.5 transition-all duration-500 animate-fade-up"
+                  className="bg-[#FAF8F5] rounded-[14px] p-6 sm:p-7 hover:-translate-y-1.5 transition-all duration-500 animate-fade-up"
                   style={{ animationDelay: `${i * 0.07}s` }}
                 >
                   <Icon className="h-6 w-6 text-gold" />
@@ -713,7 +715,7 @@ export default function ContactPage() {
 
 function SectionHeader({ eyebrow, title, bg = "ivory" }: { eyebrow: string; title: string; bg?: "ivory" | "cream" }) {
   return (
-    <section className={`w-full ${bg === "cream" ? "bg-cream" : "bg-ivory"}`}>
+    <section className={`w-full ${bg === "cream" ? "bg-[#F6F0E8]" : "bg-ivory"}`}>
       <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12 pt-14 sm:pt-20 pb-6 text-center">
         <p className="text-[11px] tracking-[0.32em] text-gold font-medium mb-3">{eyebrow}</p>
         <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-navy leading-tight">{title}</h2>
@@ -741,7 +743,7 @@ function InfoCard({
 }) {
   return (
     <div
-      className="flex flex-col bg-ivory rounded-[14px] p-6 sm:p-7 shadow-[0_16px_42px_-18px_rgba(22,35,60,0.22)] hover:-translate-y-1.5 transition-all duration-500 animate-fade-up"
+      className="flex flex-col bg-[#FAF8F5] rounded-[14px] p-6 sm:p-7 hover:-translate-y-1.5 transition-all duration-500 animate-fade-up"
       style={{ animationDelay: `${delay}s` }}
     >
       <span className="h-11 w-11 rounded-full border border-gold/50 grid place-items-center text-gold">

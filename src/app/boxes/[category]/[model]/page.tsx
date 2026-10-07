@@ -28,13 +28,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!model) {
     return {
-      title: "Jewellery Box Model Not Found | CASA DI BIZ",
-      description: "The requested bespoke jewellery box model could not be found.",
+      title: "Jewellery Box Not Found | CASA DI BIZ",
+      description: "The requested bespoke jewellery box could not be found.",
     };
   }
 
-  const title = `${model.name} (${model.modelCode}) ${model.categoryName} | CASA DI BIZ Luxury Packaging`;
-  const description = `Explore the CASA DI BIZ ${model.name} (${model.modelCode}) ${model.categoryName.toLowerCase()}, engineered with bespoke dimensions, luxury velvet or microfiber linings, and hot-stamped gold foil finishes.`;
+  const title = `${model.name} | CASA DI BIZ Luxury Jewellery Packaging`;
+  const description = `Explore the CASA DI BIZ ${model.name}, engineered with bespoke catalogue dimensions, anti-tarnish luxury interior linings, and tailored branding finishes.`;
   const primaryImage = model.images[0]?.src || "/assets/boxim.jpeg";
 
   return {
@@ -53,7 +53,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
           url: primaryImage,
           width: 1200,
           height: 800,
-          alt: `CASA DI BIZ ${model.name} luxury jewellery box`,
+          alt: `CASA DI BIZ ${model.name}`,
         },
       ],
       type: "website",
@@ -88,7 +88,7 @@ export default async function BoxModelPage({ params }: PageProps) {
       {
         "@type": "Product",
         "@id": `https://casadibiz.com/boxes/${category}/${modelSlug}#product`,
-        name: `CASA DI BIZ ${model.name} (${model.modelCode}) ${model.categoryName}`,
+        name: `CASA DI BIZ ${model.name}`,
         description: model.shortDescription,
         image: model.images.map((img) => `https://casadibiz.com${img.src}`),
         brand: {
@@ -136,7 +136,7 @@ export default async function BoxModelPage({ params }: PageProps) {
           {
             "@type": "ListItem",
             position: 4,
-            name: `${model.modelCode} ${model.name}`,
+            name: model.name,
             item: `https://casadibiz.com/boxes/${category}/${modelSlug}`,
           },
         ],

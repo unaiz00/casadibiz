@@ -1,11 +1,15 @@
 @import "tailwindcss";
 
+@theme {
+  --breakpoint-xs: 390px;
+}
+
 
 :root {
   --color-background: #fbf7f0;
   --color-foreground: #2c2c2c;
-  --color-cream: #fffdf9;
-  --color-ivory: #fbf7f0;
+  --color-cream: #F6F0E8;
+  --color-ivory: #FAF8F5;
   --color-gold: #c8a15a;
   --color-gold-soft: #d9bd85;
   --color-navy: #16233c;
@@ -67,6 +71,10 @@
 
   .bg-ivory {
     background-color: var(--color-ivory);
+  }
+
+  .bg-cream {
+    background-color: var(--color-cream);
   }
 
   .text-gradient-gold {

@@ -129,29 +129,45 @@ export default function WhiteCardTexturePage() {
               </p>
 
               {/* Material/Construction Summary */}
-              <div className="w-full bg-[#F6F0E8] border border-[#C7A86A]/20 rounded-xl p-5 mb-8 text-sm space-y-3">
+              <div className="w-full bg-[#F6F0E8] border border-[#C7A86A]/25 rounded-xl p-5 sm:p-5 mb-8 space-y-4 sm:space-y-3">
                 {product.material && (
-                  <div className="flex justify-between">
-                    <span className="text-[#0F2744] font-semibold uppercase tracking-wider text-[10px]">MATERIAL</span>
-                    <span className="font-semibold text-[#0F2744]">{product.material}</span>
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1.5 sm:gap-4 pb-3 sm:pb-2.5 border-b border-[#C7A86A]/15 last:border-b-0 last:pb-0">
+                    <span className="text-[10px] uppercase font-semibold tracking-[0.2em] text-[#0F2744]/70 shrink-0">
+                      MATERIAL
+                    </span>
+                    <span className="text-[13px] sm:text-sm font-medium sm:font-semibold text-[#0F2744] sm:text-right leading-snug break-words">
+                      {product.material}
+                    </span>
                   </div>
                 )}
                 {product.printing && (
-                  <div className="flex justify-between">
-                    <span className="text-[#0F2744] font-semibold uppercase tracking-wider text-[10px]">PRINTING</span>
-                    <span className="font-semibold text-[#0F2744]">{product.printing}</span>
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1.5 sm:gap-4 pb-3 sm:pb-2.5 border-b border-[#C7A86A]/15 last:border-b-0 last:pb-0">
+                    <span className="text-[10px] uppercase font-semibold tracking-[0.2em] text-[#0F2744]/70 shrink-0">
+                      PRINTING
+                    </span>
+                    <span className="text-[13px] sm:text-sm font-medium sm:font-semibold text-[#0F2744] sm:text-right leading-snug break-words">
+                      {product.printing}
+                    </span>
                   </div>
                 )}
                 {product.finish && (
-                  <div className="flex justify-between">
-                    <span className="text-[#0F2744] font-semibold uppercase tracking-wider text-[10px]">FINISH</span>
-                    <span className="font-semibold text-[#0F2744]">{product.finish}</span>
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1.5 sm:gap-4 pb-3 sm:pb-2.5 border-b border-[#C7A86A]/15 last:border-b-0 last:pb-0">
+                    <span className="text-[10px] uppercase font-semibold tracking-[0.2em] text-[#0F2744]/70 shrink-0">
+                      FINISH
+                    </span>
+                    <span className="text-[13px] sm:text-sm font-medium sm:font-semibold text-[#0F2744] sm:text-right leading-snug break-words">
+                      {product.finish}
+                    </span>
                   </div>
                 )}
                 {product.handle && (
-                  <div className="flex justify-between">
-                    <span className="text-[#0F2744] font-semibold uppercase tracking-wider text-[10px]">HANDLE</span>
-                    <span className="font-semibold text-[#0F2744]">{product.handle}</span>
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1.5 sm:gap-4 pb-3 sm:pb-2.5 border-b border-[#C7A86A]/15 last:border-b-0 last:pb-0">
+                    <span className="text-[10px] uppercase font-semibold tracking-[0.2em] text-[#0F2744]/70 shrink-0">
+                      HANDLE
+                    </span>
+                    <span className="text-[13px] sm:text-sm font-medium sm:font-semibold text-[#0F2744] sm:text-right leading-snug break-words">
+                      {product.handle}
+                    </span>
                   </div>
                 )}
               </div>
