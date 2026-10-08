@@ -64,7 +64,7 @@ export default function JewelleryBoxesClient() {
       return allModels.filter((m) => m.slug === "necklace-box" || m.slug === "necklace-set-box");
     }
     if (activeFilter === "set-boxes") {
-      return allModels.filter((m) => m.slug === "set-box" || m.slug === "full-set-box");
+      return allModels.filter((m) => m.slug === "set-box");
     }
     return allModels;
   }, [activeFilter, allModels]);

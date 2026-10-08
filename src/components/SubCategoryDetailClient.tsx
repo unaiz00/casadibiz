@@ -16,6 +16,7 @@ interface CategoryData {
   short: string;
   long: string;
   image: string;
+  href?: string;
 }
 
 interface SubCategoryDetailClientProps {
@@ -294,7 +295,7 @@ export default function SubCategoryDetailClient({
               {Object.entries(allCategories).filter(([s]) => s !== sub).map(([slug, c]) => (
                 <Link
                   key={slug}
-                  href={`/${categoryPath}/${slug}`}
+                  href={c.href || `/${categoryPath}/${slug}`}
                   className="group flex flex-col bg-cream rounded-[12px] overflow-hidden hover:-translate-y-1 transition-all duration-500"
                 >
                   <div className="aspect-[4/3] overflow-hidden">

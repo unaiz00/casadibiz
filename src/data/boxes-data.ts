@@ -242,7 +242,7 @@ export const BOX_CATEGORIES_DATA: Record<string, BoxCategory> = {
     headline: "Bespoke jewellery boxes crafted for coordinated jewellery suites in distinctive materials and sizes.",
     shortDescription: "Multi-compartment bespoke layouts for coordinated jewellery sets.",
     heroImage: "/assets/allimages.jpeg",
-    modelSlugs: ["set-box", "full-set-box"],
+    modelSlugs: ["set-box"],
   },
 };
 
@@ -647,9 +647,24 @@ export const BOX_MODELS_DATA: Record<string, BoxModel> = {
     shortDescription: "Luxury presentation cases engineered to cradle statement colliers, chokers, and princess-cut necklaces.",
     longDescription: "Hand-crafted bespoke necklace box engineered with contoured bust inserts, perimeter retention tabs, and anti-tarnish lining to present statement jewellery with grandeur.",
     images: [
-      { src: "/assets/allllllimm.jpeg", alt: "CASA DI BIZ Necklace Box", label: "Primary View" },
+      { src: "/assets/allllllimm.jpeg", alt: "CASA DI BIZ Necklace Box - Velvet Edition", label: "Velvet" },
+      { src: "/assets/necklace/necklace_suede.jpeg", alt: "CASA DI BIZ Necklace Box - Suede Edition", label: "Suede" },
+      { src: "/assets/necklace/necklace_microfiber.jpeg", alt: "CASA DI BIZ Necklace Box - Microfiber Edition", label: "Microfiber" },
+      { src: "/assets/necklace/necklace_crocodile.jpeg", alt: "CASA DI BIZ Necklace Box - Leatherette Crocodile Edition", label: "Leatherette" },
+      { src: "/assets/necklace/premium_microfiber_necklace.jpeg", alt: "CASA DI BIZ Necklace Box - Special Paper Edition", label: "Special Paper" },
+      { src: "/assets/necklace/necklace_blueglossy.jpeg", alt: "CASA DI BIZ Necklace Box - Textured Paper Edition", label: "Textured Paper" },
       { src: "/assets/allimages.jpeg", alt: "CASA DI BIZ Necklace Box Open", label: "Open View" },
     ],
+    materialImages: {
+      velvet: "/assets/allllllimm.jpeg",
+      suede: "/assets/necklace/necklace_suede.jpeg",
+      microfiber: "/assets/necklace/necklace_microfiber.jpeg",
+      leatherette: "/assets/necklace/necklace_crocodile.jpeg",
+      "special-paper": "/assets/necklace/premium_microfiber_necklace.jpeg",
+      "textured-paper": "/assets/necklace/necklace_blueglossy.jpeg",
+      "brown-crocodile": "/assets/necklace/necklace_crocodile.jpeg",
+      "hairy-velvet": "/assets/allllllimm.jpeg",
+    },
     sizes: [
       { label: "11.5 × 16 × 3.5 cm", dimensions: "11.5 × 16 × 3.5 cm", description: "Necklace S Size" },
       { label: "19 × 22 × 4 cm", dimensions: "19 × 22 × 4 cm", description: "Necklace M Size" },
@@ -730,7 +745,7 @@ export const BOX_MODELS_DATA: Record<string, BoxModel> = {
     ],
   },
 
-  // 9. SET BOX
+  // 9. SET BOX (Set Box & Full Set Box)
   "set-box": {
     id: "set-box",
     slug: "set-box",
@@ -738,18 +753,38 @@ export const BOX_MODELS_DATA: Record<string, BoxModel> = {
     categoryName: "Jewellery Set Boxes",
     name: "Set Box",
     collection: "Bespoke Packaging",
-    subtitle: "Bespoke Multi-Piece Jewellery Suite Box",
-    heroHeadline: "Bespoke Jewellery Box for Coordinated Sets.",
-    shortDescription: "Coordinated presentation cases engineered for multi-piece jewellery collections.",
-    longDescription: "Hand-crafted bespoke set box with multi-compartment tailored layouts for presenting coordinated necklace, earring, and ring collections.",
+    subtitle: "Bespoke Multi-Piece & Full Suite Jewellery Set Box",
+    heroHeadline: "Bespoke Jewellery Box for Coordinated Sets & Full Suites.",
+    shortDescription: "Coordinated presentation cases and full suite chests engineered for multi-piece jewellery collections.",
+    longDescription: "Hand-crafted bespoke set box featuring custom-milled multi-compartment layouts for presenting coordinated necklace, earring, ring, and bangle or bracelet suites with opulent anti-tarnish interior lining.",
     images: [
-      { src: "/assets/allimages.jpeg", alt: "CASA DI BIZ Set Box", label: "Primary View" },
-      { src: "/assets/goodimm.jpeg", alt: "CASA DI BIZ Set Box Open", label: "Open View" },
+      { src: "/assets/allsetbox/allset_hairyvelvet.jpeg", alt: "CASA DI BIZ Set Box - Velvet Edition", label: "Velvet" },
+      { src: "/assets/allsetbox/allset_suede.jpeg", alt: "CASA DI BIZ Set Box - Suede Edition", label: "Suede" },
+      { src: "/assets/allsetbox/premium_microfiber_allset.jpeg", alt: "CASA DI BIZ Set Box - Microfiber Edition", label: "Microfiber" },
+      { src: "/assets/allsetbox/allset_premiumleather.jpeg", alt: "CASA DI BIZ Set Box - Premium Leatherette Edition", label: "Leatherette" },
+      { src: "/assets/allsetbox/allset_specialsoft.jpeg", alt: "CASA DI BIZ Set Box - Special Paper Edition", label: "Special Paper" },
+      { src: "/assets/allsetbox/allset_special_premium_texture.jpeg", alt: "CASA DI BIZ Set Box - Textured Paper Edition", label: "Textured Paper" },
+      { src: "/assets/allsetbox/allset_blue_crocodile.jpeg", alt: "CASA DI BIZ Set Box - Crocodile Texture Edition", label: "Crocodile" },
+      { src: "/assets/goodimm.jpeg", alt: "CASA DI BIZ Set Box Open Layout", label: "Open View" },
+      { src: "/assets/allllllimm.jpeg", alt: "CASA DI BIZ Set Box Full Suite Open", label: "Full Suite View" },
     ],
+    materialImages: {
+      velvet: "/assets/allsetbox/allset_hairyvelvet.jpeg",
+      suede: "/assets/allsetbox/allset_suede.jpeg",
+      microfiber: "/assets/allsetbox/premium_microfiber_allset.jpeg",
+      leatherette: "/assets/allsetbox/allset_premiumleather.jpeg",
+      "special-paper": "/assets/allsetbox/allset_specialsoft.jpeg",
+      "textured-paper": "/assets/allsetbox/allset_special_premium_texture.jpeg",
+      "brown-crocodile": "/assets/allsetbox/allset_blue_crocodile.jpeg",
+      "hairy-velvet": "/assets/allsetbox/allset_hairyvelvet.jpeg",
+      "soft-touch": "/assets/allsetbox/allset_specialsoft.jpeg",
+    },
     sizes: [
       { label: "18 × 24 × 6 cm", dimensions: "18 × 24 × 6 cm", description: "Set Box (S) Size" },
       { label: "22 × 28 × 7 cm", dimensions: "22 × 28 × 7 cm", description: "Set Box (M) Size" },
       { label: "26 × 32 × 7.5 cm", dimensions: "26 × 32 × 7.5 cm", description: "Set Box (L) Size" },
+      { label: "27 × 34 × 8 cm", dimensions: "27 × 34 × 8 cm", description: "Full Set Suite Size" },
+      { label: "30 × 40 × 9 cm", dimensions: "30 × 40 × 9 cm", description: "Grand Master Chest Size" },
     ],
     materials: STANDARD_BOX_MATERIALS,
     finishes: STANDARD_BOX_FINISHES,
@@ -757,7 +792,7 @@ export const BOX_MODELS_DATA: Record<string, BoxModel> = {
       outerMaterial: "Available in multiple material options",
       innerMaterial: "Anti-Tarnish Certified Suede / Microfiber",
       hingeClosure: "Precision Spring Hinge Closure",
-      insertType: "3-Piece Suite Insert (Necklace, Earrings, Ring)",
+      insertType: "Multi-Piece & Full Suite Insert (Necklace, Earrings, Ring, Bangle)",
       brandingPlacement: "Inner Lid / Outer Lid Custom Stamping",
       outerPackaging: "Two-Piece Rigid Outer Gift Box",
       moq: "100 Units",
@@ -765,62 +800,17 @@ export const BOX_MODELS_DATA: Record<string, BoxModel> = {
       sampleAvailability: "Available on request",
     },
     highlights: [
-      { label: "FORMAT", value: "SET BOX" },
+      { label: "FORMAT", value: "SET BOX / FULL SET" },
       { label: "SIZES", value: "MULTIPLE AVAILABLE" },
       { label: "COLOUR", value: "BESPOKE TO CLIENT" },
     ],
     customisationFeatures: [
-      { title: "Multi-Piece Layout", description: "Designed to showcase 2-to-3 piece suites in a single unified presentation." },
+      { title: "Multi-Piece & Full Suite Layout", description: "Designed to showcase 2-to-5 piece suites in a single unified luxury presentation." },
+      { title: "Bridal & Master Chest Layout", description: "Full configuration including necklace, earrings, ring, and bangle or bracelet slots." },
     ],
     faqs: [
-      { q: "Is custom insert cutting available?", a: "Yes, we CNC-cut foam inserts to your exact jewellery pieces." },
-    ],
-  },
-
-  // 10. FULL SET BOX
-  "full-set-box": {
-    id: "full-set-box",
-    slug: "full-set-box",
-    categorySlug: "full-set-boxes",
-    categoryName: "Jewellery Set Boxes",
-    name: "Full Set Box",
-    collection: "Bespoke Packaging",
-    subtitle: "Grand Master Suite Jewellery Chest",
-    heroHeadline: "Bespoke Full Set Jewellery Chest.",
-    shortDescription: "Master bespoke jewellery chests engineered for comprehensive 4-piece and 5-piece high-jewellery collections.",
-    longDescription: "Master bespoke jewellery chest featuring custom-milled recessed cavities for necklace, earrings, ring, and bangle or bracelet suites with opulent anti-tarnish lining.",
-    images: [
-      { src: "/assets/allimages.jpeg", alt: "CASA DI BIZ Full Set Box", label: "Primary View" },
-      { src: "/assets/allllllimm.jpeg", alt: "CASA DI BIZ Full Set Box Open", label: "Open View" },
-    ],
-    sizes: [
-      { label: "27 × 34 × 8 cm", dimensions: "27 × 34 × 8 cm", description: "Standard Full Set Box Size" },
-      { label: "28 × 36 × 8.5 cm", dimensions: "28 × 36 × 8.5 cm", description: "Grand Suite Size" },
-      { label: "30 × 40 × 9 cm", dimensions: "30 × 40 × 9 cm", description: "Master Chest Size" },
-    ],
-    materials: STANDARD_BOX_MATERIALS,
-    finishes: STANDARD_BOX_FINISHES,
-    specifications: {
-      outerMaterial: "Available in multiple material options",
-      innerMaterial: "Anti-Tarnish Certified Suede / Microfiber",
-      hingeClosure: "Precision Spring Hinge Closure",
-      insertType: "4-Piece Suite Insert (Necklace, Earrings, Ring, Bangle)",
-      brandingPlacement: "Inner Lid / Outer Lid Custom Stamping",
-      outerPackaging: "Two-Piece Rigid Outer Gift Box",
-      moq: "100 Units",
-      leadTime: "12–18 Working Days",
-      sampleAvailability: "Available on request",
-    },
-    highlights: [
-      { label: "FORMAT", value: "FULL SET BOX" },
-      { label: "SIZES", value: "MULTIPLE AVAILABLE" },
-      { label: "COLOUR", value: "BESPOKE TO CLIENT" },
-    ],
-    customisationFeatures: [
-      { title: "Bridal & Master Chest Layout", description: "Full 4-to-5 piece configuration including bangle or bracelet slot." },
-    ],
-    faqs: [
-      { q: "Can drawer compartments be incorporated?", a: "Yes, double-tier chests with pull-out drawers are available." },
+      { q: "Is custom insert cutting available?", a: "Yes, we CNC-cut foam and velvet inserts to your exact jewellery pieces." },
+      { q: "Can drawer compartments be incorporated?", a: "Yes, multi-tier chests with pull-out drawers are available." },
     ],
   },
 
@@ -1015,15 +1005,17 @@ export function getAllBoxModels(): BoxModel[] {
 }
 
 export function getBoxModelBySlug(slug: string): BoxModel | undefined {
+  if (slug === "full-set-box") return BOX_MODELS_DATA["set-box"];
   return BOX_MODELS_DATA[slug];
 }
 
 export function getBoxModel(categorySlug: string, modelSlug: string): BoxModel | undefined {
-  const model = BOX_MODELS_DATA[modelSlug];
+  const targetSlug = modelSlug === "full-set-box" ? "set-box" : modelSlug;
+  const model = BOX_MODELS_DATA[targetSlug];
   if (model && model.categorySlug === categorySlug) {
     return model;
   }
-  return BOX_MODELS_DATA[modelSlug];
+  return BOX_MODELS_DATA[targetSlug];
 }
 
 export function getRelatedBoxModels(currentSlug: string, categorySlug: string, limit: number = 4): BoxModel[] {
