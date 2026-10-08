@@ -36,6 +36,7 @@ export interface BoxModel {
   longDescription: string;
   heroHeadline: string;
   images: BoxImage[];
+  materialImages?: Record<string, string>;
   sizes: BoxSize[];
   materials: BoxMaterialOption[];
   finishes: BoxFinishOption[];
@@ -259,9 +260,31 @@ export const BOX_MODELS_DATA: Record<string, BoxModel> = {
     shortDescription: "Bespoke jewellery packaging designed for ring presentation across multiple catalogue dimensions.",
     longDescription: "Hand-crafted bespoke ring box engineered with anti-tarnish interior linings, precision-hinged rigid structure, and tailored ring inserts. Available across a comprehensive range of catalogue dimensions to match your brand requirements.",
     images: [
-      { src: "/assets/boxim.jpeg", alt: "CASA DI BIZ Ring Box", label: "Primary View" },
-      { src: "/assets/allim.jpeg", alt: "CASA DI BIZ Ring Box Open", label: "Open View" },
+      { src: "/assets/ring/ring_hairyvelvet.jpeg", alt: "CASA DI BIZ Ring Box - Velvet Edition" },
+      { src: "/assets/ring/ring_suede.jpeg", alt: "CASA DI BIZ Ring Box - Suede Edition" },
+      { src: "/assets/ring/ring_microfiber.jpeg", alt: "CASA DI BIZ Ring Box - Microfiber Edition" },
+      { src: "/assets/ring/ring_premium_leather.jpeg", alt: "CASA DI BIZ Ring Box - Premium Leatherette Edition" },
+      { src: "/assets/ring/premiumpaper_suede_ring.jpeg", alt: "CASA DI BIZ Ring Box - Special Paper Edition" },
+      { src: "/assets/ring/ring_special_premium_texture.jpeg", alt: "CASA DI BIZ Ring Box - Textured Paper Edition" },
+      { src: "/assets/ring/premium_microfiber_ring.jpeg", alt: "CASA DI BIZ Ring Box - Premium Microfiber Edition" },
+      { src: "/assets/ring/ring_blueglossy.jpeg", alt: "CASA DI BIZ Ring Box - Glossy Lacquer Edition" },
+      { src: "/assets/ring/ring_crocodile.jpeg", alt: "CASA DI BIZ Ring Box - Crocodile Texture Edition" },
+      { src: "/assets/ring/ring_blue_crocodile.jpeg", alt: "CASA DI BIZ Ring Box - Blue Crocodile Edition" },
+      { src: "/assets/ring/ring_matt grey_paint.jpeg", alt: "CASA DI BIZ Ring Box - Matt Grey Paint Edition" },
+      { src: "/assets/ring/ring_specialsoft.jpeg", alt: "CASA DI BIZ Ring Box - Soft Touch Edition" },
     ],
+    materialImages: {
+      velvet: "/assets/ring/ring_hairyvelvet.jpeg",
+      suede: "/assets/ring/ring_suede.jpeg",
+      microfiber: "/assets/ring/ring_microfiber.jpeg",
+      leatherette: "/assets/ring/ring_premium_leather.jpeg",
+      "special-paper": "/assets/ring/premiumpaper_suede_ring.jpeg",
+      "textured-paper": "/assets/ring/ring_special_premium_texture.jpeg",
+      "brown-crocodile": "/assets/ring/ring_crocodile.jpeg",
+      "matt-grey-paint": "/assets/ring/ring_matt grey_paint.jpeg",
+      "hairy-velvet": "/assets/ring/ring_hairyvelvet.jpeg",
+      "soft-touch": "/assets/ring/ring_specialsoft.jpeg",
+    },
     sizes: [
       { label: "5.5 × 5.5 × 5 cm", dimensions: "5.5 × 5.5 × 5 cm", description: "Standard Solitaire & Petite Ring Size" },
       { label: "7 × 7 × 6 cm", dimensions: "7 × 7 × 6 cm", description: "Medium Solitaire & Band Presentation Size" },

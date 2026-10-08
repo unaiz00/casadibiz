@@ -55,6 +55,23 @@ export default function BoxPDPView({ model, relatedModels }: BoxPDPViewProps) {
   const activeMaterial = model.materials.find((m) => m.id === activeMaterialId) || model.materials[0];
   const activeFinish = model.finishes.find((f) => f.id === activeFinishId) || model.finishes[0];
 
+  // Material selection handler (links material to main product image if mapped)
+  const handleMaterialSelect = (materialId: string) => {
+    setActiveMaterialId(materialId);
+
+    if (model.materialImages) {
+      const targetSrc =
+        model.materialImages[materialId] ||
+        model.materialImages[materialId.toLowerCase()];
+      if (targetSrc) {
+        const foundIdx = model.images.findIndex((img) => img.src === targetSrc);
+        if (foundIdx !== -1) {
+          setActiveImageIdx(foundIdx);
+        }
+      }
+    }
+  };
+
   // Dynamic WhatsApp prefill message
   const whatsappMsg = `Hello CASA DI BIZ, I would like to request a quote for the ${model.name}.
 Selected Specs:
@@ -119,15 +136,15 @@ Selected Specs:
                   onClick={() => {
                     setLightboxOpen(true);
                   }}
-                  className="group relative aspect-[16/11] rounded-xl overflow-hidden border border-[#C7A86A]/25 bg-white cursor-zoom-in shadow-xs transition-all duration-500 hover:border-[#C7A86A]/60"
+                  className="group relative aspect-square rounded-xl overflow-hidden border border-[#C7A86A]/25 bg-white cursor-zoom-in shadow-xs transition-all duration-500 hover:border-[#C7A86A]/60"
                 >
                   <img
+                    key={`desktop-${model.images[activeImageIdx]?.src || "main"}`}
                     src={model.images[activeImageIdx]?.src || model.images[0]?.src}
                     alt={model.images[activeImageIdx]?.alt || `${model.name} luxury jewellery box`}
-                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02] animate-fade-in"
                     loading="eager"
                   />
-                  <div className="absolute inset-0 bg-[#0F2744]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                   {/* Zoom indicator button */}
                   <div className="absolute bottom-5 right-5 h-11 w-11 rounded-full bg-[#0F2744]/95 text-[#F6F0E8] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-1 hover:bg-[#C7A86A] hover:text-[#0F2744]">
@@ -136,16 +153,17 @@ Selected Specs:
                 </div>
 
                 {/* Sub-grid of thumbnails / gallery angles */}
-                <div className="grid grid-cols-4 gap-3.5">
+                <div className="grid grid-cols-6 gap-2.5 sm:gap-3">
                   {model.images.map((img, idx) => (
                     <button
                       key={idx}
                       type="button"
                       onClick={() => setActiveImageIdx(idx)}
-                      className={`group relative aspect-[4/3] rounded-lg overflow-hidden border transition-all duration-300 cursor-pointer text-left ${
+                      aria-label={`View ${img.alt || `product image ${idx + 1}`}`}
+                      className={`group relative aspect-square rounded-lg overflow-hidden border transition-all duration-300 cursor-pointer bg-white ${
                         activeImageIdx === idx
-                          ? "border-[#C7A86A] ring-2 ring-[#C7A86A]/30 scale-[0.98]"
-                          : "border-[#C7A86A]/20 bg-white/70 opacity-75 hover:opacity-100 hover:border-[#C7A86A]/60"
+                          ? "border-[#C7A86A] ring-2 ring-[#C7A86A]/40 scale-[0.98]"
+                          : "border-[#C7A86A]/20 opacity-75 hover:opacity-100 hover:border-[#C7A86A]/60"
                       }`}
                     >
                       <img
@@ -154,13 +172,6 @@ Selected Specs:
                         className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                         loading="lazy"
                       />
-                      {img.label && (
-                        <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-[#0F2744]/80 via-[#0F2744]/40 to-transparent p-1.5 text-center">
-                          <span className="text-[9px] tracking-[0.1em] text-[#F6F0E8] font-medium block truncate">
-                            {img.label}
-                          </span>
-                        </div>
-                      )}
                     </button>
                   ))}
                 </div>
@@ -170,12 +181,13 @@ Selected Specs:
               <div className="md:hidden w-full flex flex-col gap-3">
                 <div
                   onClick={() => setLightboxOpen(true)}
-                  className="relative aspect-[4/3] rounded-xl overflow-hidden border border-[#C7A86A]/30 bg-white shadow-xs"
+                  className="relative aspect-square rounded-xl overflow-hidden border border-[#C7A86A]/30 bg-white shadow-xs"
                 >
                   <img
+                    key={`mobile-${model.images[activeImageIdx]?.src || "main"}`}
                     src={model.images[activeImageIdx]?.src || model.images[0]?.src}
                     alt={model.images[activeImageIdx]?.alt || `${model.name} luxury jewellery box`}
-                    className="absolute inset-0 h-full w-full object-cover"
+                    className="absolute inset-0 h-full w-full object-cover animate-fade-in"
                   />
                   <div className="absolute bottom-4 right-4 h-9 w-9 rounded-full bg-[#0F2744]/90 text-[#F6F0E8] flex items-center justify-center">
                     <Maximize2 className="h-4 w-4 text-[#C7A86A]" />
@@ -189,10 +201,11 @@ Selected Specs:
                       key={idx}
                       type="button"
                       onClick={() => setActiveImageIdx(idx)}
-                      className={`relative h-16 w-20 rounded-md overflow-hidden border transition-all duration-300 shrink-0 snap-start cursor-pointer ${
+                      aria-label={`View ${img.alt || `product image ${idx + 1}`}`}
+                      className={`relative h-16 w-16 sm:h-20 sm:w-20 rounded-lg overflow-hidden border transition-all duration-300 shrink-0 snap-start cursor-pointer bg-white ${
                         activeImageIdx === idx
-                          ? "border-[#C7A86A] ring-2 ring-[#C7A86A]/40"
-                          : "border-[#C7A86A]/20 opacity-70"
+                          ? "border-[#C7A86A] ring-2 ring-[#C7A86A]/50"
+                          : "border-[#C7A86A]/20 opacity-75 hover:opacity-100"
                       }`}
                     >
                       <img src={img.src} alt={img.alt} className="h-full w-full object-cover" />
@@ -312,7 +325,7 @@ Selected Specs:
                       <button
                         key={mat.id}
                         type="button"
-                        onClick={() => setActiveMaterialId(mat.id)}
+                        onClick={() => handleMaterialSelect(mat.id)}
                         className={`p-2 sm:p-2.5 rounded-lg border flex items-center gap-2.5 text-left transition-all duration-300 cursor-pointer ${
                           isSelected
                             ? "border-[#C7A86A] border-[1.5px] bg-[#F6F0E8] shadow-xs"

@@ -109,8 +109,17 @@
     animation: marquee 30s linear infinite;
   }
 
-  .animate-bounce-soft {
-    animation: bounce-soft 2s ease-in-out infinite;
+  .animate-fade-in {
+    animation: fade-in 250ms ease-out both;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0.7;
+  }
+  to {
+    opacity: 1;
   }
 }
 
