@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowRight, HelpCircle, ChevronDown } from "lucide-react";
 import { SiteHeader, SiteFooter, Breadcrumbs } from "@/components/site-chrome";
 import PaperBagImageGallery from "@/components/bags/PaperBagImageGallery";
+import ProductCTAButtons from "@/components/pdp/ProductCTAButtons";
 
 // =====================================================
 // KRAFT BAG — PRODUCT CONTENT
@@ -72,6 +73,12 @@ const product = {
 // =====================================================
 // COMPONENT
 // =====================================================
+
+const BAG_TABS = [
+  { id: "description" as const, label: "DESCRIPTION" },
+  { id: "specifications" as const, label: "SPECIFICATIONS" },
+  { id: "customization" as const, label: "CUSTOMISATION" },
+];
 
 export default function KraftBagPage() {
   const [activeSizeIdx, setActiveSizeIdx] = useState(0);
@@ -228,24 +235,10 @@ export default function KraftBagPage() {
               </div>
 
               {/* B2B CTAs */}
-              <div className="grid grid-cols-2 gap-2 sm:gap-3 lg:flex lg:flex-row lg:gap-4 w-full">
-                <Link
-                  href={`/contact?size=${encodeURIComponent(selectedSize)}&product=${encodeURIComponent(product.name)}`}
-                  className="flex-1 inline-flex items-center justify-center gap-1.5 sm:gap-2 lg:gap-3 min-h-[52px] h-[52px] sm:h-auto sm:py-4.5 px-2 sm:px-4 lg:px-8 rounded-md text-[10px] xs:text-[11px] sm:text-xs tracking-[0.12em] sm:tracking-[0.2em] lg:tracking-[0.25em] font-bold bg-[#0F2744] text-[#FAF8F5] hover:bg-[#C7A86A] hover:text-[#0F2744] transition-all duration-300 text-center uppercase"
-                >
-                  <span>REQUEST A QUOTE</span>
-                  <ArrowRight className="h-3.5 w-3.5 shrink-0" />
-                </Link>
-                <a
-                  href={dynamicWhatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex-1 inline-flex items-center justify-center gap-1.5 sm:gap-2 lg:gap-3 min-h-[52px] h-[52px] sm:h-auto sm:py-4.5 px-2 sm:px-4 lg:px-8 rounded-md text-[10px] xs:text-[11px] sm:text-xs tracking-[0.12em] sm:tracking-[0.2em] lg:tracking-[0.25em] font-semibold border border-[#C7A86A]/40 bg-[#FAF8F5] text-[#0F2744] hover:bg-[#F6F0E8]/60 transition-all duration-300 text-center uppercase"
-                >
-                  <span>QUICK QUOTE</span>
-                  <ArrowRight className="h-3 w-3 text-[#C7A86A] shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
-                </a>
-              </div>
+              <ProductCTAButtons
+                quoteUrl={`/contact?size=${encodeURIComponent(selectedSize)}&product=${encodeURIComponent(product.name)}`}
+                whatsappUrl={dynamicWhatsappUrl}
+              />
 
               {/* Supporting Line */}
               <div className="w-full text-center mt-3">
@@ -258,157 +251,174 @@ export default function KraftBagPage() {
         </section>
 
         {/* PRODUCT DETAILS */}
-        <section className="bg-[#FAF8F5] pt-8 pb-20 lg:pt-12 lg:pb-28 border-b border-[#C7A86A]/20">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <div className="max-w-3xl">
-              {/* Title */}
-              <h2 className="text-[11px] font-semibold tracking-[0.3em] text-[#0F2744] uppercase mb-8">
-                PRODUCT DETAILS
+        <section className="bg-white pt-12 pb-16 lg:pt-16 lg:pb-20 border-y border-[#C7A86A]/20">
+          <div className="max-w-4xl mx-auto px-5 sm:px-8 lg:px-12">
+            {/* Title / Section Header */}
+            <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
+              <span className="text-[10px] font-semibold tracking-[0.3em] text-[#C7A86A] uppercase mb-2 block">
+                MANUFACTURING SPECIFICATIONS
+              </span>
+              <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl text-[#0F2744] leading-tight font-medium">
+                Product Details
               </h2>
-              {/* Tabs list */}
-              <div className="flex border-b border-[#0F2744]/10 mb-12 gap-8 md:gap-12 overflow-x-auto scrollbar-none snap-x">
-                <button
-                  onClick={() => setActiveDetailTab("description")}
-                  className={`pb-4 text-xs font-semibold tracking-[0.2em] uppercase transition-all duration-300 relative whitespace-nowrap cursor-pointer snap-start ${activeDetailTab === "description"
-                    ? "text-[#0F2744] font-medium"
-                    : "text-[#0F2744]/50 hover:text-[#0F2744]"
-                    }`}
-                >
-                  DESCRIPTION
-                  {activeDetailTab === "description" && (
-                    <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#C7A86A]" />
-                  )}
-                </button>
-                <button
-                  onClick={() => setActiveDetailTab("specifications")}
-                  className={`pb-4 text-xs font-semibold tracking-[0.2em] uppercase transition-all duration-300 relative whitespace-nowrap cursor-pointer snap-start ${activeDetailTab === "specifications"
-                    ? "text-[#0F2744] font-medium"
-                    : "text-[#0F2744]/50 hover:text-[#0F2744]"
-                    }`}
-                >
-                  SPECIFICATIONS
-                  {activeDetailTab === "specifications" && (
-                    <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#C7A86A]" />
-                  )}
-                </button>
-                <button
-                  onClick={() => setActiveDetailTab("customization")}
-                  className={`pb-4 text-xs font-semibold tracking-[0.2em] uppercase transition-all duration-300 relative whitespace-nowrap cursor-pointer snap-start ${activeDetailTab === "customization"
-                    ? "text-[#0F2744] font-medium"
-                    : "text-[#0F2744]/50 hover:text-[#0F2744]"
-                    }`}
-                >
-                  CUSTOMIZATION
-                  {activeDetailTab === "customization" && (
-                    <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#C7A86A]" />
-                  )}
-                </button>
+            </div>
+
+            {/* Mobile 3-Column Segmented Control Header (Mobile Only) */}
+            <div className="lg:hidden w-full mb-8 sm:mb-9">
+              <div className="grid grid-cols-3 gap-1 bg-[#F6F0E8] border border-[#C7A86A]/25 rounded-2xl p-1.5 w-full min-h-[52px]">
+                {BAG_TABS.map((tab) => {
+                  const isActive = activeDetailTab === tab.id;
+                  return (
+                    <button
+                      key={tab.id}
+                      type="button"
+                      onClick={() => setActiveDetailTab(tab.id)}
+                      className={`flex items-center justify-center py-2.5 px-1 rounded-xl text-center transition-all duration-300 cursor-pointer min-h-[44px] ${
+                        isActive
+                          ? "bg-[#FAF8F5] text-[#0F2744] border border-[#C7A86A]/40 shadow-xs"
+                          : "bg-transparent text-[#0F2744]/65 hover:text-[#0F2744] border border-transparent"
+                      }`}
+                    >
+                      <span className="text-[10px] xs:text-[10.5px] sm:text-[11px] font-bold tracking-[0.03em] sm:tracking-[0.08em] uppercase leading-tight text-center block break-words">
+                        {tab.label}
+                      </span>
+                    </button>
+                  );
+                })}
               </div>
+            </div>
 
-              {/* Tab Contents */}
-              <div className="transition-all duration-300 ease-in-out">
-                {activeDetailTab === "description" && (
-                  <div className="opacity-100 transition-opacity duration-300">
-                    <span className="text-[10px] font-semibold tracking-[0.25em] text-[#C7A86A] uppercase mb-3 block">
-                      THE MATERIAL
-                    </span>
-                    <h3 className="font-display text-3xl sm:text-4xl text-[#0F2744] leading-tight mb-6 font-medium">
-                      Natural kraft, thoughtfully constructed.
-                    </h3>
-                    <p className="text-[#0F2744]/80 text-base leading-relaxed mb-10 font-sans">
-                      {product.longDescription}
-                    </p>
+            {/* Desktop Tabs Header */}
+            <div className="hidden lg:flex border-b border-[#0F2744]/10 mb-10 justify-center gap-12">
+              {BAG_TABS.map((tab) => (
+                <button
+                  key={tab.id}
+                  type="button"
+                  onClick={() => setActiveDetailTab(tab.id)}
+                  className={`pb-4 text-xs font-semibold tracking-[0.2em] uppercase transition-all duration-300 relative whitespace-nowrap cursor-pointer ${
+                    activeDetailTab === tab.id
+                      ? "text-[#0F2744] font-bold"
+                      : "text-[#0F2744]/50 hover:text-[#0F2744]"
+                  }`}
+                >
+                  {tab.label}
+                  {activeDetailTab === tab.id && (
+                    <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#C7A86A]" />
+                  )}
+                </button>
+              ))}
+            </div>
 
-                    {/* highlights */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-0 pt-8 border-t border-[#C7A86A]/20">
-                      {product.highlights.map((hl, idx) => (
-                        <div
-                          key={idx}
-                          className={`${idx === 0
-                            ? "md:pr-8"
-                            : idx === 1
-                              ? "md:px-8"
-                              : "md:pl-8"
-                            }`}
-                        >
-                          <span className="block text-[10px] tracking-[0.2em] font-bold text-[#C7A86A] uppercase mb-1">
-                            {hl.label}
-                          </span>
-                          <span className="block font-display text-base text-[#0F2744] font-medium tracking-wide">
-                            {hl.value}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
+            {/* Tab Contents */}
+            <div className="transition-all duration-300 ease-in-out">
+              {activeDetailTab === "description" && (
+                <div className="opacity-100 transition-opacity duration-300">
+                  <span className="text-[10px] font-semibold tracking-[0.25em] text-[#C7A86A] uppercase mb-2 block">
+                    THE MATERIAL
+                  </span>
+                  <h3 className="font-display text-2xl sm:text-3xl text-[#0F2744] leading-tight mb-4 font-medium">
+                    Natural kraft, thoughtfully constructed.
+                  </h3>
+                  <p className="text-[#0F2744]/80 text-sm sm:text-base leading-relaxed mb-8 font-sans">
+                    {product.longDescription}
+                  </p>
+
+                  {/* highlights */}
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 pt-6 border-t border-[#C7A86A]/20">
+                    {product.highlights.map((hl, idx) => (
+                      <div
+                        key={idx}
+                        className="bg-[#FAF8F5] border border-[#C7A86A]/25 rounded-2xl p-5 sm:p-6 flex flex-col justify-between"
+                      >
+                        <span className="block text-[10px] tracking-[0.2em] font-bold text-[#C7A86A] uppercase mb-1.5">
+                          {hl.label}
+                        </span>
+                        <span className="block font-display text-base sm:text-lg text-[#0F2744] font-semibold">
+                          {hl.value}
+                        </span>
+                      </div>
+                    ))}
                   </div>
-                )}
-                {activeDetailTab === "specifications" && (
-                  <div className="opacity-100 transition-opacity duration-300">
-                    <div className="divide-y divide-[#C7A86A]/20 border-t border-[#C7A86A]/20">
-                      <div className="grid grid-cols-1 md:grid-cols-12 py-5 gap-2 md:gap-4">
-                        <div className="md:col-span-4 text-[10px] font-semibold tracking-[0.2em] text-[#0F2744]/60 uppercase">
-                          MATERIAL
-                        </div>
-                        <div className="md:col-span-8 text-sm text-[#0F2744] font-medium">
-                          {product.material}
-                        </div>
+                </div>
+              )}
+              {activeDetailTab === "specifications" && (
+                <div className="opacity-100 transition-opacity duration-300">
+                  <div className="divide-y divide-[#C7A86A]/20 border-t border-[#C7A86A]/20">
+                    <div className="grid grid-cols-1 md:grid-cols-12 py-4 sm:py-5 gap-1.5 md:gap-4">
+                      <div className="md:col-span-4 text-[10px] font-semibold tracking-[0.2em] text-[#0F2744]/60 uppercase">
+                        MATERIAL
                       </div>
-                      <div className="grid grid-cols-1 md:grid-cols-12 py-5 gap-2 md:gap-4">
-                        <div className="md:col-span-4 text-[10px] font-semibold tracking-[0.2em] text-[#0F2744]/60 uppercase">
-                          PRINTING
-                        </div>
-                        <div className="md:col-span-8 text-sm text-[#0F2744] font-medium">
-                          {product.printing}
-                        </div>
-                      </div>
-                      <div className="grid grid-cols-1 md:grid-cols-12 py-5 gap-2 md:gap-4">
-                        <div className="md:col-span-4 text-[10px] font-semibold tracking-[0.2em] text-[#0F2744]/60 uppercase">
-                          FINISH
-                        </div>
-                        <div className="md:col-span-8 text-sm text-[#0F2744] font-medium">
-                          {product.finish}
-                        </div>
-                      </div>
-                      <div className="grid grid-cols-1 md:grid-cols-12 py-5 gap-2 md:gap-4">
-                        <div className="md:col-span-4 text-[10px] font-semibold tracking-[0.2em] text-[#0F2744]/60 uppercase">
-                          HANDLE
-                        </div>
-                        <div className="md:col-span-8 text-sm text-[#0F2744] font-medium">
-                          {product.handle}
-                        </div>
-                      </div>
-                      <div className="grid grid-cols-1 md:grid-cols-12 py-5 gap-2 md:gap-4">
-                        <div className="md:col-span-4 text-[10px] font-semibold tracking-[0.2em] text-[#0F2744]/60 uppercase">
-                          AVAILABLE SIZES
-                        </div>
-                        <div className="md:col-span-8 text-sm text-[#0F2744] font-medium space-y-1">
-                          {product.sizes.map((size, idx) => (
-                            <div key={idx}>
-                              {size.value}
-                            </div>
-                          ))}
-                        </div>
+                      <div className="md:col-span-8 text-sm text-[#0F2744] font-medium">
+                        {product.material}
                       </div>
                     </div>
+                    <div className="grid grid-cols-1 md:grid-cols-12 py-4 sm:py-5 gap-1.5 md:gap-4">
+                      <div className="md:col-span-4 text-[10px] font-semibold tracking-[0.2em] text-[#0F2744]/60 uppercase">
+                        PRINTING
+                      </div>
+                      <div className="md:col-span-8 text-sm text-[#0F2744] font-medium">
+                        {product.printing}
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-12 py-4 sm:py-5 gap-1.5 md:gap-4">
+                      <div className="md:col-span-4 text-[10px] font-semibold tracking-[0.2em] text-[#0F2744]/60 uppercase">
+                        FINISH
+                      </div>
+                      <div className="md:col-span-8 text-sm text-[#0F2744] font-medium">
+                        {product.finish}
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-12 py-4 sm:py-5 gap-1.5 md:gap-4">
+                      <div className="md:col-span-4 text-[10px] font-semibold tracking-[0.2em] text-[#0F2744]/60 uppercase">
+                        HANDLE
+                      </div>
+                      <div className="md:col-span-8 text-sm text-[#0F2744] font-medium">
+                        {product.handle}
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-12 py-4 sm:py-5 gap-1.5 md:gap-4">
+                      <div className="md:col-span-4 text-[10px] font-semibold tracking-[0.2em] text-[#0F2744]/60 uppercase">
+                        AVAILABLE SIZES
+                      </div>
+                      <div className="md:col-span-8 text-sm text-[#0F2744] font-medium space-y-1">
+                        {product.sizes.map((size, idx) => (
+                          <div key={idx}>
+                            {size.value}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   </div>
-                )}
-                {activeDetailTab === "customization" && (
-                  <div className="opacity-100 transition-opacity duration-300">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-                      {product.customization.map((cust, idx) => (
-                        <div key={idx}>
-                          <h4 className="font-display text-base text-[#0F2744] font-semibold tracking-wide mb-2">
+                </div>
+              )}
+              {activeDetailTab === "customization" && (
+                <div className="opacity-100 transition-opacity duration-300">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+                    {product.customization.map((cust, idx) => (
+                      <div
+                        key={idx}
+                        className="bg-[#FAF8F5] border border-[#C7A86A]/25 rounded-2xl p-6 flex flex-col justify-between"
+                      >
+                        <div>
+                          <span className="text-[10px] font-bold tracking-[0.2em] text-[#C7A86A] uppercase block mb-2">
+                            BESPOKE EMBELLISHMENT
+                          </span>
+                          <h4 className="font-display text-xl text-[#0F2744] mb-2 font-medium">
                             {cust.title}
                           </h4>
-                          <p className="text-sm text-[#0F2744]/75 leading-relaxed font-sans">
+                          <p className="text-xs text-[#0F2744]/80 leading-relaxed font-sans">
                             {cust.desc}
                           </p>
                         </div>
-                      ))}
-                    </div>
+                        <div className="mt-5 pt-3 border-t border-[#0F2744]/10 flex items-center justify-between text-[11px] text-[#0F2744]/70">
+                          <span>Available across all bag formats</span>
+                          <span className="text-[#C7A86A] font-semibold">Bespoke Tooling</span>
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                )}
-              </div>
+                </div>
+              )}
             </div>
           </div>
         </section>

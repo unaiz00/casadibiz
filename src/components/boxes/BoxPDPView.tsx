@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { SiteHeader, SiteFooter, Breadcrumbs } from "@/components/site-chrome";
 import type { BoxModel } from "@/data/boxes-data";
+import ProductCTAButtons from "@/components/pdp/ProductCTAButtons";
 
 const BOX_TABS = [
   {
@@ -397,24 +398,10 @@ Selected Specs:
               </div>
 
               {/* B2B CTAS */}
-              <div className="flex flex-col sm:flex-row gap-3.5 w-full">
-                <Link
-                  href={quoteUrl}
-                  className="flex-1 inline-flex items-center justify-center gap-3 rounded-lg px-7 py-4 text-xs tracking-[0.22em] font-bold bg-[#0F2744] text-[#FAF8F5] hover:bg-[#C7A86A] hover:text-[#0F2744] transition-all duration-300 text-center shadow-md"
-                >
-                  <span>REQUEST A QUOTE</span>
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-                <a
-                  href={dynamicWhatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex-1 inline-flex items-center justify-center gap-2.5 rounded-lg px-6 py-4 text-xs tracking-[0.2em] font-semibold border border-[#C7A86A]/60 bg-white/60 text-[#0F2744] hover:bg-[#F6F0E8] transition-all duration-300 shadow-xs"
-                >
-                  <MessageCircle className="h-4 w-4 text-[#C7A86A]" />
-                  <span>ENQUIRE ON WHATSAPP</span>
-                </a>
-              </div>
+              <ProductCTAButtons
+                quoteUrl={quoteUrl}
+                whatsappUrl={dynamicWhatsappUrl}
+              />
 
               {/* Supporting B2B Note */}
               <div className="w-full text-center mt-3.5">

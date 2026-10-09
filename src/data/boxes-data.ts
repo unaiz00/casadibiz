@@ -199,18 +199,18 @@ export const BOX_CATEGORIES_DATA: Record<string, BoxCategory> = {
   "pendant-boxes": {
     slug: "pendant-boxes",
     name: "Pendant Boxes",
-    headline: "Bespoke jewellery boxes crafted for pendants and earrings in distinctive materials and sizes.",
+    headline: "Bespoke jewellery boxes crafted for pendants in distinctive materials and sizes.",
     shortDescription: "Balanced proportions and plush cradles for fine pendants.",
     heroImage: "/assets/allim.jpeg",
-    modelSlugs: ["pendant-box", "er-pn-box"],
+    modelSlugs: ["pendant-box"],
   },
   "chain-boxes": {
     slug: "chain-boxes",
     name: "Chain Boxes",
-    headline: "Bespoke jewellery boxes crafted for chains and pendants in distinctive materials and sizes.",
+    headline: "Bespoke jewellery boxes crafted for chains in distinctive materials and sizes.",
     shortDescription: "Elongated presentation cases engineered to display fine chains securely.",
     heroImage: "/assets/goodimm.jpeg",
-    modelSlugs: ["chain-box", "chain-pn-box"],
+    modelSlugs: ["chain-box"],
   },
   "bracelet-boxes": {
     slug: "bracelet-boxes",
@@ -218,7 +218,7 @@ export const BOX_CATEGORIES_DATA: Record<string, BoxCategory> = {
     headline: "Bespoke jewellery boxes crafted for bracelets in distinctive materials and sizes.",
     shortDescription: "Refined linear presentation cases engineered for fine bracelets.",
     heroImage: "/assets/imsec1.jpeg",
-    modelSlugs: ["bracelet-box", "bracelet-chain-box"],
+    modelSlugs: ["bracelet-box"],
   },
   "necklace-boxes": {
     slug: "necklace-boxes",
@@ -226,7 +226,7 @@ export const BOX_CATEGORIES_DATA: Record<string, BoxCategory> = {
     headline: "Bespoke jewellery boxes crafted for necklaces in distinctive materials and sizes.",
     shortDescription: "Luxury presentation cases engineered to cradle statement colliers and chains.",
     heroImage: "/assets/allllllimm.jpeg",
-    modelSlugs: ["necklace-box", "necklace-set-box"],
+    modelSlugs: ["necklace-box"],
   },
   "bangle-boxes": {
     slug: "bangle-boxes",
@@ -234,7 +234,7 @@ export const BOX_CATEGORIES_DATA: Record<string, BoxCategory> = {
     headline: "Bespoke jewellery boxes crafted for bangles in distinctive materials and sizes.",
     shortDescription: "Structured boxes with central pillar cushions for rigid bangles.",
     heroImage: "/assets/rigidd.jpeg",
-    modelSlugs: ["bangle-box", "er-bangle-box"],
+    modelSlugs: ["bangle-box"],
   },
   "full-set-boxes": {
     slug: "full-set-boxes",
@@ -698,52 +698,7 @@ export const BOX_MODELS_DATA: Record<string, BoxModel> = {
     ],
   },
 
-  // 8. NECKLACE SET BOX
-  "necklace-set-box": {
-    id: "necklace-set-box",
-    slug: "necklace-set-box",
-    categorySlug: "necklace-boxes",
-    categoryName: "Necklace Boxes",
-    name: "Necklace Set Box",
-    collection: "Bespoke Packaging",
-    subtitle: "Bespoke Necklace & Earring Suite Case",
-    heroHeadline: "Bespoke Jewellery Box for Necklace Sets.",
-    shortDescription: "Grand multi-compartment presentation cases engineered for necklace and matching earring suites.",
-    longDescription: "Hand-crafted bespoke necklace set box featuring a contoured central necklace pad and flanking earring cradles engineered for cohesive bridal and high-jewellery sets.",
-    images: [
-      { src: "/assets/allimages.jpeg", alt: "CASA DI BIZ Necklace Set Box", label: "Primary View" },
-      { src: "/assets/allllllimm.jpeg", alt: "CASA DI BIZ Necklace Set Box Open", label: "Open View" },
-    ],
-    sizes: [
-      { label: "20 × 30 × 6 cm", dimensions: "20 × 30 × 6 cm", description: "Necklace Set (L) Size" },
-      { label: "23 × 40 × 8 cm", dimensions: "23 × 40 × 8 cm", description: "Necklace Set (XL) Grand Size" },
-      { label: "25 × 35 × 7 cm", dimensions: "25 × 35 × 7 cm", description: "Bespoke Suite Size" },
-    ],
-    materials: STANDARD_BOX_MATERIALS,
-    finishes: STANDARD_BOX_FINISHES,
-    specifications: {
-      outerMaterial: "Available in multiple material options",
-      innerMaterial: "Anti-Tarnish Certified Suede / Microfiber",
-      hingeClosure: "Precision Spring Hinge Closure",
-      insertType: "Necklace Pad with Dual Flanking Earring Slots",
-      brandingPlacement: "Inner Lid / Outer Lid Custom Stamping",
-      outerPackaging: "Two-Piece Rigid Outer Gift Box",
-      moq: "100 Units",
-      leadTime: "12–18 Working Days",
-      sampleAvailability: "Available on request",
-    },
-    highlights: [
-      { label: "FORMAT", value: "NECKLACE SET BOX" },
-      { label: "SIZES", value: "MULTIPLE AVAILABLE" },
-      { label: "COLOUR", value: "BESPOKE TO CLIENT" },
-    ],
-    customisationFeatures: [
-      { title: "Harmonized Suite Insert", description: "Simultaneous positioning for statement necklace and matching drop earrings." },
-    ],
-    faqs: [
-      { q: "Can custom earring placements be configured?", a: "Yes, positioning can be altered to fit longer chandeliers or studs." },
-    ],
-  },
+
 
   // 9. SET BOX (Set Box & Full Set Box)
   "set-box": {
@@ -814,189 +769,7 @@ export const BOX_MODELS_DATA: Record<string, BoxModel> = {
     ],
   },
 
-  // 11. E/R PN BOX (Combination)
-  "er-pn-box": {
-    id: "er-pn-box",
-    slug: "er-pn-box",
-    categorySlug: "pendant-boxes",
-    categoryName: "Pendant Boxes",
-    name: "E/R Pn Box",
-    collection: "Bespoke Packaging",
-    subtitle: "Earring & Pendant Combination Box",
-    heroHeadline: "Bespoke Earring & Pendant Box.",
-    shortDescription: "Bespoke combination box crafted for matching earring and pendant duos.",
-    longDescription: "Hand-crafted bespoke jewellery box engineered with dual-purpose interior pad accommodating both pendant chain hook and earring slots.",
-    images: [
-      { src: "/assets/allim.jpeg", alt: "CASA DI BIZ E/R Pn Box", label: "Primary View" },
-      { src: "/assets/imsec2.jpeg", alt: "CASA DI BIZ E/R Pn Box Open", label: "Open View" },
-    ],
-    sizes: [
-      { label: "8 × 10 × 5 cm", dimensions: "8 × 10 × 5 cm", description: "Standard E/R Pn Box Size" },
-      { label: "8 × 10 × 4 cm", dimensions: "8 × 10 × 4 cm", description: "Slim E/R Pn Box Size" },
-    ],
-    materials: STANDARD_BOX_MATERIALS,
-    finishes: STANDARD_BOX_FINISHES,
-    specifications: {
-      outerMaterial: "Available in multiple material options",
-      innerMaterial: "Anti-Tarnish Certified Suede / Microfiber",
-      hingeClosure: "Precision Spring Hinge Closure",
-      insertType: "Dual Earring & Pendant Cushion",
-      brandingPlacement: "Inner Lid / Outer Lid Custom Stamping",
-      outerPackaging: "Two-Piece Rigid Outer Gift Box",
-      moq: "100 Units",
-      leadTime: "12–18 Working Days",
-      sampleAvailability: "Available on request",
-    },
-    highlights: [
-      { label: "FORMAT", value: "E/R PN BOX" },
-      { label: "SIZES", value: "MULTIPLE AVAILABLE" },
-      { label: "COLOUR", value: "BESPOKE TO CLIENT" },
-    ],
-    customisationFeatures: [
-      { title: "Dual Purpose Pad", description: "Precision tabs for both earrings and center pendant." },
-    ],
-    faqs: [
-      { q: "Is this suitable for everyday sets?", a: "Yes, designed specifically for paired earring and pendant sets." },
-    ],
-  },
 
-  // 12. ER BANGLE BOX (Combination)
-  "er-bangle-box": {
-    id: "er-bangle-box",
-    slug: "er-bangle-box",
-    categorySlug: "bangle-boxes",
-    categoryName: "Bangle Boxes",
-    name: "ER Bangle Box",
-    collection: "Bespoke Packaging",
-    subtitle: "Earring & Bangle Combination Box",
-    heroHeadline: "Bespoke Earring & Bangle Box.",
-    shortDescription: "Bespoke combination packaging designed for pairing earrings with bangles.",
-    longDescription: "Hand-crafted bespoke jewellery box featuring a central bangle bolster flanked by earring positioning tabs.",
-    images: [
-      { src: "/assets/rigidd.jpeg", alt: "CASA DI BIZ ER Bangle Box", label: "Primary View" },
-      { src: "/assets/imsec2.jpeg", alt: "CASA DI BIZ ER Bangle Box Open", label: "Open View" },
-    ],
-    sizes: [
-      { label: "12 × 12 × 8 cm", dimensions: "12 × 12 × 8 cm", description: "Standard ER Bangle Box Size" },
-      { label: "15 × 15 × 8 cm", dimensions: "15 × 15 × 8 cm", description: "Large ER Bangle Box Size" },
-    ],
-    materials: STANDARD_BOX_MATERIALS,
-    finishes: STANDARD_BOX_FINISHES,
-    specifications: {
-      outerMaterial: "Available in multiple material options",
-      innerMaterial: "Anti-Tarnish Certified Suede / Microfiber",
-      hingeClosure: "Precision Spring Hinge Closure",
-      insertType: "Central Bangle Roll with Flanking Earring Slots",
-      brandingPlacement: "Inner Lid / Outer Lid Custom Stamping",
-      outerPackaging: "Two-Piece Rigid Outer Gift Box",
-      moq: "100 Units",
-      leadTime: "12–18 Working Days",
-      sampleAvailability: "Available on request",
-    },
-    highlights: [
-      { label: "FORMAT", value: "ER BANGLE BOX" },
-      { label: "SIZES", value: "MULTIPLE AVAILABLE" },
-      { label: "COLOUR", value: "BESPOKE TO CLIENT" },
-    ],
-    customisationFeatures: [
-      { title: "Bangle & Earring Cradle", description: "Combined insert layout for matching bangle and earring sets." },
-    ],
-    faqs: [
-      { q: "What is the minimum order quantity?", a: "Standard MOQ is 100 units per custom batch." },
-    ],
-  },
-
-  // 13. BRACELET / CHAIN (Combination)
-  "bracelet-chain-box": {
-    id: "bracelet-chain-box",
-    slug: "bracelet-chain-box",
-    categorySlug: "bracelet-boxes",
-    categoryName: "Bracelet Boxes",
-    name: "Bracelet / Chain",
-    collection: "Bespoke Packaging",
-    subtitle: "Bracelet & Chain Dual Presentation Box",
-    heroHeadline: "Bespoke Bracelet & Chain Box.",
-    shortDescription: "Linear presentation case engineered for bracelets and fine chains.",
-    longDescription: "Hand-crafted elongated case with universal clips designed to securely cradle either bracelets or link chains.",
-    images: [
-      { src: "/assets/imsec1.jpeg", alt: "CASA DI BIZ Bracelet / Chain", label: "Primary View" },
-      { src: "/assets/goodimm.jpeg", alt: "CASA DI BIZ Bracelet / Chain Open", label: "Open View" },
-    ],
-    sizes: [
-      { label: "23 × 7 × 3.5 cm", dimensions: "23 × 7 × 3.5 cm", description: "Standard Bracelet / Chain Size" },
-      { label: "26 × 8 × 7 cm", dimensions: "26 × 8 × 7 cm", description: "Wide Bracelet / Chain Size" },
-    ],
-    materials: STANDARD_BOX_MATERIALS,
-    finishes: STANDARD_BOX_FINISHES,
-    specifications: {
-      outerMaterial: "Available in multiple material options",
-      innerMaterial: "Anti-Tarnish Certified Suede / Microfiber",
-      hingeClosure: "Precision Spring Hinge Closure",
-      insertType: "Dual Elastic Retention Clips",
-      brandingPlacement: "Inner Lid / Outer Lid Custom Stamping",
-      outerPackaging: "Two-Piece Rigid Outer Gift Box",
-      moq: "100 Units",
-      leadTime: "12–18 Working Days",
-      sampleAvailability: "Available on request",
-    },
-    highlights: [
-      { label: "FORMAT", value: "BRACELET / CHAIN" },
-      { label: "SIZES", value: "MULTIPLE AVAILABLE" },
-      { label: "COLOUR", value: "BESPOKE TO CLIENT" },
-    ],
-    customisationFeatures: [
-      { title: "Multi-Jewellery Clips", description: "Supports both stiff tennis bracelets and flexible chain links." },
-    ],
-    faqs: [
-      { q: "Are custom colors available?", a: "Yes, all materials and finishes can be customized." },
-    ],
-  },
-
-  // 14. CHAIN / PN (Combination)
-  "chain-pn-box": {
-    id: "chain-pn-box",
-    slug: "chain-pn-box",
-    categorySlug: "chain-boxes",
-    categoryName: "Chain Boxes",
-    name: "Chain / PN",
-    collection: "Bespoke Packaging",
-    subtitle: "Chain & Pendant Dual Case",
-    heroHeadline: "Bespoke Chain / PN Box.",
-    shortDescription: "Bespoke box crafted for chain and pendant combinations.",
-    longDescription: "Hand-crafted bespoke jewellery box engineered with specialized interior retaining clips for chains with attached pendants.",
-    images: [
-      { src: "/assets/goodimm.jpeg", alt: "CASA DI BIZ Chain / PN", label: "Primary View" },
-      { src: "/assets/allim.jpeg", alt: "CASA DI BIZ Chain / PN Open", label: "Open View" },
-    ],
-    sizes: [
-      { label: "9 × 13 × 7 cm", dimensions: "9 × 13 × 7 cm", description: "Standard Chain / PN Size" },
-      { label: "10 × 14 × 6 cm", dimensions: "10 × 14 × 6 cm", description: "Medium Chain / PN Size" },
-    ],
-    materials: STANDARD_BOX_MATERIALS,
-    finishes: STANDARD_BOX_FINISHES,
-    specifications: {
-      outerMaterial: "Available in multiple material options",
-      innerMaterial: "Anti-Tarnish Certified Suede / Microfiber",
-      hingeClosure: "Precision Spring Hinge Closure",
-      insertType: "Chain & Pendant Pad",
-      brandingPlacement: "Inner Lid / Outer Lid Custom Stamping",
-      outerPackaging: "Two-Piece Rigid Outer Gift Box",
-      moq: "100 Units",
-      leadTime: "12–18 Working Days",
-      sampleAvailability: "Available on request",
-    },
-    highlights: [
-      { label: "FORMAT", value: "CHAIN / PN" },
-      { label: "SIZES", value: "MULTIPLE AVAILABLE" },
-      { label: "COLOUR", value: "BESPOKE TO CLIENT" },
-    ],
-    customisationFeatures: [
-      { title: "Tension Clip", description: "Holds chain firmly in place while allowing pendant to rest centered." },
-    ],
-    faqs: [
-      { q: "What is the delivery time?", a: "12–18 working days from proof approval." },
-    ],
-  },
 };
 
 // Helper queries

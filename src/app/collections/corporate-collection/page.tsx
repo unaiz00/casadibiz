@@ -173,8 +173,8 @@ export default function CorporateCollectionPage() {
 
         {/* 2x2 PRODUCT GRID SECTION */}
         <section className="w-full bg-[#FAF8F5]">
-          <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12 pt-8 sm:pt-12 lg:pt-16 pb-12 sm:pb-16 lg:pb-20">
-            <div className="mb-6 sm:mb-8">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 lg:pt-10 pb-12 sm:pb-16 lg:pb-20">
+            <div className="mb-6 sm:mb-8 md:mb-10">
               <span className="text-[10px] sm:text-[11px] tracking-[0.28em] font-semibold text-[#C7A86A] uppercase block mb-1">
                 CURATED SUITES
               </span>
@@ -183,44 +183,44 @@ export default function CorporateCollectionPage() {
               </h2>
             </div>
 
-            {/* Desktop: 2x2 Grid | Mobile: Single Column */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-7 sm:gap-10 lg:gap-12">
+            {/* Desktop: 2x2 Grid (32px x 40px gap) | Mobile: Single Column (24px gap) */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 sm:gap-y-8 md:gap-x-8 md:gap-y-10 lg:gap-x-8 lg:gap-y-12">
               {CORPORATE_PRODUCTS.map((product, i) => (
                 <Link
                   key={product.id}
                   href={product.href}
-                  className="group flex flex-col rounded-[22px] sm:rounded-[28px] md:rounded-[32px] bg-white border border-[#0F2744]/[0.08] hover:border-[#C7A86A]/60 overflow-hidden shadow-[0_4px_20px_rgba(15,39,68,0.03)] hover:shadow-[0_12px_32px_rgba(15,39,68,0.07)] transition-all duration-500 animate-fade-up"
+                  className="group flex flex-col rounded-2xl sm:rounded-[24px] md:rounded-[28px] bg-white border border-[#0F2744]/[0.08] hover:border-[#C7A86A]/60 overflow-hidden shadow-[0_4px_20px_rgba(15,39,68,0.03)] hover:shadow-[0_12px_32px_rgba(15,39,68,0.07)] transition-all duration-500 animate-fade-up"
                   style={{ animationDelay: `${i * 0.08}s` }}
                 >
                   {/* Product Image */}
-                  <div className="relative overflow-hidden aspect-[4/3] sm:aspect-[4/3] bg-white w-full flex items-center justify-center p-3 border-b border-[#0F2744]/[0.06]">
+                  <div className="relative overflow-hidden aspect-[16/11] sm:aspect-[16/11] bg-white w-full flex items-center justify-center p-1.5 sm:p-2 border-b border-[#0F2744]/[0.06]">
                     <img
                       src={product.image}
                       alt={product.title}
                       loading="lazy"
-                      className="h-full w-full object-contain transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+                      className="h-full w-full object-contain transition-transform duration-700 ease-out group-hover:scale-[1.01]"
                     />
-                    <div className="absolute bottom-4 right-4 sm:bottom-5 sm:right-5 h-10 w-10 sm:h-11 sm:w-11 rounded-full bg-[#FAF8F5]/90 backdrop-blur-md border border-[#0F2744]/10 text-[#0F2744] flex items-center justify-center shadow-sm group-hover:bg-[#0F2744] group-hover:text-[#FAF8F5] group-hover:border-[#0F2744] transition-all duration-300">
+                    <div className="absolute bottom-3.5 right-3.5 sm:bottom-4 sm:right-4 h-9 w-9 sm:h-10 sm:w-10 rounded-full bg-[#FAF8F5]/90 backdrop-blur-md border border-[#0F2744]/10 text-[#0F2744] flex items-center justify-center shadow-sm group-hover:bg-[#0F2744] group-hover:text-[#FAF8F5] group-hover:border-[#0F2744] transition-all duration-300">
                       <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
                     </div>
                   </div>
 
                   {/* Product Content Section */}
-                  <div className="p-6 sm:p-8 md:p-9 flex-1 flex flex-col justify-between bg-white">
+                  <div className="p-5 sm:p-6 md:p-7 flex-1 flex flex-col justify-between bg-white">
                     <div>
-                      <span className="text-[10px] tracking-[0.24em] font-semibold text-[#C7A86A] uppercase block mb-1.5">
+                      <span className="text-[10px] tracking-[0.24em] font-semibold text-[#C7A86A] uppercase block mb-1">
                         {product.subtitle}
                       </span>
-                      <h3 className="font-display font-serif text-2xl sm:text-[26px] md:text-3xl text-[#0F2744] leading-tight group-hover:text-[#C7A86A] transition-colors duration-300">
+                      <h3 className="font-display font-serif text-xl sm:text-2xl lg:text-[26px] text-[#0F2744] leading-snug group-hover:text-[#C7A86A] transition-colors duration-300">
                         {product.title}
                       </h3>
-                      <p className="mt-3 text-xs sm:text-sm md:text-[14.5px] text-[#0F2744]/75 leading-relaxed font-sans">
+                      <p className="mt-2.5 text-xs sm:text-sm text-[#0F2744]/75 leading-relaxed font-sans">
                         {product.description}
                       </p>
                     </div>
 
                     {/* Features Badges & CTA */}
-                    <div className="mt-6 pt-5 border-t border-[#0F2744]/[0.08] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div className="mt-5 pt-4 border-t border-[#0F2744]/[0.08] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                       <div className="flex flex-wrap gap-1.5">
                         {product.highlights.slice(0, 2).map((h, hIdx) => (
                           <span
@@ -231,7 +231,7 @@ export default function CorporateCollectionPage() {
                           </span>
                         ))}
                       </div>
-                      <span className="inline-flex items-center gap-2 text-[11px] sm:text-xs tracking-[0.22em] font-sans font-semibold text-[#C7A86A] uppercase group-hover:text-[#0F2744] transition-colors duration-300 shrink-0">
+                      <span className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs tracking-[0.2em] font-sans font-semibold text-[#C7A86A] uppercase group-hover:text-[#0F2744] transition-colors duration-300 shrink-0">
                         VIEW DETAILS
                         <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1 text-[#C7A86A] group-hover:text-[#0F2744]" />
                       </span>

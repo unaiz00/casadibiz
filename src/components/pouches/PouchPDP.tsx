@@ -13,6 +13,7 @@ import {
 import { SiteHeader, SiteFooter, Breadcrumbs } from "@/components/site-chrome";
 import PouchImageViewer from "@/components/pouches/PouchImageViewer";
 import type { PouchProduct } from "@/data/pouches-data";
+import ProductCTAButtons from "@/components/pdp/ProductCTAButtons";
 
 const POUCH_TABS = [
   {
@@ -252,24 +253,10 @@ export default function PouchPDP({ product, relatedProducts }: PouchPDPProps) {
               </div>
 
               {/* PRIMARY B2B CTAS (Horizontal Two-Column on Mobile & Desktop) */}
-              <div className="grid grid-cols-2 gap-2 sm:gap-3.5 w-full">
-                <Link
-                  href={quoteUrl}
-                  className="inline-flex items-center justify-center gap-1.5 sm:gap-2 rounded-xl px-2 sm:px-4 py-3 sm:py-3.5 text-[10.5px] sm:text-xs tracking-[0.06em] sm:tracking-[0.14em] font-bold bg-[#0F2744] text-[#FAF8F5] hover:bg-[#C7A86A] hover:text-[#0F2744] transition-all duration-300 text-center shadow-md min-h-[46px] sm:min-h-[48px] whitespace-nowrap"
-                >
-                  <span>REQUEST A QUOTE</span>
-                  <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0" />
-                </Link>
-                <a
-                  href={dynamicWhatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex items-center justify-center gap-1.5 sm:gap-2 rounded-xl px-2 sm:px-4 py-3 sm:py-3.5 text-[10.5px] sm:text-xs tracking-[0.05em] sm:tracking-[0.12em] font-semibold sm:font-bold bg-[#25D366] text-white hover:bg-[#20ba5a] transition-all duration-300 shadow-xs min-h-[46px] sm:min-h-[48px] text-center whitespace-nowrap"
-                >
-                  <MessageCircle className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0" />
-                  <span>ENQUIRE ON WHATSAPP</span>
-                </a>
-              </div>
+              <ProductCTAButtons
+                quoteUrl={quoteUrl}
+                whatsappUrl={dynamicWhatsappUrl}
+              />
 
               {/* Supporting B2B Note */}
               <div className="w-full text-center mt-3 sm:mt-3.5">

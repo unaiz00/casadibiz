@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { SiteHeader, SiteFooter, Breadcrumbs } from "@/components/site-chrome";
 import type { CorporateGiftProduct } from "@/data/corporate-data";
+import ProductCTAButtons from "@/components/pdp/ProductCTAButtons";
 
 const CORPORATE_TABS = [
   {
@@ -244,25 +245,11 @@ export default function CorporateGiftPDP({
               </div>
 
               {/* CTA BUTTONS (Desktop + Mobile responsive) */}
-              <div className="w-full flex flex-col sm:flex-row gap-3 pt-2">
-                <Link
-                  href={quoteUrl}
-                  className="flex-1 inline-flex items-center justify-center gap-2 rounded-full px-6 py-4 text-xs tracking-[0.24em] font-semibold bg-[#C7A86A] text-[#0F2744] hover:bg-[#0F2744] hover:text-[#FAF8F5] transition-all duration-300 shadow-md text-center"
-                >
-                  REQUEST A QUOTE <ArrowRight className="h-4 w-4" />
-                </Link>
-
-                <a
-                  href={dynamicWhatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 inline-flex items-center justify-center gap-2 rounded-full px-6 py-4 text-xs tracking-[0.22em] font-semibold border border-[#C7A86A] text-[#0F2744] hover:bg-[#C7A86A] hover:text-[#0F2744] transition-all duration-300 text-center bg-transparent"
-                >
-                  <MessageCircle className="h-4 w-4 text-[#C7A86A]" />
-                  <span className="hidden sm:inline">ENQUIRE VIA WHATSAPP</span>
-                  <span className="sm:hidden">QUICK QUOTE VIA WHATSAPP</span>
-                </a>
-              </div>
+              <ProductCTAButtons
+                quoteUrl={quoteUrl}
+                whatsappUrl={dynamicWhatsappUrl}
+                className="pt-2"
+              />
             </div>
           </div>
         </section>

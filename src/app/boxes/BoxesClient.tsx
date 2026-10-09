@@ -49,19 +49,19 @@ export default function JewelleryBoxesClient() {
       return allModels.filter((m) => m.slug === "earring-box");
     }
     if (activeFilter === "pendant") {
-      return allModels.filter((m) => m.slug === "pendant-box" || m.slug === "er-pn-box");
+      return allModels.filter((m) => m.slug === "pendant-box");
     }
     if (activeFilter === "chain") {
-      return allModels.filter((m) => m.slug === "chain-box" || m.slug === "chain-pn-box");
+      return allModels.filter((m) => m.slug === "chain-box");
     }
     if (activeFilter === "bracelet") {
-      return allModels.filter((m) => m.slug === "bracelet-box" || m.slug === "bracelet-chain-box");
+      return allModels.filter((m) => m.slug === "bracelet-box");
     }
     if (activeFilter === "bangle") {
-      return allModels.filter((m) => m.slug === "bangle-box" || m.slug === "er-bangle-box");
+      return allModels.filter((m) => m.slug === "bangle-box");
     }
     if (activeFilter === "necklace") {
-      return allModels.filter((m) => m.slug === "necklace-box" || m.slug === "necklace-set-box");
+      return allModels.filter((m) => m.slug === "necklace-box");
     }
     if (activeFilter === "set-boxes") {
       return allModels.filter((m) => m.slug === "set-box");

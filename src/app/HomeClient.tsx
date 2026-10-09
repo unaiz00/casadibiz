@@ -51,7 +51,7 @@ function RibbonSwoopBottomRight({ className = "" }: { className?: string }) {
 
 /* ---------------- Hero ---------------- */
 function Hero() {
-  const slides = ["/assets/hero2.png", "/assets/herobg.png"];
+  const slides = ["/assets/contactim.png", "/assets/hero/herod.jpeg"];
   const [i, setI] = useState(0);
   useEffect(() => {
     const t = setInterval(() => setI((v) => (v + 1) % slides.length), 2800);
@@ -68,9 +68,8 @@ function Hero() {
             alt="Luxury CASA DI BIZ packaging"
             width={1408}
             height={1200}
-            className={`absolute inset-0 w-full h-full object-cover object-[72%_75%] sm:object-center transition-opacity duration-[900ms] ease-in-out ${
-              i === idx ? "opacity-100" : "opacity-0"
-            }`}
+            className={`absolute inset-0 w-full h-full object-cover object-[72%_75%] sm:object-center transition-opacity duration-[900ms] ease-in-out ${i === idx ? "opacity-100" : "opacity-0"
+              }`}
             loading="eager"
           />
         ))}

@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { MessageCircle, FileText } from "lucide-react";
 import { SiteHeader, SiteFooter, Breadcrumbs } from "@/components/site-chrome";
 import type { WrapProduct } from "@/data/wraps-data";
+import ProductCTAButtons from "@/components/pdp/ProductCTAButtons";
 import WrapImageViewer from "./WrapImageViewer";
 import WrapApplications from "./WrapApplications";
 import WrapSpecifications from "./WrapSpecifications";
@@ -115,25 +115,10 @@ export default function WrapPDPView({ product, relatedProducts }: WrapPDPViewPro
               </div>
 
               {/* Primary B2B Action Buttons */}
-              <div className="w-full grid grid-cols-2 gap-2.5 sm:gap-3.5">
-                <Link
-                  href={quoteUrl}
-                  className="inline-flex items-center justify-center gap-1.5 sm:gap-2.5 px-2.5 sm:px-6 py-3 sm:py-3.5 rounded-xl bg-[#0F2744] text-[#FAF8F5] text-[10px] sm:text-xs font-semibold tracking-[0.06em] sm:tracking-[0.18em] uppercase transition-all duration-300 hover:bg-[#16233c] shadow-xs min-h-[46px] sm:min-h-[48px] text-center whitespace-nowrap"
-                >
-                  <FileText className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-[#C7A86A] shrink-0" />
-                  <span>REQUEST A QUOTE</span>
-                </Link>
-
-                <a
-                  href={whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-1.5 sm:gap-2 px-2.5 sm:px-6 py-3 sm:py-3.5 rounded-xl bg-[#25D366] text-white text-[10px] sm:text-xs font-semibold tracking-[0.05em] sm:tracking-[0.16em] uppercase transition-all duration-300 hover:bg-[#20ba5a] shadow-xs min-h-[46px] sm:min-h-[48px] text-center whitespace-nowrap"
-                >
-                  <MessageCircle className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0" />
-                  <span>ENQUIRE ON WHATSAPP</span>
-                </a>
-              </div>
+              <ProductCTAButtons
+                quoteUrl={quoteUrl}
+                whatsappUrl={whatsappUrl}
+              />
             </div>
           </div>
         </section>
