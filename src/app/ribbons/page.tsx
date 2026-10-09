@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ArrowRight,
-  ArrowDown,
   ShieldCheck,
   Layers,
   Palette,
@@ -219,27 +218,8 @@ export default function RibbonsHubPage() {
               Premium packaging ribbons crafted across refined satin, grosgrain, cotton-blend and organza constructions, with calibrated widths and bespoke branding options for luxury packaging.
             </p>
 
-            {/* Compact CTA Row */}
-            <div className="mt-6 flex flex-wrap items-center gap-4">
-              <a
-                href="#our-ribbons"
-                className="inline-flex items-center justify-center gap-2.5 rounded-xl px-6 py-3 text-xs tracking-[0.2em] font-bold bg-[#0F2744] text-[#FAF8F5] hover:bg-[#C7A86A] hover:text-[#0F2744] transition-all duration-300 shadow-sm"
-              >
-                <span>EXPLORE RIBBONS</span>
-                <ArrowDown className="h-3.5 w-3.5" />
-              </a>
-
-              <Link
-                href="/contact?category=ribbons"
-                className="inline-flex items-center justify-center gap-2.5 rounded-xl px-6 py-3 text-xs tracking-[0.2em] font-bold bg-transparent text-[#0F2744] border border-[#0F2744]/30 hover:border-[#C7A86A] hover:text-[#C7A86A] transition-all duration-300"
-              >
-                <span>REQUEST A QUOTE</span>
-                <ArrowRight className="h-3.5 w-3.5" />
-              </Link>
-            </div>
-
             {/* High-Level B2B Quick Facts Strip */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mt-8 pt-6 border-t border-[#0F2744]/10 text-xs">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mt-7 sm:mt-8 pt-6 border-t border-[#0F2744]/10 text-xs">
               <div className="flex items-center gap-2.5">
                 <ShieldCheck className="h-4 w-4 text-[#C7A86A] shrink-0" />
                 <span className="text-[#0F2744]/80 font-medium">Non-Fray Woven Selvedges</span>

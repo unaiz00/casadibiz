@@ -83,23 +83,23 @@ export default function CollectionsPage() {
   }));
 
   return (
-    <div className="min-h-screen bg-[#FAF8F5]">
+    <div className="min-h-screen bg-ivory">
       <SiteHeader />
       <main>
         {/* Editorial Header Section */}
-        <section className="w-full bg-[#F6F0E8] border-b border-[#0F2744]/5">
-          <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12 pt-7 sm:pt-10 md:pt-12 lg:pt-14 pb-6 sm:pb-8 lg:pb-9">
+        <section className="w-full bg-cream border-b border-[#0F2744]/5">
+          <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12 pt-6 pb-6 sm:pt-14">
             <Breadcrumbs
               items={[{ label: "Home", to: "/" }, { label: "Collections" }]}
             />
-            <p className="mt-7 sm:mt-8 lg:mt-9 text-[11px] tracking-[0.32em] text-[#C7A86A] font-medium uppercase">
+            <p className="mt-4 sm:mt-8 text-[11px] tracking-[0.32em] text-gold font-medium uppercase">
               THE COMPLETE COLLECTIONS
             </p>
-            <h1 className="mt-3.5 sm:mt-4 md:mt-5 font-display font-serif text-3xl sm:text-5xl md:text-6xl text-[#0F2744] leading-[1.1] sm:leading-[1.05]">
+            <h1 className="mt-3 font-display text-4xl sm:text-5xl md:text-6xl text-navy leading-[1.05]">
               Packaging suites,{" "}
-              <span className="italic text-[#C7A86A]">not single pieces.</span>
+              <span className="italic text-gradient-gold">not single pieces.</span>
             </h1>
-            <p className="mt-5 md:mt-6 max-w-2xl text-sm sm:text-base text-[#0F2744]/75 font-sans leading-relaxed">
+            <p className="mt-5 max-w-2xl text-sm sm:text-base text-muted-luxe leading-relaxed">
               Curated collections that bring boxes, bags, pouches, wraps, and
               finishing touches together into one cohesive, luxury unboxing
               experience.
@@ -108,51 +108,44 @@ export default function CollectionsPage() {
         </section>
 
         {/* Collections Editorial Grid */}
-        <section className="w-full bg-[#FAF8F5]">
-          <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12 pt-4 sm:pt-6 lg:pt-8 pb-12 sm:pb-16 lg:pb-20">
-            {/* Desktop: 2-column grid | Mobile: Single column with natural vertical scrolling */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-7 lg:gap-x-8 gap-y-8 sm:gap-y-9 lg:gap-y-10">
+        <section className="w-full bg-ivory">
+          <div className="mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-12 py-10 sm:py-14 lg:py-16">
+            {/* Desktop: 4-column grid (lg: 1024px+) | Tablet: 2 columns | Mobile: 1 column */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
               {items.map((it, i) => {
                 const destination = it.href || `/collections/${it.slug}`;
                 return (
                   <Link
                     key={it.slug}
                     href={destination}
-                    className="group flex flex-col h-full rounded-[20px] sm:rounded-[24px] bg-white border border-[#0F2744]/[0.08] hover:border-[#C7A86A]/60 overflow-hidden shadow-[0_4px_18px_rgba(15,39,68,0.03)] hover:shadow-[0_10px_28px_rgba(15,39,68,0.06)] transition-all duration-500 animate-fade-up"
-                    style={{ animationDelay: `${i * 0.05}s` }}
+                    className="group flex flex-col bg-cream rounded-[14px] overflow-hidden hover:-translate-y-1.5 transition-all duration-500 animate-fade-up"
+                    style={{ animationDelay: `${i * 0.04}s` }}
                   >
-                    {/* Collection Image with Floating Arrow Icon */}
-                    <div className="relative overflow-hidden aspect-[16/9.5] sm:aspect-[16/9] bg-[#F4EFEA] w-full">
+                    {/* Collection Image */}
+                    <div className="relative overflow-hidden aspect-[4/3] bg-white">
                       <img
                         src={it.image}
                         alt={it.title}
                         loading="lazy"
-                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
                       />
-                      {/* Subtle floating circular indicator */}
-                      <div className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 h-9 w-9 sm:h-10 sm:w-10 rounded-full bg-[#FAF8F5]/90 backdrop-blur-md border border-white/80 text-[#0F2744] flex items-center justify-center shadow-sm group-hover:bg-[#0F2744] group-hover:text-[#FAF8F5] group-hover:border-[#0F2744] transition-all duration-300">
-                        <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
-                      </div>
                     </div>
 
                     {/* Card Content Section */}
-                    <div className="p-5 sm:p-6 lg:p-7 flex-1 flex flex-col justify-between bg-white">
+                    <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between">
                       <div>
-                        <h2 className="font-display font-serif text-[22px] sm:text-2xl md:text-[28px] text-[#0F2744] leading-snug group-hover:text-[#C7A86A] transition-colors duration-300">
+                        <h2 className="font-display text-lg sm:text-xl lg:text-[21px] text-navy leading-tight group-hover:text-gold transition-colors duration-300">
                           {it.title}
                         </h2>
-                        <p className="mt-2 sm:mt-2.5 text-sm sm:text-[15px] text-[#0F2744]/75 leading-relaxed font-sans line-clamp-3">
+                        <p className="mt-2.5 text-xs sm:text-[13.5px] text-muted-luxe leading-relaxed flex-1 line-clamp-3">
                           {it.short}
                         </p>
                       </div>
 
                       {/* CTA */}
-                      <div className="mt-4 sm:mt-5 pt-3.5 sm:pt-4 border-t border-[#0F2744]/[0.08] flex items-center justify-between">
-                        <span className="inline-flex items-center gap-2 text-[11px] sm:text-xs tracking-[0.22em] font-sans font-semibold text-[#C7A86A] uppercase group-hover:text-[#0F2744] transition-colors duration-300">
-                          EXPLORE COLLECTION
-                          <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1.5 text-[#C7A86A] group-hover:text-[#0F2744]" />
-                        </span>
-                      </div>
+                      <span className="mt-4 sm:mt-5 inline-flex items-center gap-1.5 text-[10.5px] sm:text-[11px] tracking-[0.24em] font-semibold text-gold group-hover:gap-2.5 transition-all uppercase">
+                        EXPLORE COLLECTION <ArrowRight className="h-3.5 w-3.5" />
+                      </span>
                     </div>
                   </Link>
                 );

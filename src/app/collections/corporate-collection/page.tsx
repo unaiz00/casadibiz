@@ -193,12 +193,12 @@ export default function CorporateCollectionPage() {
                   style={{ animationDelay: `${i * 0.08}s` }}
                 >
                   {/* Product Image */}
-                  <div className="relative overflow-hidden aspect-[16/11] sm:aspect-[16/11] bg-white w-full flex items-center justify-center p-1.5 sm:p-2 border-b border-[#0F2744]/[0.06]">
+                  <div className="relative overflow-hidden aspect-square bg-white w-full border-b border-[#0F2744]/[0.06]">
                     <img
                       src={product.image}
                       alt={product.title}
                       loading="lazy"
-                      className="h-full w-full object-contain transition-transform duration-700 ease-out group-hover:scale-[1.01]"
+                      className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
                     />
                     <div className="absolute bottom-3.5 right-3.5 sm:bottom-4 sm:right-4 h-9 w-9 sm:h-10 sm:w-10 rounded-full bg-[#FAF8F5]/90 backdrop-blur-md border border-[#0F2744]/10 text-[#0F2744] flex items-center justify-center shadow-sm group-hover:bg-[#0F2744] group-hover:text-[#FAF8F5] group-hover:border-[#0F2744] transition-all duration-300">
                       <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
