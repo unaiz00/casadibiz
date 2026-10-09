@@ -109,20 +109,20 @@ export default function CollectionsPage() {
 
         {/* Collections Editorial Grid */}
         <section className="w-full bg-[#FAF8F5]">
-          <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12 pt-5 sm:pt-7 lg:pt-8 pb-12 sm:pb-16 lg:pb-24">
+          <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12 pt-4 sm:pt-6 lg:pt-8 pb-12 sm:pb-16 lg:pb-20">
             {/* Desktop: 2-column grid | Mobile: Single column with natural vertical scrolling */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-7 sm:gap-10 lg:gap-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-7 lg:gap-x-8 gap-y-8 sm:gap-y-9 lg:gap-y-10">
               {items.map((it, i) => {
                 const destination = it.href || `/collections/${it.slug}`;
                 return (
                   <Link
                     key={it.slug}
                     href={destination}
-                    className="group flex flex-col rounded-[22px] sm:rounded-[28px] md:rounded-[32px] bg-white border border-[#0F2744]/[0.08] hover:border-[#C7A86A]/60 overflow-hidden shadow-[0_4px_20px_rgba(15,39,68,0.03)] hover:shadow-[0_12px_32px_rgba(15,39,68,0.07)] transition-all duration-500 animate-fade-up"
-                    style={{ animationDelay: `${i * 0.06}s` }}
+                    className="group flex flex-col h-full rounded-[20px] sm:rounded-[24px] bg-white border border-[#0F2744]/[0.08] hover:border-[#C7A86A]/60 overflow-hidden shadow-[0_4px_18px_rgba(15,39,68,0.03)] hover:shadow-[0_10px_28px_rgba(15,39,68,0.06)] transition-all duration-500 animate-fade-up"
+                    style={{ animationDelay: `${i * 0.05}s` }}
                   >
                     {/* Collection Image with Floating Arrow Icon */}
-                    <div className="relative overflow-hidden aspect-[16/11] sm:aspect-[16/10] bg-[#F4EFEA] w-full">
+                    <div className="relative overflow-hidden aspect-[16/9.5] sm:aspect-[16/9] bg-[#F4EFEA] w-full">
                       <img
                         src={it.image}
                         alt={it.title}
@@ -130,24 +130,24 @@ export default function CollectionsPage() {
                         className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
                       />
                       {/* Subtle floating circular indicator */}
-                      <div className="absolute bottom-4 right-4 sm:bottom-5 sm:right-5 h-10 w-10 sm:h-11 sm:w-11 rounded-full bg-[#FAF8F5]/90 backdrop-blur-md border border-white/80 text-[#0F2744] flex items-center justify-center shadow-sm group-hover:bg-[#0F2744] group-hover:text-[#FAF8F5] group-hover:border-[#0F2744] transition-all duration-300">
-                        <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+                      <div className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 h-9 w-9 sm:h-10 sm:w-10 rounded-full bg-[#FAF8F5]/90 backdrop-blur-md border border-white/80 text-[#0F2744] flex items-center justify-center shadow-sm group-hover:bg-[#0F2744] group-hover:text-[#FAF8F5] group-hover:border-[#0F2744] transition-all duration-300">
+                        <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
                       </div>
                     </div>
 
                     {/* Card Content Section */}
-                    <div className="p-6 sm:p-8 md:p-9 flex-1 flex flex-col justify-between bg-white">
+                    <div className="p-5 sm:p-6 lg:p-7 flex-1 flex flex-col justify-between bg-white">
                       <div>
-                        <h2 className="font-display font-serif text-2xl sm:text-[26px] md:text-3xl text-[#0F2744] leading-tight group-hover:text-[#C7A86A] transition-colors duration-300">
+                        <h2 className="font-display font-serif text-[22px] sm:text-2xl md:text-[28px] text-[#0F2744] leading-snug group-hover:text-[#C7A86A] transition-colors duration-300">
                           {it.title}
                         </h2>
-                        <p className="mt-3 text-xs sm:text-sm md:text-[14.5px] text-[#0F2744]/75 leading-relaxed font-sans line-clamp-3">
+                        <p className="mt-2 sm:mt-2.5 text-sm sm:text-[15px] text-[#0F2744]/75 leading-relaxed font-sans line-clamp-3">
                           {it.short}
                         </p>
                       </div>
 
                       {/* CTA */}
-                      <div className="mt-6 pt-4 sm:pt-5 border-t border-[#0F2744]/[0.08] flex items-center justify-between">
+                      <div className="mt-4 sm:mt-5 pt-3.5 sm:pt-4 border-t border-[#0F2744]/[0.08] flex items-center justify-between">
                         <span className="inline-flex items-center gap-2 text-[11px] sm:text-xs tracking-[0.22em] font-sans font-semibold text-[#C7A86A] uppercase group-hover:text-[#0F2744] transition-colors duration-300">
                           EXPLORE COLLECTION
                           <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1.5 text-[#C7A86A] group-hover:text-[#0F2744]" />
