@@ -122,8 +122,8 @@ export function SiteFooter() {
       </div>
 
       {/* Bottom Copyright Section */}
-      <div className="w-full mt-12 pt-6 border-t border-[#C7A86A]/10 text-center text-xs text-[#F6F0E8]/70">
-        © 2024 CASA DI BIZ. All Rights Reserved.
+      <div className="w-full mt-12 pt-6 border-t border-[#C7A86A]/10 text-center text-xs text-[#C7A86A]">
+        © CASA DI BIZ. All Rights Reserved.
       </div>
     </footer>
   );

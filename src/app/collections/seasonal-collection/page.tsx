@@ -1,3 +1,4 @@
+import { redirect } from "next/navigation";
 import type { Metadata } from "next";
 import SubCategoryDetailClient from "@/components/SubCategoryDetailClient";
 import { COLLECTION_CATEGORIES } from "../page";
@@ -88,6 +89,7 @@ export const metadata: Metadata = {
 };
 
 export default function SeasonalCollectionPage() {
+  redirect("/boxes");
   return (
     <SubCategoryDetailClient
       category={c}

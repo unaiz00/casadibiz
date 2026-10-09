@@ -10,8 +10,6 @@ import {
   ChevronRight,
   X,
   Maximize2,
-  ShieldCheck,
-  Layers,
   Check,
   MessageCircle,
 } from "lucide-react";
@@ -68,8 +66,30 @@ export default function BoxPDPView({ model, relatedModels }: BoxPDPViewProps) {
         const foundIdx = model.images.findIndex((img) => img.src === targetSrc);
         if (foundIdx !== -1) {
           setActiveImageIdx(foundIdx);
+          return;
         }
       }
+    }
+
+    // Fallback: match material by name / id against image alt, src, or label
+    const selectedMat = model.materials.find((m) => m.id === materialId);
+    const searchTerms = [
+      materialId.toLowerCase().replace(/-/g, " "),
+      materialId.toLowerCase().replace(/-/g, ""),
+      selectedMat?.name.toLowerCase(),
+    ].filter(Boolean) as string[];
+
+    const foundIdx = model.images.findIndex((img) => {
+      const alt = (img.alt || "").toLowerCase();
+      const src = (img.src || "").toLowerCase();
+      const label = (img.label || "").toLowerCase();
+      return searchTerms.some((term) =>
+        alt.includes(term) || src.includes(term.replace(/\s+/g, "")) || label.includes(term)
+      );
+    });
+
+    if (foundIdx !== -1) {
+      setActiveImageIdx(foundIdx);
     }
   };
 
@@ -213,28 +233,46 @@ Selected Specs:
                     </button>
                   ))}
                 </div>
-              </div>
 
-              {/* Quick Specification Badges Row */}
-              <div className="grid grid-cols-3 gap-3 pt-2">
-                <div className="bg-[#F6F0E8] border border-[#C7A86A]/20 rounded-lg p-3.5 flex items-center gap-3">
-                  <ShieldCheck className="h-5 w-5 text-[#C7A86A] shrink-0" />
-                  <div className="min-w-0">
-                    <span className="text-[9px] font-bold tracking-[0.2em] text-[#0F2744]/60 uppercase block">ANTI-TARNISH</span>
-                    <span className="text-xs font-semibold text-[#0F2744] truncate block">Certified Linings</span>
+                {/* Mobile Material & Texture Selector - Directly after Gallery & Thumbnails */}
+                <div className="w-full mt-0.5 pt-2.5 border-t border-[#0F2744]/10">
+                  <div className="flex justify-between items-baseline mb-2">
+                    <span className="text-[11px] font-semibold text-[#0F2744] tracking-[0.2em] uppercase">
+                      MATERIAL &amp; TEXTURE
+                    </span>
+                    <span className="text-[11px] text-[#C7A86A] font-semibold">
+                      {activeMaterial?.name}
+                    </span>
                   </div>
-                </div>
-                <div className="bg-[#F6F0E8] border border-[#C7A86A]/20 rounded-lg p-3.5 flex items-center gap-3">
-                  <Layers className="h-5 w-5 text-[#C7A86A] shrink-0" />
-                  <div className="min-w-0">
-                    <span className="text-[9px] font-bold tracking-[0.2em] text-[#0F2744]/60 uppercase block">CORE RIGIDITY</span>
-                    <span className="text-xs font-semibold text-[#0F2744] truncate block">1200+ GSM Board</span>
-                  </div>
-                </div>
-                <div className="bg-[#F6F0E8] border border-[#C7A86A]/20 rounded-lg p-3.5 flex items-center">
-                  <div className="min-w-0">
-                    <span className="text-[9px] font-bold tracking-[0.2em] text-[#0F2744]/60 uppercase block">BESPOKE EMBELLISH</span>
-                    <span className="text-xs font-semibold text-[#0F2744] truncate block">Foil & 3D Crest</span>
+                  <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-none snap-x w-full">
+                    {model.materials.map((mat) => {
+                      const isSelected = activeMaterialId === mat.id;
+                      return (
+                        <button
+                          key={mat.id}
+                          type="button"
+                          onClick={() => handleMaterialSelect(mat.id)}
+                          aria-label={`Select ${mat.name} material`}
+                          className={`flex items-center gap-2 px-2.5 py-1.5 rounded-lg border shrink-0 snap-start cursor-pointer transition-all duration-200 ${
+                            isSelected
+                              ? "border-[#C7A86A] bg-[#F6F0E8] ring-1 ring-[#C7A86A]/60 shadow-xs"
+                              : "border-[#0F2744]/15 bg-white hover:border-[#C7A86A]/50"
+                          }`}
+                        >
+                          <div className="h-7 w-7 rounded overflow-hidden border border-[#0F2744]/10 bg-[#F6F0E8] shrink-0">
+                            <img
+                              src={mat.image}
+                              alt={mat.name}
+                              className="h-full w-full object-cover"
+                              loading="lazy"
+                            />
+                          </div>
+                          <span className={`text-[11px] whitespace-nowrap ${isSelected ? "text-[#0F2744] font-semibold" : "text-[#0F2744]/80 font-medium"}`}>
+                            {mat.name}
+                          </span>
+                        </button>
+                      );
+                    })}
                   </div>
                 </div>
               </div>
@@ -271,14 +309,44 @@ Selected Specs:
               {/* SECTION 1: AVAILABLE SIZES */}
               <div className="w-full mb-6">
                 <div className="flex justify-between items-baseline mb-2.5">
-                  <h3 className="text-xs font-semibold text-[#0F2744] tracking-[0.2em] uppercase">
+                  <label htmlFor="mobile-size-select" className="text-xs font-semibold text-[#0F2744] tracking-[0.2em] uppercase">
                     AVAILABLE SIZES
-                  </h3>
+                  </label>
                   <span className="text-[11px] text-[#C7A86A] font-semibold font-mono">
                     Selected: {activeSize?.dimensions}
                   </span>
                 </div>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 w-full max-h-56 overflow-y-auto pr-1">
+
+                {/* Mobile View (<md): Premium Minimal Dropdown */}
+                <div className="block md:hidden w-full">
+                  <div className="relative w-full">
+                    <select
+                      id="mobile-size-select"
+                      value={activeSizeIdx}
+                      onChange={(e) => setActiveSizeIdx(Number(e.target.value))}
+                      aria-label="Select Available Size"
+                      className="w-full appearance-none bg-[#FAF8F5] border border-[#C7A86A]/30 text-[#0F2744] text-xs font-medium py-3 pl-3.5 pr-10 rounded-[10px] focus:outline-none focus:ring-1 focus:ring-[#C7A86A] focus:border-[#C7A86A] transition-all duration-200 cursor-pointer shadow-2xs"
+                    >
+                      {model.sizes.map((size, idx) => {
+                        const labelText =
+                          size.label && size.label !== size.dimensions
+                            ? `${size.dimensions} — ${size.label}`
+                            : size.dimensions;
+                        return (
+                          <option key={idx} value={idx} className="bg-white text-[#0F2744]">
+                            {labelText}
+                          </option>
+                        );
+                      })}
+                    </select>
+                    <div className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 flex items-center text-[#0F2744]/70">
+                      <ChevronDown className="h-4 w-4 text-[#0F2744]" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Desktop & Tablet View (md+): Grid Selector */}
+                <div className="hidden md:grid grid-cols-2 sm:grid-cols-3 gap-2 w-full max-h-56 overflow-y-auto pr-1">
                   {model.sizes.map((size, idx) => (
                     <button
                       key={idx}
@@ -302,6 +370,8 @@ Selected Specs:
                     </button>
                   ))}
                 </div>
+
+                {/* Active Size Description */}
                 {activeSize?.description && (
                   <p className="mt-2 text-[11px] text-[#0F2744]/70 italic">
                     {activeSize.description}
@@ -309,8 +379,8 @@ Selected Specs:
                 )}
               </div>
 
-              {/* SECTION 2: MATERIAL & TEXTURE */}
-              <div className="w-full mb-6">
+              {/* SECTION 2: MATERIAL & TEXTURE (Desktop only; Mobile is positioned below gallery) */}
+              <div className="hidden md:block w-full mb-6">
                 <div className="flex justify-between items-baseline mb-2.5">
                   <h3 className="text-xs font-semibold text-[#0F2744] tracking-[0.2em] uppercase">
                     MATERIAL & TEXTURE

@@ -11,7 +11,7 @@ export const COLLECTION_CATEGORIES: Record<
     title: "Paper Bags",
     short: "Heavyweight paper bags with custom cotton ribbon handles and foil-stamped branding.",
     long: "Bespoke retail carriers and boutique paper bags crafted from coloured-through pulp, specialty stocks, and luxury finishes.",
-    image: "/assets/allimages.jpeg",
+    image: "/assets/papercollct.jpeg",
     href: "/paperbags",
   },
   "jewellery-collection": {
@@ -47,7 +47,7 @@ export const COLLECTION_CATEGORIES: Record<
     short: "Limited-run packaging for festive drops and campaign moments.",
     long: "Seasonal packaging programmes — festive prints, campaign colourways and limited-edition finishes produced to a fixed calendar so your drops always land on time.",
     image: "/assets/imagesec.jpeg",
-    href: "/collections/seasonal-collection",
+    href: "/boxes",
   },
   "pouches": {
     title: "Fabric Pouches",

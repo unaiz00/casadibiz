@@ -183,14 +183,14 @@ export default function CorporateCollectionPage() {
               </h2>
             </div>
 
-            {/* Desktop: 2x2 Grid (32px x 40px gap) | Mobile: Single Column (24px gap) */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 sm:gap-y-8 md:gap-x-8 md:gap-y-10 lg:gap-x-8 lg:gap-y-12">
+            {/* Desktop: 4 Columns (lg: 1024px+) | Tablet: 2 Columns | Mobile: 1 Column */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
               {CORPORATE_PRODUCTS.map((product, i) => (
                 <Link
                   key={product.id}
                   href={product.href}
-                  className="group flex flex-col rounded-2xl sm:rounded-[24px] md:rounded-[28px] bg-white border border-[#0F2744]/[0.08] hover:border-[#C7A86A]/60 overflow-hidden shadow-[0_4px_20px_rgba(15,39,68,0.03)] hover:shadow-[0_12px_32px_rgba(15,39,68,0.07)] transition-all duration-500 animate-fade-up"
-                  style={{ animationDelay: `${i * 0.08}s` }}
+                  className="group flex flex-col h-full rounded-[16px] sm:rounded-[18px] bg-white border border-[#0F2744]/[0.08] hover:border-[#C7A86A]/60 overflow-hidden shadow-[0_3px_14px_rgba(15,39,68,0.03)] hover:shadow-[0_8px_22px_rgba(15,39,68,0.06)] transition-all duration-500 animate-fade-up"
+                  style={{ animationDelay: `${i * 0.05}s` }}
                 >
                   {/* Product Image */}
                   <div className="relative overflow-hidden aspect-square bg-white w-full border-b border-[#0F2744]/[0.06]">
@@ -198,42 +198,42 @@ export default function CorporateCollectionPage() {
                       src={product.image}
                       alt={product.title}
                       loading="lazy"
-                      className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+                      className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                     />
-                    <div className="absolute bottom-3.5 right-3.5 sm:bottom-4 sm:right-4 h-9 w-9 sm:h-10 sm:w-10 rounded-full bg-[#FAF8F5]/90 backdrop-blur-md border border-[#0F2744]/10 text-[#0F2744] flex items-center justify-center shadow-sm group-hover:bg-[#0F2744] group-hover:text-[#FAF8F5] group-hover:border-[#0F2744] transition-all duration-300">
-                      <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+                    <div className="absolute bottom-2.5 right-2.5 sm:bottom-3 sm:right-3 h-8 w-8 rounded-full bg-[#FAF8F5]/90 backdrop-blur-md border border-[#0F2744]/10 text-[#0F2744] flex items-center justify-center shadow-sm group-hover:bg-[#0F2744] group-hover:text-[#FAF8F5] group-hover:border-[#0F2744] transition-all duration-300">
+                      <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
                     </div>
                   </div>
 
                   {/* Product Content Section */}
-                  <div className="p-5 sm:p-6 md:p-7 flex-1 flex flex-col justify-between bg-white">
+                  <div className="p-4 sm:p-4.5 lg:p-5 flex-1 flex flex-col justify-between bg-white">
                     <div>
-                      <span className="text-[10px] tracking-[0.24em] font-semibold text-[#C7A86A] uppercase block mb-1">
+                      <span className="text-[9.5px] sm:text-[10px] tracking-[0.22em] font-semibold text-[#C7A86A] uppercase block mb-1">
                         {product.subtitle}
                       </span>
-                      <h3 className="font-display font-serif text-xl sm:text-2xl lg:text-[26px] text-[#0F2744] leading-snug group-hover:text-[#C7A86A] transition-colors duration-300">
+                      <h3 className="font-display font-serif text-lg sm:text-xl text-[#0F2744] leading-snug group-hover:text-[#C7A86A] transition-colors duration-300">
                         {product.title}
                       </h3>
-                      <p className="mt-2.5 text-xs sm:text-sm text-[#0F2744]/75 leading-relaxed font-sans">
+                      <p className="mt-2 text-xs sm:text-[13px] text-[#0F2744]/75 leading-relaxed font-sans line-clamp-3">
                         {product.description}
                       </p>
                     </div>
 
                     {/* Features Badges & CTA */}
-                    <div className="mt-5 pt-4 border-t border-[#0F2744]/[0.08] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                      <div className="flex flex-wrap gap-1.5">
-                        {product.highlights.slice(0, 2).map((h, hIdx) => (
+                    <div className="mt-4 pt-3.5 border-t border-[#0F2744]/[0.08] flex items-center justify-between gap-2">
+                      <div className="flex flex-wrap gap-1">
+                        {product.highlights.slice(0, 1).map((h, hIdx) => (
                           <span
                             key={hIdx}
-                            className="inline-block px-2.5 py-1 text-[10px] font-medium tracking-wider text-[#0F2744]/70 bg-[#F6F0E8] rounded-md"
+                            className="inline-block px-2 py-0.5 text-[9.5px] font-medium tracking-wider text-[#0F2744]/70 bg-[#F6F0E8] rounded"
                           >
                             {h}
                           </span>
                         ))}
                       </div>
-                      <span className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs tracking-[0.2em] font-sans font-semibold text-[#C7A86A] uppercase group-hover:text-[#0F2744] transition-colors duration-300 shrink-0">
+                      <span className="inline-flex items-center gap-1 text-[10.5px] sm:text-[11px] tracking-[0.18em] font-sans font-semibold text-[#C7A86A] uppercase group-hover:text-[#0F2744] transition-colors duration-300 shrink-0">
                         VIEW DETAILS
-                        <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1 text-[#C7A86A] group-hover:text-[#0F2744]" />
+                        <ArrowRight className="h-3 w-3 sm:h-3.5 sm:w-3.5 transition-transform duration-300 group-hover:translate-x-1 text-[#C7A86A] group-hover:text-[#0F2744]" />
                       </span>
                     </div>
                   </div>

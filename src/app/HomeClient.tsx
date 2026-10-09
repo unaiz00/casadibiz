@@ -3,6 +3,7 @@
 import Link from "next/link";
 import {
   ArrowRight,
+  ArrowUpRight,
   Instagram, Linkedin, Mail, Phone, MapPin, MessageCircle,
 } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -310,9 +311,10 @@ function Statement() {
               </p>
               <Link
                 href="/about"
-                className="inline-flex items-center gap-1 text-[11px] font-medium tracking-[2px] text-navy uppercase hover:text-gold transition duration-300"
+                className="inline-flex items-center justify-center gap-2 bg-[#0F2744] hover:bg-[#18365B] text-white text-[11px] sm:text-xs tracking-[0.2em] font-semibold uppercase px-4.5 py-2.5 sm:px-5 sm:py-3 rounded-[3px] transition-colors duration-300 w-fit"
               >
-                DISCOVER OUR CRAFT <span className="text-gold ml-1">→</span>
+                <span>DISCOVER OUR CRAFT</span>
+                <ArrowUpRight className="h-3.5 w-3.5 text-[#C7A86A]" />
               </Link>
             </div>
           </div>

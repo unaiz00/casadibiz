@@ -22,7 +22,7 @@ type NavLink = { label: string; href: string; hasChevron?: boolean };
 const NAV_LINKS: NavLink[] = [
   { label: "Home", href: "/" },
   { label: "Products", href: "/#products", hasChevron: true },
-  { label: "About Us", href: "/#about" },
+  { label: "About Us", href: "/about" },
   { label: "Collections", href: "/collections" },
   { label: "Contact", href: "/contact" },
 ];
@@ -321,8 +321,8 @@ export function SiteFooter() {
     {
       title: "COMPANY",
       items: [
-        { label: "About Us", href: "/#about" },
-        { label: "Our Process", href: "/#about" },
+        { label: "About Us", to: "/about" },
+        { label: "Our Process", to: "/about" },
       ],
     },
     {
@@ -407,9 +407,9 @@ export function SiteFooter() {
           </ul>
         </div>
       </div>
-      <div className="bg-navy text-cream/80">
-        <div className="mx-auto max-w-7xl px-6 py-5 text-center text-xs tracking-wider">
-          © 2024 CASA DI BIZ. All Rights Reserved.
+      <div className="bg-navy text-gold">
+        <div className="mx-auto max-w-7xl px-6 py-5 text-center text-xs tracking-wider text-gold">
+          © CASA DI BIZ. All Rights Reserved.
         </div>
       </div>
     </footer>
