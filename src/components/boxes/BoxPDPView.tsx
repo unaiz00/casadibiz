@@ -93,6 +93,43 @@ export default function BoxPDPView({ model, relatedModels }: BoxPDPViewProps) {
     }
   };
 
+  // Thumbnail / image navigation handler (synchronises selected material if mapped)
+  const handleImageSelect = (idx: number) => {
+    setActiveImageIdx(idx);
+    const img = model.images[idx];
+    if (!img) return;
+
+    if (model.materialImages) {
+      const matchedEntry = Object.entries(model.materialImages).find(
+        ([_, src]) => src === img.src
+      );
+      if (matchedEntry && model.materials.some((m) => m.id === matchedEntry[0])) {
+        setActiveMaterialId(matchedEntry[0]);
+        return;
+      }
+    }
+
+    for (const mat of model.materials) {
+      const searchTerms = [
+        mat.id.toLowerCase().replace(/-/g, " "),
+        mat.id.toLowerCase().replace(/-/g, ""),
+        mat.name.toLowerCase(),
+      ];
+      const alt = (img.alt || "").toLowerCase();
+      const src = (img.src || "").toLowerCase();
+      const label = (img.label || "").toLowerCase();
+      if (
+        searchTerms.some(
+          (term) =>
+            alt.includes(term) || src.includes(term.replace(/\s+/g, "")) || label.includes(term)
+        )
+      ) {
+        setActiveMaterialId(mat.id);
+        break;
+      }
+    }
+  };
+
   // Dynamic WhatsApp prefill message
   const whatsappMsg = `Hello CASA DI BIZ, I would like to request a quote for the ${model.name}.
 Selected Specs:
@@ -112,10 +149,10 @@ Selected Specs:
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") setLightboxOpen(false);
       if (e.key === "ArrowRight") {
-        setActiveImageIdx((prev) => (prev + 1) % model.images.length);
+        handleImageSelect((activeImageIdx + 1) % model.images.length);
       }
       if (e.key === "ArrowLeft") {
-        setActiveImageIdx((prev) => (prev - 1 + model.images.length) % model.images.length);
+        handleImageSelect((activeImageIdx - 1 + model.images.length) % model.images.length);
       }
     };
     window.addEventListener("keydown", handleKeyDown);
@@ -125,7 +162,7 @@ Selected Specs:
       window.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = prevOverflow;
     };
-  }, [lightboxOpen, model.images.length]);
+  }, [lightboxOpen, model.images.length, activeImageIdx]);
 
   const breadcrumbItems = [
     { label: "Home", to: "/" },
@@ -179,7 +216,7 @@ Selected Specs:
                     <button
                       key={idx}
                       type="button"
-                      onClick={() => setActiveImageIdx(idx)}
+                      onClick={() => handleImageSelect(idx)}
                       aria-label={`View ${img.alt || `product image ${idx + 1}`}`}
                       className={`group relative aspect-square rounded-lg overflow-hidden border transition-all duration-300 cursor-pointer bg-white ${
                         activeImageIdx === idx
@@ -221,7 +258,7 @@ Selected Specs:
                     <button
                       key={idx}
                       type="button"
-                      onClick={() => setActiveImageIdx(idx)}
+                      onClick={() => handleImageSelect(idx)}
                       aria-label={`View ${img.alt || `product image ${idx + 1}`}`}
                       className={`relative h-16 w-16 sm:h-20 sm:w-20 rounded-lg overflow-hidden border transition-all duration-300 shrink-0 snap-start cursor-pointer bg-white ${
                         activeImageIdx === idx
@@ -795,7 +832,7 @@ Selected Specs:
               <button
                 type="button"
                 onClick={() =>
-                  setActiveImageIdx((prev) => (prev - 1 + model.images.length) % model.images.length)
+                  handleImageSelect((activeImageIdx - 1 + model.images.length) % model.images.length)
                 }
                 aria-label="Previous image"
                 className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-50 h-10 w-10 sm:h-11 sm:w-11 rounded-full bg-[#FAF8F5] text-[#0F2744] flex items-center justify-center border border-[#C7A86A]/30 hover:bg-[#C7A86A] hover:text-[#0F2744] transition-all duration-300 cursor-pointer shadow-xs"
@@ -805,7 +842,7 @@ Selected Specs:
               <button
                 type="button"
                 onClick={() =>
-                  setActiveImageIdx((prev) => (prev + 1) % model.images.length)
+                  handleImageSelect((activeImageIdx + 1) % model.images.length)
                 }
                 aria-label="Next image"
                 className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-50 h-10 w-10 sm:h-11 sm:w-11 rounded-full bg-[#FAF8F5] text-[#0F2744] flex items-center justify-center border border-[#C7A86A]/30 hover:bg-[#C7A86A] hover:text-[#0F2744] transition-all duration-300 cursor-pointer shadow-xs"
