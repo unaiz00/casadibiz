@@ -22,7 +22,7 @@ const PRODUCT_LINKS: NavLink[] = [
   { label: "Wraps", href: "/wraps" },
   { label: "Ribbons", href: "/ribbons" },
   { label: "Collections", href: "/collections" },
-  { label: "Gifting Essentials", href: "/gifting" },
+  { label: "Gifting Essentials", href: "/collections/corporate-collection" },
 ];
 
 export function SiteHeader() {

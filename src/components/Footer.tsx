@@ -15,7 +15,7 @@ export function SiteFooter() {
         { label: "Wraps", to: "/wraps" },
         { label: "Ribbons", to: "/ribbons" },
         { label: "Collections", to: "/collections" },
-        { label: "Gifting Essentials", to: "/gifting" },
+        { label: "Gifting Essentials", to: "/collections/corporate-collection" },
       ],
     },
     {

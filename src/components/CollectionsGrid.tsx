@@ -65,7 +65,7 @@ const DEFAULT_COLLECTIONS: CollectionItem[] = [
     textColor: "text-[#F6F0E8]",
     btnBg: "bg-[#C7A86A] hover:bg-[#b09156]",
     btnText: "text-[#0F2744]",
-    href: "/gifting",
+    href: "/collections/corporate-collection",
   },
 ];
 

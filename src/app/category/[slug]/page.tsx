@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 
 const CATEGORIES: Record<string, { title: string; description: string }> = {
@@ -37,6 +38,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function CategoryPage({ params }: Props) {
   const { slug } = await params;
+  if (slug === "gifting-essentials") {
+    redirect("/collections/corporate-collection");
+  }
   const c = CATEGORIES[slug] ?? { title: "Category", description: "Luxury packaging by CASA DI BIZ." };
   return (
     <div className="min-h-screen bg-ivory">

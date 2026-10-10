@@ -164,7 +164,7 @@ function Categories() {
             if (slug === "wraps") return <Link key={label} href="/wraps" className={cls}>{inner}</Link>;
             if (slug === "ribbons") return <Link key={label} href="/ribbons" className={cls}>{inner}</Link>;
             if (slug === "collections") return <Link key={label} href="/collections" className={cls}>{inner}</Link>;
-            if (slug === "gifting-essentials") return <Link key={label} href="/gifting" className={cls}>{inner}</Link>;
+            if (slug === "gifting-essentials") return <Link key={label} href="/collections/corporate-collection" className={cls}>{inner}</Link>;
             return <Link key={label} href={`/category/${slug}`} className={cls}>{inner}</Link>;
 
           })}

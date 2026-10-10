@@ -34,7 +34,7 @@ const PRODUCT_LINKS: NavLink[] = [
   { label: "Wraps", href: "/wraps" },
   { label: "Ribbons", href: "/ribbons" },
   { label: "Collections", href: "/collections" },
-  { label: "Gifting Essentials", href: "/gifting" },
+  { label: "Gifting Essentials", href: "/collections/corporate-collection" },
 ];
 
 export function SiteHeader() {
@@ -315,7 +315,7 @@ export function SiteFooter() {
         { label: "Wraps", to: "/wraps" },
         { label: "Ribbons", to: "/ribbons" },
         { label: "Collections", to: "/collections" },
-        { label: "Gifting Essentials", to: "/gifting" },
+        { label: "Gifting Essentials", to: "/collections/corporate-collection" },
       ],
     },
     {
