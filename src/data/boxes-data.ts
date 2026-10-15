@@ -37,6 +37,7 @@ export interface BoxModel {
   heroHeadline: string;
   images: BoxImage[];
   materialImages?: Record<string, string>;
+  finishImages?: Record<string, string>;
   sizes: BoxSize[];
   materials: BoxMaterialOption[];
   finishes: BoxFinishOption[];
@@ -107,31 +108,51 @@ export const BOX_MATERIAL_REGISTRY: Record<string, BoxMaterialOption> = {
   },
   "brown-crocodile": {
     id: "brown-crocodile",
-    name: "Brown Crocodile Texture",
-    // TEMPORARY PLACEHOLDER — replace with dedicated material image later
-    image: "/assets/materials/leather.png",
+    name: "Crocodile Texture",
+    image: "/assets/materials/Luxurious Brown Crocodile Leather Texture.png",
     description: "Embossed exotic crocodile relief leatherette with distinctive luxury grain.",
   },
   "matt-grey-paint": {
     id: "matt-grey-paint",
     name: "Matt Grey Paint",
-    // TEMPORARY PLACEHOLDER — replace with dedicated material image later
-    image: "/assets/materials/whitepaper.png",
+    image: "/assets/materials/Curled Matte Gray Material Wave.png",
     description: "Sleek contemporary lacquer-coated surface with smooth architectural finish.",
   },
   "hairy-velvet": {
     id: "hairy-velvet",
     name: "Hairy Velvet",
-    // TEMPORARY PLACEHOLDER — replace with dedicated material image later
-    image: "/assets/materials/velvet.png",
+    image: "/assets/materials/hairy_velvet.png",
     description: "High-density long-pile velvet delivering dramatic visual richness.",
   },
   "soft-touch": {
     id: "soft-touch",
-    name: "Cartier / Soft Touch",
-    // TEMPORARY PLACEHOLDER — replace with dedicated material image later
-    image: "/assets/materials/microfiber.png",
+    name: "Soft Touch",
+    image: "/assets/materials/specialsoft.png",
     description: "Fine nappa soft-touch leatherette with ultra-smooth tactile feel.",
+  },
+  "premium-microfiber": {
+    id: "premium-microfiber",
+    name: "Premium Microfiber",
+    image: "/assets/materials/premium_micro_fiber.png",
+    description: "Ultra-fine Italian microfiber offering plush handfeel and elevated luxury longevity.",
+  },
+  "glossy-navy": {
+    id: "glossy-navy",
+    name: "Glossy Navy Blue",
+    image: "/assets/materials/Glossy Navy Blue Fold.png",
+    description: "High-gloss polished lacquer coating delivering a deep navy architectural luster.",
+  },
+  "premium-suede": {
+    id: "premium-suede",
+    name: "Premium Suede",
+    image: "/assets/materials/premium_suede.png",
+    description: "Ultra-soft micro-brushed suede delivering anti-scratch protection and tactile warmth.",
+  },
+  "ribbed-texture": {
+    id: "ribbed-texture",
+    name: "Ribbed Texture",
+    image: "/assets/materials/Ribbed Texture Fold.png",
+    description: "Structured ribbed tactile paper weave delivering depth and modern texture.",
   },
 };
 
@@ -143,6 +164,73 @@ export const STANDARD_BOX_MATERIALS: BoxMaterialOption[] = [
   BOX_MATERIAL_REGISTRY.leatherette,
   BOX_MATERIAL_REGISTRY["special-paper"],
   BOX_MATERIAL_REGISTRY["textured-paper"],
+];
+
+// Dedicated Ring Box Materials (includes core catalogue materials + newly added textures)
+export const RING_BOX_MATERIALS: BoxMaterialOption[] = [
+  BOX_MATERIAL_REGISTRY["hairy-velvet"],
+  BOX_MATERIAL_REGISTRY["premium-suede"],
+  BOX_MATERIAL_REGISTRY.microfiber,
+  BOX_MATERIAL_REGISTRY["premium-microfiber"],
+  BOX_MATERIAL_REGISTRY.leatherette,
+  BOX_MATERIAL_REGISTRY["special-paper"],
+  BOX_MATERIAL_REGISTRY["brown-crocodile"],
+  BOX_MATERIAL_REGISTRY["glossy-navy"],
+  BOX_MATERIAL_REGISTRY["matt-grey-paint"],
+  BOX_MATERIAL_REGISTRY["soft-touch"],
+  BOX_MATERIAL_REGISTRY["ribbed-texture"],
+];
+
+// Dedicated Bangle Box Materials (all 8 available exterior material/finish options)
+export const BANGLE_BOX_MATERIALS: BoxMaterialOption[] = [
+  {
+    id: "matt-grey-paint",
+    name: "Matt Grey Paint",
+    image: "/assets/bangle/bangle__matt grey_paint.jpeg",
+    description: "Sleek contemporary lacquer-coated surface with smooth architectural finish.",
+  },
+  {
+    id: "crocodile",
+    name: "Crocodile",
+    image: "/assets/bangle/bangle_crocodile.jpeg",
+    description: "Embossed exotic crocodile relief leatherette with distinctive luxury grain.",
+  },
+  {
+    id: "suede",
+    name: "Suede",
+    image: "/assets/bangle/bangle_suede.jpeg",
+    description: "Soft micro-suede delivering refined matte elegance and anti-scratch protection.",
+  },
+  {
+    id: "microfiber",
+    name: "Microfiber",
+    image: "/assets/bangle/bangle_microfiber.jpeg",
+    description: "Ultra-fine weave Italian microfiber offering modern luxury and longevity.",
+  },
+  {
+    id: "premium-microfiber",
+    name: "Premium Microfiber",
+    image: "/assets/bangle/premium_microfiber_bangle.jpeg",
+    description: "Ultra-fine Italian microfiber offering plush handfeel and elevated luxury longevity.",
+  },
+  {
+    id: "blue-glossy",
+    name: "Blue Glossy",
+    image: "/assets/bangle/bangle_blueglossy.jpeg",
+    description: "High-gloss polished lacquer coating delivering a deep navy architectural luster.",
+  },
+  {
+    id: "hairy-velvet",
+    name: "Hairy Velvet",
+    image: "/assets/bangle/bangle_hairyvelvet.jpeg",
+    description: "High-density long-pile velvet delivering dramatic visual richness.",
+  },
+  {
+    id: "special-premium-texture",
+    name: "Special Premium Texture",
+    image: "/assets/bangle/bangle__special_premium_texture.jpeg",
+    description: "Fine relief textured surface delivering elevated tactile depth and modern aesthetics.",
+  },
 ];
 
 // Supported Catalogue Finishes
@@ -158,8 +246,8 @@ export const STANDARD_BOX_FINISHES: BoxFinishOption[] = [
     description: "Precision silver hot foil stamping for a clean, cool metallic signature.",
   },
   {
-    id: "blind-embossed",
-    name: "Blind Embossing",
+    id: "blind-debossed",
+    name: "Blind Debossing",
     description: "Deep dimensional debossing without foil, highlighting the natural material texture.",
   },
   {
@@ -167,17 +255,9 @@ export const STANDARD_BOX_FINISHES: BoxFinishOption[] = [
     name: "Metallic Sticker",
     description: "Electroformed gold or nickel-silver micro-metal relief crest badge adhered flush.",
   },
-  {
-    id: "screen-printing",
-    name: "Screen Printing",
-    description: "Crisp multi-pigment silkscreen branding for intricate line art and typography.",
-  },
-  {
-    id: "debossing",
-    name: "Debossing",
-    description: "Precision recessed impression stamped directly into the rigid core structure.",
-  },
 ];
+
+export const RING_BOX_FINISHES: BoxFinishOption[] = STANDARD_BOX_FINISHES;
 
 export const BOX_CATEGORIES_DATA: Record<string, BoxCategory> = {
   "ring-boxes": {
@@ -260,30 +340,37 @@ export const BOX_MODELS_DATA: Record<string, BoxModel> = {
     shortDescription: "Bespoke jewellery packaging designed for ring presentation across multiple catalogue dimensions.",
     longDescription: "Hand-crafted bespoke ring box engineered with anti-tarnish interior linings, precision-hinged rigid structure, and tailored ring inserts. Available across a comprehensive range of catalogue dimensions to match your brand requirements.",
     images: [
-      { src: "/assets/ring/ring_hairyvelvet.jpeg", alt: "CASA DI BIZ Ring Box - Velvet Edition" },
-      { src: "/assets/ring/ring_suede.jpeg", alt: "CASA DI BIZ Ring Box - Suede Edition" },
-      { src: "/assets/ring/ring_microfiber.jpeg", alt: "CASA DI BIZ Ring Box - Microfiber Edition" },
-      { src: "/assets/ring/ring_premium_leather.jpeg", alt: "CASA DI BIZ Ring Box - Premium Leatherette Edition" },
-      { src: "/assets/ring/premiumpaper_suede_ring.jpeg", alt: "CASA DI BIZ Ring Box - Special Paper Edition" },
-      { src: "/assets/ring/ring_special_premium_texture.jpeg", alt: "CASA DI BIZ Ring Box - Textured Paper Edition" },
-      { src: "/assets/ring/premium_microfiber_ring.jpeg", alt: "CASA DI BIZ Ring Box - Premium Microfiber Edition" },
-      { src: "/assets/ring/ring_blueglossy.jpeg", alt: "CASA DI BIZ Ring Box - Glossy Lacquer Edition" },
-      { src: "/assets/ring/ring_crocodile.jpeg", alt: "CASA DI BIZ Ring Box - Crocodile Texture Edition" },
-      { src: "/assets/ring/ring_blue_crocodile.jpeg", alt: "CASA DI BIZ Ring Box - Blue Crocodile Edition" },
-      { src: "/assets/ring/ring_matt grey_paint.jpeg", alt: "CASA DI BIZ Ring Box - Matt Grey Paint Edition" },
-      { src: "/assets/ring/ring_specialsoft.jpeg", alt: "CASA DI BIZ Ring Box - Soft Touch Edition" },
+      { src: "/assets/ring/ring_hairyvelvet.jpeg", alt: "CASA DI BIZ Ring Box - Hairy Velvet Edition", label: "Hairy Velvet" },
+      { src: "/assets/ring/ring_suede.jpeg", alt: "CASA DI BIZ Ring Box - Premium Suede Edition", label: "Premium Suede" },
+      { src: "/assets/ring/ring_microfiber.jpeg", alt: "CASA DI BIZ Ring Box - Microfiber Edition", label: "Microfiber" },
+      { src: "/assets/ring/ring_premium_leather.jpeg", alt: "CASA DI BIZ Ring Box - Premium Leatherette Edition", label: "Leatherette" },
+      { src: "/assets/ring/premiumpaper_suede_ring.jpeg", alt: "CASA DI BIZ Ring Box - Special Paper Edition", label: "Special Paper" },
+      { src: "/assets/ring/ring_special_premium_texture.jpeg", alt: "CASA DI BIZ Ring Box - Ribbed Texture Edition", label: "Ribbed Texture" },
+      { src: "/assets/ring/premium_microfiber_ring.jpeg", alt: "CASA DI BIZ Ring Box - Premium Microfiber Edition", label: "Premium Microfiber" },
+      { src: "/assets/ring/ring_blueglossy.jpeg", alt: "CASA DI BIZ Ring Box - Glossy Lacquer Edition", label: "Glossy Navy Blue" },
+      { src: "/assets/ring/ring_crocodile.jpeg", alt: "CASA DI BIZ Ring Box - Crocodile Texture Edition", label: "Crocodile Texture" },
+      { src: "/assets/ring/ring_blue_crocodile.jpeg", alt: "CASA DI BIZ Ring Box - Blue Crocodile Edition", label: "Blue Crocodile" },
+      { src: "/assets/ring/ring_matt grey_paint.jpeg", alt: "CASA DI BIZ Ring Box - Matt Grey Paint Edition", label: "Matt Grey Paint" },
+      { src: "/assets/ring/ring_specialsoft.jpeg", alt: "CASA DI BIZ Ring Box - Soft Touch Edition", label: "Soft Touch" },
     ],
     materialImages: {
-      velvet: "/assets/ring/ring_hairyvelvet.jpeg",
-      suede: "/assets/ring/ring_suede.jpeg",
+      "hairy-velvet": "/assets/ring/ring_hairyvelvet.jpeg",
+      "premium-suede": "/assets/ring/ring_suede.jpeg",
       microfiber: "/assets/ring/ring_microfiber.jpeg",
       leatherette: "/assets/ring/ring_premium_leather.jpeg",
       "special-paper": "/assets/ring/premiumpaper_suede_ring.jpeg",
-      "textured-paper": "/assets/ring/ring_special_premium_texture.jpeg",
+      "ribbed-texture": "/assets/ring/ring_special_premium_texture.jpeg",
+      "premium-microfiber": "/assets/ring/premium_microfiber_ring.jpeg",
+      "glossy-navy": "/assets/ring/ring_blueglossy.jpeg",
       "brown-crocodile": "/assets/ring/ring_crocodile.jpeg",
       "matt-grey-paint": "/assets/ring/ring_matt grey_paint.jpeg",
-      "hairy-velvet": "/assets/ring/ring_hairyvelvet.jpeg",
       "soft-touch": "/assets/ring/ring_specialsoft.jpeg",
+    },
+    finishImages: {
+      "blind-debossed": "/assets/ring/ring_hairyvelvet.jpeg",
+      "metallic-sticker": "/assets/ring/ring_matt grey_paint.jpeg",
+      "silver-foiling": "/assets/ring/ring_blueglossy.jpeg",
+      "gold-foiling": "/assets/ring/ring_special_premium_texture.jpeg",
     },
     sizes: [
       { label: "5.5 × 5.5 × 5 cm", dimensions: "5.5 × 5.5 × 5 cm", description: "Standard Solitaire & Petite Ring Size" },
@@ -301,8 +388,8 @@ export const BOX_MODELS_DATA: Record<string, BoxModel> = {
       { label: "8 × 8 × 6 cm", dimensions: "8 × 8 × 6 cm", description: "Wide Band & Twin Ring Size" },
       { label: "10 × 10 × 8 cm", dimensions: "10 × 10 × 8 cm", description: "Statement / Multi-Ring Grand Size" },
     ],
-    materials: STANDARD_BOX_MATERIALS,
-    finishes: STANDARD_BOX_FINISHES,
+    materials: RING_BOX_MATERIALS,
+    finishes: RING_BOX_FINISHES,
     specifications: {
       outerMaterial: "Available in multiple material options",
       innerMaterial: "Anti-Tarnish Certified Suede / Microfiber",
@@ -322,7 +409,7 @@ export const BOX_MODELS_DATA: Record<string, BoxModel> = {
     customisationFeatures: [
       { title: "Custom Dimensions", description: "Manufactured to exact jewel height and band specifications." },
       { title: "Material & Colour", description: "Customised to your exact brand palette and texture requirements." },
-      { title: "Branding Finishes", description: "Gold foiling, silver foiling, blind embossing, or 3D metal crests." },
+      { title: "Branding Finishes", description: "Gold foiling, silver foiling, blind debossing, or 3D metal crests." },
     ],
     faqs: [
       { q: "Can we order custom sizes not listed above?", a: "Yes, bespoke tooling and custom mold dimensions can be manufactured for your brand." },
@@ -597,25 +684,24 @@ export const BOX_MODELS_DATA: Record<string, BoxModel> = {
     shortDescription: "Structured boxes featuring central pillar supports engineered for single, pair, and stacking bangles.",
     longDescription: "Hand-crafted bespoke bangle box engineered with custom circular roll bolsters, rigid framework, and anti-tarnish micro-suede linings.",
     images: [
-      { src: "/assets/bangle/bangle_hairyvelvet.jpeg", alt: "CASA DI BIZ Bangle Box - Velvet Edition" },
-      { src: "/assets/bangle/bangle_suede.jpeg", alt: "CASA DI BIZ Bangle Box - Suede Edition" },
-      { src: "/assets/bangle/bangle_microfiber.jpeg", alt: "CASA DI BIZ Bangle Box - Microfiber Edition" },
-      { src: "/assets/bangle/bangle_crocodile.jpeg", alt: "CASA DI BIZ Bangle Box - Crocodile Texture Edition" },
-      { src: "/assets/bangle/premium_microfiber_bangle.jpeg", alt: "CASA DI BIZ Bangle Box - Special Paper Edition" },
-      { src: "/assets/bangle/bangle__special_premium_texture.jpeg", alt: "CASA DI BIZ Bangle Box - Textured Paper Edition" },
-      { src: "/assets/bangle/bangle_blueglossy.jpeg", alt: "CASA DI BIZ Bangle Box - Glossy Lacquer Edition" },
-      { src: "/assets/bangle/bangle__matt grey_paint.jpeg", alt: "CASA DI BIZ Bangle Box - Matt Grey Paint Edition" },
+      { src: "/assets/bangle/bangle__matt grey_paint.jpeg", alt: "CASA DI BIZ Bangle Box - Matt Grey Paint", label: "Matt Grey Paint" },
+      { src: "/assets/bangle/bangle_crocodile.jpeg", alt: "CASA DI BIZ Bangle Box - Crocodile", label: "Crocodile" },
+      { src: "/assets/bangle/bangle_suede.jpeg", alt: "CASA DI BIZ Bangle Box - Suede", label: "Suede" },
+      { src: "/assets/bangle/bangle_microfiber.jpeg", alt: "CASA DI BIZ Bangle Box - Microfiber", label: "Microfiber" },
+      { src: "/assets/bangle/premium_microfiber_bangle.jpeg", alt: "CASA DI BIZ Bangle Box - Premium Microfiber", label: "Premium Microfiber" },
+      { src: "/assets/bangle/bangle_blueglossy.jpeg", alt: "CASA DI BIZ Bangle Box - Blue Glossy", label: "Blue Glossy" },
+      { src: "/assets/bangle/bangle_hairyvelvet.jpeg", alt: "CASA DI BIZ Bangle Box - Hairy Velvet", label: "Hairy Velvet" },
+      { src: "/assets/bangle/bangle__special_premium_texture.jpeg", alt: "CASA DI BIZ Bangle Box - Special Premium Texture", label: "Special Premium Texture" },
     ],
     materialImages: {
-      velvet: "/assets/bangle/bangle_hairyvelvet.jpeg",
+      "matt-grey-paint": "/assets/bangle/bangle__matt grey_paint.jpeg",
+      crocodile: "/assets/bangle/bangle_crocodile.jpeg",
       suede: "/assets/bangle/bangle_suede.jpeg",
       microfiber: "/assets/bangle/bangle_microfiber.jpeg",
-      leatherette: "/assets/bangle/bangle_crocodile.jpeg",
-      "special-paper": "/assets/bangle/premium_microfiber_bangle.jpeg",
-      "textured-paper": "/assets/bangle/bangle__special_premium_texture.jpeg",
-      "brown-crocodile": "/assets/bangle/bangle_crocodile.jpeg",
-      "matt-grey-paint": "/assets/bangle/bangle__matt grey_paint.jpeg",
+      "premium-microfiber": "/assets/bangle/premium_microfiber_bangle.jpeg",
+      "blue-glossy": "/assets/bangle/bangle_blueglossy.jpeg",
       "hairy-velvet": "/assets/bangle/bangle_hairyvelvet.jpeg",
+      "special-premium-texture": "/assets/bangle/bangle__special_premium_texture.jpeg",
     },
     sizes: [
       { label: "10 × 10 × 8 cm", dimensions: "10 × 10 × 8 cm", description: "Standard Single Bangle Size" },
@@ -624,7 +710,7 @@ export const BOX_MODELS_DATA: Record<string, BoxModel> = {
       { label: "18 × 10.5 × 4.5 cm", dimensions: "18 × 10.5 × 4.5 cm", description: "T Bangle Size" },
       { label: "12 × 12 × 9 cm", dimensions: "12 × 12 × 9 cm", description: "Deep Twin Bangle Size" },
     ],
-    materials: STANDARD_BOX_MATERIALS,
+    materials: BANGLE_BOX_MATERIALS,
     finishes: STANDARD_BOX_FINISHES,
     specifications: {
       outerMaterial: "Available in multiple material options",

@@ -111,7 +111,7 @@ const RIBBON_CORE_PRODUCTS = [
   {
     slug: "woven-edge-polyester-satin",
     name: "Woven Edge Polyester Satin",
-    conciseDescription: "Smooth satin surface with a defined woven edge.",
+    conciseDescription: "Smooth satin with a refined woven edge.",
     bestSuitedTo: "Luxury gifting, apparel packaging and presentation boxes.",
     widths: "10 mm · 15 mm · 25 mm · 38 mm",
     image: "/assets/woven_edge _polyester_satin_ribbon.jpeg",
@@ -145,7 +145,7 @@ const RIBBON_CORE_PRODUCTS = [
 
 export default function RibbonsHubPage() {
   const whatsappGeneralUrl =
-    "https://wa.me/919995255846?text=" +
+    "https://wa.me/+971563374248?text=" +
     encodeURIComponent(
       "Hello CASA DI BIZ, I would like to request a bespoke quote for custom luxury packaging ribbons."
     );
@@ -196,10 +196,10 @@ export default function RibbonsHubPage() {
       <main>
         {/* 2. COMPACT HERO */}
         <section className="w-full bg-[#F6F0E8] border-b border-[#C7A86A]/25 relative overflow-hidden">
-          <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12 pt-7 pb-10 sm:pt-9 sm:pb-12">
+          <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12 pt-6 pb-7 sm:pt-8 sm:pb-9">
             <Breadcrumbs items={[{ label: "Home", to: "/" }, { label: "Ribbons" }]} />
 
-            <div className="mt-5 flex items-center gap-3">
+            <div className="mt-4 sm:mt-5 flex items-center gap-3">
               <span className="text-[11px] tracking-[0.32em] text-[#C7A86A] font-bold uppercase">
                 BESPOKE RIBBON COLLECTION
               </span>
@@ -214,127 +214,65 @@ export default function RibbonsHubPage() {
               <span className="italic text-[#C7A86A]">complete the brand ritual.</span>
             </h1>
 
-            <p className="mt-4 max-w-3xl text-sm sm:text-base text-[#0F2744]/80 leading-relaxed font-sans">
-              Premium packaging ribbons crafted across refined satin, grosgrain, cotton-blend and organza constructions, with calibrated widths and bespoke branding options for luxury packaging.
+            <p className="mt-3 sm:mt-4 max-w-2xl text-sm sm:text-base text-[#0F2744]/80 leading-relaxed font-sans">
+              Premium ribbons in satin, grosgrain, cotton blends and organza, tailored to your packaging.
             </p>
-
-            {/* High-Level B2B Quick Facts Strip */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mt-7 sm:mt-8 pt-6 border-t border-[#0F2744]/10 text-xs">
-              <div className="flex items-center gap-2.5">
-                <ShieldCheck className="h-4 w-4 text-[#C7A86A] shrink-0" />
-                <span className="text-[#0F2744]/80 font-medium">Non-Fray Woven Selvedges</span>
-              </div>
-              <div className="flex items-center gap-2.5">
-                <Ruler className="h-4 w-4 text-[#C7A86A] shrink-0" />
-                <span className="text-[#0F2744]/80 font-medium">10 mm · 15 mm · 25 mm · 38 mm</span>
-              </div>
-              <div className="flex items-center gap-2.5">
-                <Palette className="h-4 w-4 text-[#C7A86A] shrink-0" />
-                <span className="text-[#0F2744]/80 font-medium">Pantone Colour Matching</span>
-              </div>
-              <div className="flex items-center">
-                <span className="text-[#0F2744]/80 font-medium">Hot Foil Stamping & Screen Print</span>
-              </div>
-            </div>
           </div>
         </section>
 
-        {/* 3. RIBBON COLLECTION / PRODUCT DISCOVERY (MOVED MUCH EARLIER) */}
-        <section id="our-ribbons" className="w-full bg-[#FAF8F5] py-12 sm:py-16 scroll-mt-20">
+        {/* 3. RIBBON COLLECTION GRID */}
+        <section id="our-ribbons" className="w-full bg-[#FAF8F5] pt-8 pb-14 sm:pt-10 sm:pb-16 scroll-mt-20">
           <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
-            <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-10">
-              <div>
-                <span className="text-[10px] font-semibold tracking-[0.3em] text-[#C7A86A] uppercase mb-2 block">
-                  OUR RIBBON MATERIALS
-                </span>
-                <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl text-[#0F2744] font-medium">
-                  Choose the ribbon that completes your packaging.
-                </h2>
-              </div>
-              <p className="mt-2 md:mt-0 text-xs sm:text-sm text-[#0F2744]/75 max-w-lg leading-relaxed">
-                Four refined constructions designed for different packaging expressions, from soft natural texture to structured grosgrain and translucent organza.
-              </p>
+            <div className="mb-6 sm:mb-8">
+              <span className="text-[10px] sm:text-[11px] font-semibold tracking-[0.3em] text-[#C7A86A] uppercase mb-1.5 block">
+                OUR MATERIALS
+              </span>
+              <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl text-[#0F2744] font-medium">
+                Explore Our Ribbon Materials
+              </h2>
             </div>
 
-            {/* Mobile horizontal swipe carousel + Desktop 4-col Grid */}
-            <div className="flex overflow-x-auto snap-x snap-mandatory gap-5 pb-4 md:pb-0 md:grid md:grid-cols-2 lg:grid-cols-4 md:overflow-visible -mx-5 px-5 md:mx-0 md:px-0">
-              {RIBBON_CORE_PRODUCTS.map((prod) => {
-                return (
-                  <div
-                    key={prod.slug}
-                    className="min-w-[82vw] sm:min-w-[320px] md:min-w-0 snap-start flex flex-col bg-white rounded-2xl overflow-hidden border border-[#C7A86A]/25 transition-all duration-300 hover:border-[#C7A86A]/70 group"
-                  >
-                    {/* Clean Product Photography: No overlays, no pills, no code badges */}
-                    <Link
-                      href={`/ribbons/${prod.slug}`}
-                      className="relative block aspect-[4/3] bg-[#F6F0E8] overflow-hidden"
-                    >
-                      <img
-                        src={prod.image}
-                        alt={prod.alt}
-                        loading="lazy"
-                        className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                      />
-                    </Link>
+            {/* Ribbon Material Cards Grid */}
+            <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+              {RIBBON_CORE_PRODUCTS.map((prod) => (
+                <Link
+                  key={prod.slug}
+                  href={`/ribbons/${prod.slug}`}
+                  className="group flex flex-col h-full bg-white rounded-2xl overflow-hidden border border-[#C7A86A]/25 transition-all duration-300 hover:border-[#C7A86A]/70 shadow-xs focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C7A86A] focus-visible:ring-offset-2"
+                >
+                  {/* Clean Product Photography: No overlays, no pills, no code badges */}
+                  <div className="relative block aspect-[4/3] bg-[#F6F0E8] overflow-hidden">
+                    <img
+                      src={prod.image}
+                      alt={prod.alt}
+                      loading="lazy"
+                      className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    />
+                  </div>
 
-                    {/* Product Details Outside Photography */}
-                    <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between">
-                      <div>
-                        {/* Material Characteristic Tag */}
-                        <span className="text-[9px] font-bold tracking-[0.2em] text-[#C7A86A] uppercase block mb-1.5">
-                          {prod.keyCharacteristic}
-                        </span>
+                  {/* Product Details Outside Photography */}
+                  <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                      {/* Customer-Facing Product Name */}
+                      <h3 className="font-display text-lg sm:text-xl text-[#0F2744] group-hover:text-[#C7A86A] transition-colors leading-snug font-medium">
+                        {prod.name}
+                      </h3>
 
-                        {/* Customer-Facing Product Name */}
-                        <h3 className="font-display text-lg sm:text-xl text-[#0F2744] group-hover:text-[#C7A86A] transition-colors leading-snug">
-                          <Link href={`/ribbons/${prod.slug}`}>{prod.name}</Link>
-                        </h3>
+                      {/* Concise Description */}
+                      <p className="mt-2 text-xs sm:text-[13px] text-[#0F2744]/75 leading-relaxed font-sans">
+                        {prod.conciseDescription}
+                      </p>
+                    </div>
 
-                        {/* Concise Description */}
-                        <p className="mt-2 text-xs text-[#0F2744]/80 leading-relaxed font-sans">
-                          {prod.conciseDescription}
-                        </p>
-
-                        {/* Best Suited To */}
-                        <div className="mt-3.5 pt-3.5 border-t border-[#0F2744]/10">
-                          <span className="text-[9px] font-bold tracking-[0.18em] text-[#0F2744]/55 uppercase block mb-1">
-                            BEST SUITED TO
-                          </span>
-                          <p className="text-[11px] font-medium text-[#0F2744]/85 leading-snug">
-                            {prod.bestSuitedTo}
-                          </p>
-                        </div>
-
-                        {/* Widths */}
-                        <div className="mt-3">
-                          <span className="text-[9px] font-bold tracking-[0.18em] text-[#0F2744]/55 uppercase block mb-1">
-                            AVAILABLE WIDTHS
-                          </span>
-                          <span className="text-xs font-semibold text-[#0F2744] font-mono">
-                            {prod.widths}
-                          </span>
-                        </div>
-                      </div>
-
-                      {/* Card Action */}
-                      <div className="mt-5 pt-4 border-t border-[#0F2744]/10">
-                        <Link
-                          href={`/ribbons/${prod.slug}`}
-                          className="w-full inline-flex items-center justify-between rounded-xl px-4 py-2.5 text-[11px] tracking-[0.2em] font-bold bg-[#F6F0E8] text-[#0F2744] group-hover:bg-[#0F2744] group-hover:text-[#FAF8F5] transition-all duration-300"
-                        >
-                          <span>EXPLORE RIBBON</span>
-                          <ArrowRight className="h-3.5 w-3.5" />
-                        </Link>
-                      </div>
+                    {/* Minimal Card Action */}
+                    <div className="pt-5 mt-auto">
+                      <span className="inline-flex items-center gap-1.5 text-[10.5px] sm:text-[11px] tracking-[0.2em] font-semibold text-[#C7A86A] group-hover:text-[#0F2744] group-hover:gap-2.5 transition-all">
+                        EXPLORE RIBBON <ArrowRight className="h-3.5 w-3.5 shrink-0" />
+                      </span>
                     </div>
                   </div>
-                );
-              })}
-            </div>
-
-            {/* Mobile Scroll Indicator Helper */}
-            <div className="mt-3 flex items-center justify-center gap-1.5 md:hidden text-[10px] text-[#0F2744]/50">
-              <span>← Swipe to explore all 4 ribbon materials →</span>
+                </Link>
+              ))}
             </div>
           </div>
         </section>

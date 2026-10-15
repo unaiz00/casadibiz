@@ -16,7 +16,7 @@ interface WrapPDPViewProps {
 
 export default function WrapPDPView({ product, relatedProducts }: WrapPDPViewProps) {
   const whatsappMsg = `Hello CASA DI BIZ, I would like to enquire about ${product.name} for my packaging requirements.`;
-  const whatsappUrl = `https://wa.me/919995255846?text=${encodeURIComponent(whatsappMsg)}`;
+  const whatsappUrl = `https://wa.me/+971563374248?text=${encodeURIComponent(whatsappMsg)}`;
   const quoteUrl = `/contact?category=wraps&product=${encodeURIComponent(product.name)}`;
 
   const breadcrumbItems = [

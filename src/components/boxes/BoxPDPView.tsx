@@ -41,12 +41,49 @@ interface BoxPDPViewProps {
 }
 
 export default function BoxPDPView({ model, relatedModels }: BoxPDPViewProps) {
+  const isRingBox = model.slug === "ring-box" || model.id === "ring-box";
+  const isBangleBox = model.slug === "bangle-box" || model.id === "bangle-box";
+
+  // Dedicated Ring Box Finish-to-Material & Image mapping
+  const RING_BOX_FINISH_MAP: Record<string, { src: string; matId: string }> = {
+    "blind-debossed": {
+      src: "/assets/ring/ring_hairyvelvet.jpeg",
+      matId: "hairy-velvet",
+    },
+    "metallic-sticker": {
+      src: "/assets/ring/ring_matt grey_paint.jpeg",
+      matId: "matt-grey-paint",
+    },
+    "silver-foiling": {
+      src: "/assets/ring/ring_blueglossy.jpeg",
+      matId: "glossy-navy",
+    },
+    "gold-foiling": {
+      src: "/assets/ring/ring_special_premium_texture.jpeg",
+      matId: "ribbed-texture",
+    },
+  };
+
+  const getRingBoxFinishForMaterial = (matId: string): string => {
+    if (matId === "hairy-velvet") return "blind-debossed";
+    if (matId === "matt-grey-paint") return "metallic-sticker";
+    if (matId === "glossy-navy") return "silver-foiling";
+    if (matId === "ribbed-texture") return "gold-foiling";
+    // For all other materials on ring box, it's gold foiling
+    return "gold-foiling";
+  };
+
+  const initialMaterialId = model.materials[0]?.id || "";
+  const initialFinishId = isRingBox
+    ? getRingBoxFinishForMaterial(initialMaterialId)
+    : (model.finishes[0]?.id || "");
+
   // Active states
   const [activeImageIdx, setActiveImageIdx] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [activeSizeIdx, setActiveSizeIdx] = useState(0);
-  const [activeMaterialId, setActiveMaterialId] = useState(model.materials[0]?.id || "");
-  const [activeFinishId, setActiveFinishId] = useState(model.finishes[0]?.id || "");
+  const [activeMaterialId, setActiveMaterialId] = useState(initialMaterialId);
+  const [activeFinishId, setActiveFinishId] = useState(initialFinishId);
   const [openFaqIdx, setOpenFaqIdx] = useState<number | null>(0);
   const [activeDetailTab, setActiveDetailTab] = useState<"description" | "specifications" | "customization">("description");
 
@@ -54,9 +91,15 @@ export default function BoxPDPView({ model, relatedModels }: BoxPDPViewProps) {
   const activeMaterial = model.materials.find((m) => m.id === activeMaterialId) || model.materials[0];
   const activeFinish = model.finishes.find((f) => f.id === activeFinishId) || model.finishes[0];
 
-  // Material selection handler (links material to main product image if mapped)
+  // Material selection handler (links material to main product image and logo finish)
   const handleMaterialSelect = (materialId: string) => {
     setActiveMaterialId(materialId);
+
+    // On Ring Box PDP: showcase which logo finish it is (Gold Foiling for all other materials)
+    if (isRingBox) {
+      const targetFinish = getRingBoxFinishForMaterial(materialId);
+      setActiveFinishId(targetFinish);
+    }
 
     if (model.materialImages) {
       const targetSrc =
@@ -93,39 +136,72 @@ export default function BoxPDPView({ model, relatedModels }: BoxPDPViewProps) {
     }
   };
 
-  // Thumbnail / image navigation handler (synchronises selected material if mapped)
+  // Finish selection handler (links finish option to showcase product image on Ring Box PDP)
+  const handleFinishSelect = (finishId: string) => {
+    setActiveFinishId(finishId);
+
+    // Only on Ring Box PDP
+    if (isRingBox) {
+      const target = RING_BOX_FINISH_MAP[finishId];
+      if (target) {
+        const foundIdx = model.images.findIndex((img) => img.src === target.src);
+        if (foundIdx !== -1) {
+          setActiveImageIdx(foundIdx);
+        }
+        setActiveMaterialId(target.matId);
+      }
+      return;
+    }
+  };
+
+  // Thumbnail / image navigation handler (synchronises selected material and logo finish on Ring Box)
   const handleImageSelect = (idx: number) => {
     setActiveImageIdx(idx);
     const img = model.images[idx];
     if (!img) return;
+
+    let matchedMatId = "";
 
     if (model.materialImages) {
       const matchedEntry = Object.entries(model.materialImages).find(
         ([_, src]) => src === img.src
       );
       if (matchedEntry && model.materials.some((m) => m.id === matchedEntry[0])) {
-        setActiveMaterialId(matchedEntry[0]);
-        return;
+        matchedMatId = matchedEntry[0];
       }
     }
 
-    for (const mat of model.materials) {
-      const searchTerms = [
-        mat.id.toLowerCase().replace(/-/g, " "),
-        mat.id.toLowerCase().replace(/-/g, ""),
-        mat.name.toLowerCase(),
-      ];
-      const alt = (img.alt || "").toLowerCase();
-      const src = (img.src || "").toLowerCase();
-      const label = (img.label || "").toLowerCase();
-      if (
-        searchTerms.some(
-          (term) =>
-            alt.includes(term) || src.includes(term.replace(/\s+/g, "")) || label.includes(term)
-        )
-      ) {
-        setActiveMaterialId(mat.id);
-        break;
+    if (!matchedMatId && img.src.includes("crocodile") && model.materials.some((m) => m.id === "brown-crocodile")) {
+      matchedMatId = "brown-crocodile";
+    }
+
+    if (!matchedMatId) {
+      for (const mat of model.materials) {
+        const searchTerms = [
+          mat.id.toLowerCase().replace(/-/g, " "),
+          mat.id.toLowerCase().replace(/-/g, ""),
+          mat.name.toLowerCase(),
+        ];
+        const alt = (img.alt || "").toLowerCase();
+        const src = (img.src || "").toLowerCase();
+        const label = (img.label || "").toLowerCase();
+        if (
+          searchTerms.some(
+            (term) =>
+              alt.includes(term) || src.includes(term.replace(/\s+/g, "")) || label.includes(term)
+          )
+        ) {
+          matchedMatId = mat.id;
+          break;
+        }
+      }
+    }
+
+    if (matchedMatId) {
+      setActiveMaterialId(matchedMatId);
+      if (isRingBox) {
+        const targetFinish = getRingBoxFinishForMaterial(matchedMatId);
+        setActiveFinishId(targetFinish);
       }
     }
   };
@@ -138,7 +214,7 @@ Selected Specs:
 - Logo Finish: ${activeFinish?.name}
 - Colour: Bespoke to brand requirement`;
 
-  const dynamicWhatsappUrl = `https://wa.me/919995255846?text=${encodeURIComponent(whatsappMsg)}`;
+  const dynamicWhatsappUrl = `https://wa.me/+971563374248?text=${encodeURIComponent(whatsappMsg)}`;
 
   // Dynamic Contact Page URL with prefilled query
   const quoteUrl = `/contact?category=${encodeURIComponent(model.categorySlug)}&model=${encodeURIComponent(model.name)}&size=${encodeURIComponent(activeSize?.dimensions || "")}&material=${encodeURIComponent(activeMaterial?.name || "")}&finish=${encodeURIComponent(activeFinish?.name || "")}`;
@@ -211,7 +287,7 @@ Selected Specs:
                 </div>
 
                 {/* Sub-grid of thumbnails / gallery angles */}
-                <div className="grid grid-cols-6 gap-2.5 sm:gap-3">
+                <div className={`grid ${isBangleBox ? "grid-cols-4 sm:grid-cols-8" : "grid-cols-6"} gap-2.5 sm:gap-3`}>
                   {model.images.map((img, idx) => (
                     <button
                       key={idx}
@@ -271,46 +347,87 @@ Selected Specs:
                   ))}
                 </div>
 
-                {/* Mobile Material & Texture Selector - Directly after Gallery & Thumbnails */}
-                <div className="w-full mt-0.5 pt-2.5 border-t border-[#0F2744]/10">
-                  <div className="flex justify-between items-baseline mb-2">
+                {/* Mobile Material & Texture / Finish Selector - Directly after Gallery & Thumbnails */}
+                <div className="w-full mt-2 pt-3 border-t border-[#0F2744]/10">
+                  <div className="flex justify-between items-baseline mb-2.5">
                     <span className="text-[11px] font-semibold text-[#0F2744] tracking-[0.2em] uppercase">
-                      MATERIAL &amp; TEXTURE
+                      {isBangleBox ? "MATERIAL & FINISH" : "MATERIAL & TEXTURE"}
                     </span>
                     <span className="text-[11px] text-[#C7A86A] font-semibold">
                       {activeMaterial?.name}
                     </span>
                   </div>
-                  <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-none snap-x w-full">
-                    {model.materials.map((mat) => {
-                      const isSelected = activeMaterialId === mat.id;
-                      return (
-                        <button
-                          key={mat.id}
-                          type="button"
-                          onClick={() => handleMaterialSelect(mat.id)}
-                          aria-label={`Select ${mat.name} material`}
-                          className={`flex items-center gap-2 px-2.5 py-1.5 rounded-lg border shrink-0 snap-start cursor-pointer transition-all duration-200 ${
-                            isSelected
-                              ? "border-[#C7A86A] bg-[#F6F0E8] ring-1 ring-[#C7A86A]/60 shadow-xs"
-                              : "border-[#0F2744]/15 bg-white hover:border-[#C7A86A]/50"
-                          }`}
-                        >
-                          <div className="h-7 w-7 rounded overflow-hidden border border-[#0F2744]/10 bg-[#F6F0E8] shrink-0">
-                            <img
-                              src={mat.image}
-                              alt={mat.name}
-                              className="h-full w-full object-cover"
-                              loading="lazy"
-                            />
-                          </div>
-                          <span className={`text-[11px] whitespace-nowrap ${isSelected ? "text-[#0F2744] font-semibold" : "text-[#0F2744]/80 font-medium"}`}>
-                            {mat.name}
-                          </span>
-                        </button>
-                      );
-                    })}
-                  </div>
+                  {isBangleBox ? (
+                    <div className="grid grid-cols-2 gap-2 sm:gap-2.5 w-full">
+                      {model.materials.map((mat) => {
+                        const isSelected = activeMaterialId === mat.id;
+                        return (
+                          <button
+                            key={mat.id}
+                            type="button"
+                            onClick={() => handleMaterialSelect(mat.id)}
+                            aria-label={`Select ${mat.name} material`}
+                            className={`group flex flex-col items-center p-2 rounded-xl border text-center transition-all duration-200 cursor-pointer min-w-0 ${
+                              isSelected
+                                ? "border-[#C7A86A] bg-[#F6F0E8] ring-1 ring-[#C7A86A] shadow-xs"
+                                : "border-[#C7A86A]/20 bg-[#FAF8F5] hover:border-[#C7A86A]/50 hover:bg-[#F6F0E8]/40"
+                            }`}
+                          >
+                            <div className="w-full aspect-[4/3] rounded-lg overflow-hidden border border-[#0F2744]/10 bg-white shrink-0 mb-1.5 shadow-2xs">
+                              <img
+                                src={mat.image}
+                                alt={mat.name}
+                                className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                                loading="lazy"
+                              />
+                            </div>
+                            <span
+                              className={`text-[11px] leading-tight text-center ${
+                                isSelected ? "text-[#0F2744] font-semibold" : "text-[#0F2744]/80 font-medium"
+                              }`}
+                            >
+                              {mat.name}
+                            </span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  ) : (
+                    <div className="grid grid-cols-2 gap-2 w-full">
+                      {model.materials.map((mat) => {
+                        const isSelected = activeMaterialId === mat.id;
+                        return (
+                          <button
+                            key={mat.id}
+                            type="button"
+                            onClick={() => handleMaterialSelect(mat.id)}
+                            aria-label={`Select ${mat.name} material`}
+                            className={`flex items-center gap-2 p-2 rounded-lg border text-left transition-all duration-200 cursor-pointer min-w-0 ${
+                              isSelected
+                                ? "border-[#C7A86A] bg-[#F6F0E8] ring-1 ring-[#C7A86A] shadow-xs"
+                                : "border-[#0F2744]/15 bg-white hover:border-[#C7A86A]/50"
+                            }`}
+                          >
+                            <div className="h-7 w-7 rounded overflow-hidden border border-[#0F2744]/10 bg-[#F6F0E8] shrink-0">
+                              <img
+                                src={mat.image}
+                                alt={mat.name}
+                                className="h-full w-full object-cover"
+                                loading="lazy"
+                              />
+                            </div>
+                            <span
+                              className={`text-[11px] leading-tight truncate min-w-0 ${
+                                isSelected ? "text-[#0F2744] font-semibold" : "text-[#0F2744]/80 font-medium"
+                              }`}
+                            >
+                              {mat.name}
+                            </span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -416,46 +533,84 @@ Selected Specs:
                 )}
               </div>
 
-              {/* SECTION 2: MATERIAL & TEXTURE (Desktop only; Mobile is positioned below gallery) */}
+              {/* SECTION 2: MATERIAL & TEXTURE / MATERIAL & FINISH (Desktop only; Mobile is positioned below gallery) */}
               <div className="hidden md:block w-full mb-6">
                 <div className="flex justify-between items-baseline mb-2.5">
                   <h3 className="text-xs font-semibold text-[#0F2744] tracking-[0.2em] uppercase">
-                    MATERIAL & TEXTURE
+                    {isBangleBox ? "MATERIAL & FINISH" : "MATERIAL & TEXTURE"}
                   </h3>
                   <span className="text-[11px] text-[#C7A86A] font-medium">
                     {activeMaterial?.name}
                   </span>
                 </div>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 w-full">
-                  {model.materials.map((mat) => {
-                    const isSelected = activeMaterialId === mat.id;
-                    return (
-                      <button
-                        key={mat.id}
-                        type="button"
-                        onClick={() => handleMaterialSelect(mat.id)}
-                        className={`p-2 sm:p-2.5 rounded-lg border flex items-center gap-2.5 text-left transition-all duration-300 cursor-pointer ${
-                          isSelected
-                            ? "border-[#C7A86A] border-[1.5px] bg-[#F6F0E8] shadow-xs"
-                            : "border-[#0F2744]/15 bg-white hover:border-[#C7A86A]/60 hover:bg-[#FAF8F5]"
-                        }`}
-                      >
-                        {/* Thumbnail Image */}
-                        <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-md overflow-hidden border border-[#0F2744]/10 bg-[#F6F0E8] shrink-0 relative">
-                          <img
-                            src={mat.image}
-                            alt={mat.name}
-                            className="h-full w-full object-cover"
-                            loading="lazy"
-                          />
-                        </div>
-                        <span className="text-xs font-medium text-[#0F2744] leading-snug truncate">
-                          {mat.name}
-                        </span>
-                      </button>
-                    );
-                  })}
-                </div>
+                {isBangleBox ? (
+                  <div className="grid grid-cols-4 gap-2.5 w-full">
+                    {model.materials.map((mat) => {
+                      const isSelected = activeMaterialId === mat.id;
+                      return (
+                        <button
+                          key={mat.id}
+                          type="button"
+                          onClick={() => handleMaterialSelect(mat.id)}
+                          aria-label={`Select ${mat.name} material`}
+                          className={`group flex flex-col items-center p-2 rounded-xl border text-center transition-all duration-300 cursor-pointer min-w-0 ${
+                            isSelected
+                              ? "border-[#C7A86A] bg-[#F6F0E8] ring-1 ring-[#C7A86A] shadow-xs"
+                              : "border-[#C7A86A]/20 bg-[#FAF8F5] hover:border-[#C7A86A]/60 hover:bg-[#F6F0E8]/40"
+                          }`}
+                        >
+                          {/* Thumbnail Image */}
+                          <div className="w-full aspect-square rounded-lg overflow-hidden border border-[#0F2744]/10 bg-white shrink-0 mb-1.5 shadow-2xs">
+                            <img
+                              src={mat.image}
+                              alt={mat.name}
+                              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                              loading="lazy"
+                            />
+                          </div>
+                          <span
+                            className={`text-[11px] leading-tight text-center ${
+                              isSelected ? "text-[#0F2744] font-semibold" : "text-[#0F2744]/80 font-medium"
+                            }`}
+                          >
+                            {mat.name}
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 w-full">
+                    {model.materials.map((mat) => {
+                      const isSelected = activeMaterialId === mat.id;
+                      return (
+                        <button
+                          key={mat.id}
+                          type="button"
+                          onClick={() => handleMaterialSelect(mat.id)}
+                          className={`p-2 sm:p-2.5 rounded-lg border flex items-center gap-2.5 text-left transition-all duration-300 cursor-pointer min-w-0 ${
+                            isSelected
+                              ? "border-[#C7A86A] border-[1.5px] bg-[#F6F0E8] shadow-xs ring-1 ring-[#C7A86A]"
+                              : "border-[#0F2744]/15 bg-white hover:border-[#C7A86A]/60 hover:bg-[#FAF8F5]"
+                          }`}
+                        >
+                          {/* Thumbnail Image */}
+                          <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-md overflow-hidden border border-[#0F2744]/10 bg-[#F6F0E8] shrink-0 relative">
+                            <img
+                              src={mat.image}
+                              alt={mat.name}
+                              className="h-full w-full object-cover"
+                              loading="lazy"
+                            />
+                          </div>
+                          <span className="text-xs font-medium text-[#0F2744] leading-snug truncate min-w-0">
+                            {mat.name}
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
               </div>
 
               {/* SECTION 3: COLOUR (Bespoke B2B statement, no swatches) */}
@@ -486,12 +641,12 @@ Selected Specs:
                     {activeFinish?.name}
                   </span>
                 </div>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 w-full">
+                <div className="grid grid-cols-2 gap-2 w-full">
                   {model.finishes.map((finish) => (
                     <button
                       key={finish.id}
                       type="button"
-                      onClick={() => setActiveFinishId(finish.id)}
+                      onClick={() => handleFinishSelect(finish.id)}
                       className={`p-2.5 border rounded-md text-xs font-medium transition-all duration-300 cursor-pointer text-center ${
                         activeFinishId === finish.id
                           ? "border-[#C7A86A] bg-[#0F2744] text-[#FAF8F5]"

@@ -54,7 +54,7 @@ export default function PaperBagPDP({ category, data }: PaperBagPDPProps) {
   const galleryImages = overlays.galleryImages || data.productImages.slice(0, 3);
   const selectedSize = data.sizes[activeSizeIdx]?.value || "";
   const whatsappMsg = `Hello CASA DI BIZ, I would like to request a quote for the ${data.category.title} (Size: ${selectedSize})`;
-  const dynamicWhatsappUrl = `https://wa.me/919995255846?text=${encodeURIComponent(whatsappMsg)}`;
+  const dynamicWhatsappUrl = `https://wa.me/+971563374248?text=${encodeURIComponent(whatsappMsg)}`;
 
   return (
     <div className="min-h-screen bg-[#FAF8F5] font-sans selection:bg-[#C7A86A]/20 selection:text-[#0F2744]">

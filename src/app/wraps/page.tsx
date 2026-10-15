@@ -100,32 +100,30 @@ export default function WrapsPage() {
               </h2>
             </div>
 
-            <div className="grid gap-5 sm:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-6">
               {wrapProducts.map((it, i) => (
                 <Link
                   key={it.slug}
                   href={`/wraps/${it.categorySlug}/${it.slug}`}
-                  className="group flex flex-col bg-[#FAF8F5] border border-[#C7A86A]/25 rounded-[14px] overflow-hidden hover:border-[#C7A86A]/70 hover:-translate-y-1.5 transition-all duration-500 animate-fade-up"
-                  style={{ animationDelay: `${i * 0.08}s` }}
+                  className="group flex flex-col h-full bg-[#FAF8F5] border border-[#C7A86A]/25 rounded-2xl overflow-hidden hover:border-[#C7A86A]/60 transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C7A86A] focus-visible:ring-offset-2"
                 >
-                  <div className="relative overflow-hidden aspect-[4/3] bg-white">
+                  <div className="relative overflow-hidden aspect-[4/3] bg-[#F6F0E8]">
                     <img
                       src={it.image.src}
                       alt={it.image.alt}
                       loading="lazy"
-                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
+                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
                     />
                   </div>
-                  <div className="p-4 sm:p-6 flex-1 flex flex-col">
-                    <h3 className="font-display text-lg sm:text-2xl text-navy leading-tight">
+                  <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between">
+                    <h3 className="font-display text-[17px] xs:text-[18px] sm:text-[20px] lg:text-[21px] text-[#102945] font-medium leading-snug group-hover:text-[#102945]/90 transition-colors">
                       {it.name}
                     </h3>
-                    <p className="mt-2 sm:mt-3 text-xs sm:text-sm text-muted-luxe leading-relaxed flex-1">
-                      {it.shortDescription}
-                    </p>
-                    <span className="mt-3.5 sm:mt-5 inline-flex items-center gap-2 text-[10px] sm:text-[11px] tracking-[0.25em] sm:tracking-[0.28em] font-semibold text-gold group-hover:gap-3 transition-all">
-                      EXPLORE DETAILS <ArrowRight className="h-4 w-4" />
-                    </span>
+                    <div className="pt-4 sm:pt-5 mt-auto">
+                      <span className="inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] tracking-[0.22em] sm:tracking-[0.25em] font-semibold text-[#C7A86A] group-hover:text-[#b89552] group-hover:gap-2.5 transition-all">
+                        EXPLORE DETAILS <ArrowRight className="h-3.5 w-3.5 shrink-0" />
+                      </span>
+                    </div>
                   </div>
                 </Link>
               ))}

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, ShieldCheck, Layers, Ruler } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { SiteHeader, SiteFooter, Breadcrumbs } from "@/components/site-chrome";
 import { POUCH_PRODUCTS } from "@/data/pouches-data";
 
@@ -68,10 +68,10 @@ export default function PouchesHubPage() {
       <main>
         {/* 2. HERO SECTION */}
         <section className="w-full bg-[#F6F0E8] border-b border-[#C7A86A]/25 relative overflow-hidden">
-          <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12 pt-7 pb-10 sm:pt-9 sm:pb-12">
+          <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12 pt-6 pb-7 sm:pt-8 sm:pb-9">
             <Breadcrumbs items={[{ label: "Home", to: "/" }, { label: "Pouches" }]} />
 
-            <div className="mt-5 flex items-center gap-3">
+            <div className="mt-4 sm:mt-5 flex items-center gap-3">
               <span className="text-[11px] tracking-[0.32em] text-[#C7A86A] font-bold uppercase">
                 BESPOKE POUCH COLLECTION
               </span>
@@ -86,46 +86,22 @@ export default function PouchesHubPage() {
               <span className="italic text-[#C7A86A]">protect and present.</span>
             </h1>
 
-            <p className="mt-4 max-w-3xl text-sm sm:text-base text-[#0F2744]/80 leading-relaxed font-sans">
-              Five signature luxury pouch constructions across refined grosgrain, double-faced satin, woven edge satin, cotton-nylon blends, and sheer organza, with calibrated dimensions and bespoke Pantone dyeing.
+            <p className="mt-3 sm:mt-4 max-w-2xl text-sm sm:text-base text-[#0F2744]/80 leading-relaxed font-sans">
+              Refined fabrics and bespoke finishes for considered product presentation.
             </p>
-
-            {/* Quick B2B Highlights */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mt-8 pt-6 border-t border-[#0F2744]/10 text-xs">
-              <div className="flex items-center gap-2.5">
-                <ShieldCheck className="h-4 w-4 text-[#C7A86A] shrink-0" />
-                <span className="text-[#0F2744]/80 font-medium">Anti-Tarnish Linings</span>
-              </div>
-              <div className="flex items-center gap-2.5">
-                <Ruler className="h-4 w-4 text-[#C7A86A] shrink-0" />
-                <span className="text-[#0F2744]/80 font-medium">Custom Dimensions & Proportions</span>
-              </div>
-              <div className="flex items-center gap-2.5">
-                <Layers className="h-4 w-4 text-[#C7A86A] shrink-0" />
-                <span className="text-[#0F2744]/80 font-medium">Pantone Colour Formulation</span>
-              </div>
-              <div className="flex items-center">
-                <span className="text-[#0F2744]/80 font-medium">Hot Foil & Engraved Hardware</span>
-              </div>
-            </div>
           </div>
         </section>
 
         {/* 3. POUCH COLLECTION GRID */}
-        <section className="w-full bg-[#FAF8F5] py-12 sm:py-16">
+        <section className="w-full bg-[#FAF8F5] pt-8 pb-14 sm:pt-10 sm:pb-16">
           <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
-            <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-10">
-              <div>
-                <span className="text-[10px] font-semibold tracking-[0.3em] text-[#C7A86A] uppercase mb-2 block">
-                  OUR POUCH MATERIALS
-                </span>
-                <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl text-[#0F2744] font-medium">
-                  Select the pouch material tailored to your product.
-                </h2>
-              </div>
-              <p className="mt-2 md:mt-0 text-xs sm:text-sm text-[#0F2744]/75 max-w-lg leading-relaxed">
-                Five distinct fabric constructions designed for different luxury expressions, from structured matte grosgrain to fluid satin and natural cotton blends.
-              </p>
+            <div className="mb-6 sm:mb-8">
+              <span className="text-[10px] sm:text-[11px] font-semibold tracking-[0.3em] text-[#C7A86A] uppercase mb-1.5 block">
+                OUR MATERIALS
+              </span>
+              <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl text-[#0F2744] font-medium">
+                Explore Our Pouch Materials
+              </h2>
             </div>
 
             <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">

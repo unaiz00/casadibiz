@@ -5,8 +5,6 @@ import Link from "next/link";
 import {
   ArrowRight,
   MessageCircle,
-  ShieldCheck,
-  Layers,
   Check,
   ChevronDown,
 } from "lucide-react";
@@ -58,7 +56,7 @@ export default function PouchPDP({ product, relatedProducts }: PouchPDPProps) {
   )}`;
 
   const dynamicWhatsappUrl =
-    "https://wa.me/919995255846?text=" +
+    "https://wa.me/+971563374248?text=" +
     encodeURIComponent(
       `Hello CASA DI BIZ, I would like to request a bespoke quote for ${product.name} (Size: ${selectedSize?.label} - ${selectedSize?.dimensions}).`
     );
@@ -93,44 +91,6 @@ export default function PouchPDP({ product, relatedProducts }: PouchPDPProps) {
                 alt={primaryImage.alt}
                 productName={product.name}
               />
-
-              {/* Manufacturer Highlights Strip */}
-              <div className="grid grid-cols-3 gap-3 pt-2">
-                <div className="bg-[#F6F0E8] border border-[#C7A86A]/20 rounded-2xl p-4 flex flex-col justify-between">
-                  <ShieldCheck className="h-5 w-5 text-[#C7A86A] mb-2" />
-                  <div>
-                    <span className="text-[10px] font-bold tracking-[0.2em] text-[#0F2744]/70 uppercase block mb-0.5">
-                      FABRIC WEAVE
-                    </span>
-                    <span className="text-xs font-semibold text-[#0F2744] block">
-                      {product.keyCharacteristic}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="bg-[#F6F0E8] border border-[#C7A86A]/20 rounded-2xl p-4 flex flex-col justify-between">
-                  <Layers className="h-5 w-5 text-[#C7A86A] mb-2" />
-                  <div>
-                    <span className="text-[10px] font-bold tracking-[0.2em] text-[#0F2744]/70 uppercase block mb-0.5">
-                      CLOSURE TYPE
-                    </span>
-                    <span className="text-xs font-semibold text-[#0F2744] block">
-                      {product.closure.split(" ")[0]} Closure
-                    </span>
-                  </div>
-                </div>
-
-                <div className="bg-[#F6F0E8] border border-[#C7A86A]/20 rounded-2xl p-4 flex flex-col justify-end">
-                  <div>
-                    <span className="text-[10px] font-bold tracking-[0.2em] text-[#0F2744]/70 uppercase block mb-0.5">
-                      BRANDING
-                    </span>
-                    <span className="text-xs font-semibold text-[#0F2744] block">
-                      Foil & Monogram
-                    </span>
-                  </div>
-                </div>
-              </div>
             </div>
 
             {/* RIGHT: Product Information, Specs & Configuration */}
@@ -280,53 +240,40 @@ export default function PouchPDP({ product, relatedProducts }: PouchPDPProps) {
               </h2>
             </div>
 
-            {/* Mobile 3-Column Segmented Control Header (Mobile Only) */}
-            <div className="lg:hidden w-full mb-8">
-              <div className="grid grid-cols-3 gap-1 bg-[#F6F0E8] border border-[#C7A86A]/25 rounded-2xl p-1.5 w-full min-h-[56px]">
+            {/* Segmented Control Tab Navigation */}
+            <div className="w-full max-w-3xl mx-auto mb-10 sm:mb-12">
+              <div
+                role="tablist"
+                aria-label="Manufacturing Specifications Tabs"
+                className="grid grid-cols-3 gap-1 sm:gap-1.5 bg-[#F6F0E8] border border-[#C7A86A]/25 rounded-2xl p-1 sm:p-1.5 w-full shadow-xs"
+              >
                 {POUCH_TABS.map((tab) => {
                   const isActive = activeTab === tab.id;
                   return (
                     <button
                       key={tab.id}
+                      role="tab"
+                      aria-selected={isActive}
                       type="button"
                       onClick={() => setActiveTab(tab.id)}
-                      className={`flex flex-col items-center justify-center py-2 px-1 rounded-xl text-center transition-all duration-300 cursor-pointer min-h-[48px] ${
+                      className={`flex items-center justify-center py-2.5 sm:py-3 px-1.5 sm:px-4 rounded-xl text-center transition-all duration-300 cursor-pointer min-h-[48px] sm:min-h-[52px] select-none ${
                         isActive
-                          ? "bg-[#FAF8F5] text-[#0F2744] border border-[#C7A86A]/40 shadow-xs"
-                          : "bg-transparent text-[#0F2744]/65 hover:text-[#0F2744] border border-transparent"
+                          ? "bg-[#102945] text-[#FFFFFF] shadow-xs"
+                          : "bg-transparent text-[#102945] hover:bg-[#102945]/5"
                       }`}
                     >
-                      <span className="text-[9.5px] xs:text-[10px] sm:text-[11px] font-bold tracking-[0.04em] sm:tracking-[0.08em] uppercase leading-tight text-center block">
-                        {tab.mobileLines[0]}
-                      </span>
-                      <span className="text-[9.5px] xs:text-[10px] sm:text-[11px] font-bold tracking-[0.04em] sm:tracking-[0.08em] uppercase leading-tight text-center block">
-                        {tab.mobileLines[1]}
+                      <span className="text-[9.5px] xs:text-[10px] sm:text-xs font-semibold tracking-[0.04em] sm:tracking-[0.12em] uppercase leading-tight sm:leading-normal text-center block max-w-full">
+                        <span className="inline sm:hidden">
+                          {tab.mobileLines[0]}
+                          <br />
+                          {tab.mobileLines[1]}
+                        </span>
+                        <span className="hidden sm:inline">{tab.label}</span>
                       </span>
                     </button>
                   );
                 })}
               </div>
-            </div>
-
-            {/* Desktop Tabs Header (Unchanged on Desktop lg+) */}
-            <div className="hidden lg:flex border-b border-[#0F2744]/10 mb-10 justify-center gap-12">
-              {POUCH_TABS.map((tab) => (
-                <button
-                  key={tab.id}
-                  type="button"
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`pb-4 text-xs font-semibold tracking-[0.2em] uppercase transition-all duration-300 relative whitespace-nowrap cursor-pointer ${
-                    activeTab === tab.id
-                      ? "text-[#0F2744] font-bold"
-                      : "text-[#0F2744]/50 hover:text-[#0F2744]"
-                  }`}
-                >
-                  {tab.label}
-                  {activeTab === tab.id && (
-                    <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#C7A86A]" />
-                  )}
-                </button>
-              ))}
             </div>
 
             {/* TAB CONTENT: OVERVIEW */}

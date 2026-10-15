@@ -62,7 +62,7 @@ export default function CorporateGiftPDP({
   )}&inquiry=quote`;
 
   const dynamicWhatsappUrl =
-    "https://wa.me/919995255846?text=" +
+    "https://wa.me/+971563374248?text=" +
     encodeURIComponent(
       `Hello CASA DI BIZ, I would like to request a bespoke quote for ${product.title} (Corporate Gifting Collection).`
     );

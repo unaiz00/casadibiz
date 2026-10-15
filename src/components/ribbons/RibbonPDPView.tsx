@@ -9,8 +9,6 @@ import {
   ChevronRight,
   Maximize2,
   X,
-  ShieldCheck,
-  Layers,
   Check,
   MessageCircle,
 } from "lucide-react";
@@ -64,7 +62,7 @@ Selected Width: ${selectedWidth.label} (${selectedWidth.position})
 Colour: Custom Brand / Pantone matching
 Please share MOQ, sample lead time, and branding options.`;
 
-  const dynamicWhatsappUrl = `https://wa.me/919995255846?text=${encodeURIComponent(whatsappMsg)}`;
+  const dynamicWhatsappUrl = `https://wa.me/+971563374248?text=${encodeURIComponent(whatsappMsg)}`;
 
   // Dynamic Contact Quote URL (No internal IDs/codes)
   const quoteUrl = `/contact?category=ribbons&material=${encodeURIComponent(material.name)}&width=${encodeURIComponent(selectedWidth.label)}`;
@@ -152,51 +150,6 @@ Please share MOQ, sample lead time, and branding options.`;
                       />
                     </button>
                   ))}
-                </div>
-              </div>
-
-              {/* Material Craft Highlights - Responsive Mobile Carousel / Desktop 3-Column Row */}
-              <div className="flex overflow-x-auto snap-x snap-mandatory gap-3.5 pt-2 pb-2 -mx-5 px-5 sm:-mx-8 sm:px-8 lg:mx-0 lg:px-0 lg:pb-0 lg:grid lg:grid-cols-3 lg:gap-3 scrollbar-none [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-                {/* Card 1: Edge Integrity */}
-                <div className="bg-[#F6F0E8] border border-[#C7A86A]/20 rounded-2xl p-5 lg:p-3.5 snap-start shrink-0 w-[80vw] lg:w-auto lg:shrink flex flex-col justify-between min-h-[115px] lg:min-h-0">
-                  <div className="mb-3 lg:mb-2">
-                    <ShieldCheck className="h-5 w-5 text-[#C7A86A] shrink-0" />
-                  </div>
-                  <div>
-                    <span className="text-[10px] font-bold tracking-[0.2em] text-[#0F2744]/70 uppercase block mb-1">
-                      EDGE INTEGRITY
-                    </span>
-                    <span className="text-sm lg:text-xs font-semibold text-[#0F2744] block leading-snug">
-                      {material.edgeFinish.split(" ")[0]} Finish
-                    </span>
-                  </div>
-                </div>
-
-                {/* Card 2: Tactile Weave */}
-                <div className="bg-[#F6F0E8] border border-[#C7A86A]/20 rounded-2xl p-5 lg:p-3.5 snap-start shrink-0 w-[80vw] lg:w-auto lg:shrink flex flex-col justify-between min-h-[115px] lg:min-h-0">
-                  <div className="mb-3 lg:mb-2">
-                    <Layers className="h-5 w-5 text-[#C7A86A] shrink-0" />
-                  </div>
-                  <div>
-                    <span className="text-[10px] font-bold tracking-[0.2em] text-[#0F2744]/70 uppercase block mb-1">
-                      TACTILE WEAVE
-                    </span>
-                    <span className="text-sm lg:text-xs font-semibold text-[#0F2744] block leading-snug">
-                      {material.positioning}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Card 3: Branding */}
-                <div className="bg-[#F6F0E8] border border-[#C7A86A]/20 rounded-2xl p-5 lg:p-3.5 snap-start shrink-0 w-[80vw] lg:w-auto lg:shrink flex flex-col justify-end min-h-[115px] lg:min-h-0">
-                  <div>
-                    <span className="text-[10px] font-bold tracking-[0.2em] text-[#0F2744]/70 uppercase block mb-1">
-                      BRANDING
-                    </span>
-                    <span className="text-sm lg:text-xs font-semibold text-[#0F2744] block leading-snug">
-                      Foil & Screen Print
-                    </span>
-                  </div>
                 </div>
               </div>
             </div>
@@ -317,6 +270,7 @@ Please share MOQ, sample lead time, and branding options.`;
         </section>
 
         {/* EDITORIAL MATERIAL DETAILS & SPECIFICATIONS */}
+        {/* EDITORIAL SPECIFICATIONS & CRAFTSMANSHIP SECTION */}
         <section className="bg-white border-y border-[#C7A86A]/20 pt-12 pb-20 lg:pt-16 lg:pb-24">
           <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-12">
             <div className="text-center max-w-2xl mx-auto mb-10">
@@ -330,24 +284,29 @@ Please share MOQ, sample lead time, and branding options.`;
 
             {/* Mobile Segmented Control Header (Mobile Only - Single Line 4-Column Row) */}
             <div className="lg:hidden w-full mb-8">
-              <div className="grid grid-cols-4 gap-0.5 xs:gap-1 bg-[#F6F0E8] border border-[#C7A86A]/25 rounded-xl sm:rounded-2xl p-1 w-full min-h-[52px]">
+              <div
+                role="tablist"
+                aria-label="Manufacturing Specifications Tabs"
+                className="grid grid-cols-4 gap-1 sm:gap-1.5 bg-[#F6F0E8] border border-[#C7A86A]/25 rounded-2xl p-1 sm:p-1.5 w-full shadow-xs"
+              >
                 {RIBBON_TABS.map((tab) => {
                   const isActive = activeTab === tab.id;
                   return (
                     <button
                       key={tab.id}
+                      role="tab"
+                      aria-selected={isActive}
                       type="button"
                       onClick={() => setActiveTab(tab.id)}
-                      className={`flex flex-col items-center justify-center py-2 px-0.5 xs:px-1 rounded-lg sm:rounded-xl text-center transition-all duration-300 cursor-pointer min-h-[48px] h-full ${
+                      className={`flex items-center justify-center py-2 sm:py-2.5 px-0.5 xs:px-1 rounded-xl text-center transition-all duration-300 cursor-pointer min-h-[48px] sm:min-h-[52px] select-none ${
                         isActive
-                          ? "bg-[#FAF8F5] text-[#0F2744] border border-[#C7A86A]/40 shadow-xs"
-                          : "bg-transparent text-[#0F2744]/65 hover:text-[#0F2744] border border-transparent"
+                          ? "bg-[#102945] text-[#FFFFFF] shadow-xs"
+                          : "bg-transparent text-[#102945] hover:bg-[#102945]/5"
                       }`}
                     >
-                      <span className="text-[8px] xs:text-[8.5px] sm:text-[9.5px] md:text-[10px] font-bold tracking-[0.01em] xs:tracking-[0.02em] sm:tracking-[0.04em] uppercase leading-[1.2] text-center block w-full truncate sm:overflow-visible">
+                      <span className="text-[8px] xs:text-[8.5px] sm:text-[9.5px] font-semibold tracking-[0.02em] sm:tracking-[0.04em] uppercase leading-tight text-center block max-w-full">
                         {tab.mobileLines[0]}
-                      </span>
-                      <span className="text-[8px] xs:text-[8.5px] sm:text-[9.5px] md:text-[10px] font-bold tracking-[0.01em] xs:tracking-[0.02em] sm:tracking-[0.04em] uppercase leading-[1.2] text-center block w-full truncate sm:overflow-visible">
+                        <br />
                         {tab.mobileLines[1]}
                       </span>
                     </button>

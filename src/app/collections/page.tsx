@@ -21,6 +21,13 @@ export const COLLECTION_CATEGORIES: Record<
     image: "/assets/rigidd.jpeg",
     href: "/boxes",
   },
+  "jewellery-storage-travel-cases": {
+    title: "Jewellery Storage & Travel Cases",
+    short: "Thoughtfully designed cases and organisers for storing, travelling with and presenting fine jewellery.",
+    long: "Bespoke jewellery storage and travel solutions designed to organise, protect and present precious pieces with understated elegance.",
+    image: "/assets/storage/Leatherette_Stackable_Trays.jpeg",
+    href: "/collections/jewellery-storage-travel-cases",
+  },
   "corporate-collection": {
     title: "Corporate Gift Boxes",
     short: "Considered gifting sets for clients, partners and internal milestones.",
@@ -68,11 +75,11 @@ export const COLLECTION_CATEGORIES: Record<
 export const metadata: Metadata = {
   title: "Collections — Curated Luxury Packaging Suites | CASA DI BIZ",
   description:
-    "Explore CASA DI BIZ luxury packaging collections — Paper Bags, Jewellery Boxes, Corporate Gift Boxes, Wrapping Papers, Wedding and Seasonal suites.",
+    "Explore CASA DI BIZ luxury packaging collections — Paper Bags, Jewellery Boxes, Jewellery Storage & Travel Cases, Corporate Gift Boxes, Wrapping Papers, Wedding and Seasonal suites.",
   openGraph: {
     title: "Luxury Packaging Collections by CASA DI BIZ",
     description:
-      "Curated packaging suites, paper bags, jewellery boxes, corporate gifts, and bespoke wrapping papers for premium brands.",
+      "Curated packaging suites, paper bags, jewellery storage cases, corporate gifts, and bespoke wrapping papers for premium brands.",
   },
 };
 

@@ -138,7 +138,7 @@ export const metadata: Metadata = {
 export default function CorporateCollectionPage() {
   const whatsappMsg =
     "Hello CASA DI BIZ, I would like to inquire about your Corporate Gifting Collection and bespoke corporate gift sets.";
-  const dynamicWhatsappUrl = `https://wa.me/919995255846?text=${encodeURIComponent(
+  const dynamicWhatsappUrl = `https://wa.me/+971563374248?text=${encodeURIComponent(
     whatsappMsg
   )}`;
 

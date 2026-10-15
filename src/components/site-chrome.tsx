@@ -284,7 +284,7 @@ export function SiteHeader() {
                     <Linkedin className="h-4 w-4" />
                   </a>
                   <a
-                    href="https://wa.me/919995255846"
+                    href="https://wa.me/+971563374248"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="WhatsApp"
@@ -339,7 +339,7 @@ export function SiteFooter() {
   const socials: { Icon: typeof Instagram; href: string; label: string }[] = [
     { Icon: Instagram, href: "https://instagram.com", label: "Instagram" },
     { Icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
-    { Icon: MessageCircle, href: "https://wa.me/919995255846", label: "WhatsApp" },
+    { Icon: MessageCircle, href: "https://wa.me/+971563374248", label: "WhatsApp" },
     { Icon: Mail, href: "mailto:hello@casadibiz.com", label: "Email" },
   ];
   return (

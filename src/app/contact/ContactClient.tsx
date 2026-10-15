@@ -24,7 +24,7 @@ import { SiteHeader, SiteFooter } from "@/components/site-chrome";
 const COMPANY = {
   phone: "+91 9995255846",
   phoneRaw: "+919995255846",
-  whatsapp: "919995255846",
+  whatsapp: "+971563374248",
   email: "hello@casadibiz.com",
   address: "Al Quoz Industrial Area 3, Dubai, United Arab Emirates",
   mapQuery: "Al Quoz Industrial Area 3, Dubai, UAE",
@@ -47,6 +47,7 @@ const PRODUCT_TYPES: Record<string, string[]> = {
   Ribbons: ["Satin Ribbons", "Grosgrain Ribbons", "Printed Ribbons", "Custom Ribbons"],
   Collections: [
     "Jewellery Collection",
+    "Jewellery Storage & Travel Cases",
     "Corporate Collection",
     "Wedding Collection",
     "Seasonal Collection",

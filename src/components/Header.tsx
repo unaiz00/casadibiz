@@ -272,7 +272,7 @@ export function SiteHeader() {
                     <Linkedin className="h-4 w-4" />
                   </a>
                   <a
-                    href="https://wa.me/919995255846"
+                    href="https://wa.me/+971563374248"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="WhatsApp"

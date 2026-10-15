@@ -37,8 +37,8 @@ export function SiteFooter() {
   const socials: { Icon: typeof Instagram; href: string; label: string }[] = [
     { Icon: Instagram, href: "https://instagram.com", label: "Instagram" },
     { Icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
-    { Icon: MessageCircle, href: "https://wa.me/919995255846", label: "WhatsApp" },
-    { Icon: Mail, href: "mailto:hello@casadibiz.com", label: "Email" },
+    { Icon: MessageCircle, href: "https://wa.me/+971563374248", label: "WhatsApp" },
+    { Icon: Mail, href: "mailto:info@casadibiz.com", label: "Email" },
   ];
 
   return (
