@@ -45,81 +45,174 @@ export default function BoxPDPView({ model, relatedModels }: BoxPDPViewProps) {
   const isBangleBox = model.slug === "bangle-box" || model.id === "bangle-box";
   const isEarringBox = model.slug === "earring-box" || model.id === "earring-box";
   const isBraceletBox = model.slug === "bracelet-box" || model.id === "bracelet-box";
+  const isSetBox = model.slug === "set-box" || model.id === "set-box";
+  const isNecklaceBox = model.slug === "necklace-box" || model.id === "necklace-box";
+  const isPendantBox = model.slug === "pendant-box" || model.id === "pendant-box";
 
-  // Dedicated Ring Box Finish-to-Material & Image mapping
-  const RING_BOX_FINISH_MAP: Record<string, { src: string; matId: string }> = {
-    "blind-debossed": {
-      src: "/assets/ring/ring_hairyvelvet.jpeg",
-      matId: "hairy-velvet",
-    },
-    "metallic-sticker": {
-      src: "/assets/ring/ring_matt grey_paint.jpeg",
-      matId: "matt-grey-paint",
-    },
-    "silver-foiling": {
-      src: "/assets/ring/ring_blueglossy.jpeg",
-      matId: "glossy-navy",
-    },
-    "gold-foiling": {
-      src: "/assets/ring/ring_special_premium_texture.jpeg",
-      matId: "ribbed-texture",
-    },
-  };
+  const isChainBox = model.slug === "chain-box" || model.id === "chain-box";
 
-  const getRingBoxFinishForMaterial = (matId: string): string => {
-    if (matId === "hairy-velvet") return "blind-debossed";
-    if (matId === "matt-grey-paint") return "metallic-sticker";
-    if (matId === "glossy-navy") return "silver-foiling";
-    if (matId === "ribbed-texture") return "gold-foiling";
-    // For all other materials on ring box, it's gold foiling
-    return "gold-foiling";
-  };
-
-  // Dedicated Earring Box Finish-to-Material & Image mapping
-  const EARRING_BOX_FINISH_MAP: Record<string, { src: string; matId: string }> = {
-    "blind-debossed": {
-      src: "/assets/earring/earring_vlevet_champagne.jpeg",
-      matId: "hairy-velvet",
+  // Dedicated Finish-to-Material & Image mapping for all Box PDPs
+  const BOX_FINISH_MAPS: Record<string, Record<string, { src: string; matId: string }>> = {
+    "ring-box": {
+      "blind-debossed": {
+        src: "/assets/ring/ring_hairyvelvet.jpeg",
+        matId: "hairy-velvet",
+      },
+      "metallic-sticker": {
+        src: "/assets/ring/ring_matt grey_paint.jpeg",
+        matId: "matt-grey-paint",
+      },
+      "silver-foiling": {
+        src: "/assets/ring/ring_blueglossy.jpeg",
+        matId: "glossy-navy",
+      },
+      "gold-foiling": {
+        src: "/assets/ring/ring_special_premium_texture.jpeg",
+        matId: "ribbed-texture",
+      },
     },
-    "metallic-sticker": {
-      src: "/assets/earring/earring_Gray Jewelry Box Collage.png",
-      matId: "matt-grey-paint",
+    "earring-box": {
+      "blind-debossed": {
+        src: "/assets/earring/Velvet_Earring_Box.png",
+        matId: "hairy-velvet",
+      },
+      "metallic-sticker": {
+        src: "/assets/earring/earring_Gray Jewelry Box Collage.png",
+        matId: "matt-grey-paint",
+      },
+      "silver-foiling": {
+        src: "/assets/earring/earring_blueglossy.jpeg",
+        matId: "glossy-navy",
+      },
+      "gold-foiling": {
+        src: "/assets/earring/erpin_special_premium_texture.jpeg",
+        matId: "ribbed-texture",
+      },
     },
-    "silver-foiling": {
-      src: "/assets/earring/earring_blueglossy.jpeg",
-      matId: "glossy-navy",
+    "pendant-box": {
+      "blind-debossed": {
+        src: "/assets/pendant/hairyvelvet_pendantbox.png",
+        matId: "velvet",
+      },
+      "metallic-sticker": {
+        src: "/assets/pendant/mattgrey_pendant.png",
+        matId: "matt-grey-paint",
+      },
+      "silver-foiling": {
+        src: "/assets/pendant/bluglossy_pendant.png",
+        matId: "glossy-navy",
+      },
+      "gold-foiling": {
+        src: "/assets/pendant/pendant_ribbed.jpeg",
+        matId: "ribbed-texture",
+      },
     },
-    "gold-foiling": {
-      src: "/assets/earring/erpin_special_premium_texture.jpeg",
-      matId: "ribbed-texture",
+    "necklace-box": {
+      "blind-debossed": {
+        src: "/assets/necklace/hairyvelvet_necklace.png",
+        matId: "velvet",
+      },
+      "metallic-sticker": {
+        src: "/assets/necklace/matt_paint_necklace.png",
+        matId: "matt-grey-paint",
+      },
+      "silver-foiling": {
+        src: "/assets/necklace/necklace_blueglossy.jpeg",
+        matId: "glossy-navy",
+      },
+      "gold-foiling": {
+        src: "/assets/necklace/Ribbed_Necklace Box_Showcase.png",
+        matId: "ribbed-texture",
+      },
     },
-  };
-
-  const getEarringBoxFinishForMaterial = (matId: string): string => {
-    if (matId === "hairy-velvet" || matId === "velvet") return "blind-debossed";
-    if (matId === "matt-grey-paint") return "metallic-sticker";
-    if (matId === "glossy-navy") return "silver-foiling";
-    if (matId === "ribbed-texture" || matId === "textured-paper") return "gold-foiling";
-    // For all other materials on earring box, it's gold foiling
-    return "gold-foiling";
+    "bracelet-box": {
+      "blind-debossed": {
+        src: "/assets/bracelet/bracelet__hairyvelvet.jpeg",
+        matId: "velvet",
+      },
+      "metallic-sticker": {
+        src: "/assets/bracelet/Mattgreypaint_bracelet.jpg",
+        matId: "matt-grey-paint",
+      },
+      "silver-foiling": {
+        src: "/assets/bracelet/blurglossy_bracelet.png",
+        matId: "glossy-navy",
+      },
+      "gold-foiling": {
+        src: "/assets/bracelet/ribbed_bracelet.png",
+        matId: "ribbed-texture",
+      },
+    },
+    "bangle-box": {
+      "blind-debossed": {
+        src: "/assets/bangle/bangle_hairyvelvet.jpeg",
+        matId: "hairy-velvet",
+      },
+      "metallic-sticker": {
+        src: "/assets/bangle/bangle__matt grey_paint.jpeg",
+        matId: "matt-grey-paint",
+      },
+      "silver-foiling": {
+        src: "/assets/bangle/bangle_blueglossy.jpeg",
+        matId: "blue-glossy",
+      },
+      "gold-foiling": {
+        src: "/assets/bangle/bangle__special_premium_texture.jpeg",
+        matId: "special-premium-texture",
+      },
+    },
+    "set-box": {
+      "blind-debossed": {
+        src: "/assets/allsetbox/allset_hairyvelvet.jpeg",
+        matId: "velvet",
+      },
+      "metallic-sticker": {
+        src: "/assets/allsetbox/Luxury Jewelry Box Collage.png",
+        matId: "matt-grey-paint",
+      },
+      "silver-foiling": {
+        src: "/assets/allsetbox/Casa Di Biz Jewelry Box Collection.png",
+        matId: "glossy-navy",
+      },
+      "gold-foiling": {
+        src: "/assets/allsetbox/allset_ribbed.jpeg",
+        matId: "ribbed-texture",
+      },
+    },
+    "chain-box": {
+      "blind-debossed": {
+        src: "/assets/chain/chainpn1_velvetchamgne.jpeg",
+        matId: "velvet",
+      },
+      "metallic-sticker": {
+        src: "/assets/chain/chain__matt grey_paint.jpeg",
+        matId: "matt-grey-paint",
+      },
+      "gold-foiling": {
+        src: "/assets/chain/chain__special_premium_texture.jpeg",
+        matId: "textured-paper",
+      },
+      "silver-foiling": {
+        src: "/assets/chain/chain_microfiber.jpeg",
+        matId: "microfiber",
+      },
+    },
   };
 
   const getFinishMap = (): Record<string, { src: string; matId: string }> | null => {
-    if (isRingBox) return RING_BOX_FINISH_MAP;
-    if (isEarringBox) return EARRING_BOX_FINISH_MAP;
-    return null;
+    return BOX_FINISH_MAPS[model.slug] || BOX_FINISH_MAPS[model.id] || null;
   };
 
   const getFinishForMaterial = (matId: string): string => {
-    if (isRingBox) return getRingBoxFinishForMaterial(matId);
-    if (isEarringBox) return getEarringBoxFinishForMaterial(matId);
-    return model.finishes[0]?.id || "";
+    if (matId === "hairy-velvet" || matId === "velvet") return "blind-debossed";
+    if (matId === "matt-grey-paint") return "metallic-sticker";
+    if (matId === "glossy-navy" || matId === "blue-glossy") return "silver-foiling";
+    // For all other materials on any box PDP, default to gold foiling
+    return "gold-foiling";
   };
 
   const initialMaterialId = model.materials[0]?.id || "";
-  const initialFinishId = (isRingBox || isEarringBox)
-    ? getFinishForMaterial(initialMaterialId)
-    : (model.finishes[0]?.id || "");
+  const initialFinishId = getFinishForMaterial(initialMaterialId) || model.finishes[0]?.id || "";
 
   // Active states
   const [activeImageIdx, setActiveImageIdx] = useState(0);
@@ -138,11 +231,9 @@ export default function BoxPDPView({ model, relatedModels }: BoxPDPViewProps) {
   const handleMaterialSelect = (materialId: string) => {
     setActiveMaterialId(materialId);
 
-    // On Ring Box & Earring Box PDP: showcase which logo finish it is (Gold Foiling for all other materials)
-    if (isRingBox || isEarringBox) {
-      const targetFinish = getFinishForMaterial(materialId);
-      setActiveFinishId(targetFinish);
-    }
+    // Dynamic logo finish synchronization matching Ring Box PDP across all box PDPs
+    const targetFinish = getFinishForMaterial(materialId);
+    setActiveFinishId(targetFinish);
 
     if (model.materialImages) {
       const targetSrc =
@@ -183,18 +274,15 @@ export default function BoxPDPView({ model, relatedModels }: BoxPDPViewProps) {
   const handleFinishSelect = (finishId: string) => {
     setActiveFinishId(finishId);
 
-    // Ring Box & Earring Box PDP
-    if (isRingBox || isEarringBox) {
-      const finishMap = getFinishMap();
-      const target = finishMap ? finishMap[finishId] : undefined;
-      if (target) {
-        const foundIdx = model.images.findIndex((img) => img.src === target.src);
-        if (foundIdx !== -1) {
-          setActiveImageIdx(foundIdx);
-        }
-        setActiveMaterialId(target.matId);
+    // Dynamic product image & material synchronization matching Ring Box PDP across all box PDPs
+    const finishMap = getFinishMap();
+    const target = finishMap ? finishMap[finishId] : undefined;
+    if (target) {
+      const foundIdx = model.images.findIndex((img) => img.src === target.src);
+      if (foundIdx !== -1) {
+        setActiveImageIdx(foundIdx);
       }
-      return;
+      setActiveMaterialId(target.matId);
     }
   };
 
@@ -223,7 +311,7 @@ export default function BoxPDPView({ model, relatedModels }: BoxPDPViewProps) {
 
     if (
       !matchedMatId &&
-      (img.src.includes("velvet") || img.src.includes("vlevet")) &&
+      (img.src.toLowerCase().includes("velvet") || img.src.toLowerCase().includes("vlevet")) &&
       model.materials.some((m) => m.id === "hairy-velvet" || m.id === "velvet")
     ) {
       matchedMatId = model.materials.some((m) => m.id === "hairy-velvet") ? "hairy-velvet" : "velvet";
@@ -253,10 +341,8 @@ export default function BoxPDPView({ model, relatedModels }: BoxPDPViewProps) {
 
     if (matchedMatId) {
       setActiveMaterialId(matchedMatId);
-      if (isRingBox || isEarringBox) {
-        const targetFinish = getFinishForMaterial(matchedMatId);
-        setActiveFinishId(targetFinish);
-      }
+      const targetFinish = getFinishForMaterial(matchedMatId);
+      setActiveFinishId(targetFinish);
     }
   };
 
@@ -330,7 +416,7 @@ Selected Specs:
                     key={`desktop-${model.images[activeImageIdx]?.src || "main"}`}
                     src={model.images[activeImageIdx]?.src || model.images[0]?.src}
                     alt={model.images[activeImageIdx]?.alt || `${model.name} luxury jewellery box`}
-                    className={`absolute inset-0 h-full w-full ${isBraceletBox ? "object-contain bg-[#FAF8F5]" : "object-cover"} transition-transform duration-700 ease-out group-hover:scale-[1.02] animate-fade-in`}
+                    className={`absolute inset-0 h-full w-full ${isBraceletBox || isSetBox || isNecklaceBox || isPendantBox || isBangleBox ? "object-contain bg-[#FAF8F5]" : "object-cover"} transition-transform duration-700 ease-out group-hover:scale-[1.02] animate-fade-in`}
                     loading="eager"
                   />
 
@@ -341,7 +427,7 @@ Selected Specs:
                 </div>
 
                 {/* Sub-grid of thumbnails / gallery angles */}
-                <div className={`grid ${isBangleBox ? "grid-cols-4 sm:grid-cols-8" : "grid-cols-6"} gap-2.5 sm:gap-3`}>
+                <div className={`grid ${isSetBox || isNecklaceBox ? "grid-cols-5" : isBangleBox ? "grid-cols-4 sm:grid-cols-8" : "grid-cols-6"} gap-2.5 sm:gap-3`}>
                   {model.images.map((img, idx) => (
                     <button
                       key={idx}
@@ -375,7 +461,7 @@ Selected Specs:
                     key={`mobile-${model.images[activeImageIdx]?.src || "main"}`}
                     src={model.images[activeImageIdx]?.src || model.images[0]?.src}
                     alt={model.images[activeImageIdx]?.alt || `${model.name} luxury jewellery box`}
-                    className={`absolute inset-0 h-full w-full ${isBraceletBox ? "object-contain bg-[#FAF8F5]" : "object-cover"} animate-fade-in`}
+                    className={`absolute inset-0 h-full w-full ${isBraceletBox || isSetBox || isNecklaceBox || isPendantBox || isBangleBox ? "object-contain bg-[#FAF8F5]" : "object-cover"} animate-fade-in`}
                   />
                   <div className="absolute bottom-4 right-4 h-9 w-9 rounded-full bg-[#0F2744]/90 text-[#F6F0E8] flex items-center justify-center">
                     <Maximize2 className="h-4 w-4 text-[#C7A86A]" />

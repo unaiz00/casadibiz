@@ -38,13 +38,13 @@ const COLLECTIONS_LIST = [
 // Listing card preview images for /boxes/#jewellery-boxes (change here without affecting the PDP)
 export const BOX_LISTING_IMAGES: Record<string, string> = {
   "ring-box": "/assets/ring/ring_hairyvelvet.jpeg",                 // Card 1: Ring Box
-  "earring-box": "/assets/earring/earring_microfiber.jpeg",         // Card 2: Earring Box
-  "pendant-box": "/assets/chain_earring_blue_crocodile.jpeg",                              // Card 3: Pendant Box
+  "earring-box": "/assets/earring/premium_microfiber_earring.jpeg",         // Card 2: Earring Box
+  "pendant-box": "/assets/pendant/hairyvelvet_pendantbox.png",                              // Card 3: Pendant Box
   "chain-box": "/assets/chain/chain__matt grey_paint.jpeg",         // Card 4: Chain Box
-  "bracelet-box": "/assets/bracelet/bracelet_blue_crocodile.jpeg",    // Card 5: Bracelet Box
+  "bracelet-box": "/assets/bracelet/premium_microfiber_bracelet.jpeg",    // Card 5: Bracelet Box
   "bangle-box": "/assets/bangle/bangle_crocodile.jpeg",             // Card 6: Bangle Box
-  "necklace-box": "/assets/necklace/premium_microfiber_necklace.jpeg",                        // Card 7: Necklace Box
-  "set-box": "/assets/allsetbox/allset_special_premium_texture.jpeg",           // Card 8: Set Box
+  "necklace-box": "/assets/necklace/Ribbed_Necklace Box_Showcase.png",                        // Card 7: Necklace Box
+  "set-box": "/assets/allsetbox/allset_suede.jpeg",           // Card 8: Set Box
 };
 
 export default function JewelleryBoxesClient() {

@@ -281,12 +281,71 @@ export const STANDARD_BOX_FINISHES: BoxFinishOption[] = [
 export const RING_BOX_FINISHES: BoxFinishOption[] = STANDARD_BOX_FINISHES;
 export const BRACELET_BOX_FINISHES: BoxFinishOption[] = STANDARD_BOX_FINISHES;
 
+// Dedicated Set Box Materials (all 9 available exterior material options matching valid assets)
+export const SET_BOX_MATERIALS: BoxMaterialOption[] = [
+  BOX_MATERIAL_REGISTRY.velvet,
+  BOX_MATERIAL_REGISTRY["premium-suede"],
+  BOX_MATERIAL_REGISTRY["premium-microfiber"],
+  BOX_MATERIAL_REGISTRY.leatherette,
+  BOX_MATERIAL_REGISTRY["brown-crocodile"],
+  BOX_MATERIAL_REGISTRY["glossy-navy"],
+  BOX_MATERIAL_REGISTRY["matt-grey-paint"],
+  BOX_MATERIAL_REGISTRY["soft-touch"],
+  BOX_MATERIAL_REGISTRY["ribbed-texture"],
+];
+
+export const SET_BOX_FINISHES: BoxFinishOption[] = STANDARD_BOX_FINISHES;
+
+// Dedicated Necklace Box Materials (all 10 available exterior material options matching valid assets)
+export const NECKLACE_BOX_MATERIALS: BoxMaterialOption[] = [
+  BOX_MATERIAL_REGISTRY.velvet,
+  BOX_MATERIAL_REGISTRY["premium-suede"],
+  BOX_MATERIAL_REGISTRY.microfiber,
+  BOX_MATERIAL_REGISTRY["premium-microfiber"],
+  BOX_MATERIAL_REGISTRY.leatherette,
+  BOX_MATERIAL_REGISTRY["brown-crocodile"],
+  BOX_MATERIAL_REGISTRY["glossy-navy"],
+  BOX_MATERIAL_REGISTRY["matt-grey-paint"],
+  BOX_MATERIAL_REGISTRY["soft-touch"],
+  BOX_MATERIAL_REGISTRY["ribbed-texture"],
+];
+
+export const NECKLACE_BOX_FINISHES: BoxFinishOption[] = STANDARD_BOX_FINISHES;
+
+// Dedicated Pendant Box Materials (all 8 available exterior material options matching valid assets)
+export const PENDANT_BOX_MATERIALS: BoxMaterialOption[] = [
+  BOX_MATERIAL_REGISTRY.velvet,
+  BOX_MATERIAL_REGISTRY.microfiber,
+  BOX_MATERIAL_REGISTRY["premium-microfiber"],
+  BOX_MATERIAL_REGISTRY["brown-crocodile"],
+  BOX_MATERIAL_REGISTRY["glossy-navy"],
+  BOX_MATERIAL_REGISTRY["matt-grey-paint"],
+  BOX_MATERIAL_REGISTRY["soft-touch"],
+  BOX_MATERIAL_REGISTRY["ribbed-texture"],
+];
+
+export const PENDANT_BOX_FINISHES: BoxFinishOption[] = STANDARD_BOX_FINISHES;
+
+// Dedicated Chain Box Materials
+export const CHAIN_BOX_MATERIALS: BoxMaterialOption[] = [
+  BOX_MATERIAL_REGISTRY.velvet,
+  BOX_MATERIAL_REGISTRY.suede,
+  BOX_MATERIAL_REGISTRY.microfiber,
+  BOX_MATERIAL_REGISTRY["premium-microfiber"],
+  BOX_MATERIAL_REGISTRY.leatherette,
+  BOX_MATERIAL_REGISTRY["textured-paper"],
+  BOX_MATERIAL_REGISTRY["matt-grey-paint"],
+  BOX_MATERIAL_REGISTRY["soft-touch"],
+];
+
+export const CHAIN_BOX_FINISHES: BoxFinishOption[] = STANDARD_BOX_FINISHES;
+
 // Dedicated Earring Box Materials (all 12 available exterior material/texture options)
 export const EARRING_BOX_MATERIALS: BoxMaterialOption[] = [
   {
     id: "hairy-velvet",
     name: "Hairy Velvet",
-    image: "/assets/earring/earring_vlevet_champagne.jpeg",
+    image: "/assets/earring/Velvet_Earring_Box.png",
     description: "Plush champagne velvet delivering dramatic tactile pile and soft luster.",
   },
   {
@@ -544,10 +603,10 @@ export const BOX_MODELS_DATA: Record<string, BoxModel> = {
       { src: "/assets/earring/erpin_special_premium_texture.jpeg", alt: "CASA DI BIZ Earring Box - Ribbed Texture Edition", label: "Ribbed Texture" },
       { src: "/assets/earring/earring_vlevet_champagne2.jpeg", alt: "CASA DI BIZ Earring Box - Velvet Champagne Open View", label: "Champagne Velvet Open" },
       { src: "/assets/earring/earring3vlevet_champagne.jpeg", alt: "CASA DI BIZ Earring Box - Velvet Champagne Detail View", label: "Champagne Velvet Detail" },
-      { src: "/assets/earring/Velvet Earring Box.png", alt: "CASA DI BIZ Earring Box - Velvet Showcase Edition", label: "Velvet Showcase" },
+      { src: "/assets/earring/Velvet_Earring_Box.png", alt: "CASA DI BIZ Earring Box - Velvet Showcase Edition", label: "Velvet Showcase" },
     ],
     materialImages: {
-      "hairy-velvet": "/assets/earring/earring_vlevet_champagne.jpeg",
+      "hairy-velvet": "/assets/earring/Velvet_Earring_Box.png",
       "premium-suede": "/assets/earring/premium_Suede Earring Box Collage.png",
       microfiber: "/assets/earring/earring_microfiber.jpeg",
       "premium-microfiber": "/assets/earring/premium_microfiber_earring.jpeg",
@@ -561,7 +620,7 @@ export const BOX_MODELS_DATA: Record<string, BoxModel> = {
       "ribbed-texture": "/assets/earring/erpin_special_premium_texture.jpeg",
     },
     finishImages: {
-      "blind-debossed": "/assets/earring/earring_vlevet_champagne.jpeg",
+      "blind-debossed": "/assets/earring/Velvet_Earring_Box.png",
       "metallic-sticker": "/assets/earring/earring_Gray Jewelry Box Collage.png",
       "silver-foiling": "/assets/earring/earring_blueglossy.jpeg",
       "gold-foiling": "/assets/earring/erpin_special_premium_texture.jpeg",
@@ -618,9 +677,38 @@ export const BOX_MODELS_DATA: Record<string, BoxModel> = {
     shortDescription: "Bespoke jewellery packaging engineered for solitary and statement pendants with fitted retention channels.",
     longDescription: "Hand-crafted bespoke pendant box engineered with anti-tarnish interior cushions, hidden chain wells, and precision retaining clips for flawless presentation.",
     images: [
-      { src: "/assets/allim.jpeg", alt: "CASA DI BIZ Pendant Box", label: "Primary View" },
-      { src: "/assets/goodimm.jpeg", alt: "CASA DI BIZ Pendant Box Open", label: "Open View" },
+      { src: "/assets/pendant/hairyvelvet_pendantbox.png", alt: "CASA DI BIZ Pendant Box - Velvet Edition", label: "Velvet" },
+      { src: "/assets/pendant/pendant_microfiber.jpeg", alt: "CASA DI BIZ Pendant Box - Microfiber Edition", label: "Microfiber" },
+      { src: "/assets/pendant/premium_microfiber_pendant.jpeg", alt: "CASA DI BIZ Pendant Box - Premium Microfiber Edition", label: "Premium Microfiber" },
+      { src: "/assets/pendant/crocodile_pendant.png", alt: "CASA DI BIZ Pendant Box - Crocodile Texture Edition", label: "Crocodile Texture" },
+      { src: "/assets/pendant/bluglossy_pendant.png", alt: "CASA DI BIZ Pendant Box - Glossy Lacquer Edition", label: "Glossy Navy Blue" },
+      { src: "/assets/pendant/mattgrey_pendant.png", alt: "CASA DI BIZ Pendant Box - Matt Grey Paint Edition", label: "Matt Grey Paint" },
+      { src: "/assets/pendant/pendant_specialsoft.jpeg", alt: "CASA DI BIZ Pendant Box - Soft Touch Edition", label: "Soft Touch" },
+      { src: "/assets/pendant/pendant_ribbed.jpeg", alt: "CASA DI BIZ Pendant Box - Ribbed Texture Edition", label: "Ribbed Texture" },
+      { src: "/assets/pendant/chainpn1_velvetchamgne.jpeg", alt: "CASA DI BIZ Pendant Box - Velvet Champagne Multi-View", label: "Champagne Velvet Multi-View" },
+      { src: "/assets/pendant/chainp_velvetchamgne.jpeg", alt: "CASA DI BIZ Pendant Box - Velvet Champagne Closed", label: "Champagne Velvet Closed" },
+      { src: "/assets/pendant/chainpn2_velvetchamgne.jpeg", alt: "CASA DI BIZ Pendant Box - Velvet Champagne Open", label: "Champagne Velvet Open" },
     ],
+    materialImages: {
+      velvet: "/assets/pendant/hairyvelvet_pendantbox.png",
+      "hairy-velvet": "/assets/pendant/hairyvelvet_pendantbox.png",
+      microfiber: "/assets/pendant/pendant_microfiber.jpeg",
+      "premium-microfiber": "/assets/pendant/premium_microfiber_pendant.jpeg",
+      "brown-crocodile": "/assets/pendant/crocodile_pendant.png",
+      "blue-crocodile": "/assets/pendant/crocodile_pendant.png",
+      crocodile: "/assets/pendant/crocodile_pendant.png",
+      "glossy-navy": "/assets/pendant/bluglossy_pendant.png",
+      "blue-glossy": "/assets/pendant/bluglossy_pendant.png",
+      "matt-grey-paint": "/assets/pendant/mattgrey_pendant.png",
+      "soft-touch": "/assets/pendant/pendant_specialsoft.jpeg",
+      "ribbed-texture": "/assets/pendant/pendant_ribbed.jpeg",
+    },
+    finishImages: {
+      "blind-debossed": "/assets/pendant/hairyvelvet_pendantbox.png",
+      "metallic-sticker": "/assets/pendant/mattgrey_pendant.png",
+      "silver-foiling": "/assets/pendant/bluglossy_pendant.png",
+      "gold-foiling": "/assets/pendant/pendant_ribbed.jpeg",
+    },
     sizes: [
       { label: "10 × 10 × 6 cm", dimensions: "10 × 10 × 6 cm", description: "Standard Pendant Size" },
       { label: "8 × 10 × 5 cm", dimensions: "8 × 10 × 5 cm", description: "Rectangular Pendant Size" },
@@ -628,8 +716,8 @@ export const BOX_MODELS_DATA: Record<string, BoxModel> = {
       { label: "9 × 9 × 5 cm", dimensions: "9 × 9 × 5 cm", description: "Square Medallion Size" },
       { label: "10 × 10 × 5 cm", dimensions: "10 × 10 × 5 cm", description: "Deep Cushion Pendant Size" },
     ],
-    materials: STANDARD_BOX_MATERIALS,
-    finishes: STANDARD_BOX_FINISHES,
+    materials: PENDANT_BOX_MATERIALS,
+    finishes: PENDANT_BOX_FINISHES,
     specifications: {
       outerMaterial: "Available in multiple material options",
       innerMaterial: "Anti-Tarnish Certified Suede / Microfiber",
@@ -688,14 +776,20 @@ export const BOX_MODELS_DATA: Record<string, BoxModel> = {
       "matt-grey-paint": "/assets/chain/chain__matt grey_paint.jpeg",
       "soft-touch": "/assets/chain/chain_specialsoft.jpeg",
     },
+    finishImages: {
+      "blind-debossed": "/assets/chain/chainpn1_velvetchamgne.jpeg",
+      "metallic-sticker": "/assets/chain/chain__matt grey_paint.jpeg",
+      "gold-foiling": "/assets/chain/chain__special_premium_texture.jpeg",
+      "silver-foiling": "/assets/chain/chain_microfiber.jpeg",
+    },
     sizes: [
       { label: "9 × 13 × 7 cm", dimensions: "9 × 13 × 7 cm", description: "Compact Chain & Link Size" },
       { label: "22 × 5.5 × 3 cm", dimensions: "22 × 5.5 × 3 cm", description: "Linear Fine Chain Size" },
       { label: "24 × 6 × 4 cm", dimensions: "24 × 6 × 4 cm", description: "Medium Chain & Link Size" },
       { label: "26 × 7 × 4 cm", dimensions: "26 × 7 × 4 cm", description: "Grand Elongated Chain Size" },
     ],
-    materials: STANDARD_BOX_MATERIALS,
-    finishes: STANDARD_BOX_FINISHES,
+    materials: CHAIN_BOX_MATERIALS,
+    finishes: CHAIN_BOX_FINISHES,
     specifications: {
       outerMaterial: "Available in multiple material options",
       innerMaterial: "Anti-Tarnish Certified Suede / Microfiber",
@@ -766,6 +860,12 @@ export const BOX_MODELS_DATA: Record<string, BoxModel> = {
       "soft-touch": "/assets/bracelet/bracelet_specialsoft.jpeg",
       "ribbed-texture": "/assets/bracelet/ribbed_bracelet.png",
     },
+    finishImages: {
+      "blind-debossed": "/assets/bracelet/bracelet__hairyvelvet.jpeg",
+      "metallic-sticker": "/assets/bracelet/Mattgreypaint_bracelet.jpg",
+      "silver-foiling": "/assets/bracelet/blurglossy_bracelet.png",
+      "gold-foiling": "/assets/bracelet/ribbed_bracelet.png",
+    },
     sizes: [
       { label: "22 × 6.5 × 5 cm", dimensions: "22 × 6.5 × 5 cm", description: "Standard Tennis Bracelet Size" },
       { label: "23 × 7 × 3.5 cm", dimensions: "23 × 7 × 3.5 cm", description: "Slimline Bracelet Size" },
@@ -831,6 +931,12 @@ export const BOX_MODELS_DATA: Record<string, BoxModel> = {
       "hairy-velvet": "/assets/bangle/bangle_hairyvelvet.jpeg",
       "special-premium-texture": "/assets/bangle/bangle__special_premium_texture.jpeg",
     },
+    finishImages: {
+      "blind-debossed": "/assets/bangle/bangle_hairyvelvet.jpeg",
+      "metallic-sticker": "/assets/bangle/bangle__matt grey_paint.jpeg",
+      "silver-foiling": "/assets/bangle/bangle_blueglossy.jpeg",
+      "gold-foiling": "/assets/bangle/bangle__special_premium_texture.jpeg",
+    },
     sizes: [
       { label: "10 × 10 × 8 cm", dimensions: "10 × 10 × 8 cm", description: "Standard Single Bangle Size" },
       { label: "12 × 12 × 8 cm", dimensions: "12 × 12 × 8 cm", description: "Large / Wide Bangle Size" },
@@ -877,23 +983,39 @@ export const BOX_MODELS_DATA: Record<string, BoxModel> = {
     shortDescription: "Luxury presentation cases engineered to cradle statement colliers, chokers, and princess-cut necklaces.",
     longDescription: "Hand-crafted bespoke necklace box engineered with contoured bust inserts, perimeter retention tabs, and anti-tarnish lining to present statement jewellery with grandeur.",
     images: [
-      { src: "/assets/allllllimm.jpeg", alt: "CASA DI BIZ Necklace Box - Velvet Edition", label: "Velvet" },
-      { src: "/assets/necklace/necklace_suede.jpeg", alt: "CASA DI BIZ Necklace Box - Suede Edition", label: "Suede" },
+      { src: "/assets/necklace/hairyvelvet_necklace.png", alt: "CASA DI BIZ Necklace Box - Velvet Edition", label: "Velvet" },
+      { src: "/assets/necklace/necklace_suede.jpeg", alt: "CASA DI BIZ Necklace Box - Premium Suede Edition", label: "Premium Suede" },
       { src: "/assets/necklace/necklace_microfiber.jpeg", alt: "CASA DI BIZ Necklace Box - Microfiber Edition", label: "Microfiber" },
-      { src: "/assets/necklace/necklace_crocodile.jpeg", alt: "CASA DI BIZ Necklace Box - Leatherette Crocodile Edition", label: "Leatherette" },
-      { src: "/assets/necklace/premium_microfiber_necklace.jpeg", alt: "CASA DI BIZ Necklace Box - Special Paper Edition", label: "Special Paper" },
-      { src: "/assets/necklace/necklace_blueglossy.jpeg", alt: "CASA DI BIZ Necklace Box - Textured Paper Edition", label: "Textured Paper" },
-      { src: "/assets/allimages.jpeg", alt: "CASA DI BIZ Necklace Box Open", label: "Open View" },
+      { src: "/assets/necklace/premium_microfiber_necklace.jpeg", alt: "CASA DI BIZ Necklace Box - Premium Microfiber Edition", label: "Premium Microfiber" },
+      { src: "/assets/necklace/leather_necklace.png", alt: "CASA DI BIZ Necklace Box - Leatherette Edition", label: "Leatherette" },
+      { src: "/assets/necklace/necklace_crocodile.jpeg", alt: "CASA DI BIZ Necklace Box - Crocodile Texture Edition", label: "Crocodile Texture" },
+      { src: "/assets/necklace/necklace_blueglossy.jpeg", alt: "CASA DI BIZ Necklace Box - Glossy Lacquer Edition", label: "Glossy Navy Blue" },
+      { src: "/assets/necklace/matt_paint_necklace.png", alt: "CASA DI BIZ Necklace Box - Matt Grey Paint Edition", label: "Matt Grey Paint" },
+      { src: "/assets/necklace/specialsoft_necklace.png", alt: "CASA DI BIZ Necklace Box - Soft Touch Edition", label: "Soft Touch" },
+      { src: "/assets/necklace/Ribbed_Necklace Box_Showcase.png", alt: "CASA DI BIZ Necklace Box - Ribbed Texture Edition", label: "Ribbed Texture" },
     ],
     materialImages: {
-      velvet: "/assets/allllllimm.jpeg",
+      velvet: "/assets/necklace/hairyvelvet_necklace.png",
+      "hairy-velvet": "/assets/necklace/hairyvelvet_necklace.png",
+      "premium-suede": "/assets/necklace/necklace_suede.jpeg",
       suede: "/assets/necklace/necklace_suede.jpeg",
       microfiber: "/assets/necklace/necklace_microfiber.jpeg",
-      leatherette: "/assets/necklace/necklace_crocodile.jpeg",
-      "special-paper": "/assets/necklace/premium_microfiber_necklace.jpeg",
-      "textured-paper": "/assets/necklace/necklace_blueglossy.jpeg",
+      "premium-microfiber": "/assets/necklace/premium_microfiber_necklace.jpeg",
+      leatherette: "/assets/necklace/leather_necklace.png",
       "brown-crocodile": "/assets/necklace/necklace_crocodile.jpeg",
-      "hairy-velvet": "/assets/allllllimm.jpeg",
+      "blue-crocodile": "/assets/necklace/necklace_crocodile.jpeg",
+      crocodile: "/assets/necklace/necklace_crocodile.jpeg",
+      "glossy-navy": "/assets/necklace/necklace_blueglossy.jpeg",
+      "blue-glossy": "/assets/necklace/necklace_blueglossy.jpeg",
+      "matt-grey-paint": "/assets/necklace/matt_paint_necklace.png",
+      "soft-touch": "/assets/necklace/specialsoft_necklace.png",
+      "ribbed-texture": "/assets/necklace/Ribbed_Necklace Box_Showcase.png",
+    },
+    finishImages: {
+      "blind-debossed": "/assets/necklace/hairyvelvet_necklace.png",
+      "metallic-sticker": "/assets/necklace/matt_paint_necklace.png",
+      "silver-foiling": "/assets/necklace/necklace_blueglossy.jpeg",
+      "gold-foiling": "/assets/necklace/Ribbed_Necklace Box_Showcase.png",
     },
     sizes: [
       { label: "11.5 × 16 × 3.5 cm", dimensions: "11.5 × 16 × 3.5 cm", description: "Necklace S Size" },
@@ -902,8 +1024,8 @@ export const BOX_MODELS_DATA: Record<string, BoxModel> = {
       { label: "21 × 21 × 7 cm", dimensions: "21 × 21 × 7 cm", description: "Square Collier Necklace Size" },
       { label: "22 × 26 × 6 cm", dimensions: "22 × 26 × 6 cm", description: "Grand Statement Necklace Size" },
     ],
-    materials: STANDARD_BOX_MATERIALS,
-    finishes: STANDARD_BOX_FINISHES,
+    materials: NECKLACE_BOX_MATERIALS,
+    finishes: NECKLACE_BOX_FINISHES,
     specifications: {
       outerMaterial: "Available in multiple material options",
       innerMaterial: "Anti-Tarnish Certified Suede / Microfiber",
@@ -944,25 +1066,38 @@ export const BOX_MODELS_DATA: Record<string, BoxModel> = {
     longDescription: "Hand-crafted bespoke set box featuring custom-milled multi-compartment layouts for presenting coordinated necklace, earring, ring, and bangle or bracelet suites with opulent anti-tarnish interior lining.",
     images: [
       { src: "/assets/allsetbox/allset_hairyvelvet.jpeg", alt: "CASA DI BIZ Set Box - Velvet Edition", label: "Velvet" },
-      { src: "/assets/allsetbox/allset_suede.jpeg", alt: "CASA DI BIZ Set Box - Suede Edition", label: "Suede" },
-      { src: "/assets/allsetbox/premium_microfiber_allset.jpeg", alt: "CASA DI BIZ Set Box - Microfiber Edition", label: "Microfiber" },
+      { src: "/assets/allsetbox/allset_suede.jpeg", alt: "CASA DI BIZ Set Box - Premium Suede Edition", label: "Premium Suede" },
+      { src: "/assets/allsetbox/premium_microfiber_allset.jpeg", alt: "CASA DI BIZ Set Box - Premium Microfiber Edition", label: "Premium Microfiber" },
       { src: "/assets/allsetbox/allset_premiumleather.jpeg", alt: "CASA DI BIZ Set Box - Premium Leatherette Edition", label: "Leatherette" },
-      { src: "/assets/allsetbox/allset_specialsoft.jpeg", alt: "CASA DI BIZ Set Box - Special Paper Edition", label: "Special Paper" },
-      { src: "/assets/allsetbox/allset_special_premium_texture.jpeg", alt: "CASA DI BIZ Set Box - Textured Paper Edition", label: "Textured Paper" },
-      { src: "/assets/allsetbox/allset_blue_crocodile.jpeg", alt: "CASA DI BIZ Set Box - Crocodile Texture Edition", label: "Crocodile" },
-      { src: "/assets/goodimm.jpeg", alt: "CASA DI BIZ Set Box Open Layout", label: "Open View" },
-      { src: "/assets/allllllimm.jpeg", alt: "CASA DI BIZ Set Box Full Suite Open", label: "Full Suite View" },
+      { src: "/assets/allsetbox/allset_blue_crocodile.jpeg", alt: "CASA DI BIZ Set Box - Crocodile Texture Edition", label: "Crocodile Texture" },
+      { src: "/assets/allsetbox/Casa Di Biz Jewelry Box Collection.png", alt: "CASA DI BIZ Set Box - Glossy Lacquer Edition", label: "Glossy Navy Blue" },
+      { src: "/assets/allsetbox/Luxury Jewelry Box Collage.png", alt: "CASA DI BIZ Set Box - Matt Grey Paint Edition", label: "Matt Grey Paint" },
+      { src: "/assets/allsetbox/allset_specialsoft.jpeg", alt: "CASA DI BIZ Set Box - Soft Touch Edition", label: "Soft Touch" },
+      { src: "/assets/allsetbox/allset_ribbed.jpeg", alt: "CASA DI BIZ Set Box - Ribbed Texture Edition", label: "Ribbed Texture" },
+      { src: "/assets/allsetbox/Navy Velvet Jewelry Box Collection.png", alt: "CASA DI BIZ Set Box - Velvet Full Suite Open", label: "Velvet Full Suite" },
     ],
     materialImages: {
       velvet: "/assets/allsetbox/allset_hairyvelvet.jpeg",
+      "hairy-velvet": "/assets/allsetbox/allset_hairyvelvet.jpeg",
+      "premium-suede": "/assets/allsetbox/allset_suede.jpeg",
       suede: "/assets/allsetbox/allset_suede.jpeg",
+      "premium-microfiber": "/assets/allsetbox/premium_microfiber_allset.jpeg",
       microfiber: "/assets/allsetbox/premium_microfiber_allset.jpeg",
       leatherette: "/assets/allsetbox/allset_premiumleather.jpeg",
-      "special-paper": "/assets/allsetbox/allset_specialsoft.jpeg",
-      "textured-paper": "/assets/allsetbox/allset_special_premium_texture.jpeg",
       "brown-crocodile": "/assets/allsetbox/allset_blue_crocodile.jpeg",
-      "hairy-velvet": "/assets/allsetbox/allset_hairyvelvet.jpeg",
+      "blue-crocodile": "/assets/allsetbox/allset_blue_crocodile.jpeg",
+      crocodile: "/assets/allsetbox/allset_blue_crocodile.jpeg",
+      "glossy-navy": "/assets/allsetbox/Casa Di Biz Jewelry Box Collection.png",
+      "blue-glossy": "/assets/allsetbox/Casa Di Biz Jewelry Box Collection.png",
+      "matt-grey-paint": "/assets/allsetbox/Luxury Jewelry Box Collage.png",
       "soft-touch": "/assets/allsetbox/allset_specialsoft.jpeg",
+      "ribbed-texture": "/assets/allsetbox/allset_ribbed.jpeg",
+    },
+    finishImages: {
+      "blind-debossed": "/assets/allsetbox/allset_hairyvelvet.jpeg",
+      "metallic-sticker": "/assets/allsetbox/Luxury Jewelry Box Collage.png",
+      "silver-foiling": "/assets/allsetbox/Casa Di Biz Jewelry Box Collection.png",
+      "gold-foiling": "/assets/allsetbox/allset_ribbed.jpeg",
     },
     sizes: [
       { label: "18 × 24 × 6 cm", dimensions: "18 × 24 × 6 cm", description: "Set Box (S) Size" },
@@ -971,8 +1106,8 @@ export const BOX_MODELS_DATA: Record<string, BoxModel> = {
       { label: "27 × 34 × 8 cm", dimensions: "27 × 34 × 8 cm", description: "Full Set Suite Size" },
       { label: "30 × 40 × 9 cm", dimensions: "30 × 40 × 9 cm", description: "Grand Master Chest Size" },
     ],
-    materials: STANDARD_BOX_MATERIALS,
-    finishes: STANDARD_BOX_FINISHES,
+    materials: SET_BOX_MATERIALS,
+    finishes: SET_BOX_FINISHES,
     specifications: {
       outerMaterial: "Available in multiple material options",
       innerMaterial: "Anti-Tarnish Certified Suede / Microfiber",

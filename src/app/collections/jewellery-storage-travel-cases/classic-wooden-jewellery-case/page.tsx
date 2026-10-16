@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     title: "Classic Wooden Jewellery Case | CASA DI BIZ",
     description:
       "Handcrafted wooden jewellery storage cases for luxury boutique display and heirloom presentation.",
-    images: [{ url: "/assets/allsetbox/allset_special_premium_texture.jpeg" }],
+    images: [{ url: "/assets/storage/Classic_Wooden_Jewellery_Case.jpeg" }],
   },
 };
 
