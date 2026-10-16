@@ -154,6 +154,12 @@ export const BOX_MATERIAL_REGISTRY: Record<string, BoxMaterialOption> = {
     image: "/assets/materials/Ribbed Texture Fold.png",
     description: "Structured ribbed tactile paper weave delivering depth and modern texture.",
   },
+  "blue-crocodile": {
+    id: "blue-crocodile",
+    name: "Blue Crocodile",
+    image: "/assets/materials/Luxurious Brown Crocodile Leather Texture.png",
+    description: "Exotic relief crocodile grain in deep oceanic blue lacquer finish.",
+  },
 };
 
 // Supported Standard Catalogue Materials (matches the 6 core material visual cards)
@@ -233,6 +239,21 @@ export const BANGLE_BOX_MATERIALS: BoxMaterialOption[] = [
   },
 ];
 
+// Dedicated Bracelet Box Materials (11 exterior material options matching Ring Box PDP)
+export const BRACELET_BOX_MATERIALS: BoxMaterialOption[] = [
+  BOX_MATERIAL_REGISTRY.velvet,
+  BOX_MATERIAL_REGISTRY["premium-suede"],
+  BOX_MATERIAL_REGISTRY.microfiber,
+  BOX_MATERIAL_REGISTRY["premium-microfiber"],
+  BOX_MATERIAL_REGISTRY.leatherette,
+  BOX_MATERIAL_REGISTRY["special-paper"],
+  BOX_MATERIAL_REGISTRY["brown-crocodile"],
+  BOX_MATERIAL_REGISTRY["glossy-navy"],
+  BOX_MATERIAL_REGISTRY["matt-grey-paint"],
+  BOX_MATERIAL_REGISTRY["soft-touch"],
+  BOX_MATERIAL_REGISTRY["ribbed-texture"],
+];
+
 // Supported Catalogue Finishes
 export const STANDARD_BOX_FINISHES: BoxFinishOption[] = [
   {
@@ -258,6 +279,85 @@ export const STANDARD_BOX_FINISHES: BoxFinishOption[] = [
 ];
 
 export const RING_BOX_FINISHES: BoxFinishOption[] = STANDARD_BOX_FINISHES;
+export const BRACELET_BOX_FINISHES: BoxFinishOption[] = STANDARD_BOX_FINISHES;
+
+// Dedicated Earring Box Materials (all 12 available exterior material/texture options)
+export const EARRING_BOX_MATERIALS: BoxMaterialOption[] = [
+  {
+    id: "hairy-velvet",
+    name: "Hairy Velvet",
+    image: "/assets/earring/earring_vlevet_champagne.jpeg",
+    description: "Plush champagne velvet delivering dramatic tactile pile and soft luster.",
+  },
+  {
+    id: "premium-suede",
+    name: "Premium Suede",
+    image: "/assets/earring/premium_Suede Earring Box Collage.png",
+    description: "Soft micro-suede delivering refined matte elegance and anti-scratch protection.",
+  },
+  {
+    id: "microfiber",
+    name: "Microfiber",
+    image: "/assets/earring/earring_microfiber.jpeg",
+    description: "Ultra-fine weave Italian microfiber offering modern luxury and longevity.",
+  },
+  {
+    id: "premium-microfiber",
+    name: "Premium Microfiber",
+    image: "/assets/earring/premium_microfiber_earring.jpeg",
+    description: "Ultra-fine Italian microfiber offering plush handfeel and elevated luxury longevity.",
+  },
+  {
+    id: "leatherette",
+    name: "Leatherette",
+    image: "/assets/earring/erpin_premiumleather.jpeg",
+    description: "Smooth grain vegan leather with subtle sheen and structured durability.",
+  },
+  {
+    id: "special-paper",
+    name: "Special Paper",
+    image: "/assets/earring/earring_special.png",
+    description: "Pulp-dyed luxury fine paperboard with tactile woven and linen textures.",
+  },
+  {
+    id: "brown-crocodile",
+    name: "Crocodile Texture",
+    image: "/assets/earring/Luxury Crocodile Jewelry Box Showcase.png",
+    description: "Embossed exotic crocodile relief leatherette with distinctive luxury grain.",
+  },
+  {
+    id: "blue-crocodile",
+    name: "Blue Crocodile",
+    image: "/assets/earring/earring_blue_crocodile.jpeg",
+    description: "Exotic relief crocodile grain in deep oceanic blue lacquer finish.",
+  },
+  {
+    id: "glossy-navy",
+    name: "Glossy Navy Blue",
+    image: "/assets/earring/earring_blueglossy.jpeg",
+    description: "High-gloss polished lacquer coating delivering a deep navy architectural luster.",
+  },
+  {
+    id: "matt-grey-paint",
+    name: "Matt Grey Paint",
+    image: "/assets/earring/earring_Gray Jewelry Box Collage.png",
+    description: "Sleek contemporary lacquer-coated surface with smooth architectural finish.",
+  },
+  {
+    id: "soft-touch",
+    name: "Soft Touch",
+    image: "/assets/earring/erpin_specialsoft.jpeg",
+    description: "Fine nappa soft-touch leatherette with ultra-smooth tactile feel.",
+  },
+  {
+    id: "ribbed-texture",
+    name: "Ribbed Texture",
+    image: "/assets/earring/erpin_special_premium_texture.jpeg",
+    description: "Structured ribbed tactile paper weave delivering depth and modern texture.",
+  },
+];
+
+export const EARRING_BOX_FINISHES: BoxFinishOption[] = STANDARD_BOX_FINISHES;
 
 export const BOX_CATEGORIES_DATA: Record<string, BoxCategory> = {
   "ring-boxes": {
@@ -428,26 +528,43 @@ export const BOX_MODELS_DATA: Record<string, BoxModel> = {
     subtitle: "Bespoke Earring Presentation Case",
     heroHeadline: "Bespoke Jewellery Box for Earrings.",
     shortDescription: "Bespoke jewellery packaging designed for stud, drop, hoop, and statement earrings across multiple catalogue dimensions.",
-    longDescription: "Hand-crafted bespoke earring box engineered with anti-tarnish interior linings, precision tension tabs, and plush insert pads tailored for studs, chandelier drops, and fine earrings.",
+    longDescription: "Hand-crafted bespoke earring box engineered with anti-tarnish interior linings, precision tension tabs, and plush insert pads tailored for studs, chandelier drops, and fine earrings. Available across a comprehensive range of catalogue dimensions to match your brand requirements.",
     images: [
-      { src: "/assets/earring/earring_vlevet_champagne.jpeg", alt: "CASA DI BIZ Earring Box - Velvet Edition", label: "Velvet" },
-      { src: "/assets/earring/premium_microfiber_earring.jpeg", alt: "CASA DI BIZ Earring Box - Suede Edition", label: "Suede" },
+      { src: "/assets/earring/earring_vlevet_champagne.jpeg", alt: "CASA DI BIZ Earring Box - Hairy Velvet Edition", label: "Hairy Velvet" },
+      { src: "/assets/earring/premium_Suede Earring Box Collage.png", alt: "CASA DI BIZ Earring Box - Premium Suede Edition", label: "Premium Suede" },
       { src: "/assets/earring/earring_microfiber.jpeg", alt: "CASA DI BIZ Earring Box - Microfiber Edition", label: "Microfiber" },
-      { src: "/assets/earring/erpin_premiumleather.jpeg", alt: "CASA DI BIZ Earring Box - Premium Leatherette Edition", label: "Leatherette" },
-      { src: "/assets/earring/erpin_special_premium_texture.jpeg", alt: "CASA DI BIZ Earring Box - Textured Paper Edition", label: "Textured Paper" },
+      { src: "/assets/earring/premium_microfiber_earring.jpeg", alt: "CASA DI BIZ Earring Box - Premium Microfiber Edition", label: "Premium Microfiber" },
+      { src: "/assets/earring/erpin_premiumleather.jpeg", alt: "CASA DI BIZ Earring Box - Leatherette Edition", label: "Leatherette" },
+      { src: "/assets/earring/earring_special.png", alt: "CASA DI BIZ Earring Box - Special Paper Edition", label: "Special Paper" },
+      { src: "/assets/earring/Luxury Crocodile Jewelry Box Showcase.png", alt: "CASA DI BIZ Earring Box - Crocodile Texture Edition", label: "Crocodile Texture" },
+      { src: "/assets/earring/earring_blue_crocodile.jpeg", alt: "CASA DI BIZ Earring Box - Blue Crocodile Edition", label: "Blue Crocodile" },
+      { src: "/assets/earring/earring_blueglossy.jpeg", alt: "CASA DI BIZ Earring Box - Glossy Lacquer Edition", label: "Glossy Navy Blue" },
+      { src: "/assets/earring/earring_Gray Jewelry Box Collage.png", alt: "CASA DI BIZ Earring Box - Matt Grey Paint Edition", label: "Matt Grey Paint" },
       { src: "/assets/earring/erpin_specialsoft.jpeg", alt: "CASA DI BIZ Earring Box - Soft Touch Edition", label: "Soft Touch" },
+      { src: "/assets/earring/erpin_special_premium_texture.jpeg", alt: "CASA DI BIZ Earring Box - Ribbed Texture Edition", label: "Ribbed Texture" },
       { src: "/assets/earring/earring_vlevet_champagne2.jpeg", alt: "CASA DI BIZ Earring Box - Velvet Champagne Open View", label: "Champagne Velvet Open" },
       { src: "/assets/earring/earring3vlevet_champagne.jpeg", alt: "CASA DI BIZ Earring Box - Velvet Champagne Detail View", label: "Champagne Velvet Detail" },
+      { src: "/assets/earring/Velvet Earring Box.png", alt: "CASA DI BIZ Earring Box - Velvet Showcase Edition", label: "Velvet Showcase" },
     ],
     materialImages: {
-      velvet: "/assets/earring/earring_vlevet_champagne.jpeg",
-      suede: "/assets/earring/premium_microfiber_earring.jpeg",
-      microfiber: "/assets/earring/earring_microfiber.jpeg",
-      leatherette: "/assets/earring/erpin_premiumleather.jpeg",
-      "special-paper": "/assets/earring/premium_microfiber_earring.jpeg",
-      "textured-paper": "/assets/earring/erpin_special_premium_texture.jpeg",
-      "soft-touch": "/assets/earring/erpin_specialsoft.jpeg",
       "hairy-velvet": "/assets/earring/earring_vlevet_champagne.jpeg",
+      "premium-suede": "/assets/earring/premium_Suede Earring Box Collage.png",
+      microfiber: "/assets/earring/earring_microfiber.jpeg",
+      "premium-microfiber": "/assets/earring/premium_microfiber_earring.jpeg",
+      leatherette: "/assets/earring/erpin_premiumleather.jpeg",
+      "special-paper": "/assets/earring/earring_special.png",
+      "brown-crocodile": "/assets/earring/Luxury Crocodile Jewelry Box Showcase.png",
+      "blue-crocodile": "/assets/earring/earring_blue_crocodile.jpeg",
+      "glossy-navy": "/assets/earring/earring_blueglossy.jpeg",
+      "matt-grey-paint": "/assets/earring/earring_Gray Jewelry Box Collage.png",
+      "soft-touch": "/assets/earring/erpin_specialsoft.jpeg",
+      "ribbed-texture": "/assets/earring/erpin_special_premium_texture.jpeg",
+    },
+    finishImages: {
+      "blind-debossed": "/assets/earring/earring_vlevet_champagne.jpeg",
+      "metallic-sticker": "/assets/earring/earring_Gray Jewelry Box Collage.png",
+      "silver-foiling": "/assets/earring/earring_blueglossy.jpeg",
+      "gold-foiling": "/assets/earring/erpin_special_premium_texture.jpeg",
     },
     sizes: [
       { label: "10 × 10 × 6 cm", dimensions: "10 × 10 × 6 cm", description: "Standard Stud & Drop Earring Size" },
@@ -458,8 +575,8 @@ export const BOX_MODELS_DATA: Record<string, BoxModel> = {
       { label: "10 × 10 × 7 cm", dimensions: "10 × 10 × 7 cm", description: "Deep Profile Earring Size" },
       { label: "12 × 12 × 6 cm", dimensions: "12 × 12 × 6 cm", description: "Slim Square Earring Size" },
     ],
-    materials: STANDARD_BOX_MATERIALS,
-    finishes: STANDARD_BOX_FINISHES,
+    materials: EARRING_BOX_MATERIALS,
+    finishes: EARRING_BOX_FINISHES,
     specifications: {
       outerMaterial: "Available in multiple material options",
       innerMaterial: "Anti-Tarnish Certified Suede / Microfiber",
@@ -479,9 +596,12 @@ export const BOX_MODELS_DATA: Record<string, BoxModel> = {
     customisationFeatures: [
       { title: "Insert Geometry", description: "Pre-drilled holes, hidden drop slots, and hoop supports tailored to your collection." },
       { title: "Material & Colour", description: "Customised to your exact brand palette and texture requirements." },
+      { title: "Branding Finishes", description: "Gold foiling, silver foiling, blind debossing, or 3D metal crests." },
     ],
     faqs: [
       { q: "Can the insert support both studs and drop earrings?", a: "Yes, convertible and dual-purpose insert layouts are fully supported." },
+      { q: "Can we order custom sizes not listed above?", a: "Yes, bespoke tooling and custom mold dimensions can be manufactured for your brand." },
+      { q: "How are colours matched?", a: "Colours are custom matched to your brand PANTONE or textile swatch." },
     ],
   },
 
@@ -613,30 +733,38 @@ export const BOX_MODELS_DATA: Record<string, BoxModel> = {
     shortDescription: "Refined linear presentation cases engineered for tennis bracelets, link chains, and cuff pieces.",
     longDescription: "Hand-crafted bespoke bracelet box with custom fitted clips and plush recessed channels designed for tennis bracelets, structured cuffs, and link pieces.",
     images: [
-      { src: "/assets/bracelet/bracelet__hairyvelvet.jpeg", alt: "CASA DI BIZ Bracelet Box - Velvet Edition" },
-      { src: "/assets/bracelet/bracelet_suede.jpeg", alt: "CASA DI BIZ Bracelet Box - Suede Edition" },
-      { src: "/assets/bracelet/bracelet_microfiber.jpeg", alt: "CASA DI BIZ Bracelet Box - Microfiber Edition" },
-      { src: "/assets/bracelet/bracelet_premiumleather.jpeg", alt: "CASA DI BIZ Bracelet Box - Premium Leatherette Edition" },
-      { src: "/assets/bracelet/premiumpaper_suede_bracelet.jpeg", alt: "CASA DI BIZ Bracelet Box - Special Paper Edition" },
-      { src: "/assets/bracelet/premium_microfiber_bracelet.jpeg", alt: "CASA DI BIZ Bracelet Box - Textured Paper Edition" },
-      { src: "/assets/bracelet/bracelet_specialsoft.jpeg", alt: "CASA DI BIZ Bracelet Box - Soft Touch Edition" },
-      { src: "/assets/bracelet/bracelet_crocodile.jpeg", alt: "CASA DI BIZ Bracelet Box - Crocodile Texture Edition" },
-      { src: "/assets/bracelet/bracelet_blue_crocodile.jpeg", alt: "CASA DI BIZ Bracelet Box - Blue Crocodile Edition" },
-      { src: "/assets/bracelet/braceletvelvetchamgne3.jpeg", alt: "CASA DI BIZ Bracelet Box - Champagne Velvet Edition" },
-      { src: "/assets/bracelet/braceletvelvetchamgne.jpeg", alt: "CASA DI BIZ Bracelet Box - Champagne Velvet Open" },
-      { src: "/assets/bracelet/braceletvelvetchamgne2.jpeg", alt: "CASA DI BIZ Bracelet Box - Champagne Velvet Closed" },
+      { src: "/assets/bracelet/bracelet__hairyvelvet.jpeg", alt: "CASA DI BIZ Bracelet Box - Velvet Edition", label: "Velvet" },
+      { src: "/assets/bracelet/bracelet_suede.jpeg", alt: "CASA DI BIZ Bracelet Box - Premium Suede Edition", label: "Premium Suede" },
+      { src: "/assets/bracelet/bracelet_microfiber.jpeg", alt: "CASA DI BIZ Bracelet Box - Microfiber Edition", label: "Microfiber" },
+      { src: "/assets/bracelet/premium_microfiber_bracelet.jpeg", alt: "CASA DI BIZ Bracelet Box - Premium Microfiber Edition", label: "Premium Microfiber" },
+      { src: "/assets/bracelet/bracelet_premiumleather.jpeg", alt: "CASA DI BIZ Bracelet Box - Premium Leatherette Edition", label: "Leatherette" },
+      { src: "/assets/bracelet/premiumpaper_bracelet.jpeg", alt: "CASA DI BIZ Bracelet Box - Special Paper Edition", label: "Special Paper" },
+      { src: "/assets/bracelet/bracelet_crocodile.jpeg", alt: "CASA DI BIZ Bracelet Box - Crocodile Texture Edition", label: "Crocodile Texture" },
+      { src: "/assets/bracelet/blurglossy_bracelet.png", alt: "CASA DI BIZ Bracelet Box - Glossy Lacquer Edition", label: "Glossy Navy Blue" },
+      { src: "/assets/bracelet/Mattgreypaint_bracelet.jpg", alt: "CASA DI BIZ Bracelet Box - Matt Grey Paint Edition", label: "Matt Grey Paint" },
+      { src: "/assets/bracelet/bracelet_specialsoft.jpeg", alt: "CASA DI BIZ Bracelet Box - Soft Touch Edition", label: "Soft Touch" },
+      { src: "/assets/bracelet/ribbed_bracelet.png", alt: "CASA DI BIZ Bracelet Box - Ribbed Texture Edition", label: "Ribbed Texture" },
+      { src: "/assets/bracelet/bracelet_blue_crocodile.jpeg", alt: "CASA DI BIZ Bracelet Box - Blue Crocodile Edition", label: "Blue Crocodile" },
+      { src: "/assets/bracelet/braceletvelvetchamgne.jpeg", alt: "CASA DI BIZ Bracelet Box - Champagne Velvet Open", label: "Champagne Velvet Open" },
+      { src: "/assets/bracelet/braceletvelvetchamgne2.jpeg", alt: "CASA DI BIZ Bracelet Box - Champagne Velvet Closed", label: "Champagne Velvet Closed" },
+      { src: "/assets/bracelet/braceletvelvetchamgne3.jpeg", alt: "CASA DI BIZ Bracelet Box - Champagne Velvet Detail", label: "Champagne Velvet Detail" },
     ],
     materialImages: {
       velvet: "/assets/bracelet/bracelet__hairyvelvet.jpeg",
+      "hairy-velvet": "/assets/bracelet/bracelet__hairyvelvet.jpeg",
+      "premium-suede": "/assets/bracelet/bracelet_suede.jpeg",
       suede: "/assets/bracelet/bracelet_suede.jpeg",
       microfiber: "/assets/bracelet/bracelet_microfiber.jpeg",
+      "premium-microfiber": "/assets/bracelet/premium_microfiber_bracelet.jpeg",
       leatherette: "/assets/bracelet/bracelet_premiumleather.jpeg",
-      "special-paper": "/assets/bracelet/premiumpaper_suede_bracelet.jpeg",
-      "textured-paper": "/assets/bracelet/premium_microfiber_bracelet.jpeg",
+      "special-paper": "/assets/bracelet/premiumpaper_bracelet.jpeg",
       "brown-crocodile": "/assets/bracelet/bracelet_crocodile.jpeg",
-      "blue-crocodile": "/assets/bracelet/bracelet_blue_crocodile.jpeg",
-      "hairy-velvet": "/assets/bracelet/bracelet__hairyvelvet.jpeg",
+      crocodile: "/assets/bracelet/bracelet_crocodile.jpeg",
+      "glossy-navy": "/assets/bracelet/blurglossy_bracelet.png",
+      "blue-glossy": "/assets/bracelet/blurglossy_bracelet.png",
+      "matt-grey-paint": "/assets/bracelet/Mattgreypaint_bracelet.jpg",
       "soft-touch": "/assets/bracelet/bracelet_specialsoft.jpeg",
+      "ribbed-texture": "/assets/bracelet/ribbed_bracelet.png",
     },
     sizes: [
       { label: "22 × 6.5 × 5 cm", dimensions: "22 × 6.5 × 5 cm", description: "Standard Tennis Bracelet Size" },
@@ -645,8 +773,8 @@ export const BOX_MODELS_DATA: Record<string, BoxModel> = {
       { label: "26 × 8 × 7 cm", dimensions: "26 × 8 × 7 cm", description: "Grand / Wide Cuff Bracelet Size" },
       { label: "24 × 6.5 × 4.5 cm", dimensions: "24 × 6.5 × 4.5 cm", description: "Structured Link Bracelet Size" },
     ],
-    materials: STANDARD_BOX_MATERIALS,
-    finishes: STANDARD_BOX_FINISHES,
+    materials: BRACELET_BOX_MATERIALS,
+    finishes: BRACELET_BOX_FINISHES,
     specifications: {
       outerMaterial: "Available in multiple material options",
       innerMaterial: "Anti-Tarnish Certified Suede / Microfiber",
