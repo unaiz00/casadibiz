@@ -18,22 +18,6 @@ const FILTER_TABS = [
   { id: "set-boxes", label: "SET BOXES" },
 ];
 
-const COLLECTIONS_LIST = [
-  { name: "Box Collection 01 — Velvet Champagne", material: "Velvet Champagne", desc: "Plush silk velvet covering with champagne tone" },
-  { name: "Box Collection 02 — Premium Microfiber", material: "Premium Microfiber", desc: "Ultra-fine weave Italian microfiber texture" },
-  { name: "Box Collection 03 — Premium Suede", material: "Premium Suede", desc: "Soft micro-suede with anti-scratch surface" },
-  { name: "Box Collection 04 — Brown Crocodile Texture", material: "Brown Crocodile Texture", desc: "Embossed exotic crocodile relief leatherette" },
-  { name: "Box Collection 05 — Premium Suede / Special Paper", material: "Premium Suede / Special Paper", desc: "Dual material combination of suede and pulp-dyed paper" },
-  { name: "Box Collection 06 — Premium Suede / Special Paper", material: "Premium Suede / Special Paper", desc: "Refined paperboard shell with suede interior" },
-  { name: "Box Collection 07 — Matt Grey Paint", material: "Matt Grey Paint", desc: "Smooth lacquer finished wood composite" },
-  { name: "Box Collection 08 — Special Premium Texture", material: "Special Premium Texture", desc: "Structured geometric and linen grain stock" },
-  { name: "Box Collection 09 — Blue Crocodile Texture", material: "Blue Crocodile Texture", desc: "Deep navy embossed crocodile grain leatherette" },
-  { name: "Box Collection 10 — Premium Microfiber / Special Paper", material: "Premium Microfiber / Special Paper", desc: "Microfiber lining paired with fine paperboard outer" },
-  { name: "Box Collection 11 — Blue Glossy Finish", material: "Blue Glossy Finish", desc: "High-gloss reflective lacquer coat" },
-  { name: "Box Collection 12 — Hairy Velvet", material: "Hairy Velvet", desc: "Long-pile textured velvet with deep tactile hand" },
-  { name: "Box Collection 13 — Cartier / Special Soft Touch", material: "Cartier / Special Soft Touch", desc: "Fine nappa soft-touch leatherette" },
-  { name: "Box Collection 14 — Premium Leather", material: "Premium Leather", desc: "Structured edge-stitched full grain leatherette" },
-];
 
 // Listing card preview images for /boxes/#jewellery-boxes (change here without affecting the PDP)
 export const BOX_LISTING_IMAGES: Record<string, string> = {
@@ -195,43 +179,6 @@ export default function JewelleryBoxesClient() {
           )}
         </section>
 
-        {/* MATERIALS & FINISHES SECTION */}
-        <section className="w-full bg-[#F6F0E8] py-16 sm:py-24 border-t border-[#0F2744]/10">
-          <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
-            <div className="max-w-3xl mb-12 text-left sm:text-center sm:mx-auto">
-              <span className="text-[10px] tracking-[0.3em] text-[#C7A86A] font-semibold uppercase block mb-2">
-                TACTILE SURFACE OPTIONS
-              </span>
-              <h2 className="font-display text-3xl sm:text-4xl text-[#0F2744] font-normal leading-tight">
-                Materials & Finishes
-              </h2>
-              <p className="mt-3 text-sm text-[#0F2744]/75 font-light leading-relaxed">
-                Authentic coverings and fine finishes available across all CASA DI BIZ jewellery box collections.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5">
-              {COLLECTIONS_LIST.map((col) => (
-                <div
-                  key={col.name}
-                  className="bg-[#FAF8F5] p-5 rounded-[6px] border border-[#0F2744]/10 flex flex-col justify-between"
-                >
-                  <div>
-                    <span className="text-[10px] tracking-wider text-[#C7A86A] font-semibold uppercase block mb-1">
-                      {col.material}
-                    </span>
-                    <h3 className="font-display text-base text-[#0F2744] font-normal">
-                      {col.name}
-                    </h3>
-                  </div>
-                  <p className="mt-3 text-xs text-[#0F2744]/65 font-light">
-                    {col.desc}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
 
       </main>
 

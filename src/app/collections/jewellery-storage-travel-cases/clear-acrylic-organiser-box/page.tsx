@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     title: "Clear Acrylic Organiser Box | CASA DI BIZ",
     description:
       "Crystal clear optical acrylic jewellery organisers with removable velvet drawer trays for contemporary displays and vanities.",
-    images: [{ url: "/assets/boxim.jpeg" }],
+    images: [{ url: "/assets/storage/clearacrylic.jpeg" }],
   },
 };
 

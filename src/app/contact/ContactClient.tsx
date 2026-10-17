@@ -772,61 +772,94 @@ function InfoCard({
 
 /* ---------------- Enquiry modal ---------------- */
 
-type FormState = {
+const ENQUIRY_PRODUCT_CATEGORIES = [
+  "Jewellery Boxes",
+  "Corporate Boxes",
+  "Bags",
+  "Pouches",
+  "Ribbons",
+  "Wraps",
+  "Wedding Collections",
+  "Gifting Essentials",
+];
+
+const CONTACT_TIMES = [
+  "Anytime",
+  "Morning",
+  "Afternoon",
+  "Evening",
+];
+
+type EnquiryFormState = {
   name: string;
   company: string;
-  email: string;
+  productInterestedIn: string;
+  preferredMaterial: string;
+  estimatedQuantity: string;
+  bestTimeToContact: string;
+  additionalInfo: string;
   phone: string;
-  contactMethod: string;
-  category: string;
-  productType: string;
-  material: string;
-  color: string;
-  printing: string;
-  dimensions: string;
-  quantity: string;
-  deliveryDate: string;
-  reference: string;
-  notes: string;
 };
 
-const EMPTY: FormState = {
+const EMPTY_ENQUIRY: EnquiryFormState = {
   name: "",
   company: "",
-  email: "",
+  productInterestedIn: "",
+  preferredMaterial: "",
+  estimatedQuantity: "",
+  bestTimeToContact: "Anytime",
+  additionalInfo: "",
   phone: "",
-  contactMethod: "WhatsApp",
-  category: "",
-  productType: "",
-  material: "",
-  color: "",
-  printing: "",
-  dimensions: "",
-  quantity: "",
-  deliveryDate: "",
-  reference: "",
-  notes: "",
 };
 
 function EnquiryModal({ onClose }: { onClose: () => void }) {
-  const [form, setForm] = useState<FormState>(EMPTY);
-  const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({});
+  const [form, setForm] = useState<EnquiryFormState>(EMPTY_ENQUIRY);
+  const [errors, setErrors] = useState<Partial<Record<keyof EnquiryFormState, string>>>({});
 
-  const types = useMemo(() => (form.category ? PRODUCT_TYPES[form.category] ?? [] : []), [form.category]);
+  // Keyboard navigation: close on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [onClose]);
 
-  const set = (k: keyof FormState, v: string) =>
-    setForm((f) => ({ ...f, [k]: v, ...(k === "category" ? { productType: "" } : null) }));
+  const set = (k: keyof EnquiryFormState, v: string) => {
+    setForm((f) => ({ ...f, [k]: v }));
+    if (errors[k]) {
+      setErrors((e) => {
+        const next = { ...e };
+        delete next[k];
+        return next;
+      });
+    }
+  };
 
   function validate() {
-    const e: Partial<Record<keyof FormState, string>> = {};
-    if (!form.name.trim()) e.name = "Please enter your name.";
-    else if (form.name.trim().length > 100) e.name = "Name must be under 100 characters.";
-    if (!form.email.trim()) e.email = "Please enter your email address.";
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) e.email = "Enter a valid email address.";
-    if (!form.phone.trim()) e.phone = "Please enter your phone number.";
-    else if (!/^[+()\-\s\d]{7,20}$/.test(form.phone.trim())) e.phone = "Enter a valid phone number.";
-    if (!form.category) e.category = "Select a product category.";
-    if (!form.quantity.trim()) e.quantity = "Tell us the quantity you need.";
+    const e: Partial<Record<keyof EnquiryFormState, string>> = {};
+    if (!form.name.trim()) {
+      e.name = "Please enter your name.";
+    } else if (form.name.trim().length > 100) {
+      e.name = "Name must be under 100 characters.";
+    }
+
+    if (!form.productInterestedIn) {
+      e.productInterestedIn = "Please select a product category.";
+    }
+
+    if (!form.estimatedQuantity.trim()) {
+      e.estimatedQuantity = "Please provide an estimated quantity.";
+    }
+
+    if (!form.phone.trim()) {
+      e.phone = "Please enter your Phone or WhatsApp number.";
+    } else if (!/^[+()\-\s\d]{7,20}$/.test(form.phone.trim())) {
+      e.phone = "Enter a valid phone number (e.g. +971 50 123 4567).";
+    }
+
     setErrors(e);
     return Object.keys(e).length === 0;
   }
@@ -835,19 +868,12 @@ function EnquiryModal({ onClose }: { onClose: () => void }) {
     const rows: [string, string][] = [
       ["Name", form.name],
       ["Company", form.company],
-      ["Email", form.email],
-      ["Phone", form.phone],
-      ["Preferred Contact", form.contactMethod],
-      ["Product Category", form.category],
-      ["Product Type", form.productType],
-      ["Material", form.material],
-      ["Preferred Colour", form.color],
-      ["Printing / Branding", form.printing],
-      ["Dimensions / Size", form.dimensions],
-      ["Quantity Required", form.quantity],
-      ["Expected Delivery", form.deliveryDate],
-      ["Reference Image", form.reference],
-      ["Additional Requirements", form.notes],
+      ["Product Interested In", form.productInterestedIn],
+      ["Preferred Material", form.preferredMaterial],
+      ["Estimated Quantity", form.estimatedQuantity],
+      ["Best Time to Contact", form.bestTimeToContact],
+      ["Additional Information", form.additionalInfo],
+      ["Phone / WhatsApp Number", form.phone],
     ];
     const body = rows
       .filter(([, v]) => v && v.trim())
@@ -858,125 +884,188 @@ function EnquiryModal({ onClose }: { onClose: () => void }) {
 
   const sendWhatsApp = () => {
     if (!validate()) return;
+    const whatsappNum = COMPANY.whatsapp.replace(/\D/g, "");
     window.open(
-      `https://wa.me/${COMPANY.whatsapp}?text=${encodeURIComponent(buildMessage())}`,
+      `https://wa.me/${whatsappNum}?text=${encodeURIComponent(buildMessage())}`,
       "_blank",
-      "noopener,noreferrer",
+      "noopener,noreferrer"
     );
   };
 
   const sendEmail = () => {
     if (!validate()) return;
     window.location.href = `mailto:${COMPANY.email}?subject=${encodeURIComponent(
-      "Packaging Enquiry — " + (form.company.trim() || form.name.trim()),
+      "Packaging Enquiry — " + (form.company.trim() || form.name.trim())
     )}&body=${encodeURIComponent(buildMessage())}`;
   };
 
   return (
     <div
-      className="fixed inset-0 z-[100] bg-navy/90 backdrop-blur-sm flex items-start sm:items-center justify-center p-3 sm:p-6 overflow-y-auto animate-fade-up"
+      className="fixed inset-0 z-[100] bg-[#0F2744]/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 overflow-y-auto"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
-      aria-label="Enquiry form"
+      aria-labelledby="enquiry-modal-title"
     >
       <div
-        className="relative w-full max-w-3xl my-6 bg-ivory rounded-[16px] shadow-[0_40px_90px_-30px_rgba(0,0,0,0.6)] overflow-hidden"
+        className="relative w-full max-w-2xl my-auto bg-[#FAF8F5] rounded-2xl shadow-[0_30px_90px_rgba(0,0,0,0.45)] border border-[#C7A86A]/30 overflow-hidden flex flex-col max-h-[92vh]"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="bg-navy px-6 sm:px-9 py-7 sm:py-9">
-          <p className="text-[11px] tracking-[0.32em] text-gold font-medium">REQUEST A QUOTATION</p>
-          <h3 className="mt-3 font-display text-2xl sm:text-3xl text-cream leading-tight">
-            Tell us what you're <span className="italic text-gradient-gold">creating.</span>
+        {/* MODAL HEADER */}
+        <div className="relative bg-[#0F2744] px-6 sm:px-9 py-6 sm:py-7 border-b border-[#C7A86A]/20 shrink-0">
+          <span className="text-[10px] tracking-[0.3em] font-semibold text-[#C7A86A] uppercase block mb-1">
+            CASA DI BIZ — BESPOKE PACKAGING
+          </span>
+          <h3 id="enquiry-modal-title" className="font-display text-2xl sm:text-3xl text-[#FAF8F5] font-medium leading-tight">
+            Let’s Talk Packaging
           </h3>
+          <p className="mt-2 text-xs sm:text-sm text-[#FAF8F5]/80 font-light leading-relaxed max-w-lg">
+            Tell us a little about your requirements. Our team will be happy to assist you.
+          </p>
           <button
+            type="button"
             onClick={onClose}
-            aria-label="Close"
-            className="absolute top-5 right-5 h-10 w-10 rounded-full bg-cream/10 text-cream grid place-items-center hover:bg-gold hover:text-navy transition"
+            aria-label="Close dialog"
+            className="absolute top-5 right-5 sm:top-6 sm:right-6 h-9 w-9 sm:h-10 sm:w-10 rounded-full bg-white/10 text-[#FAF8F5] grid place-items-center hover:bg-[#C7A86A] hover:text-[#0F2744] transition-colors duration-200 cursor-pointer"
           >
-            <X className="h-5 w-5" />
+            <X className="h-4 w-4 sm:h-5 sm:w-5" />
           </button>
         </div>
 
-        <div className="px-6 sm:px-9 py-7 sm:py-9">
-          <div className="grid gap-5 sm:grid-cols-2">
-            <Field label="Your Name" required error={errors.name}>
-              <input className={inputCls} maxLength={100} value={form.name} onChange={(e) => set("name", e.target.value)} placeholder="Full name" />
-            </Field>
-            <Field label="Company Name (Optional)">
-              <input className={inputCls} maxLength={120} value={form.company} onChange={(e) => set("company", e.target.value)} placeholder="Brand or company" />
-            </Field>
-            <Field label="Email Address" required error={errors.email}>
-              <input type="email" className={inputCls} maxLength={255} value={form.email} onChange={(e) => set("email", e.target.value)} placeholder="you@brand.com" />
-            </Field>
-            <Field label="Phone Number" required error={errors.phone}>
-              <input type="tel" className={inputCls} maxLength={20} value={form.phone} onChange={(e) => set("phone", e.target.value)} placeholder="+971 50 000 0000" />
-            </Field>
-            <Field label="Preferred Contact Method">
-              <select className={inputCls} value={form.contactMethod} onChange={(e) => set("contactMethod", e.target.value)}>
-                {["WhatsApp", "Phone Call", "Email"].map((o) => <option key={o}>{o}</option>)}
-              </select>
-            </Field>
-            <Field label="Product Category" required error={errors.category}>
-              <select className={inputCls} value={form.category} onChange={(e) => set("category", e.target.value)}>
-                <option value="">Select a category</option>
-                {Object.keys(PRODUCT_TYPES).map((o) => <option key={o}>{o}</option>)}
-              </select>
-            </Field>
-            <Field label="Product Type">
-              <select className={inputCls} value={form.productType} onChange={(e) => set("productType", e.target.value)} disabled={!types.length}>
-                <option value="">{types.length ? "Select a type" : "Select a category first"}</option>
-                {types.map((o) => <option key={o}>{o}</option>)}
-              </select>
-            </Field>
-            <Field label="Material">
-              <input className={inputCls} maxLength={120} value={form.material} onChange={(e) => set("material", e.target.value)} placeholder="e.g. rigid board, velvet, kraft" />
-            </Field>
-            <Field label="Preferred Color">
-              <input className={inputCls} maxLength={80} value={form.color} onChange={(e) => set("color", e.target.value)} placeholder="e.g. navy with gold foil" />
-            </Field>
-            <Field label="Printing / Branding">
-              <select className={inputCls} value={form.printing} onChange={(e) => set("printing", e.target.value)}>
-                <option value="">Select an option</option>
-                {PRINTING.map((o) => <option key={o}>{o}</option>)}
-              </select>
-            </Field>
-            <Field label="Dimensions / Size">
-              <input className={inputCls} maxLength={120} value={form.dimensions} onChange={(e) => set("dimensions", e.target.value)} placeholder="L × W × H in cm" />
-            </Field>
-            <Field label="Quantity Required" required error={errors.quantity}>
-              <input className={inputCls} maxLength={40} value={form.quantity} onChange={(e) => set("quantity", e.target.value)} placeholder="e.g. 500 units" />
-            </Field>
-            <Field label="Expected Delivery Date">
-              <input type="date" className={inputCls} value={form.deliveryDate} onChange={(e) => set("deliveryDate", e.target.value)} />
-            </Field>
-            <Field label="Reference Image Link (Optional)">
-              <input className={inputCls} maxLength={300} value={form.reference} onChange={(e) => set("reference", e.target.value)} placeholder="Paste a link, or attach in WhatsApp" />
-            </Field>
-            <div className="sm:col-span-2">
-              <Field label="Additional Requirements">
-                <textarea rows={4} className={`${inputCls} resize-none`} maxLength={1000} value={form.notes} onChange={(e) => set("notes", e.target.value)} placeholder="Anything else we should know" />
+        {/* MODAL BODY (Scrollable) */}
+        <div className="px-6 sm:px-9 py-6 sm:py-7 overflow-y-auto overscroll-contain">
+          <form onSubmit={(e) => { e.preventDefault(); sendWhatsApp(); }} noValidate>
+            <div className="grid gap-4 sm:gap-5 grid-cols-1 sm:grid-cols-2">
+              {/* 1. Your Name — required */}
+              <Field label="Your Name" required error={errors.name}>
+                <input
+                  type="text"
+                  className={inputCls}
+                  maxLength={100}
+                  value={form.name}
+                  onChange={(e) => set("name", e.target.value)}
+                  placeholder="Full name"
+                  autoFocus
+                />
               </Field>
-            </div>
-          </div>
 
-          <div className="mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4">
-            <button
-              onClick={sendWhatsApp}
-              className="btn-gold btn-gold-hover inline-flex items-center justify-center gap-3 rounded-full px-8 py-4 text-[11px] tracking-[0.24em] font-semibold bg-gold text-navy"
-            >
-              <MessageCircle className="h-4 w-4" /> SEND ENQUIRY VIA WHATSAPP
-            </button>
-            <button
-              onClick={sendEmail}
-              className="inline-flex items-center justify-center gap-3 rounded-full px-8 py-4 text-[11px] tracking-[0.24em] font-medium border border-gold/60 text-navy hover:bg-gold hover:text-navy transition"
-            >
-              <Mail className="h-4 w-4" /> SEND EMAIL ENQUIRY
-            </button>
-          </div>
-          <p className="mt-4 text-xs text-muted-luxe">
-            Attach reference images directly in the WhatsApp chat after the message opens.
-          </p>
+              {/* 2. Company Name — optional */}
+              <Field label="Company Name">
+                <input
+                  type="text"
+                  className={inputCls}
+                  maxLength={120}
+                  value={form.company}
+                  onChange={(e) => set("company", e.target.value)}
+                  placeholder="Brand or company name"
+                />
+              </Field>
+
+              {/* 3. Product Interested In — required dropdown */}
+              <Field label="Product Interested In" required error={errors.productInterestedIn}>
+                <select
+                  className={`${inputCls} cursor-pointer`}
+                  value={form.productInterestedIn}
+                  onChange={(e) => set("productInterestedIn", e.target.value)}
+                >
+                  <option value="">Select a product category</option>
+                  {ENQUIRY_PRODUCT_CATEGORIES.map((cat) => (
+                    <option key={cat} value={cat}>
+                      {cat}
+                    </option>
+                  ))}
+                </select>
+              </Field>
+
+              {/* 4. Preferred Material — optional */}
+              <Field label="Preferred Material">
+                <input
+                  type="text"
+                  className={inputCls}
+                  maxLength={120}
+                  value={form.preferredMaterial}
+                  onChange={(e) => set("preferredMaterial", e.target.value)}
+                  placeholder="e.g. Rigid board, velvet, kraft, satin"
+                />
+              </Field>
+
+              {/* 5. Estimated Quantity — required */}
+              <Field label="Estimated Quantity" required error={errors.estimatedQuantity}>
+                <input
+                  type="text"
+                  className={inputCls}
+                  maxLength={60}
+                  value={form.estimatedQuantity}
+                  onChange={(e) => set("estimatedQuantity", e.target.value)}
+                  placeholder="e.g. 500 units"
+                />
+              </Field>
+
+              {/* 6. Best Time to Contact You — dropdown */}
+              <Field label="Best Time to Contact You">
+                <select
+                  className={`${inputCls} cursor-pointer`}
+                  value={form.bestTimeToContact}
+                  onChange={(e) => set("bestTimeToContact", e.target.value)}
+                >
+                  {CONTACT_TIMES.map((time) => (
+                    <option key={time} value={time}>
+                      {time}
+                    </option>
+                  ))}
+                </select>
+              </Field>
+
+              {/* 7. Additional Information — optional textarea */}
+              <div className="sm:col-span-2">
+                <Field label="Additional Information">
+                  <textarea
+                    rows={3}
+                    className={`${inputCls} resize-none`}
+                    maxLength={1000}
+                    value={form.additionalInfo}
+                    onChange={(e) => set("additionalInfo", e.target.value)}
+                    placeholder="Tell us about your size requirements, branding, design ideas, or timelines..."
+                  />
+                </Field>
+              </div>
+
+              {/* 8. Phone / WhatsApp Number — required */}
+              <div className="sm:col-span-2">
+                <Field label="Phone / WhatsApp Number" required error={errors.phone}>
+                  <input
+                    type="tel"
+                    className={inputCls}
+                    maxLength={25}
+                    value={form.phone}
+                    onChange={(e) => set("phone", e.target.value)}
+                    placeholder="+971 50 000 0000"
+                  />
+                </Field>
+              </div>
+            </div>
+
+            {/* ACTION BUTTONS */}
+            <div className="mt-7 pt-5 border-t border-[#C7A86A]/20 flex flex-col sm:flex-row gap-3">
+              <button
+                type="button"
+                onClick={sendWhatsApp}
+                className="flex-1 inline-flex items-center justify-center gap-2.5 rounded-full px-6 py-3.5 text-xs tracking-[0.2em] font-semibold bg-[#C7A86A] text-[#0F2744] hover:bg-[#b09156] transition-all duration-300 shadow-sm cursor-pointer"
+              >
+                <MessageCircle className="h-4 w-4" /> SEND VIA WHATSAPP
+              </button>
+              <button
+                type="button"
+                onClick={sendEmail}
+                className="flex-1 inline-flex items-center justify-center gap-2.5 rounded-full px-6 py-3.5 text-xs tracking-[0.2em] font-semibold border border-[#0F2744]/30 text-[#0F2744] hover:border-[#0F2744] hover:bg-[#0F2744] hover:text-[#FAF8F5] transition-all duration-300 cursor-pointer"
+              >
+                <Mail className="h-4 w-4" /> SEND VIA EMAIL
+              </button>
+            </div>
+            <p className="mt-3.5 text-center text-[11px] text-[#0F2744]/65 font-light">
+              Our packaging specialists review every enquiry and reply within 1 business day.
+            </p>
+          </form>
         </div>
       </div>
     </div>
@@ -984,7 +1073,7 @@ function EnquiryModal({ onClose }: { onClose: () => void }) {
 }
 
 const inputCls =
-  "w-full rounded-[10px] border border-border-luxe bg-cream/60 px-4 py-3 text-sm text-navy placeholder:text-muted-luxe/70 outline-none focus:border-gold focus:bg-cream transition";
+  "w-full rounded-[10px] border border-[#C7A86A]/30 bg-white px-4 py-3 text-sm text-[#0F2744] placeholder:text-[#0F2744]/40 outline-none focus:border-[#C7A86A] focus:ring-1 focus:ring-[#C7A86A]/40 transition shadow-xs";
 
 function Field({
   label,
@@ -999,12 +1088,12 @@ function Field({
 }) {
   return (
     <label className="block">
-      <span className="block text-[10px] tracking-[0.24em] font-semibold text-navy/70 mb-2 uppercase">
+      <span className="block text-[10px] tracking-[0.24em] font-semibold text-[#0F2744]/75 mb-1.5 uppercase">
         {label}
-        {required && <span className="text-gold"> *</span>}
+        {required && <span className="text-[#C7A86A] font-bold"> *</span>}
       </span>
       {children}
-      {error && <span className="mt-1.5 block text-xs text-red-600">{error}</span>}
+      {error && <span className="mt-1 block text-xs text-red-600 font-medium">{error}</span>}
     </label>
   );
 }

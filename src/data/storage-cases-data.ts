@@ -255,16 +255,15 @@ export const STORAGE_CASE_PRODUCTS: Record<string, StorageCaseProduct> = {
     slug: "clear-acrylic-organiser-box",
     title: "Clear Acrylic Organiser Box",
     subtitle: "Optical-Grade Acrylic with Velvet Inserts",
-    positioning: "Museum-grade clear acrylic boxes providing 360-degree visibility with velvet inserts.",
+    positioning: "",
     description:
       "Museum-quality optical acrylic jewellery box providing 360-degree clarity. Fitted with slide-out velvet-cushioned trays, dust-sealed magnetic lid closures, and scratch-resistant polished bevelled edges for contemporary retail displays and premium vanity presentation.",
     category: "JEWELLERY STORAGE & TRAVEL CASES",
     eyebrow: "CONTEMPORARY ACRYLIC • BESPOKE MANUFACTURE",
-    // Current placeholder from public/assets/ — easily replaceable with final product shoot
-    image: "/assets/storage/Leatherette_Stackable_Trays.jpeg",
+    image: "/assets/storage/clearacrylic.jpeg",
     images: [
       {
-        src: "/assets/storage/Leatherette_Stackable_Trays.jpeg",
+        src: "/assets/storage/clearacrylic.jpeg",
         alt: "CASA DI BIZ Clear Acrylic Organiser Box",
         label: "Clear Acrylic Box View",
       },

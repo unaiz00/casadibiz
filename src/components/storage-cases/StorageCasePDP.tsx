@@ -172,9 +172,11 @@ export default function StorageCasePDP({
                 <p className="mt-2 text-sm text-[#0F2744]/75 font-medium tracking-wide">
                   {product.subtitle}
                 </p>
-                <p className="mt-3 text-xs sm:text-[13px] text-[#0F2744]/70 italic border-l-2 border-[#C7A86A]/50 pl-3">
-                  {product.positioning}
-                </p>
+                {product.positioning && (
+                  <p className="mt-3 text-xs sm:text-[13px] text-[#0F2744]/70 italic border-l-2 border-[#C7A86A]/50 pl-3">
+                    {product.positioning}
+                  </p>
+                )}
               </div>
 
               {/* Description Paragraph */}
