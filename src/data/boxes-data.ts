@@ -187,54 +187,54 @@ export const RING_BOX_MATERIALS: BoxMaterialOption[] = [
   BOX_MATERIAL_REGISTRY["ribbed-texture"],
 ];
 
-// Dedicated Bangle Box Materials (all 8 available exterior material/finish options)
+// Dedicated Bangle Box Materials (exterior material/texture options matching Ring Box PDP)
 export const BANGLE_BOX_MATERIALS: BoxMaterialOption[] = [
   {
     id: "matt-grey-paint",
     name: "Matt Grey Paint",
-    image: "/assets/bangle/bangle__matt grey_paint.jpeg",
+    image: "/assets/materials/Curled Matte Gray Material Wave.png",
     description: "Sleek contemporary lacquer-coated surface with smooth architectural finish.",
   },
   {
     id: "crocodile",
     name: "Crocodile",
-    image: "/assets/bangle/bangle_crocodile.jpeg",
+    image: "/assets/materials/Luxurious Brown Crocodile Leather Texture.png",
     description: "Embossed exotic crocodile relief leatherette with distinctive luxury grain.",
   },
   {
     id: "suede",
     name: "Suede",
-    image: "/assets/bangle/bangle_suede.jpeg",
+    image: "/assets/materials/premium_suede.png",
     description: "Soft micro-suede delivering refined matte elegance and anti-scratch protection.",
   },
   {
     id: "microfiber",
     name: "Microfiber",
-    image: "/assets/bangle/bangle_microfiber.jpeg",
+    image: "/assets/materials/microfiber.png",
     description: "Ultra-fine weave Italian microfiber offering modern luxury and longevity.",
   },
   {
     id: "premium-microfiber",
     name: "Premium Microfiber",
-    image: "/assets/bangle/premium_microfiber_bangle.jpeg",
+    image: "/assets/materials/premium_micro_fiber.png",
     description: "Ultra-fine Italian microfiber offering plush handfeel and elevated luxury longevity.",
   },
   {
     id: "blue-glossy",
     name: "Blue Glossy",
-    image: "/assets/bangle/bangle_blueglossy.jpeg",
+    image: "/assets/materials/Glossy Navy Blue Fold.png",
     description: "High-gloss polished lacquer coating delivering a deep navy architectural luster.",
   },
   {
     id: "hairy-velvet",
     name: "Hairy Velvet",
-    image: "/assets/bangle/bangle_hairyvelvet.jpeg",
+    image: "/assets/materials/hairy_velvet.png",
     description: "High-density long-pile velvet delivering dramatic visual richness.",
   },
   {
     id: "special-premium-texture",
     name: "Special Premium Texture",
-    image: "/assets/bangle/bangle__special_premium_texture.jpeg",
+    image: "/assets/materials/Ribbed Texture Fold.png",
     description: "Fine relief textured surface delivering elevated tactile depth and modern aesthetics.",
   },
 ];
@@ -424,7 +424,7 @@ export const BOX_CATEGORIES_DATA: Record<string, BoxCategory> = {
     name: "Ring Boxes",
     headline: "Bespoke jewellery boxes crafted for rings in distinctive materials and sizes.",
     shortDescription: "Precision plush inserts and spring closures engineered for fine rings.",
-    heroImage: "/assets/boxim.jpeg",
+    heroImage: "/assets/earring_special.png",
     modelSlugs: ["ring-box"],
   },
   "earring-boxes": {
@@ -589,7 +589,7 @@ export const BOX_MODELS_DATA: Record<string, BoxModel> = {
     shortDescription: "Bespoke jewellery packaging designed for stud, drop, hoop, and statement earrings across multiple catalogue dimensions.",
     longDescription: "Hand-crafted bespoke earring box engineered with anti-tarnish interior linings, precision tension tabs, and plush insert pads tailored for studs, chandelier drops, and fine earrings. Available across a comprehensive range of catalogue dimensions to match your brand requirements.",
     images: [
-      { src: "/assets/earring/earring_vlevet_champagne.jpeg", alt: "CASA DI BIZ Earring Box - Hairy Velvet Edition", label: "Hairy Velvet" },
+      { src: "/assets/earring/Velvet_Earring_Box.png", alt: "CASA DI BIZ Earring Box - Velvet Showcase Edition", label: "Velvet Showcase" },
       { src: "/assets/earring/premium_Suede Earring Box Collage.png", alt: "CASA DI BIZ Earring Box - Premium Suede Edition", label: "Premium Suede" },
       { src: "/assets/earring/earring_microfiber.jpeg", alt: "CASA DI BIZ Earring Box - Microfiber Edition", label: "Microfiber" },
       { src: "/assets/earring/premium_microfiber_earring.jpeg", alt: "CASA DI BIZ Earring Box - Premium Microfiber Edition", label: "Premium Microfiber" },
@@ -601,9 +601,7 @@ export const BOX_MODELS_DATA: Record<string, BoxModel> = {
       { src: "/assets/earring/earring_Gray Jewelry Box Collage.png", alt: "CASA DI BIZ Earring Box - Matt Grey Paint Edition", label: "Matt Grey Paint" },
       { src: "/assets/earring/erpin_specialsoft.jpeg", alt: "CASA DI BIZ Earring Box - Soft Touch Edition", label: "Soft Touch" },
       { src: "/assets/earring/erpin_special_premium_texture.jpeg", alt: "CASA DI BIZ Earring Box - Ribbed Texture Edition", label: "Ribbed Texture" },
-      { src: "/assets/earring/earring_vlevet_champagne2.jpeg", alt: "CASA DI BIZ Earring Box - Velvet Champagne Open View", label: "Champagne Velvet Open" },
-      { src: "/assets/earring/earring3vlevet_champagne.jpeg", alt: "CASA DI BIZ Earring Box - Velvet Champagne Detail View", label: "Champagne Velvet Detail" },
-      { src: "/assets/earring/Velvet_Earring_Box.png", alt: "CASA DI BIZ Earring Box - Velvet Showcase Edition", label: "Velvet Showcase" },
+      { src: "/assets/earring/earring_vlevet_champagne.jpeg", alt: "CASA DI BIZ Earring Box - Hairy Velvet Edition", label: "Hairy Velvet" },
     ],
     materialImages: {
       "hairy-velvet": "/assets/earring/Velvet_Earring_Box.png",

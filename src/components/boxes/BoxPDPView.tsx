@@ -417,7 +417,7 @@ Selected Specs:
                     key={`desktop-${model.images[activeImageIdx]?.src || "main"}`}
                     src={model.images[activeImageIdx]?.src || model.images[0]?.src}
                     alt={model.images[activeImageIdx]?.alt || `${model.name} luxury jewellery box`}
-                    className={`absolute inset-0 h-full w-full ${isBraceletBox || isSetBox || isNecklaceBox || isPendantBox || isBangleBox ? "object-contain bg-[#FAF8F5]" : "object-cover"} transition-transform duration-700 ease-out group-hover:scale-[1.02] animate-fade-in`}
+                    className={`absolute inset-0 h-full w-full ${isBraceletBox || isSetBox || isNecklaceBox || isPendantBox ? "object-contain bg-[#FAF8F5]" : "object-cover"} transition-transform duration-700 ease-out group-hover:scale-[1.02] animate-fade-in`}
                     loading="eager"
                   />
 
@@ -428,7 +428,7 @@ Selected Specs:
                 </div>
 
                 {/* Sub-grid of thumbnails / gallery angles */}
-                <div className={`grid ${isSetBox || isNecklaceBox ? "grid-cols-5" : isBangleBox ? "grid-cols-4 sm:grid-cols-8" : "grid-cols-6"} gap-2.5 sm:gap-3`}>
+                <div className={`grid ${isSetBox || isNecklaceBox ? "grid-cols-5" : "grid-cols-6"} gap-2.5 sm:gap-3`}>
                   {model.images.map((img, idx) => (
                     <button
                       key={idx}
@@ -462,7 +462,7 @@ Selected Specs:
                     key={`mobile-${model.images[activeImageIdx]?.src || "main"}`}
                     src={model.images[activeImageIdx]?.src || model.images[0]?.src}
                     alt={model.images[activeImageIdx]?.alt || `${model.name} luxury jewellery box`}
-                    className={`absolute inset-0 h-full w-full ${isBraceletBox || isSetBox || isNecklaceBox || isPendantBox || isBangleBox ? "object-contain bg-[#FAF8F5]" : "object-cover"} animate-fade-in`}
+                    className={`absolute inset-0 h-full w-full ${isBraceletBox || isSetBox || isNecklaceBox || isPendantBox ? "object-contain bg-[#FAF8F5]" : "object-cover"} animate-fade-in`}
                   />
                   <div className="absolute bottom-4 right-4 h-9 w-9 rounded-full bg-[#0F2744]/90 text-[#F6F0E8] flex items-center justify-center">
                     <Maximize2 className="h-4 w-4 text-[#C7A86A]" />
@@ -488,87 +488,50 @@ Selected Specs:
                   ))}
                 </div>
 
-                {/* Mobile Material & Texture / Finish Selector - Directly after Gallery & Thumbnails */}
+                {/* Mobile Material & Texture Selector - Directly after Gallery & Thumbnails */}
                 <div className="w-full mt-2 pt-3 border-t border-[#0F2744]/10">
                   <div className="flex justify-between items-baseline mb-2.5">
                     <span className="text-[11px] font-semibold text-[#0F2744] tracking-[0.2em] uppercase">
-                      {isBangleBox ? "MATERIAL & FINISH" : "MATERIAL & TEXTURE"}
+                      MATERIAL & TEXTURE
                     </span>
                     <span className="text-[11px] text-[#C7A86A] font-semibold">
                       {activeMaterial?.name}
                     </span>
                   </div>
-                  {isBangleBox ? (
-                    <div className="grid grid-cols-2 gap-2 sm:gap-2.5 w-full">
-                      {model.materials.map((mat) => {
-                        const isSelected = activeMaterialId === mat.id;
-                        return (
-                          <button
-                            key={mat.id}
-                            type="button"
-                            onClick={() => handleMaterialSelect(mat.id)}
-                            aria-label={`Select ${mat.name} material`}
-                            className={`group flex flex-col items-center p-2 rounded-xl border text-center transition-all duration-200 cursor-pointer min-w-0 ${
-                              isSelected
-                                ? "border-[#C7A86A] bg-[#F6F0E8] ring-1 ring-[#C7A86A] shadow-xs"
-                                : "border-[#C7A86A]/20 bg-[#FAF8F5] hover:border-[#C7A86A]/50 hover:bg-[#F6F0E8]/40"
+                  <div className="grid grid-cols-2 gap-2 w-full">
+                    {model.materials.map((mat) => {
+                      const isSelected = activeMaterialId === mat.id;
+                      return (
+                        <button
+                          key={mat.id}
+                          type="button"
+                          onClick={() => handleMaterialSelect(mat.id)}
+                          aria-label={`Select ${mat.name} material`}
+                          className={`flex items-center gap-2 p-2 rounded-lg border text-left transition-all duration-200 cursor-pointer min-w-0 ${
+                            isSelected
+                              ? "border-[#C7A86A] bg-[#F6F0E8] ring-1 ring-[#C7A86A] shadow-xs"
+                              : "border-[#0F2744]/15 bg-white hover:border-[#C7A86A]/50"
+                          }`}
+                        >
+                          <div className="h-7 w-7 rounded overflow-hidden border border-[#0F2744]/10 bg-[#F6F0E8] shrink-0">
+                            <img
+                              src={mat.image}
+                              alt={mat.name}
+                              className="h-full w-full object-cover"
+                              loading="lazy"
+                            />
+                          </div>
+                          <span
+                            className={`text-[11px] leading-tight truncate min-w-0 ${
+                              isSelected ? "text-[#0F2744] font-semibold" : "text-[#0F2744]/80 font-medium"
                             }`}
                           >
-                            <div className="w-full aspect-[4/3] rounded-lg overflow-hidden border border-[#0F2744]/10 bg-white shrink-0 mb-1.5 shadow-2xs">
-                              <img
-                                src={mat.image}
-                                alt={mat.name}
-                                className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                                loading="lazy"
-                              />
-                            </div>
-                            <span
-                              className={`text-[11px] leading-tight text-center ${
-                                isSelected ? "text-[#0F2744] font-semibold" : "text-[#0F2744]/80 font-medium"
-                              }`}
-                            >
-                              {mat.name}
-                            </span>
-                          </button>
-                        );
-                      })}
-                    </div>
-                  ) : (
-                    <div className="grid grid-cols-2 gap-2 w-full">
-                      {model.materials.map((mat) => {
-                        const isSelected = activeMaterialId === mat.id;
-                        return (
-                          <button
-                            key={mat.id}
-                            type="button"
-                            onClick={() => handleMaterialSelect(mat.id)}
-                            aria-label={`Select ${mat.name} material`}
-                            className={`flex items-center gap-2 p-2 rounded-lg border text-left transition-all duration-200 cursor-pointer min-w-0 ${
-                              isSelected
-                                ? "border-[#C7A86A] bg-[#F6F0E8] ring-1 ring-[#C7A86A] shadow-xs"
-                                : "border-[#0F2744]/15 bg-white hover:border-[#C7A86A]/50"
-                            }`}
-                          >
-                            <div className="h-7 w-7 rounded overflow-hidden border border-[#0F2744]/10 bg-[#F6F0E8] shrink-0">
-                              <img
-                                src={mat.image}
-                                alt={mat.name}
-                                className="h-full w-full object-cover"
-                                loading="lazy"
-                              />
-                            </div>
-                            <span
-                              className={`text-[11px] leading-tight truncate min-w-0 ${
-                                isSelected ? "text-[#0F2744] font-semibold" : "text-[#0F2744]/80 font-medium"
-                              }`}
-                            >
-                              {mat.name}
-                            </span>
-                          </button>
-                        );
-                      })}
-                    </div>
-                  )}
+                            {mat.name}
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
             </div>
@@ -674,84 +637,46 @@ Selected Specs:
                 )}
               </div>
 
-              {/* SECTION 2: MATERIAL & TEXTURE / MATERIAL & FINISH (Desktop only; Mobile is positioned below gallery) */}
+              {/* SECTION 2: MATERIAL & TEXTURE (Desktop only; Mobile is positioned below gallery) */}
               <div className="hidden md:block w-full mb-6">
                 <div className="flex justify-between items-baseline mb-2.5">
                   <h3 className="text-xs font-semibold text-[#0F2744] tracking-[0.2em] uppercase">
-                    {isBangleBox ? "MATERIAL & FINISH" : "MATERIAL & TEXTURE"}
+                    MATERIAL & TEXTURE
                   </h3>
                   <span className="text-[11px] text-[#C7A86A] font-medium">
                     {activeMaterial?.name}
                   </span>
                 </div>
-                {isBangleBox ? (
-                  <div className="grid grid-cols-4 gap-2.5 w-full">
-                    {model.materials.map((mat) => {
-                      const isSelected = activeMaterialId === mat.id;
-                      return (
-                        <button
-                          key={mat.id}
-                          type="button"
-                          onClick={() => handleMaterialSelect(mat.id)}
-                          aria-label={`Select ${mat.name} material`}
-                          className={`group flex flex-col items-center p-2 rounded-xl border text-center transition-all duration-300 cursor-pointer min-w-0 ${
-                            isSelected
-                              ? "border-[#C7A86A] bg-[#F6F0E8] ring-1 ring-[#C7A86A] shadow-xs"
-                              : "border-[#C7A86A]/20 bg-[#FAF8F5] hover:border-[#C7A86A]/60 hover:bg-[#F6F0E8]/40"
-                          }`}
-                        >
-                          {/* Thumbnail Image */}
-                          <div className="w-full aspect-square rounded-lg overflow-hidden border border-[#0F2744]/10 bg-white shrink-0 mb-1.5 shadow-2xs">
-                            <img
-                              src={mat.image}
-                              alt={mat.name}
-                              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                              loading="lazy"
-                            />
-                          </div>
-                          <span
-                            className={`text-[11px] leading-tight text-center ${
-                              isSelected ? "text-[#0F2744] font-semibold" : "text-[#0F2744]/80 font-medium"
-                            }`}
-                          >
-                            {mat.name}
-                          </span>
-                        </button>
-                      );
-                    })}
-                  </div>
-                ) : (
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 w-full">
-                    {model.materials.map((mat) => {
-                      const isSelected = activeMaterialId === mat.id;
-                      return (
-                        <button
-                          key={mat.id}
-                          type="button"
-                          onClick={() => handleMaterialSelect(mat.id)}
-                          className={`p-2 sm:p-2.5 rounded-lg border flex items-center gap-2.5 text-left transition-all duration-300 cursor-pointer min-w-0 ${
-                            isSelected
-                              ? "border-[#C7A86A] border-[1.5px] bg-[#F6F0E8] shadow-xs ring-1 ring-[#C7A86A]"
-                              : "border-[#0F2744]/15 bg-white hover:border-[#C7A86A]/60 hover:bg-[#FAF8F5]"
-                          }`}
-                        >
-                          {/* Thumbnail Image */}
-                          <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-md overflow-hidden border border-[#0F2744]/10 bg-[#F6F0E8] shrink-0 relative">
-                            <img
-                              src={mat.image}
-                              alt={mat.name}
-                              className="h-full w-full object-cover"
-                              loading="lazy"
-                            />
-                          </div>
-                          <span className="text-xs font-medium text-[#0F2744] leading-snug truncate min-w-0">
-                            {mat.name}
-                          </span>
-                        </button>
-                      );
-                    })}
-                  </div>
-                )}
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 w-full">
+                  {model.materials.map((mat) => {
+                    const isSelected = activeMaterialId === mat.id;
+                    return (
+                      <button
+                        key={mat.id}
+                        type="button"
+                        onClick={() => handleMaterialSelect(mat.id)}
+                        className={`p-2 sm:p-2.5 rounded-lg border flex items-center gap-2.5 text-left transition-all duration-300 cursor-pointer min-w-0 ${
+                          isSelected
+                            ? "border-[#C7A86A] border-[1.5px] bg-[#F6F0E8] shadow-xs ring-1 ring-[#C7A86A]"
+                            : "border-[#0F2744]/15 bg-white hover:border-[#C7A86A]/60 hover:bg-[#FAF8F5]"
+                        }`}
+                      >
+                        {/* Thumbnail Image */}
+                        <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-md overflow-hidden border border-[#0F2744]/10 bg-[#F6F0E8] shrink-0 relative">
+                          <img
+                            src={mat.image}
+                            alt={mat.name}
+                            className="h-full w-full object-cover"
+                            loading="lazy"
+                          />
+                        </div>
+                        <span className="text-xs font-medium text-[#0F2744] leading-snug truncate min-w-0">
+                          {mat.name}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
 
               {/* SECTION 3: COLOUR (Bespoke B2B statement, no swatches) */}
