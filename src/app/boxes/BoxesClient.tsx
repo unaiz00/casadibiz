@@ -39,7 +39,7 @@ const COLLECTIONS_LIST = [
 export const BOX_LISTING_IMAGES: Record<string, string> = {
   "ring-box": "/assets/ring/ring_hairyvelvet.jpeg",                 // Card 1: Ring Box
   "earring-box": "/assets/earring/premium_microfiber_earring.jpeg",         // Card 2: Earring Box
-  "pendant-box": "/assets/pendant/hairyvelvet_pendantbox.png",                              // Card 3: Pendant Box
+  "pendant-box": "/assets/pendant/bluglossy_pendant.png",                              // Card 3: Pendant Box
   "chain-box": "/assets/chain/chain__matt grey_paint.jpeg",         // Card 4: Chain Box
   "bracelet-box": "/assets/bracelet/premium_microfiber_bracelet.jpeg",    // Card 5: Bracelet Box
   "bangle-box": "/assets/bangle/bangle_crocodile.jpeg",             // Card 6: Bangle Box

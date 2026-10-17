@@ -170,24 +170,6 @@ export const RIBBON_MATERIALS: Record<string, RibbonMaterial> = {
         role: "hero",
         label: "Master Spool Overview",
       },
-      {
-        src: "/assets/materials/linen.png",
-        alt: "CASA DI BIZ Cotton Nylon Blend organic soft-weave texture detail",
-        role: "texture",
-        label: "Weave Texture Detail",
-      },
-      {
-        src: "/assets/allim.jpeg",
-        alt: "CASA DI BIZ artisanal ribbon on bespoke packaging boxes",
-        role: "application",
-        label: "Boutique Packaging Presentation",
-      },
-      {
-        src: "/assets/giftim.jpeg",
-        alt: "CASA DI BIZ custom printed soft ribbon on luxury gift package",
-        role: "branding",
-        label: "Custom Printed Ribbon Tie",
-      },
     ],
     applications: [
       {
@@ -610,24 +592,6 @@ export const RIBBON_MATERIALS: Record<string, RibbonMaterial> = {
         alt: "CASA DI BIZ Sheer Organza translucent transparency luxury ribbon roll",
         role: "hero",
         label: "Organza Ribbon Overview",
-      },
-      {
-        src: "/assets/materials/specialpaper.png",
-        alt: "CASA DI BIZ fine translucent open weave organza texture",
-        role: "texture",
-        label: "Translucent Mesh Detail",
-      },
-      {
-        src: "/assets/allllllimm.jpeg",
-        alt: "CASA DI BIZ sheer organza ribbon styled with fragrance packaging",
-        role: "application",
-        label: "Delicate Fragrance Styling",
-      },
-      {
-        src: "/assets/flowpackaging.jpg",
-        alt: "CASA DI BIZ custom printed organza ribbon on luxury wedding suite",
-        role: "branding",
-        label: "Ethereal Gift Tie",
       },
     ],
     applications: [

@@ -16,6 +16,7 @@ import {
 import { SiteHeader, SiteFooter, Breadcrumbs } from "@/components/site-chrome";
 import type { BoxModel } from "@/data/boxes-data";
 import ProductCTAButtons from "@/components/pdp/ProductCTAButtons";
+import { BOX_LISTING_IMAGES } from "@/app/boxes/BoxesClient";
 
 const BOX_TABS = [
   {
@@ -1056,16 +1057,16 @@ Selected Specs:
                 </Link>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="flex overflow-x-auto snap-x snap-mandatory gap-5 pb-4 -mx-5 px-5 sm:mx-0 sm:px-0 sm:pb-0 sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-6 sm:overflow-visible scrollbar-none [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                 {relatedModels.map((rel) => (
                   <Link
                     key={rel.slug}
                     href={`/boxes/${rel.categorySlug}/${rel.slug}`}
-                    className="group flex flex-col bg-white border border-[#C7A86A]/20 rounded-xl overflow-hidden hover:-translate-y-1.5 transition-all duration-500 shadow-xs"
+                    className="group flex flex-col bg-white border border-[#C7A86A]/20 rounded-xl overflow-hidden hover:-translate-y-1.5 transition-all duration-500 shadow-xs snap-start shrink-0 w-[78vw] xs:w-[72vw] max-w-[300px] sm:w-auto sm:max-w-none sm:shrink"
                   >
                     <div className="relative aspect-[4/3] bg-white overflow-hidden">
                       <img
-                        src={rel.images[0]?.src || "/assets/boxim.jpeg"}
+                        src={BOX_LISTING_IMAGES[rel.slug] || rel.images[0]?.src || "/assets/boxim.jpeg"}
                         alt={rel.name}
                         className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                         loading="lazy"
@@ -1094,6 +1095,16 @@ Selected Specs:
                     </div>
                   </Link>
                 ))}
+              </div>
+
+              {/* Mobile View Full Catalogue CTA */}
+              <div className="mt-6 text-center sm:hidden">
+                <Link
+                  href="/boxes/#jewellery-boxes"
+                  className="inline-flex items-center gap-2 text-xs font-semibold text-[#C7A86A] tracking-[0.15em] hover:gap-3 transition-all"
+                >
+                  VIEW FULL CATALOGUE <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
               </div>
             </div>
           </section>

@@ -71,15 +71,15 @@ export function SiteFooter() {
 
           <ul className="space-y-3 text-sm text-[#F6F0E8]/80">
             <li>
-              <a href="tel:+919995255846" className="flex items-center gap-2 hover:text-[#C7A86A] transition">
+              <a href="tel:+971 563374248" className="flex items-center gap-2 hover:text-[#C7A86A] transition">
                 {/* ICON TODO: Swap icon */}
-                <Phone className="h-4 w-4 text-[#C7A86A]" /> +91 9995255846
+                <Phone className="h-4 w-4 text-[#C7A86A]" /> +971 563374248
               </a>
             </li>
             <li>
-              <a href="mailto:hello@casadibiz.com" className="flex items-center gap-2 hover:text-[#C7A86A] transition">
+              <a href="mailto:info@casadibiz.com" className="flex items-center gap-2 hover:text-[#C7A86A] transition">
                 {/* ICON TODO: Swap icon */}
-                <Mail className="h-4 w-4 text-[#C7A86A]" /> hello@casadibiz.com
+                <Mail className="h-4 w-4 text-[#C7A86A]" /> info@casadibiz.com
               </a>
             </li>
             <li>

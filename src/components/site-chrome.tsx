@@ -165,17 +165,15 @@ export function SiteHeader() {
           {/* Backdrop */}
           <div
             onClick={closeMobileMenu}
-            className={`fixed inset-0 bg-black/40 backdrop-blur-[2px] transition-opacity duration-300 ease-out ${
-              isOpenVisible ? "opacity-100" : "opacity-0"
-            }`}
+            className={`fixed inset-0 bg-black/40 backdrop-blur-[2px] transition-opacity duration-300 ease-out ${isOpenVisible ? "opacity-100" : "opacity-0"
+              }`}
             aria-hidden="true"
           />
 
           {/* Bottom Sheet */}
           <div
-            className={`relative z-10 w-full max-w-lg mx-auto bg-[#FAF8F5] rounded-t-[24px] border-t border-x border-border-luxe/70 shadow-[0_-12px_40px_rgba(0,0,0,0.18)] transition-transform duration-350 ease-out transform max-h-[75vh] flex flex-col ${
-              isOpenVisible ? "translate-y-0" : "translate-y-full"
-            }`}
+            className={`relative z-10 w-full max-w-lg mx-auto bg-[#FAF8F5] rounded-t-[24px] border-t border-x border-border-luxe/70 shadow-[0_-12px_40px_rgba(0,0,0,0.18)] transition-transform duration-350 ease-out transform max-h-[75vh] flex flex-col ${isOpenVisible ? "translate-y-0" : "translate-y-full"
+              }`}
             role="dialog"
             aria-modal="true"
             aria-label="Mobile navigation"
@@ -204,9 +202,8 @@ export function SiteHeader() {
                       >
                         <span>{l.label}</span>
                         <ChevronDown
-                          className={`h-4 w-4 text-gold transition-transform duration-300 ${
-                            mobileProductsOpen ? "rotate-180" : ""
-                          }`}
+                          className={`h-4 w-4 text-gold transition-transform duration-300 ${mobileProductsOpen ? "rotate-180" : ""
+                            }`}
                         />
                       </button>
                       {mobileProductsOpen && (
@@ -385,13 +382,13 @@ export function SiteFooter() {
           <div className="text-[11px] tracking-[0.3em] font-semibold text-gold mb-5">CONTACT</div>
           <ul className="space-y-3 text-sm text-navy/80">
             <li>
-              <a href="tel:+919995255846" className="flex items-center gap-2 hover:text-gold transition">
-                <Phone className="h-4 w-4 text-gold" /> +91 9995255846
+              <a href="tel:+971 563374248" className="flex items-center gap-2 hover:text-gold transition">
+                <Phone className="h-4 w-4 text-gold" /> +971 563374248
               </a>
             </li>
             <li>
-              <a href="mailto:hello@casadibiz.com" className="flex items-center gap-2 hover:text-gold transition">
-                <Mail className="h-4 w-4 text-gold" /> hello@casadibiz.com
+              <a href="mailto:info@casadibiz.com" className="flex items-center gap-2 hover:text-gold transition">
+                <Mail className="h-4 w-4 text-gold" /> info@casadibiz.com
               </a>
             </li>
             <li>

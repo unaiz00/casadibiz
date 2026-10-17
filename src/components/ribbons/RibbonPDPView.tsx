@@ -72,11 +72,13 @@ Please share MOQ, sample lead time, and branding options.`;
     if (!lightboxOpen) return;
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") setLightboxOpen(false);
-      if (e.key === "ArrowRight") {
-        setActiveImageIdx((prev) => (prev + 1) % material.images.length);
-      }
-      if (e.key === "ArrowLeft") {
-        setActiveImageIdx((prev) => (prev - 1 + material.images.length) % material.images.length);
+      if (material.images.length > 1) {
+        if (e.key === "ArrowRight") {
+          setActiveImageIdx((prev) => (prev + 1) % material.images.length);
+        }
+        if (e.key === "ArrowLeft") {
+          setActiveImageIdx((prev) => (prev - 1 + material.images.length) % material.images.length);
+        }
       }
     };
     window.addEventListener("keydown", handleKeyDown);
@@ -129,28 +131,30 @@ Please share MOQ, sample lead time, and branding options.`;
                   </div>
                 </div>
 
-                {/* Sub-grid of thumbnails */}
-                <div className="grid grid-cols-4 gap-3">
-                  {material.images.map((img, idx) => (
-                    <button
-                      key={idx}
-                      type="button"
-                      onClick={() => setActiveImageIdx(idx)}
-                      className={`group relative aspect-[4/3] rounded-xl overflow-hidden border transition-all duration-300 cursor-pointer text-left ${
-                        activeImageIdx === idx
-                          ? "border-[#C7A86A] ring-2 ring-[#C7A86A]/40 scale-[0.98]"
-                          : "border-[#C7A86A]/20 bg-white/80 opacity-80 hover:opacity-100 hover:border-[#C7A86A]/60"
-                      }`}
-                    >
-                      <img
-                        src={img.src}
-                        alt={img.alt}
-                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        loading="lazy"
-                      />
-                    </button>
-                  ))}
-                </div>
+                {/* Sub-grid of thumbnails (displayed only if multiple images exist) */}
+                {material.images.length > 1 && (
+                  <div className="grid grid-cols-4 gap-3">
+                    {material.images.map((img, idx) => (
+                      <button
+                        key={idx}
+                        type="button"
+                        onClick={() => setActiveImageIdx(idx)}
+                        className={`group relative aspect-[4/3] rounded-xl overflow-hidden border transition-all duration-300 cursor-pointer text-left ${
+                          activeImageIdx === idx
+                            ? "border-[#C7A86A] ring-2 ring-[#C7A86A]/40 scale-[0.98]"
+                            : "border-[#C7A86A]/20 bg-white/80 opacity-80 hover:opacity-100 hover:border-[#C7A86A]/60"
+                        }`}
+                      >
+                        <img
+                          src={img.src}
+                          alt={img.alt}
+                          className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          loading="lazy"
+                        />
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
 
@@ -832,28 +836,32 @@ Please share MOQ, sample lead time, and branding options.`;
                 className="max-h-full max-w-full object-contain"
               />
 
-              {/* Prev / Next controls */}
-              <button
-                type="button"
-                aria-label="Previous image"
-                onClick={() =>
-                  setActiveImageIdx((prev) => (prev - 1 + material.images.length) % material.images.length)
-                }
-                className="absolute left-4 top-1/2 -translate-y-1/2 h-11 w-11 rounded-full bg-white/90 text-[#0F2744] border border-[#C7A86A]/30 flex items-center justify-center hover:bg-[#C7A86A] hover:text-[#0F2744] transition-all cursor-pointer shadow-xs"
-              >
-                <ChevronLeft className="h-6 w-6" />
-              </button>
+              {/* Prev / Next controls (displayed only if multiple images exist) */}
+              {material.images.length > 1 && (
+                <>
+                  <button
+                    type="button"
+                    aria-label="Previous image"
+                    onClick={() =>
+                      setActiveImageIdx((prev) => (prev - 1 + material.images.length) % material.images.length)
+                    }
+                    className="absolute left-4 top-1/2 -translate-y-1/2 h-11 w-11 rounded-full bg-white/90 text-[#0F2744] border border-[#C7A86A]/30 flex items-center justify-center hover:bg-[#C7A86A] hover:text-[#0F2744] transition-all cursor-pointer shadow-xs"
+                  >
+                    <ChevronLeft className="h-6 w-6" />
+                  </button>
 
-              <button
-                type="button"
-                aria-label="Next image"
-                onClick={() =>
-                  setActiveImageIdx((prev) => (prev + 1) % material.images.length)
-                }
-                className="absolute right-4 top-1/2 -translate-y-1/2 h-11 w-11 rounded-full bg-white/90 text-[#0F2744] border border-[#C7A86A]/30 flex items-center justify-center hover:bg-[#C7A86A] hover:text-[#0F2744] transition-all cursor-pointer shadow-xs"
-              >
-                <ChevronRight className="h-6 w-6" />
-              </button>
+                  <button
+                    type="button"
+                    aria-label="Next image"
+                    onClick={() =>
+                      setActiveImageIdx((prev) => (prev + 1) % material.images.length)
+                    }
+                    className="absolute right-4 top-1/2 -translate-y-1/2 h-11 w-11 rounded-full bg-white/90 text-[#0F2744] border border-[#C7A86A]/30 flex items-center justify-center hover:bg-[#C7A86A] hover:text-[#0F2744] transition-all cursor-pointer shadow-xs"
+                  >
+                    <ChevronRight className="h-6 w-6" />
+                  </button>
+                </>
+              )}
             </div>
           </div>
         </div>

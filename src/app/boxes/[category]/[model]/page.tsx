@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import {
   getAllBoxModels,
   getBoxModel,
+  getBoxModelBySlug,
   getRelatedBoxModels,
 } from "@/data/boxes-data";
 import BoxPDPView from "@/components/boxes/BoxPDPView";
@@ -16,15 +17,22 @@ interface PageProps {
 
 export async function generateStaticParams() {
   const models = getAllBoxModels();
-  return models.map((m) => ({
+  const staticParams = models.map((m) => ({
     category: m.categorySlug,
     model: m.slug,
   }));
+  staticParams.push(
+    { category: "full-set-boxes", model: "full-set-box" },
+    { category: "set-boxes", model: "set-box" },
+    { category: "set-boxes", model: "full-set-box" },
+    ...models.map((m) => ({ category: m.slug, model: m.slug }))
+  );
+  return staticParams;
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { category, model: modelSlug } = await params;
-  const model = getBoxModel(category, modelSlug);
+  const model = getBoxModel(category, modelSlug) || getBoxModelBySlug(modelSlug) || getBoxModelBySlug(category);
 
   if (!model) {
     return {
@@ -73,7 +81,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function BoxModelPage({ params }: PageProps) {
   const { category, model: modelSlug } = await params;
-  const model = getBoxModel(category, modelSlug);
+  const model = getBoxModel(category, modelSlug) || getBoxModelBySlug(modelSlug) || getBoxModelBySlug(category);
 
   if (!model) {
     notFound();

@@ -1,14 +1,18 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { ArrowRight, Shield, Ruler } from "lucide-react";
 import { SiteHeader, SiteFooter, Breadcrumbs } from "@/components/site-chrome";
 import {
   BOX_CATEGORIES_DATA,
   BOX_MODELS_DATA,
   getAllBoxCategories,
+  getAllBoxModels,
   getBoxCategory,
+  getBoxModelBySlug,
+  getRelatedBoxModels,
 } from "@/data/boxes-data";
+import BoxPDPView from "@/components/boxes/BoxPDPView";
 
 interface CategoryPageProps {
   params: Promise<{
@@ -17,20 +21,77 @@ interface CategoryPageProps {
 }
 
 export async function generateStaticParams() {
-  const categories = getAllBoxCategories();
-  return categories.map((cat) => ({
+  const categories = getAllBoxCategories().map((cat) => ({
     category: cat.slug,
   }));
+  const models = getAllBoxModels().map((m) => ({
+    category: m.slug,
+  }));
+  return [
+    ...categories,
+    ...models,
+    { category: "full-set-box" },
+    { category: "jewellery-boxes" },
+  ];
 }
 
 export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
   const { category: categorySlug } = await params;
-  const cat = getBoxCategory(categorySlug);
 
+  if (categorySlug === "jewellery-boxes") {
+    return {
+      title: "Jewellery Boxes — Bespoke Luxury Packaging | CASA DI BIZ",
+      description: "Explore CASA DI BIZ curated catalogue of bespoke jewellery boxes.",
+    };
+  }
+
+  // 1. Check if categorySlug is a Box Model PDP (e.g. ring-box, set-box, etc.)
+  const model = getBoxModelBySlug(categorySlug);
+  if (model) {
+    const title = `${model.name} | CASA DI BIZ Luxury Jewellery Packaging`;
+    const description = `Explore the CASA DI BIZ ${model.name}, engineered with bespoke catalogue dimensions, anti-tarnish luxury interior linings, and tailored branding finishes.`;
+    const primaryImage = model.images[0]?.src || "/assets/boxim.jpeg";
+
+    return {
+      title,
+      description,
+      alternates: {
+        canonical: `https://casadibiz.com/boxes/${categorySlug}`,
+      },
+      openGraph: {
+        title,
+        description,
+        url: `https://casadibiz.com/boxes/${categorySlug}`,
+        siteName: "CASA DI BIZ",
+        images: [
+          {
+            url: primaryImage,
+            width: 1200,
+            height: 800,
+            alt: `CASA DI BIZ ${model.name}`,
+          },
+        ],
+        type: "website",
+      },
+      twitter: {
+        card: "summary_large_image",
+        title,
+        description,
+        images: [primaryImage],
+      },
+      robots: {
+        index: true,
+        follow: true,
+      },
+    };
+  }
+
+  // 2. Otherwise check if it is a Box Category listing (e.g. ring-boxes)
+  const cat = getBoxCategory(categorySlug);
   if (!cat) {
     return {
-      title: "Box Category Not Found | CASA DI BIZ",
-      description: "The requested luxury box category could not be found.",
+      title: "Jewellery Box Not Found | CASA DI BIZ",
+      description: "The requested bespoke jewellery box could not be found.",
     };
   }
 
@@ -69,6 +130,90 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
 
 export default async function BoxCategoryListingPage({ params }: CategoryPageProps) {
   const { category: categorySlug } = await params;
+
+  if (categorySlug === "jewellery-boxes") {
+    redirect("/boxes");
+  }
+
+  // 1. If this is a box model (e.g. /boxes/ring-box, /boxes/earring-box, /boxes/set-box, etc.), render PDP directly
+  const model = getBoxModelBySlug(categorySlug);
+  if (model) {
+    const relatedModels = getRelatedBoxModels(model.slug, model.categorySlug, 4);
+
+    const jsonLd = {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Product",
+          "@id": `https://casadibiz.com/boxes/${categorySlug}#product`,
+          name: `CASA DI BIZ ${model.name}`,
+          description: model.shortDescription,
+          image: model.images.map((img) => `https://casadibiz.com${img.src}`),
+          brand: {
+            "@type": "Brand",
+            name: "CASA DI BIZ",
+          },
+          category: `Luxury Packaging > Boxes > ${model.categoryName}`,
+          material: model.specifications.outerMaterial,
+          manufacturer: {
+            "@type": "Organization",
+            name: "CASA DI BIZ Luxury Packaging",
+            url: "https://casadibiz.com",
+          },
+          offers: {
+            "@type": "AggregateOffer",
+            priceCurrency: "AED",
+            priceSpecification: {
+              "@type": "PriceSpecification",
+              description: "B2B Custom Quote Based Manufacturing",
+            },
+          },
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": `https://casadibiz.com/boxes/${categorySlug}#breadcrumb`,
+          itemListElement: [
+            {
+              "@type": "ListItem",
+              position: 1,
+              name: "Home",
+              item: "https://casadibiz.com",
+            },
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: "Boxes",
+              item: "https://casadibiz.com/boxes",
+            },
+            {
+              "@type": "ListItem",
+              position: 3,
+              name: model.categoryName,
+              item: `https://casadibiz.com/boxes/${model.categorySlug}`,
+            },
+            {
+              "@type": "ListItem",
+              position: 4,
+              name: model.name,
+              item: `https://casadibiz.com/boxes/${categorySlug}`,
+            },
+          ],
+        },
+      ],
+    };
+
+    return (
+      <>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        <BoxPDPView model={model} relatedModels={relatedModels} />
+      </>
+    );
+  }
+
+  // 2. Otherwise handle category listing
   const category = getBoxCategory(categorySlug);
 
   if (!category) {
