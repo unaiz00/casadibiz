@@ -42,13 +42,6 @@ export const COLLECTION_CATEGORIES: Record<
     image: "/assets/flat_matte_finish_paperwrap.jpeg",
     href: "/wraps",
   },
-  "wedding-collection": {
-    title: "Wedding Collection",
-    short: "Favour boxes, pouches and ribbon detailing for the whole celebration.",
-    long: "Wedding packaging from invitation sleeves to favour boxes and satin ribbon — soft palettes, foiled monograms and finishing that photographs beautifully.",
-    image: "/assets/allim.jpeg",
-    href: "/collections/wedding-collection",
-  },
   "seasonal-collection": {
     title: "Seasonal Collection",
     short: "Limited-run packaging for festive drops and campaign moments.",
@@ -75,7 +68,7 @@ export const COLLECTION_CATEGORIES: Record<
 export const metadata: Metadata = {
   title: "Collections — Curated Luxury Packaging Suites | CASA DI BIZ",
   description:
-    "Explore CASA DI BIZ luxury packaging collections — Paper Bags, Jewellery Boxes, Jewellery Storage & Travel Cases, Corporate Gift Boxes, Wrapping Papers, Wedding and Seasonal suites.",
+    "Explore CASA DI BIZ luxury packaging collections — Paper Bags, Jewellery Boxes, Jewellery Storage & Travel Cases, Corporate Gift Boxes, Wrapping Papers, and Seasonal suites.",
   openGraph: {
     title: "Luxury Packaging Collections by CASA DI BIZ",
     description:
