@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import { X, Maximize2 } from "lucide-react";
+import { X, Maximize2, ChevronLeft, ChevronRight } from "lucide-react";
 
 export interface GalleryImage {
   src: string;
@@ -35,6 +35,7 @@ export default function PaperBagImageGallery({
   const dragStartXRef = useRef(0);
   const dragStartYRef = useRef(0);
   const isHorizontalSwipeRef = useRef<boolean | null>(null);
+  const hasMovedRef = useRef(false);
 
   // Lightbox zoom & pan state
   const [lightboxScale, setLightboxScale] = useState(1);
@@ -78,10 +79,18 @@ export default function PaperBagImageGallery({
       if (e.key === "Escape") closeLightbox();
       if (lightboxScale === 1) {
         if (e.key === "ArrowRight") {
-          setLightboxIndex((prev) => (prev + 1) % total);
+          setLightboxIndex((prev) => {
+            const next = (prev + 1) % total;
+            setActiveIndex(next);
+            return next;
+          });
         }
         if (e.key === "ArrowLeft") {
-          setLightboxIndex((prev) => (prev - 1 + total) % total);
+          setLightboxIndex((prev) => {
+            const next = (prev - 1 + total) % total;
+            setActiveIndex(next);
+            return next;
+          });
         }
       }
     };
@@ -99,19 +108,27 @@ export default function PaperBagImageGallery({
   // IN-PAGE GALLERY SWIPE & DRAG HANDLERS
   // ==========================================
   const handleTouchStart = (e: React.TouchEvent) => {
-    if (e.touches.length !== 1 || total <= 1) return;
+    if ((e.target as HTMLElement).closest("button")) return;
+    if (e.touches.length !== 1) return;
     dragStartXRef.current = e.touches[0].clientX;
     dragStartYRef.current = e.touches[0].clientY;
     isHorizontalSwipeRef.current = null;
+    hasMovedRef.current = false;
     setIsDragging(true);
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
-    if (!isDragging || total <= 1) return;
+    if (!isDragging) return;
     const currentX = e.touches[0].clientX;
     const currentY = e.touches[0].clientY;
     const diffX = currentX - dragStartXRef.current;
     const diffY = currentY - dragStartYRef.current;
+
+    if (Math.abs(diffX) > 6 || Math.abs(diffY) > 6) {
+      hasMovedRef.current = true;
+    }
+
+    if (total <= 1) return;
 
     if (isHorizontalSwipeRef.current === null) {
       if (Math.abs(diffX) > 6 || Math.abs(diffY) > 6) {
@@ -134,18 +151,25 @@ export default function PaperBagImageGallery({
     }
   };
 
-  const handleTouchEnd = () => {
-    if (!isDragging || total <= 1) {
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (!isDragging) return;
+    if ((e.target as HTMLElement).closest("button")) {
+      setDragOffset(0);
       setIsDragging(false);
+      isHorizontalSwipeRef.current = null;
       return;
     }
+
     const width = galleryRef.current?.offsetWidth || 300;
     const threshold = Math.min(width * 0.18, 55);
 
-    if (dragOffset < -threshold && activeIndex < total - 1) {
+    if (total > 1 && dragOffset < -threshold && activeIndex < total - 1) {
       setActiveIndex((prev) => prev + 1);
-    } else if (dragOffset > threshold && activeIndex > 0) {
+    } else if (total > 1 && dragOffset > threshold && activeIndex > 0) {
       setActiveIndex((prev) => prev - 1);
+    } else if (!hasMovedRef.current && Math.abs(dragOffset) < 5) {
+      // Clean tap -> open lightbox
+      openLightbox(activeIndex);
     }
 
     setDragOffset(0);
@@ -155,15 +179,24 @@ export default function PaperBagImageGallery({
 
   // Desktop Mouse Drag Handlers
   const handleMouseDown = (e: React.MouseEvent) => {
-    if (total <= 1) return;
+    if ((e.target as HTMLElement).closest("button")) return;
     dragStartXRef.current = e.clientX;
     dragStartYRef.current = e.clientY;
+    hasMovedRef.current = false;
     setIsDragging(true);
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging || total <= 1) return;
+    if (!isDragging) return;
     const diffX = e.clientX - dragStartXRef.current;
+    const diffY = e.clientY - dragStartYRef.current;
+
+    if (Math.abs(diffX) > 5 || Math.abs(diffY) > 5) {
+      hasMovedRef.current = true;
+    }
+
+    if (total <= 1) return;
+
     let dampenedDiff = diffX;
     if (
       (activeIndex === 0 && diffX > 0) ||
@@ -174,16 +207,22 @@ export default function PaperBagImageGallery({
     setDragOffset(dampenedDiff);
   };
 
-  const handleMouseUp = () => {
+  const handleMouseUp = (e?: React.MouseEvent) => {
     if (!isDragging) return;
+    if (e && (e.target as HTMLElement).closest("button")) {
+      setDragOffset(0);
+      setIsDragging(false);
+      return;
+    }
+
     const width = galleryRef.current?.offsetWidth || 500;
     const threshold = Math.min(width * 0.18, 60);
 
-    if (dragOffset < -threshold && activeIndex < total - 1) {
+    if (total > 1 && dragOffset < -threshold && activeIndex < total - 1) {
       setActiveIndex((prev) => prev + 1);
-    } else if (dragOffset > threshold && activeIndex > 0) {
+    } else if (total > 1 && dragOffset > threshold && activeIndex > 0) {
       setActiveIndex((prev) => prev - 1);
-    } else if (Math.abs(dragOffset) < 5) {
+    } else if (!hasMovedRef.current && Math.abs(dragOffset) < 5) {
       // It was a clean click -> open lightbox
       openLightbox(activeIndex);
     }
@@ -223,6 +262,7 @@ export default function PaperBagImageGallery({
 
   // Lightbox Mouse handlers
   const handleLightboxMouseDown = (e: React.MouseEvent) => {
+    if ((e.target as HTMLElement).closest("button")) return;
     if (lightboxScale > 1) {
       setIsLightboxPanning(true);
       lightboxPanStartRef.current = {
@@ -253,9 +293,17 @@ export default function PaperBagImageGallery({
     }
     if (isLightboxDragging) {
       if (lightboxDragOffset < -50) {
-        setLightboxIndex((prev) => (prev + 1) % total);
+        setLightboxIndex((prev) => {
+          const next = (prev + 1) % total;
+          setActiveIndex(next);
+          return next;
+        });
       } else if (lightboxDragOffset > 50) {
-        setLightboxIndex((prev) => (prev - 1 + total) % total);
+        setLightboxIndex((prev) => {
+          const next = (prev - 1 + total) % total;
+          setActiveIndex(next);
+          return next;
+        });
       }
       setLightboxDragOffset(0);
       setIsLightboxDragging(false);
@@ -264,6 +312,7 @@ export default function PaperBagImageGallery({
 
   // Lightbox Touch handlers (Swipe, Pinch & Pan)
   const handleLightboxTouchStart = (e: React.TouchEvent) => {
+    if ((e.target as HTMLElement).closest("button")) return;
     if (e.touches.length === 2) {
       const dist = Math.hypot(
         e.touches[0].clientX - e.touches[1].clientX,
@@ -321,9 +370,17 @@ export default function PaperBagImageGallery({
     }
     if (isLightboxDragging) {
       if (lightboxDragOffset < -45) {
-        setLightboxIndex((prev) => (prev + 1) % total);
+        setLightboxIndex((prev) => {
+          const next = (prev + 1) % total;
+          setActiveIndex(next);
+          return next;
+        });
       } else if (lightboxDragOffset > 45) {
-        setLightboxIndex((prev) => (prev - 1 + total) % total);
+        setLightboxIndex((prev) => {
+          const next = (prev - 1 + total) % total;
+          setActiveIndex(next);
+          return next;
+        });
       }
       setLightboxDragOffset(0);
       setIsLightboxDragging(false);
@@ -335,16 +392,21 @@ export default function PaperBagImageGallery({
       {/* ======================================================== */}
       {/* IN-PAGE GALLERY: NATURAL TOUCH/DRAG SWIPEABLE CONTAINER  */}
       {/* ======================================================== */}
-      <div className="w-full flex flex-col gap-3.5">
+      <div className="w-full flex flex-col gap-3 sm:gap-3.5">
         <div
           ref={galleryRef}
-          className={`relative aspect-[16/11] sm:aspect-[4/3] w-full rounded-2xl sm:rounded-3xl overflow-hidden bg-white border border-[#C7A86A]/25 shadow-xs select-none touch-pan-y ${
+          className={`group relative aspect-[16/11] sm:aspect-[4/3] w-full rounded-2xl sm:rounded-3xl overflow-hidden bg-white border border-[#C7A86A]/25 shadow-xs select-none touch-pan-y ${
             isDragging ? "cursor-grabbing" : "cursor-grab"
           }`}
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
-          onMouseLeave={handleMouseUp}
+          onMouseLeave={() => {
+            if (isDragging) {
+              setDragOffset(0);
+              setIsDragging(false);
+            }
+          }}
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
@@ -369,18 +431,58 @@ export default function PaperBagImageGallery({
                   alt={img.alt}
                   draggable={false}
                   loading={idx === 0 ? "eager" : "lazy"}
-                  className="h-full w-full object-cover pointer-events-none transition-transform duration-700 ease-out hover:scale-[1.02]"
+                  className="h-full w-full object-cover pointer-events-none transition-transform duration-700 ease-out group-hover:scale-[1.02]"
                 />
               </div>
             ))}
           </div>
 
           {/* Subtle Hover Gradient */}
-          <div className="absolute inset-0 bg-[#0F2744]/5 opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+          <div className="absolute inset-0 bg-[#0F2744]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+
+          {/* Carousel Navigation Arrows */}
+          {total > 1 && (
+            <>
+              <button
+                type="button"
+                onMouseDown={(e) => e.stopPropagation()}
+                onMouseUp={(e) => e.stopPropagation()}
+                onTouchStart={(e) => e.stopPropagation()}
+                onTouchEnd={(e) => e.stopPropagation()}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setActiveIndex((prev) => (prev - 1 + total) % total);
+                }}
+                aria-label="Previous product image"
+                className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 h-9 w-9 sm:h-10 sm:w-10 rounded-full bg-white/90 text-[#0F2744] border border-[#C7A86A]/30 flex items-center justify-center shadow-md opacity-85 hover:opacity-100 hover:bg-[#C7A86A] hover:text-[#0F2744] hover:scale-105 transition-all duration-300 cursor-pointer z-10 focus:outline-hidden focus:ring-2 focus:ring-[#C7A86A]"
+              >
+                <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
+              </button>
+              <button
+                type="button"
+                onMouseDown={(e) => e.stopPropagation()}
+                onMouseUp={(e) => e.stopPropagation()}
+                onTouchStart={(e) => e.stopPropagation()}
+                onTouchEnd={(e) => e.stopPropagation()}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setActiveIndex((prev) => (prev + 1) % total);
+                }}
+                aria-label="Next product image"
+                className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 h-9 w-9 sm:h-10 sm:w-10 rounded-full bg-white/90 text-[#0F2744] border border-[#C7A86A]/30 flex items-center justify-center shadow-md opacity-85 hover:opacity-100 hover:bg-[#C7A86A] hover:text-[#0F2744] hover:scale-105 transition-all duration-300 cursor-pointer z-10 focus:outline-hidden focus:ring-2 focus:ring-[#C7A86A]"
+              >
+                <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />
+              </button>
+            </>
+          )}
 
           {/* Unobtrusive Corner Maximize Button */}
           <button
             type="button"
+            onMouseDown={(e) => e.stopPropagation()}
+            onMouseUp={(e) => e.stopPropagation()}
+            onTouchStart={(e) => e.stopPropagation()}
+            onTouchEnd={(e) => e.stopPropagation()}
             onClick={(e) => {
               e.stopPropagation();
               openLightbox(activeIndex);
@@ -392,22 +494,48 @@ export default function PaperBagImageGallery({
           </button>
         </div>
 
-        {/* Minimal Subtle Dot Indicator (below image) */}
+        {/* 3 Selectable Thumbnails in a Horizontal Row Directly Below Main Image (Desktop & Mobile) */}
         {total > 1 && (
-          <div className="flex justify-center items-center gap-1.5 py-1">
-            {formattedImages.map((_, idx) => (
-              <button
-                key={idx}
-                type="button"
-                onClick={() => setActiveIndex(idx)}
-                aria-label={`Go to slide ${idx + 1}`}
-                className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
-                  idx === activeIndex
-                    ? "w-6 bg-[#C7A86A]"
-                    : "w-1.5 bg-[#0F2744]/20 hover:bg-[#0F2744]/40"
-                }`}
-              />
-            ))}
+          <div className="grid grid-cols-3 gap-2.5 sm:gap-3.5 w-full">
+            {formattedImages.map((img, idx) => {
+              const isActive = idx === activeIndex;
+              return (
+                <button
+                  key={idx}
+                  type="button"
+                  onMouseDown={(e) => e.stopPropagation()}
+                  onMouseUp={(e) => e.stopPropagation()}
+                  onTouchStart={(e) => e.stopPropagation()}
+                  onTouchEnd={(e) => e.stopPropagation()}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setActiveIndex(idx);
+                  }}
+                  aria-label={`View ${img.alt || `${productTitle} image ${idx + 1}`}`}
+                  aria-current={isActive ? "true" : undefined}
+                  className={`group relative aspect-[4/3] w-full rounded-xl sm:rounded-2xl overflow-hidden bg-white border transition-all duration-300 cursor-pointer text-left focus:outline-hidden focus:ring-2 focus:ring-[#C7A86A] ${
+                    isActive
+                      ? "border-[#C7A86A] ring-2 ring-[#C7A86A]/40 shadow-xs scale-[0.99]"
+                      : "border-[#C7A86A]/20 hover:border-[#C7A86A]/60 opacity-80 hover:opacity-100"
+                  }`}
+                >
+                  <img
+                    src={img.src}
+                    alt={img.alt || `${productTitle} thumbnail ${idx + 1}`}
+                    draggable={false}
+                    className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  <div
+                    className={`absolute inset-0 transition-opacity duration-300 pointer-events-none ${
+                      isActive
+                        ? "bg-[#C7A86A]/5"
+                        : "bg-[#0F2744]/0 group-hover:bg-[#0F2744]/5"
+                    }`}
+                  />
+                </button>
+              );
+            })}
           </div>
         )}
       </div>
@@ -421,17 +549,75 @@ export default function PaperBagImageGallery({
           aria-modal="true"
           aria-label={`Enlarged viewer for ${productTitle}`}
           className="fixed inset-0 z-[100] flex items-center justify-center bg-[#FAF8F5]/98 backdrop-blur-sm transition-opacity duration-300 p-4 sm:p-8 animate-fade-up select-none"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              closeLightbox();
+            }
+          }}
           onWheel={handleLightboxWheel}
         >
           {/* Circular Close Button (Top-Right) */}
           <button
             type="button"
-            onClick={closeLightbox}
+            onMouseDown={(e) => e.stopPropagation()}
+            onMouseUp={(e) => e.stopPropagation()}
+            onTouchStart={(e) => e.stopPropagation()}
+            onTouchEnd={(e) => e.stopPropagation()}
+            onClick={(e) => {
+              e.stopPropagation();
+              closeLightbox();
+            }}
             aria-label="Close image viewer"
             className="absolute top-5 right-5 sm:top-7 sm:right-7 z-50 h-10 w-10 sm:h-11 sm:w-11 rounded-full bg-white/80 sm:bg-transparent text-[#0F2744] flex items-center justify-center border border-[#0F2744]/15 hover:bg-[#C7A86A] hover:text-[#0F2744] hover:border-[#C7A86A] transition-all duration-300 cursor-pointer shadow-xs focus:outline-hidden focus:ring-2 focus:ring-[#C7A86A]"
           >
             <X className="h-5 w-5" />
           </button>
+
+          {/* Lightbox Navigation Controls */}
+          {total > 1 && lightboxScale === 1 && (
+            <>
+              <button
+                type="button"
+                onMouseDown={(e) => e.stopPropagation()}
+                onMouseUp={(e) => e.stopPropagation()}
+                onTouchStart={(e) => e.stopPropagation()}
+                onTouchEnd={(e) => e.stopPropagation()}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setLightboxIndex((prev) => {
+                    const next = (prev - 1 + total) % total;
+                    setActiveIndex(next);
+                    return next;
+                  });
+                  resetLightboxZoom();
+                }}
+                aria-label="Previous image"
+                className="absolute left-4 sm:left-7 top-1/2 -translate-y-1/2 z-50 h-10 w-10 sm:h-12 sm:w-12 rounded-full bg-white/90 text-[#0F2744] border border-[#0F2744]/15 flex items-center justify-center shadow-md hover:bg-[#C7A86A] hover:text-[#0F2744] hover:border-[#C7A86A] transition-all duration-300 cursor-pointer"
+              >
+                <ChevronLeft className="h-5 w-5 sm:h-6 sm:w-6" />
+              </button>
+              <button
+                type="button"
+                onMouseDown={(e) => e.stopPropagation()}
+                onMouseUp={(e) => e.stopPropagation()}
+                onTouchStart={(e) => e.stopPropagation()}
+                onTouchEnd={(e) => e.stopPropagation()}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setLightboxIndex((prev) => {
+                    const next = (prev + 1) % total;
+                    setActiveIndex(next);
+                    return next;
+                  });
+                  resetLightboxZoom();
+                }}
+                aria-label="Next image"
+                className="absolute right-4 sm:right-7 top-1/2 -translate-y-1/2 z-50 h-10 w-10 sm:h-12 sm:w-12 rounded-full bg-white/90 text-[#0F2744] border border-[#0F2744]/15 flex items-center justify-center shadow-md hover:bg-[#C7A86A] hover:text-[#0F2744] hover:border-[#C7A86A] transition-all duration-300 cursor-pointer"
+              >
+                <ChevronRight className="h-5 w-5 sm:h-6 sm:w-6" />
+              </button>
+            </>
+          )}
 
           {/* Lightbox Swipe Track / Image Display */}
           <div
@@ -456,7 +642,13 @@ export default function PaperBagImageGallery({
             onMouseDown={handleLightboxMouseDown}
             onMouseMove={handleLightboxMouseMove}
             onMouseUp={handleLightboxMouseUp}
-            onMouseLeave={handleLightboxMouseUp}
+            onMouseLeave={() => {
+              if (isLightboxPanning) setIsLightboxPanning(false);
+              if (isLightboxDragging) {
+                setLightboxDragOffset(0);
+                setIsLightboxDragging(false);
+              }
+            }}
             onTouchStart={handleLightboxTouchStart}
             onTouchMove={handleLightboxTouchMove}
             onTouchEnd={handleLightboxTouchEnd}
@@ -475,7 +667,8 @@ export default function PaperBagImageGallery({
                     ? "none"
                     : "transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1)",
               }}
-              className="max-w-[88vw] max-h-[85vh] flex items-center justify-center pointer-events-none"
+              className="max-w-[88vw] max-h-[85vh] flex items-center justify-center pointer-events-auto"
+              onClick={(e) => e.stopPropagation()}
             >
               <img
                 ref={lightboxImgRef}
@@ -494,8 +687,14 @@ export default function PaperBagImageGallery({
                 <button
                   key={idx}
                   type="button"
-                  onClick={() => {
+                  onMouseDown={(e) => e.stopPropagation()}
+                  onMouseUp={(e) => e.stopPropagation()}
+                  onTouchStart={(e) => e.stopPropagation()}
+                  onTouchEnd={(e) => e.stopPropagation()}
+                  onClick={(e) => {
+                    e.stopPropagation();
                     setLightboxIndex(idx);
+                    setActiveIndex(idx);
                     resetLightboxZoom();
                   }}
                   aria-label={`Lightbox slide ${idx + 1}`}

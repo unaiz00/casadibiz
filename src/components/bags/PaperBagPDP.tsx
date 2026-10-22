@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowRight, HelpCircle, ChevronDown, Ribbon } from "lucide-react";
 import { SiteHeader, SiteFooter, Breadcrumbs } from "@/components/site-chrome";
 import PaperBagImageGallery from "@/components/bags/PaperBagImageGallery";
+export { PaperBagImageGallery };
 import type { BagCategoryData } from "@/app/bags/paper-bags/data";
 import ProductCTAButtons from "@/components/pdp/ProductCTAButtons";
 
