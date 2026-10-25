@@ -37,11 +37,10 @@ interface PouchPDPProps {
 }
 
 export default function PouchPDP({ product, relatedProducts }: PouchPDPProps) {
-  const [selectedSizeId, setSelectedSizeId] = useState<string>(product.sizes[0]?.id || "small");
   const [activeTab, setActiveTab] = useState<"overview" | "specs" | "branding">("overview");
   const [openFaqIdx, setOpenFaqIdx] = useState<number | null>(null);
 
-  const selectedSize = product.sizes.find((s) => s.id === selectedSizeId) || product.sizes[0];
+  const selectedSize = product.sizes[0];
 
   const primaryImage = product.images[0] || {
     src: "/assets/cats/pouch.jpeg",
@@ -69,7 +68,7 @@ export default function PouchPDP({ product, relatedProducts }: PouchPDPProps) {
       <main>
         {/* 2. TOP BREADCRUMB STRIP */}
         <div className="w-full bg-[#FAF8F5] border-b border-[#C7A86A]/15 pt-5 pb-3">
-          <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
+          <div className="max-w-[1500px] mx-auto px-5 sm:px-8 lg:px-12">
             <Breadcrumbs
               items={[
                 { label: "Home", to: "/" },
@@ -82,10 +81,10 @@ export default function PouchPDP({ product, relatedProducts }: PouchPDPProps) {
 
         {/* 3. HERO PRODUCT SECTION */}
         <section className="w-full bg-[#FAF8F5] pt-6 pb-12 sm:pt-8 sm:pb-16 lg:pb-20">
-          <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
+          <div className="max-w-[1500px] mx-auto px-5 sm:px-8 lg:px-12 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
             
             {/* LEFT: Large Luxury Product Photography with CASA DI BIZ Enlarge Interaction */}
-            <div className="lg:col-span-7 flex flex-col space-y-4">
+            <div className="lg:col-span-7 flex flex-col gap-4">
               <PouchImageViewer
                 src={primaryImage.src}
                 alt={primaryImage.alt}
@@ -156,42 +155,27 @@ export default function PouchPDP({ product, relatedProducts }: PouchPDPProps) {
               {/* PROPORTIONS & SIZING */}
               {product.sizes && product.sizes.length > 0 && (
                 <div className="w-full mb-6">
-                  <div className="flex justify-between items-baseline mb-2.5">
+                  <div className="mb-2.5">
                     <h2 className="text-xs font-semibold text-[#0F2744] tracking-[0.2em] uppercase">
                       PROPORTIONS & SIZING
                     </h2>
-                    <span className="text-[11px] text-[#C7A86A] font-semibold">
-                      {selectedSize.dimensions}
-                    </span>
                   </div>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 w-full">
-                    {product.sizes.map((s) => {
-                      const isSelected = selectedSizeId === s.id;
-                      return (
-                        <button
-                          key={s.id}
-                          type="button"
-                          onClick={() => setSelectedSizeId(s.id)}
-                          className={`p-2.5 border rounded-xl text-left transition-all duration-300 cursor-pointer ${
-                            isSelected
-                              ? "border-[#C7A86A] bg-[#F6F0E8] ring-1 ring-[#C7A86A] shadow-xs"
-                              : "border-[#C7A86A]/20 bg-[#FAF8F5] hover:border-[#C7A86A]/50 hover:bg-[#F6F0E8]/40"
-                          }`}
-                        >
-                          <div className="flex justify-between items-center mb-0.5">
-                            <span className="text-xs font-bold text-[#0F2744]">
-                              {s.dimensions}
-                            </span>
-                            {isSelected && (
-                              <span className="h-1.5 w-1.5 rounded-full bg-[#C7A86A]" />
-                            )}
-                          </div>
-                          <span className="text-[10px] text-[#0F2744]/70 block truncate">
-                            {s.label.split("/")[0]}
+                    {product.sizes.map((s) => (
+                      <div
+                        key={s.id}
+                        className="p-2.5 border border-[#C7A86A]/70 bg-[#FAF8F5] rounded-xl text-left"
+                      >
+                        <div className="flex justify-between items-center mb-0.5">
+                          <span className="text-xs font-bold text-[#0F2744]">
+                            {s.dimensions}
                           </span>
-                        </button>
-                      );
-                    })}
+                        </div>
+                        <span className="text-[10px] text-[#0F2744]/70 block truncate">
+                          {s.label.split("/")[0]}
+                        </span>
+                      </div>
+                    ))}
                   </div>
                   <p className="text-[11px] text-[#0F2744]/70 mt-2 italic">
                     Best suited to: {selectedSize.suitableFor}.

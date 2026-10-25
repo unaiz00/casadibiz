@@ -218,13 +218,12 @@ export default function BoxPDPView({ model, relatedModels }: BoxPDPViewProps) {
   // Active states
   const [activeImageIdx, setActiveImageIdx] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [activeSizeIdx, setActiveSizeIdx] = useState(0);
   const [activeMaterialId, setActiveMaterialId] = useState(initialMaterialId);
   const [activeFinishId, setActiveFinishId] = useState(initialFinishId);
   const [openFaqIdx, setOpenFaqIdx] = useState<number | null>(0);
   const [activeDetailTab, setActiveDetailTab] = useState<"description" | "specifications" | "customization">("description");
 
-  const activeSize = model.sizes[activeSizeIdx] || model.sizes[0];
+  const activeSize = model.sizes[0];
   const activeMaterial = model.materials.find((m) => m.id === activeMaterialId) || model.materials[0];
   const activeFinish = model.finishes.find((f) => f.id === activeFinishId) || model.finishes[0];
 
@@ -580,10 +579,10 @@ Selected Specs:
                   <div className="relative w-full">
                     <select
                       id="mobile-size-select"
-                      value={activeSizeIdx}
-                      onChange={(e) => setActiveSizeIdx(Number(e.target.value))}
-                      aria-label="Select Available Size"
-                      className="w-full appearance-none bg-[#FAF8F5] border border-[#C7A86A]/30 text-[#0F2744] text-xs font-medium py-3 pl-3.5 pr-10 rounded-[10px] focus:outline-none focus:ring-1 focus:ring-[#C7A86A] focus:border-[#C7A86A] transition-all duration-200 cursor-pointer shadow-2xs"
+                      defaultValue={0}
+                      tabIndex={-1}
+                      aria-label="Available Size"
+                      className="w-full appearance-none bg-[#FAF8F5] border border-[#C7A86A]/30 text-[#0F2744] text-xs font-medium py-3 pl-3.5 pr-10 rounded-[10px] shadow-2xs pointer-events-none"
                     >
                       {model.sizes.map((size, idx) => {
                         const labelText =
@@ -606,26 +605,17 @@ Selected Specs:
                 {/* Desktop & Tablet View (md+): Grid Selector */}
                 <div className="hidden md:grid grid-cols-2 sm:grid-cols-3 gap-2 w-full max-h-56 overflow-y-auto pr-1">
                   {model.sizes.map((size, idx) => (
-                    <button
+                    <div
                       key={idx}
-                      type="button"
-                      onClick={() => setActiveSizeIdx(idx)}
-                      className={`p-2.5 border rounded-lg text-left transition-all duration-300 cursor-pointer relative ${
-                        activeSizeIdx === idx
-                          ? "border-[#C7A86A] bg-[#F6F0E8] shadow-xs ring-1 ring-[#C7A86A]"
-                          : "border-[#C7A86A]/20 bg-white/70 hover:border-[#C7A86A]/50 hover:bg-[#F6F0E8]/30"
-                      }`}
+                      className="p-2.5 border border-[#C7A86A]/20 bg-white/70 rounded-lg text-left relative"
                     >
                       <div className="flex justify-between items-center mb-0.5">
                         <span className="text-[11px] font-bold text-[#0F2744] font-mono leading-none">{size.dimensions}</span>
-                        {activeSizeIdx === idx && (
-                          <span className="h-1.5 w-1.5 rounded-full bg-[#C7A86A] shrink-0" />
-                        )}
                       </div>
                       <span className="text-[9px] text-[#0F2744]/65 block truncate">
                         {size.label !== size.dimensions ? size.label : size.description}
                       </span>
-                    </button>
+                    </div>
                   ))}
                 </div>
 

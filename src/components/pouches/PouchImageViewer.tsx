@@ -142,7 +142,7 @@ export default function PouchImageViewer({ src, alt, productName }: PouchImageVi
 
   return (
     <>
-      {/* 1. HERO PRODUCT IMAGE CONTAINER (MATCHING BAG PDP LUXURY STYLE) */}
+      {/* 1. HERO PRODUCT IMAGE CONTAINER (MATCHING RIBBON PDP LUXURY SHOWCASE STYLE) */}
       <div className="w-full">
         <div
           role="button"
@@ -155,24 +155,24 @@ export default function PouchImageViewer({ src, alt, productName }: PouchImageVi
             }
           }}
           aria-label={`Enlarge image of ${productName}`}
-          className="group relative aspect-[4/3] w-full rounded-2xl sm:rounded-3xl overflow-hidden bg-[#F6F0E8] border border-[#C7A86A]/25 cursor-zoom-in shadow-xs transition-all duration-300 hover:border-[#C7A86A]/60 focus:outline-hidden focus:ring-2 focus:ring-[#C7A86A]"
+          className="group relative aspect-[16/11] w-full rounded-2xl overflow-hidden border border-[#C7A86A]/25 bg-white cursor-zoom-in shadow-sm transition-all duration-500 hover:border-[#C7A86A]/60 focus:outline-hidden focus:ring-2 focus:ring-[#C7A86A]"
         >
           <img
             src={src}
             alt={alt}
-            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
             loading="eager"
           />
 
           {/* Subtle Hover Overlay */}
-          <div className="absolute inset-0 bg-[#0F2744]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <div className="absolute inset-0 bg-[#0F2744]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-          {/* Small Circular Enlarge Button (Matching Bag PDP Pattern) */}
+          {/* Zoom Indicator (Matching Ribbon PDP Sizing & Hover State) */}
           <div
-            className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 h-10 w-10 sm:h-12 sm:w-12 rounded-full bg-[#0F2744]/95 text-[#F6F0E8] border border-[#C7A86A]/30 flex items-center justify-center shadow-md opacity-90 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-300 transform translate-y-0 sm:translate-y-1 sm:group-hover:translate-y-0 group-hover:scale-105"
+            className="absolute bottom-5 right-5 h-11 w-11 rounded-full bg-[#0F2744]/95 text-[#F6F0E8] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-1 hover:bg-[#C7A86A] hover:text-[#0F2744]"
             aria-hidden="true"
           >
-            <Maximize2 className="h-4 w-4 sm:h-5 sm:w-5 text-[#C7A86A]" />
+            <Maximize2 className="h-4.5 w-4.5 text-[#C7A86A] group-hover:text-[#0F2744] transition-colors" />
           </div>
         </div>
       </div>

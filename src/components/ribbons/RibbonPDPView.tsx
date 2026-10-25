@@ -48,12 +48,10 @@ export default function RibbonPDPView({ material, relatedMaterials }: RibbonPDPV
   // Configuration State
   const [activeImageIdx, setActiveImageIdx] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [selectedWidthMm, setSelectedWidthMm] = useState<number>(material.widths[2]?.mm || 25);
   const [openFaqIdx, setOpenFaqIdx] = useState<number | null>(0);
   const [activeTab, setActiveTab] = useState<"overview" | "specs" | "branding" | "applications">("overview");
 
-  const selectedWidth: RibbonWidth =
-    material.widths.find((w) => w.mm === selectedWidthMm) || material.widths[0];
+  const selectedWidth: RibbonWidth = material.widths[0];
 
   // Dynamic WhatsApp Quote Message (No internal IDs/codes)
   const whatsappMsg = `Hello CASA DI BIZ, I would like to request a bespoke quote for custom ribbons:
@@ -188,55 +186,36 @@ Please share MOQ, sample lead time, and branding options.`;
                   <span className="text-[#0F2744]/70 font-semibold uppercase tracking-wider text-[10px]">MATERIAL</span>
                   <span className="font-semibold text-[#0F2744]">{material.name}</span>
                 </div>
-                <div className="flex justify-between items-center pb-2 border-b border-[#C7A86A]/15">
-                  <span className="text-[#0F2744]/70 font-semibold uppercase tracking-wider text-[10px]">SELECTED WIDTH</span>
-                  <span className="font-semibold text-[#0F2744]">{selectedWidth.label} • {selectedWidth.position}</span>
-                </div>
                 <div className="flex justify-between items-center">
                   <span className="text-[#0F2744]/70 font-semibold uppercase tracking-wider text-[10px]">COLOUR</span>
                   <span className="font-semibold text-[#0F2744]">Custom / Pantone Matched</span>
                 </div>
               </div>
 
-              {/* 1. SELECT WIDTH */}
+              {/* AVAILABLE RIBBON WIDTHS */}
               <div className="w-full mb-6">
-                <div className="flex justify-between items-baseline mb-2.5">
+                <div className="mb-2.5">
                   <h2 className="text-xs font-semibold text-[#0F2744] tracking-[0.2em] uppercase">
-                    1. SELECT WIDTH
+                    AVAILABLE RIBBON WIDTHS
                   </h2>
-                  <span className="text-[11px] text-[#C7A86A] font-semibold">
-                    {selectedWidth.position}
-                  </span>
                 </div>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 w-full">
-                  {material.widths.map((w) => {
-                    const isSelected = selectedWidthMm === w.mm;
-                    return (
-                      <button
-                        key={w.mm}
-                        type="button"
-                        onClick={() => setSelectedWidthMm(w.mm)}
-                        className={`p-3 border rounded-xl text-left transition-all duration-300 cursor-pointer relative ${
-                          isSelected
-                            ? "border-[#C7A86A] bg-[#F6F0E8] shadow-xs ring-1 ring-[#C7A86A]"
-                            : "border-[#C7A86A]/20 bg-[#FAF8F5] hover:border-[#C7A86A]/50 hover:bg-[#F6F0E8]/40"
-                        }`}
-                      >
-                        <div className="flex justify-between items-center mb-1">
-                          <span className="text-xs font-bold text-[#0F2744]">{w.mm} mm</span>
-                          {isSelected && (
-                            <span className="h-2 w-2 rounded-full bg-[#C7A86A]" />
-                          )}
-                        </div>
-                        <span className="text-[11px] font-mono text-[#0F2744]/70 block">
-                          {w.inches}
-                        </span>
-                        <span className="text-[9px] font-medium text-[#C7A86A] block mt-1 truncate">
-                          {w.position}
-                        </span>
-                      </button>
-                    );
-                  })}
+                  {material.widths.map((w) => (
+                    <div
+                      key={w.mm}
+                      className="p-3 border border-[#C7A86A]/70 bg-[#FAF8F5] rounded-xl text-left relative"
+                    >
+                      <div className="flex justify-between items-center mb-1">
+                        <span className="text-xs font-bold text-[#0F2744]">{w.mm} mm</span>
+                      </div>
+                      <span className="text-[11px] font-mono text-[#0F2744]/70 block">
+                        {w.inches}
+                      </span>
+                      <span className="text-[9px] font-medium text-[#C7A86A] block mt-1 truncate">
+                        {w.position}
+                      </span>
+                    </div>
+                  ))}
                 </div>
                 {/* Width Context Note */}
                 <p className="text-[11px] text-[#0F2744]/70 mt-2 italic">
@@ -531,58 +510,50 @@ Please share MOQ, sample lead time, and branding options.`;
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-              {material.widths.map((w) => {
-                const isSelected = selectedWidthMm === w.mm;
-                return (
-                  <div
-                    key={w.mm}
-                    onClick={() => setSelectedWidthMm(w.mm)}
-                    className={`rounded-2xl p-6 border transition-all duration-300 cursor-pointer flex flex-col justify-between ${
-                      isSelected
-                        ? "bg-[#F6F0E8] border-[#C7A86A] shadow-md ring-1 ring-[#C7A86A]"
-                        : "bg-white border-[#C7A86A]/20 hover:border-[#C7A86A]/60"
-                    }`}
-                  >
-                    <div>
-                      {/* Visual ribbon scale bar */}
-                      <div className="h-14 bg-[#FAF8F5] border border-[#0F2744]/10 rounded-xl flex items-center justify-center mb-5 p-2">
-                        <div
-                          className="bg-[#0F2744] rounded transition-all duration-500"
-                          style={{
-                            height: `${Math.max(4, Math.min(38, w.mm * 0.9))}px`,
-                            width: "85%",
-                          }}
-                        />
-                      </div>
-
-                      <div className="flex items-baseline justify-between mb-1">
-                        <span className="font-display text-2xl text-[#0F2744] font-bold">{w.mm} mm</span>
-                        <span className="font-mono text-xs font-semibold text-[#C7A86A]">{w.inches}</span>
-                      </div>
-                      <span className="text-[10px] font-bold tracking-[0.2em] text-[#0F2744]/70 uppercase block mb-3">
-                        {w.position}
-                      </span>
-                      <p className="text-xs text-[#0F2744]/80 leading-relaxed mb-4">
-                        {w.description}
-                      </p>
+              {material.widths.map((w) => (
+                <div
+                  key={w.mm}
+                  className="rounded-2xl p-6 border border-[#C7A86A]/70 bg-white flex flex-col justify-between"
+                >
+                  <div>
+                    {/* Visual ribbon scale bar */}
+                    <div className="h-14 bg-[#FAF8F5] border border-[#0F2744]/10 rounded-xl flex items-center justify-center mb-5 p-2">
+                      <div
+                        className="bg-[#0F2744] rounded transition-all duration-500"
+                        style={{
+                          height: `${Math.max(4, Math.min(38, w.mm * 0.9))}px`,
+                          width: "85%",
+                        }}
+                      />
                     </div>
 
-                    <div>
-                      <span className="text-[9px] font-bold tracking-[0.15em] text-[#C7A86A] uppercase block mb-2">
-                        SUITABLE APPLICATIONS:
-                      </span>
-                      <ul className="space-y-1.5 text-[11px] text-[#0F2744]/75">
-                        {w.suitableFor.map((item, idx) => (
-                          <li key={idx} className="flex items-center gap-1.5">
-                            <span className="h-1 w-1 rounded-full bg-[#C7A86A]" />
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
+                    <div className="flex items-baseline justify-between mb-1">
+                      <span className="font-display text-2xl text-[#0F2744] font-bold">{w.mm} mm</span>
+                      <span className="font-mono text-xs font-semibold text-[#C7A86A]">{w.inches}</span>
                     </div>
+                    <span className="text-[10px] font-bold tracking-[0.2em] text-[#0F2744]/70 uppercase block mb-3">
+                      {w.position}
+                    </span>
+                    <p className="text-xs text-[#0F2744]/80 leading-relaxed mb-4">
+                      {w.description}
+                    </p>
                   </div>
-                );
-              })}
+
+                  <div>
+                    <span className="text-[9px] font-bold tracking-[0.15em] text-[#C7A86A] uppercase block mb-2">
+                      SUITABLE APPLICATIONS:
+                    </span>
+                    <ul className="space-y-1.5 text-[11px] text-[#0F2744]/75">
+                      {w.suitableFor.map((item, idx) => (
+                        <li key={idx} className="flex items-center gap-1.5">
+                          <span className="h-1 w-1 rounded-full bg-[#C7A86A]" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>

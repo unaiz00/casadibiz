@@ -84,11 +84,10 @@ const BAG_TABS = [
 ];
 
 export default function WhiteCardPage() {
-  const [activeSizeIdx, setActiveSizeIdx] = useState(0);
   const [openFaqIdx, setOpenFaqIdx] = useState<number | null>(0);
   const [activeDetailTab, setActiveDetailTab] = useState<"description" | "specifications" | "customization">("description");
 
-  const selectedSize = product.sizes[activeSizeIdx]?.value || "";
+  const selectedSize = product.sizes[0]?.value || "";
   const whatsappMsg = `Hello CASA DI BIZ, I would like to request a quote for the ${product.name} (Size: ${selectedSize})`;
   const dynamicWhatsappUrl = `https://wa.me/+971563374248?text=${encodeURIComponent(whatsappMsg)}`;
 
@@ -193,19 +192,14 @@ export default function WhiteCardPage() {
                   } gap-2 w-full lg:flex lg:flex-row lg:gap-3 lg:w-auto`}
                 >
                   {product.sizes.map((size, idx) => (
-                    <button
+                    <div
                       key={idx}
-                      onClick={() => setActiveSizeIdx(idx)}
-                      className={`flex items-center justify-center min-h-[48px] py-2 px-1.5 sm:px-3 lg:px-5 lg:h-12 border rounded-md transition-all duration-300 cursor-pointer text-center ${
-                        activeSizeIdx === idx
-                          ? "border-[#C7A86A] bg-[#F6F0E8]"
-                          : "border-[#C7A86A]/20 bg-[#FAF8F5] hover:border-[#C7A86A]/50 hover:bg-[#F6F0E8]/20 hover:translate-y-[-1px]"
-                      }`}
+                      className="flex items-center justify-center min-h-[48px] py-2 px-1.5 sm:px-3 lg:px-5 lg:h-12 border border-[#C7A86A]/25 bg-[#F6F0E8] rounded-md text-center"
                     >
                       <span className="text-[11px] xs:text-[11.5px] sm:text-[12px] font-medium tracking-[0.02em] sm:tracking-[0.08em] text-[#0F2744] leading-tight text-center whitespace-normal break-words">
                         {size.value}
                       </span>
-                    </button>
+                    </div>
                   ))}
                 </div>
               </div>
@@ -394,9 +388,8 @@ export default function WhiteCardPage() {
                             {cust.desc}
                           </p>
                         </div>
-                        <div className="mt-5 pt-3 border-t border-[#0F2744]/10 flex items-center justify-between text-[11px] text-[#0F2744]/70">
+                        <div className="mt-5 pt-3 border-t border-[#0F2744]/10 flex items-center text-[11px] text-[#0F2744]/70">
                           <span>Available across all bag formats</span>
-                          <span className="text-[#C7A86A] font-semibold">Bespoke Tooling</span>
                         </div>
                       </div>
                     ))}
