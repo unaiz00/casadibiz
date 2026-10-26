@@ -488,7 +488,7 @@ Selected Specs:
                 </div>
 
                 {/* Mobile Material & Texture Selector - Directly after Gallery & Thumbnails */}
-                <div className="w-full mt-2 pt-3 border-t border-[#0F2744]/10">
+                <div className="w-full mt-2 pt-3 border-t border-[#0F2744]/10 min-w-0">
                   <div className="flex justify-between items-baseline mb-2.5">
                     <span className="text-[11px] font-semibold text-[#0F2744] tracking-[0.2em] uppercase">
                       MATERIAL & TEXTURE
@@ -497,7 +497,7 @@ Selected Specs:
                       {activeMaterial?.name}
                     </span>
                   </div>
-                  <div className="grid grid-cols-2 gap-2 w-full">
+                  <div className="flex flex-nowrap gap-2.5 overflow-x-auto py-1.5 scrollbar-none snap-x snap-mandatory w-full min-w-0 touch-pan-x [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                     {model.materials.map((mat) => {
                       const isSelected = activeMaterialId === mat.id;
                       return (
@@ -506,13 +506,13 @@ Selected Specs:
                           type="button"
                           onClick={() => handleMaterialSelect(mat.id)}
                           aria-label={`Select ${mat.name} material`}
-                          className={`flex items-center gap-2 p-2 rounded-lg border text-left transition-all duration-200 cursor-pointer min-w-0 ${
+                          className={`flex items-center gap-2.5 px-3.5 py-2 rounded-xl border text-left transition-all duration-200 cursor-pointer shrink-0 snap-start whitespace-nowrap ${
                             isSelected
                               ? "border-[#C7A86A] bg-[#F6F0E8] ring-1 ring-[#C7A86A] shadow-xs"
                               : "border-[#0F2744]/15 bg-white hover:border-[#C7A86A]/50"
                           }`}
                         >
-                          <div className="h-7 w-7 rounded overflow-hidden border border-[#0F2744]/10 bg-[#F6F0E8] shrink-0">
+                          <div className="h-7 w-7 rounded-md overflow-hidden border border-[#0F2744]/10 bg-[#F6F0E8] shrink-0">
                             <img
                               src={mat.image}
                               alt={mat.name}
@@ -521,7 +521,7 @@ Selected Specs:
                             />
                           </div>
                           <span
-                            className={`text-[11px] leading-tight truncate min-w-0 ${
+                            className={`text-xs leading-tight ${
                               isSelected ? "text-[#0F2744] font-semibold" : "text-[#0F2744]/80 font-medium"
                             }`}
                           >
@@ -637,7 +637,44 @@ Selected Specs:
                     {activeMaterial?.name}
                   </span>
                 </div>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 w-full">
+                {/* Mobile / Tablet View (<lg): Horizontally scrollable row */}
+                <div className="flex lg:hidden flex-nowrap gap-2.5 overflow-x-auto py-1.5 scrollbar-none snap-x snap-mandatory w-full min-w-0 touch-pan-x [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                  {model.materials.map((mat) => {
+                    const isSelected = activeMaterialId === mat.id;
+                    return (
+                      <button
+                        key={mat.id}
+                        type="button"
+                        onClick={() => handleMaterialSelect(mat.id)}
+                        aria-label={`Select ${mat.name} material`}
+                        className={`flex items-center gap-2.5 px-3.5 py-2 rounded-xl border text-left transition-all duration-200 cursor-pointer shrink-0 snap-start whitespace-nowrap ${
+                          isSelected
+                            ? "border-[#C7A86A] bg-[#F6F0E8] ring-1 ring-[#C7A86A] shadow-xs"
+                            : "border-[#0F2744]/15 bg-white hover:border-[#C7A86A]/50"
+                        }`}
+                      >
+                        <div className="h-7 w-7 rounded-md overflow-hidden border border-[#0F2744]/10 bg-[#F6F0E8] shrink-0">
+                          <img
+                            src={mat.image}
+                            alt={mat.name}
+                            className="h-full w-full object-cover"
+                            loading="lazy"
+                          />
+                        </div>
+                        <span
+                          className={`text-xs leading-tight ${
+                            isSelected ? "text-[#0F2744] font-semibold" : "text-[#0F2744]/80 font-medium"
+                          }`}
+                        >
+                          {mat.name}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* Desktop View (lg+): Grid layout */}
+                <div className="hidden lg:grid grid-cols-2 sm:grid-cols-3 gap-2.5 w-full">
                   {model.materials.map((mat) => {
                     const isSelected = activeMaterialId === mat.id;
                     return (
