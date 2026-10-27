@@ -237,6 +237,9 @@ export const BANGLE_BOX_MATERIALS: BoxMaterialOption[] = [
     image: "/assets/materials/Ribbed Texture Fold.png",
     description: "Fine relief textured surface delivering elevated tactile depth and modern aesthetics.",
   },
+  BOX_MATERIAL_REGISTRY.leatherette,
+  BOX_MATERIAL_REGISTRY["special-paper"],
+  BOX_MATERIAL_REGISTRY["soft-touch"],
 ];
 
 // Dedicated Bracelet Box Materials (11 exterior material options matching Ring Box PDP)
@@ -281,12 +284,14 @@ export const STANDARD_BOX_FINISHES: BoxFinishOption[] = [
 export const RING_BOX_FINISHES: BoxFinishOption[] = STANDARD_BOX_FINISHES;
 export const BRACELET_BOX_FINISHES: BoxFinishOption[] = STANDARD_BOX_FINISHES;
 
-// Dedicated Set Box Materials (all 9 available exterior material options matching valid assets)
+// Dedicated Set Box Materials (all 11 exterior material options matching Ring Box PDP)
 export const SET_BOX_MATERIALS: BoxMaterialOption[] = [
   BOX_MATERIAL_REGISTRY.velvet,
   BOX_MATERIAL_REGISTRY["premium-suede"],
+  BOX_MATERIAL_REGISTRY.microfiber,
   BOX_MATERIAL_REGISTRY["premium-microfiber"],
   BOX_MATERIAL_REGISTRY.leatherette,
+  BOX_MATERIAL_REGISTRY["special-paper"],
   BOX_MATERIAL_REGISTRY["brown-crocodile"],
   BOX_MATERIAL_REGISTRY["glossy-navy"],
   BOX_MATERIAL_REGISTRY["matt-grey-paint"],
@@ -296,13 +301,14 @@ export const SET_BOX_MATERIALS: BoxMaterialOption[] = [
 
 export const SET_BOX_FINISHES: BoxFinishOption[] = STANDARD_BOX_FINISHES;
 
-// Dedicated Necklace Box Materials (all 10 available exterior material options matching valid assets)
+// Dedicated Necklace Box Materials (all 11 exterior material options matching Ring Box PDP)
 export const NECKLACE_BOX_MATERIALS: BoxMaterialOption[] = [
   BOX_MATERIAL_REGISTRY.velvet,
   BOX_MATERIAL_REGISTRY["premium-suede"],
   BOX_MATERIAL_REGISTRY.microfiber,
   BOX_MATERIAL_REGISTRY["premium-microfiber"],
   BOX_MATERIAL_REGISTRY.leatherette,
+  BOX_MATERIAL_REGISTRY["special-paper"],
   BOX_MATERIAL_REGISTRY["brown-crocodile"],
   BOX_MATERIAL_REGISTRY["glossy-navy"],
   BOX_MATERIAL_REGISTRY["matt-grey-paint"],
@@ -312,11 +318,14 @@ export const NECKLACE_BOX_MATERIALS: BoxMaterialOption[] = [
 
 export const NECKLACE_BOX_FINISHES: BoxFinishOption[] = STANDARD_BOX_FINISHES;
 
-// Dedicated Pendant Box Materials (all 8 available exterior material options matching valid assets)
+// Dedicated Pendant Box Materials (all 11 exterior material options matching Ring Box PDP)
 export const PENDANT_BOX_MATERIALS: BoxMaterialOption[] = [
   BOX_MATERIAL_REGISTRY.velvet,
+  BOX_MATERIAL_REGISTRY["premium-suede"],
   BOX_MATERIAL_REGISTRY.microfiber,
   BOX_MATERIAL_REGISTRY["premium-microfiber"],
+  BOX_MATERIAL_REGISTRY.leatherette,
+  BOX_MATERIAL_REGISTRY["special-paper"],
   BOX_MATERIAL_REGISTRY["brown-crocodile"],
   BOX_MATERIAL_REGISTRY["glossy-navy"],
   BOX_MATERIAL_REGISTRY["matt-grey-paint"],
@@ -326,16 +335,21 @@ export const PENDANT_BOX_MATERIALS: BoxMaterialOption[] = [
 
 export const PENDANT_BOX_FINISHES: BoxFinishOption[] = STANDARD_BOX_FINISHES;
 
-// Dedicated Chain Box Materials
+// Dedicated Chain Box Materials (all exterior material options matching Ring Box PDP + textured paper)
 export const CHAIN_BOX_MATERIALS: BoxMaterialOption[] = [
   BOX_MATERIAL_REGISTRY.velvet,
   BOX_MATERIAL_REGISTRY.suede,
+  BOX_MATERIAL_REGISTRY["premium-suede"],
   BOX_MATERIAL_REGISTRY.microfiber,
   BOX_MATERIAL_REGISTRY["premium-microfiber"],
   BOX_MATERIAL_REGISTRY.leatherette,
+  BOX_MATERIAL_REGISTRY["special-paper"],
   BOX_MATERIAL_REGISTRY["textured-paper"],
+  BOX_MATERIAL_REGISTRY["brown-crocodile"],
+  BOX_MATERIAL_REGISTRY["glossy-navy"],
   BOX_MATERIAL_REGISTRY["matt-grey-paint"],
   BOX_MATERIAL_REGISTRY["soft-touch"],
+  BOX_MATERIAL_REGISTRY["ribbed-texture"],
 ];
 
 export const CHAIN_BOX_FINISHES: BoxFinishOption[] = STANDARD_BOX_FINISHES;
@@ -766,11 +780,15 @@ export const BOX_MODELS_DATA: Record<string, BoxModel> = {
     ],
     materialImages: {
       velvet: "/assets/chain/chainpn1_velvetchamgne.jpeg",
+      "hairy-velvet": "/assets/chain/chainpn1_velvetchamgne.jpeg",
       suede: "/assets/chain/premiumpaper_suede_chain.jpeg",
+      "premium-suede": "/assets/chain/premiumpaper_suede_chain.jpeg",
       microfiber: "/assets/chain/chain_microfiber.jpeg",
+      "premium-microfiber": "/assets/chain/premium_microfiber_chain.jpeg",
       leatherette: "/assets/chain/chain_premiumleather.jpeg",
       "special-paper": "/assets/chain/premium_microfiber_chain.jpeg",
       "textured-paper": "/assets/chain/chain__special_premium_texture.jpeg",
+      "ribbed-texture": "/assets/chain/chain__special_premium_texture.jpeg",
       "matt-grey-paint": "/assets/chain/chain__matt grey_paint.jpeg",
       "soft-touch": "/assets/chain/chain_specialsoft.jpeg",
     },
@@ -922,12 +940,17 @@ export const BOX_MODELS_DATA: Record<string, BoxModel> = {
     materialImages: {
       "matt-grey-paint": "/assets/bangle/bangle__matt grey_paint.jpeg",
       crocodile: "/assets/bangle/bangle_crocodile.jpeg",
+      "brown-crocodile": "/assets/bangle/bangle_crocodile.jpeg",
       suede: "/assets/bangle/bangle_suede.jpeg",
+      "premium-suede": "/assets/bangle/bangle_suede.jpeg",
       microfiber: "/assets/bangle/bangle_microfiber.jpeg",
       "premium-microfiber": "/assets/bangle/premium_microfiber_bangle.jpeg",
       "blue-glossy": "/assets/bangle/bangle_blueglossy.jpeg",
+      "glossy-navy": "/assets/bangle/bangle_blueglossy.jpeg",
       "hairy-velvet": "/assets/bangle/bangle_hairyvelvet.jpeg",
+      velvet: "/assets/bangle/bangle_hairyvelvet.jpeg",
       "special-premium-texture": "/assets/bangle/bangle__special_premium_texture.jpeg",
+      "ribbed-texture": "/assets/bangle/bangle__special_premium_texture.jpeg",
     },
     finishImages: {
       "blind-debossed": "/assets/bangle/bangle_hairyvelvet.jpeg",
