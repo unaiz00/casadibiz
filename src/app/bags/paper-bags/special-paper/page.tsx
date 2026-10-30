@@ -48,7 +48,6 @@ const product = {
   ],
 
   colors: [
-    { name: "Champagne", hex: "#E6D8B8" },
     { name: "Burgundy", hex: "#800020" }
   ],
 

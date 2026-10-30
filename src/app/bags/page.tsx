@@ -25,7 +25,7 @@ export const BAG_PRODUCTS = [
   {
     slug: "kraft-bag",
     title: "Kraft Bags",
-    short: "Durable, unbleached brown or bleached white kraft paper carriers providing high tear resistance.",
+    short: "Durable, unbleached brown kraft paper carriers providing high tear resistance.",
     image: "/assets/kraft3.png",
   },
 ];

@@ -45,4 +45,4 @@ lerna-debug.log*
 *.sw?
 
 # Video assets — keep local, don't commit to GitHub
-*.mp4
+*.mp4git restore --staged -- '*.mp4'

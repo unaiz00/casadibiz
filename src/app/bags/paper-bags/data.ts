@@ -64,7 +64,6 @@ export const PAPER_BAG_DATA: Record<string, BagCategoryData> = {
       { label: "Luxury Watches", desc: "Bespoke watch chronometers" }
     ],
     colors: [
-      { name: "Champagne", hex: "#E6D8B8" },
       { name: "Burgundy", hex: "#800020" }
     ],
     faqs: [
@@ -172,7 +171,7 @@ export const PAPER_BAG_DATA: Record<string, BagCategoryData> = {
     category: {
       title: "Kraft Bags",
       subtitle: "SUSTAINABLE LONG-FIBER WRAPS",
-      shortDescription: "Durable, unbleached brown or bleached white kraft paper carriers providing high tear resistance.",
+      shortDescription: "Durable, unbleached brown kraft paper carriers providing high tear resistance.",
       longDescription: "Our Kraft bags offer an authentic organic aesthetic without sacrificing luxury metrics. Constructed from 120 GSM natural long-fiber conifer wood pulp, the paper has natural high tensile strength and tear resistance. Made with intent, they are 100% recyclable, compostable, and FSC-certified.",
       heroImages: ["/assets/kraft-bag-ref.png", "/assets/goodimm.jpeg", "/assets/allim.jpeg"],
       breadcrumbs: [
@@ -207,8 +206,7 @@ export const PAPER_BAG_DATA: Record<string, BagCategoryData> = {
       { label: "Boutique Retail", desc: "Handcrafted goods & fashion" }
     ],
     colors: [
-      { name: "Brown", hex: "#8A6D55" },
-      { name: "White", hex: "#FAF8F5" }
+      { name: "Brown", hex: "#8A6D55" }
     ],
     faqs: [
       { q: "Are these bags fully compostable?", a: "Yes. Bags with natural twisted paper handles using starch glues are 100% compostable and recyclable." },

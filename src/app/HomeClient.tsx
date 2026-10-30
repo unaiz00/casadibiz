@@ -117,24 +117,24 @@ function Hero() {
 /* ---------------- Categories ---------------- */
 function Categories() {
   const items = [
-    { label: "Boxes", img: "/assets/cats/boxclor.mp4", slug: "boxes" },
-    { label: "Bags", img: "/assets/cats/papercolr.mp4", slug: "bags" },
-    { label: "Pouches", img: "/assets/cats/pouchcolr.mp4", slug: "pouches" },
-    { label: "Wraps", img: "/assets/cats/wrapedit.mp4", slug: "wraps" },
-    { label: "Ribbons", img: "/assets/cats/ribboncolr.mp4", slug: "ribbons" },
-    { label: "Collections", img: "/assets/cats/cllctv.mp4", slug: "collections" },
-    { label: "Gifting Essentials", img: "/assets/cats/giftcolr.mp4", slug: "gifting-essentials" },
+    { label: "Boxes", img: "/animatedicon/animboxicon.gif", slug: "boxes" },
+    { label: "Bags", img: "/animatedicon/paperbagicon.gif", slug: "bags" },
+    { label: "Pouches", img: "/animatedicon/pouchseticon.gif", slug: "pouches" },
+    { label: "Wraps", img: "/animatedicon/wrapicon.gif", slug: "wraps" },
+    { label: "Ribbons", img: "/animatedicon/riibonseticon.gif", slug: "ribbons" },
+    { label: "Collections", img: "/animatedicon/collectionicon.gif", slug: "collections" },
+    { label: "Gifting Essentials", img: "/animatedicon/giftbox.gif", slug: "gifting-essentials" },
   ];
   return (
-    <section id="categories" className="w-full bg-white">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-10 pt-8 pb-12 sm:pt-20 sm:pb-16 md:pt-24 md:pb-20">
+    <section id="categories" className="w-full bg-[#F6EFE4]">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-10 pt-8 pb-10 sm:pt-12 sm:pb-14 md:pt-16 md:pb-[72px]">
         <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-4 sm:gap-6">
           {items.map(({ label, img, slug }, i) => {
             const isVideo = img.endsWith(".mp4");
+            const isLastOnMobile = i === items.length - 1;
             const inner = (
               <>
                 <div className="relative h-20 w-20 sm:h-24 sm:w-24">
-                  <div className="absolute inset-0 rounded-full bg-white blur-xl opacity-100" />
                   {isVideo ? (
                     <video
                       src={img}
@@ -143,21 +143,24 @@ function Categories() {
                       muted
                       playsInline
                       className="relative h-full w-full object-contain mix-blend-multiply"
+                      style={{ mixBlendMode: "multiply" }}
                     />
                   ) : (
                     <img
                       src={img}
                       alt={label}
+                      width={96}
+                      height={96}
                       loading="lazy"
-                      className="relative h-full w-full object-contain mix-blend-multiply"
+                      className="relative h-full w-full object-contain"
                     />
                   )}
                 </div>
-                <span className="text-[11px] sm:text-xs md:text-sm text-navy text-center leading-tight">{label}</span>
+                <span className="text-[11px] sm:text-xs md:text-sm text-navy text-center leading-tight min-h-[28px] sm:min-h-[34px] flex items-center justify-center">{label}</span>
                 <span className="h-[2px] w-6 bg-gold/60 rounded-full" />
               </>
             );
-            const cls = "group flex flex-col items-center gap-2 sm:gap-3";
+            const cls = `group flex flex-col items-center gap-2 sm:gap-3 ${isLastOnMobile ? "col-start-2 sm:col-start-auto" : ""}`;
             if (slug === "boxes") return <Link key={label} href="/boxes/#jewellery-boxes" className={cls}>{inner}</Link>;
             if (slug === "bags") return <Link key={label} href="/bags" className={cls}>{inner}</Link>;
             if (slug === "pouches") return <Link key={label} href="/pouches" className={cls}>{inner}</Link>;

@@ -14,7 +14,7 @@ import ProductCTAButtons from "@/components/pdp/ProductCTAButtons";
 const product = {
   name: "Kraft Bags",
   subtitle: "SUSTAINABLE LONG-FIBER WRAPS",
-  shortDescription: "Durable, unbleached brown or bleached white kraft paper carriers providing high tear resistance.",
+  shortDescription: "Durable, unbleached brown kraft paper carriers providing high tear resistance.",
   longDescription: "Our Kraft bags offer an authentic organic aesthetic without sacrificing luxury metrics. Constructed from 120 GSM natural long-fiber conifer wood pulp, the paper has natural high tensile strength and tear resistance. Made with intent, they are 100% recyclable, compostable, and FSC-certified.",
 
   images: [
@@ -41,8 +41,7 @@ const product = {
   ],
 
   colors: [
-    { name: "Brown", hex: "#8A6D55" },
-    { name: "White", hex: "#FAF8F5" }
+    { name: "Brown", hex: "#8A6D55" }
   ],
 
   handleDetail: {
