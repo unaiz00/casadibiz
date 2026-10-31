@@ -120,7 +120,7 @@ function Categories() {
     { label: "Boxes", img: "/animatedicon/animboxicon.gif", slug: "boxes" },
     { label: "Bags", img: "/animatedicon/paperbagicon.gif", slug: "bags" },
     { label: "Pouches", img: "/animatedicon/pouchseticon.gif", slug: "pouches" },
-    { label: "Wraps", img: "/animatedicon/wrapicon.gif", slug: "wraps" },
+    { label: "Wraps", img: "/animatedicon/wrapseticon.gif", slug: "wraps" },
     { label: "Ribbons", img: "/animatedicon/riibonseticon.gif", slug: "ribbons" },
     { label: "Collections", img: "/animatedicon/collectionicon.gif", slug: "collections" },
     { label: "Gifting Essentials", img: "/animatedicon/giftbox.gif", slug: "gifting-essentials" },
