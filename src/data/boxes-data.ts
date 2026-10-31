@@ -697,9 +697,7 @@ export const BOX_MODELS_DATA: Record<string, BoxModel> = {
       { src: "/assets/pendant/mattgrey_pendant.png", alt: "CASA DI BIZ Pendant Box - Matt Grey Paint Edition", label: "Matt Grey Paint" },
       { src: "/assets/pendant/pendant_specialsoft.jpeg", alt: "CASA DI BIZ Pendant Box - Soft Touch Edition", label: "Soft Touch" },
       { src: "/assets/pendant/pendant_ribbed.jpeg", alt: "CASA DI BIZ Pendant Box - Ribbed Texture Edition", label: "Ribbed Texture" },
-      { src: "/assets/pendant/chainpn1_velvetchamgne.jpeg", alt: "CASA DI BIZ Pendant Box - Velvet Champagne Multi-View", label: "Champagne Velvet Multi-View" },
       { src: "/assets/pendant/chainp_velvetchamgne.jpeg", alt: "CASA DI BIZ Pendant Box - Velvet Champagne Closed", label: "Champagne Velvet Closed" },
-      { src: "/assets/pendant/chainpn2_velvetchamgne.jpeg", alt: "CASA DI BIZ Pendant Box - Velvet Champagne Open", label: "Champagne Velvet Open" },
     ],
     materialImages: {
       velvet: "/assets/pendant/hairyvelvet_pendantbox.png",
@@ -776,7 +774,6 @@ export const BOX_MODELS_DATA: Record<string, BoxModel> = {
       { src: "/assets/chain/chain_specialsoft.jpeg", alt: "CASA DI BIZ Chain Box - Soft Touch Edition" },
       { src: "/assets/chain/chain__matt grey_paint.jpeg", alt: "CASA DI BIZ Chain Box - Matt Grey Paint Edition" },
       { src: "/assets/chain/chainp_velvetchamgne.jpeg", alt: "CASA DI BIZ Chain Box - Velvet Champagne Closed" },
-      { src: "/assets/chain/chainpn2_velvetchamgne.jpeg", alt: "CASA DI BIZ Chain Box - Velvet Champagne Open" },
     ],
     materialImages: {
       velvet: "/assets/chain/chainpn1_velvetchamgne.jpeg",
@@ -855,9 +852,7 @@ export const BOX_MODELS_DATA: Record<string, BoxModel> = {
       { src: "/assets/bracelet/bracelet_specialsoft.jpeg", alt: "CASA DI BIZ Bracelet Box - Soft Touch Edition", label: "Soft Touch" },
       { src: "/assets/bracelet/ribbed_bracelet.png", alt: "CASA DI BIZ Bracelet Box - Ribbed Texture Edition", label: "Ribbed Texture" },
       { src: "/assets/bracelet/bracelet_blue_crocodile.jpeg", alt: "CASA DI BIZ Bracelet Box - Blue Crocodile Edition", label: "Blue Crocodile" },
-      { src: "/assets/bracelet/braceletvelvetchamgne.jpeg", alt: "CASA DI BIZ Bracelet Box - Champagne Velvet Open", label: "Champagne Velvet Open" },
       { src: "/assets/bracelet/braceletvelvetchamgne2.jpeg", alt: "CASA DI BIZ Bracelet Box - Champagne Velvet Closed", label: "Champagne Velvet Closed" },
-      { src: "/assets/bracelet/braceletvelvetchamgne3.jpeg", alt: "CASA DI BIZ Bracelet Box - Champagne Velvet Detail", label: "Champagne Velvet Detail" },
     ],
     materialImages: {
       velvet: "/assets/bracelet/bracelet__hairyvelvet.jpeg",

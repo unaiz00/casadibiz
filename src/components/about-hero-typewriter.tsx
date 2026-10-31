@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { Typewriter } from "./ui/typewriter";
 
 export function AboutHeroTypewriter() {

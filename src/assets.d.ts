@@ -4,15 +4,15 @@ declare module "*.asset.json" {
 }
 
 declare module "*/lovable-error-reporting" {
-  export function reportLovableError(...args: any[]): void;
+  export function reportLovableError(...args: unknown[]): void;
 }
 
 declare module "../lib/lovable-error-reporting" {
-  export function reportLovableError(...args: any[]): void;
+  export function reportLovableError(...args: unknown[]): void;
 }
 
 declare module "@/lib/lovable-error-reporting" {
-  export function reportLovableError(...args: any[]): void;
+  export function reportLovableError(...args: unknown[]): void;
 }
 
 declare module "*.css?url" {

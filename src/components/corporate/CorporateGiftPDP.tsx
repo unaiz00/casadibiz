@@ -1,13 +1,10 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import {
   ArrowRight,
   MessageCircle,
-  ShieldCheck,
-  Layers,
-  Sparkles,
   Maximize2,
   X,
   ChevronRight,

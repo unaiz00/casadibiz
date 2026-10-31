@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, MessageCircle, ShieldCheck, Palette, Sparkles, Box, CheckCircle2 } from "lucide-react";
+import { ArrowRight, MessageCircle } from "lucide-react";
 import { SiteHeader, SiteFooter, Breadcrumbs } from "@/components/site-chrome";
 
 export interface CorporateProduct {

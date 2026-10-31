@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import { ArrowRight, HelpCircle, ChevronDown } from "lucide-react";
+import { HelpCircle, ChevronDown } from "lucide-react";
 import { SiteHeader, SiteFooter, Breadcrumbs } from "@/components/site-chrome";
 import PaperBagImageGallery from "@/components/bags/PaperBagImageGallery";
 import ProductCTAButtons from "@/components/pdp/ProductCTAButtons";

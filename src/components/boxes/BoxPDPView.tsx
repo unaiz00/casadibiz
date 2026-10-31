@@ -4,14 +4,11 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import {
   ArrowRight,
-  HelpCircle,
   ChevronDown,
   ChevronLeft,
   ChevronRight,
   X,
   Maximize2,
-  Check,
-  MessageCircle,
 } from "lucide-react";
 import { SiteHeader, SiteFooter, Breadcrumbs } from "@/components/site-chrome";
 import type { BoxModel } from "@/data/boxes-data";
@@ -42,15 +39,10 @@ interface BoxPDPViewProps {
 }
 
 export default function BoxPDPView({ model, relatedModels }: BoxPDPViewProps) {
-  const isRingBox = model.slug === "ring-box" || model.id === "ring-box";
-  const isBangleBox = model.slug === "bangle-box" || model.id === "bangle-box";
-  const isEarringBox = model.slug === "earring-box" || model.id === "earring-box";
   const isBraceletBox = model.slug === "bracelet-box" || model.id === "bracelet-box";
   const isSetBox = model.slug === "set-box" || model.id === "set-box";
   const isNecklaceBox = model.slug === "necklace-box" || model.id === "necklace-box";
   const isPendantBox = model.slug === "pendant-box" || model.id === "pendant-box";
-
-  const isChainBox = model.slug === "chain-box" || model.id === "chain-box";
 
   // Dedicated Finish-to-Material & Image mapping for all Box PDPs
   const BOX_FINISH_MAPS: Record<string, Record<string, { src: string; matId: string }>> = {

@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { SiteHeader, SiteFooter, Breadcrumbs } from "@/components/site-chrome";
 import type { WrapProduct } from "@/data/wraps-data";
 import ProductCTAButtons from "@/components/pdp/ProductCTAButtons";

@@ -4,7 +4,7 @@ import { useState, useMemo } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { SiteHeader, SiteFooter, Breadcrumbs } from "@/components/site-chrome";
-import { getAllBoxModels, type BoxModel } from "@/data/boxes-data";
+import { getAllBoxModels } from "@/data/boxes-data";
 
 const FILTER_TABS = [
   { id: "all", label: "ALL" },

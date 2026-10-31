@@ -101,7 +101,7 @@ export default function WrapsPage() {
             </div>
 
             <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-6">
-              {wrapProducts.map((it, i) => (
+              {wrapProducts.map((it) => (
                 <Link
                   key={it.slug}
                   href={`/wraps/${it.categorySlug}/${it.slug}`}

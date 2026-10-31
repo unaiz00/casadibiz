@@ -7,7 +7,7 @@ import { SiteHeader, SiteFooter, Breadcrumbs } from "@/components/site-chrome";
 
 // Helper to resolve icon components from lucide-react dynamically
 const getIcon = (name: string): React.ComponentType<{ className?: string }> => {
-  const IconComponent = (Lucide as any)[name];
+  const IconComponent = (Lucide as unknown as Record<string, React.ComponentType<{ className?: string }>>)[name];
   return IconComponent || Lucide.HelpCircle;
 };
 

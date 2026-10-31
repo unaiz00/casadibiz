@@ -4,51 +4,11 @@ import Link from "next/link";
 import {
   ArrowRight,
   ArrowUpRight,
-  Instagram, Linkedin, Mail, Phone, MapPin, MessageCircle,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { SiteHeader, SiteFooter } from "@/components/site-chrome";
 import CollectionsGrid from "@/components/CollectionsGrid";
 
-/* ---------------- Ribbons decoration ---------------- */
-
-function RibbonSwoopTopLeft({ className = "" }: { className?: string }) {
-  return (
-    <div className={`absolute pointer-events-none ${className}`} aria-hidden>
-      <svg className="w-full h-full" viewBox="0 0 200 200" fill="none">
-        <path d="M20 180C60 140 140 180 180 20" stroke="url(#gold-grad)" strokeWidth="0.5" className="blur-[0.5px]" />
-        <path d="M10 170C50 130 130 170 170 10" stroke="url(#gold-grad)" strokeWidth="1.5" strokeDasharray="1 2" />
-        <path d="M30 190C70 150 150 190 190 30" stroke="url(#gold-grad)" strokeWidth="0.2" />
-        <defs>
-          <linearGradient id="gold-grad" x1="0%" y1="100%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#846126" />
-            <stop offset="50%" stopColor="#D4AF37" />
-            <stop offset="100%" stopColor="#F9E4B7" />
-          </linearGradient>
-        </defs>
-      </svg>
-    </div>
-  );
-}
-
-function RibbonSwoopBottomRight({ className = "" }: { className?: string }) {
-  return (
-    <div className={`absolute pointer-events-none ${className}`} aria-hidden>
-      <svg className="w-full h-full" viewBox="0 0 200 200" fill="none">
-        <path d="M0 150C80 150 120 50 200 50" stroke="url(#gold-grad-2)" strokeWidth="0.75" />
-        <path d="M0 160C80 160 120 60 200 60" stroke="url(#gold-grad-2)" strokeWidth="2" opacity="0.4" />
-        <path d="M0 140C80 140 120 40 200 40" stroke="url(#gold-grad-2)" strokeWidth="0.25" />
-        <defs>
-          <linearGradient id="gold-grad-2" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#F9E4B7" />
-            <stop offset="50%" stopColor="#D4AF37" />
-            <stop offset="100%" stopColor="#846126" />
-          </linearGradient>
-        </defs>
-      </svg>
-    </div>
-  );
-}
 
 /* ---------------- Hero ---------------- */
 function Hero() {
