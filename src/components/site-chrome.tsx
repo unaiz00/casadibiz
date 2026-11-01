@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
-import { Menu, X, ChevronDown, Instagram, Linkedin, Mail, Phone, MapPin, MessageCircle } from "lucide-react";
+import { Menu, X, ChevronDown, Instagram, Mail, Phone, MapPin, MessageCircle } from "lucide-react";
 
 export function Logo({ className = "" }: { className?: string }) {
   return (
@@ -238,18 +238,18 @@ export function SiteHeader() {
               {/* Contact Information & Socials */}
               <div className="pt-5 border-t border-border-luxe/60 space-y-3 text-sm text-navy/80">
                 <a
-                  href="tel:+919995255846"
+                  href="tel:+971563374248"
                   className="flex items-center gap-2.5 hover:text-gold transition"
                 >
                   <Phone className="h-4 w-4 text-gold shrink-0" />
-                  <span>+91 9995255846</span>
+                  <span>+971 563374248</span>
                 </a>
                 <a
-                  href="mailto:hello@casadibiz.com"
+                  href="mailto:info@casadibiz.com"
                   className="flex items-center gap-2.5 hover:text-gold transition"
                 >
                   <Mail className="h-4 w-4 text-gold shrink-0" />
-                  <span>hello@casadibiz.com</span>
+                  <span>info@casadibiz.com</span>
                 </a>
                 <a
                   href="https://maps.google.com/?q=Dubai+UAE"
@@ -271,15 +271,6 @@ export function SiteHeader() {
                     className="h-9 w-9 rounded-full border border-gold/40 flex items-center justify-center text-gold hover:bg-gold hover:text-cream transition"
                   >
                     <Instagram className="h-4 w-4" />
-                  </a>
-                  <a
-                    href="https://linkedin.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="LinkedIn"
-                    className="h-9 w-9 rounded-full border border-gold/40 flex items-center justify-center text-gold hover:bg-gold hover:text-cream transition"
-                  >
-                    <Linkedin className="h-4 w-4" />
                   </a>
                   <a
                     href="https://wa.me/+971563374248"

@@ -469,8 +469,8 @@ export default function ContactPage() {
                             value={formData.boxType}
                             onChange={(e) => setFormData({ ...formData, boxType: e.target.value })}
                           >
-                            <option value="">Select type</option>
-                            {["Rigid Boxes", "Magnetic Boxes", "Drawer Boxes", "Folding Boxes", "Jewelry Boxes", "Custom Box"].map((o) => (
+                            <option value="">Select Box</option>
+                            {["Ring Box", "Earring Box", "Pendant Box", "Chain Box", "Bracelet Box", "Necklace Box", "Set Box"].map((o) => (
                               <option key={o} value={o}>{o}</option>
                             ))}
                           </select>
@@ -484,7 +484,7 @@ export default function ContactPage() {
                             onChange={(e) => setFormData({ ...formData, boxMaterial: e.target.value })}
                           >
                             <option value="">Select material</option>
-                            {["Special Paper", "Textured Paper", "PU Leather", "Velvet", "Suede", "Linen", "Custom"].map((o) => (
+                            {["Special Paper", "Ribbed Texture", "Soft Touch", "Micro Fiber", "Premium Micro Fiber", "Leather", "Velvet", "Suede", "Premium Suede", "Blue Glossy Finish", "Crocodile Finish", "Matt Grey Paint"].map((o) => (
                               <option key={o} value={o}>{o}</option>
                             ))}
                           </select>
@@ -498,7 +498,7 @@ export default function ContactPage() {
                             onChange={(e) => setFormData({ ...formData, boxFinishing: e.target.value })}
                           >
                             <option value="">Select finishing</option>
-                            {["Foil Stamping", "Embossing", "Debossing", "Spot UV", "Printing", "Custom"].map((o) => (
+                            {["Gold Foiling ", "Silver Foiling", "Blind Debossing", "Metallic Sticker",].map((o) => (
                               <option key={o} value={o}>{o}</option>
                             ))}
                           </select>
@@ -516,7 +516,7 @@ export default function ContactPage() {
                             onChange={(e) => setFormData({ ...formData, bagType: e.target.value })}
                           >
                             <option value="">Select type</option>
-                            {["Kraft Bags", "Special Paper Bags", "White Card Bags", "White Card Texture Bags", "Custom"].map((o) => (
+                            {["Kraft Bags", "Special Paper Bags", "White Card Bags", "White Card Texture Bags"].map((o) => (
                               <option key={o} value={o}>{o}</option>
                             ))}
                           </select>
@@ -562,7 +562,7 @@ export default function ContactPage() {
                             onChange={(e) => setFormData({ ...formData, pouchType: e.target.value })}
                           >
                             <option value="">Select type</option>
-                            {["Velvet", "Suede", "Satin", "Microfiber", "Custom"].map((o) => (
+                            {["Cotton/Nylon", "Sheer Organza", "woven Satin", "Double Faced Satin", "Matte Grossgrain"].map((o) => (
                               <option key={o} value={o}>{o}</option>
                             ))}
                           </select>
@@ -608,7 +608,7 @@ export default function ContactPage() {
                             onChange={(e) => setFormData({ ...formData, ribbonType: e.target.value })}
                           >
                             <option value="">Select type</option>
-                            {["Satin", "Grosgrain", "Custom"].map((o) => (
+                            {["Cotton/Nylon Blend", "Matte Grosgrain", "Woven Edge Polyester Satin", "Sheer Organza"].map((o) => (
                               <option key={o} value={o}>{o}</option>
                             ))}
                           </select>

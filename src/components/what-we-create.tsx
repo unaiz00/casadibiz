@@ -24,7 +24,7 @@ const CARDS: CardItem[] = [
     id: "bags",
     title: "BAGS",
     copy: "Signature silhouettes. Effortless presentation.",
-    img: "/assets/kraft2.png",
+    img: "/assets/papercollct.jpeg",
     link: "/bags",
   },
   {
