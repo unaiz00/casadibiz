@@ -22,7 +22,6 @@ export function SiteFooter() {
       title: "COMPANY",
       items: [
         { label: "About Us", to: "/about" },
-        { label: "Our Process", href: "/#about" },
       ],
     },
     {

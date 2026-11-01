@@ -337,7 +337,7 @@ export function SiteFooter() {
   const socials: { Icon: typeof Instagram; href: string; label: string }[] = [
     { Icon: Instagram, href: "https://www.instagram.com/casadibiz?cplk=cnE5NjQ3ZHRzMHNl", label: "Instagram" },
     { Icon: MessageCircle, href: "https://wa.me/+971563374248", label: "WhatsApp" },
-    { Icon: Mail, href: "mailto:hello@casadibiz.com", label: "Email" },
+    { Icon: Mail, href: "mailto:info@casadibiz.com", label: "Email" },
   ];
   return (
     <footer>

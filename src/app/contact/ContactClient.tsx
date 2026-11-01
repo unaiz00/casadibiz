@@ -25,7 +25,7 @@ const COMPANY = {
   phone: "+971 563374248",
   phoneRaw: "+971563374248",
   whatsapp: "+971563374248",
-  email: "hello@casadibiz.com",
+  email: "info@casadibiz.com",
   address: "Al Quoz Industrial Area 3, Dubai, United Arab Emirates",
   mapQuery: "Al Quoz Industrial Area 3, Dubai, UAE",
   hours: [
