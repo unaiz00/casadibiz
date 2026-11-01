@@ -22,8 +22,8 @@ import { SiteHeader, SiteFooter } from "@/components/site-chrome";
 
 /* ---------------- Company details ---------------- */
 const COMPANY = {
-  phone: "+91 9995255846",
-  phoneRaw: "+919995255846",
+  phone: "+971 563374248",
+  phoneRaw: "+971563374248",
   whatsapp: "+971563374248",
   email: "hello@casadibiz.com",
   address: "Al Quoz Industrial Area 3, Dubai, United Arab Emirates",
