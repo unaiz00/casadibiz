@@ -329,8 +329,8 @@ export function SiteFooter() {
         { label: "FAQs", to: "/contact" },
         { label: "Shipping & Delivery", to: "/contact" },
         { label: "Returns & Exchange", to: "/contact" },
-        { label: "Terms & Conditions", to: "/contact" },
-        { label: "Privacy Policy", to: "/contact" },
+        { label: "Terms & Conditions", to: "/terms-and-conditions" },
+        { label: "Privacy Policy", to: "/privacy-policy" },
       ],
     },
   ];

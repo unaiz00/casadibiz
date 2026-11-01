@@ -17,6 +17,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/",
     "/about/",
     "/contact/",
+    "/terms-and-conditions/",
+    "/privacy-policy/",
   ];
 
   // 2. Primary Category Hubs & Collection Hubs

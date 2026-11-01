@@ -29,6 +29,8 @@ export function SiteFooter() {
       items: [
         { label: "FAQs", to: "/contact" },
         { label: "Shipping & Delivery", to: "/contact" },
+        { label: "Terms & Conditions", to: "/terms-and-conditions" },
+        { label: "Privacy Policy", to: "/privacy-policy" },
       ],
     },
   ];
