@@ -10,6 +10,7 @@ export function Logo({ className = "" }: { className?: string }) {
       <img
         src="/assets/logo.png"
         alt="CASA DI BIZ — Luxury Packaging"
+        loading="eager"
         className="h-12 w-auto object-contain"
       />
       <span className="font-display text-xl tracking-wide text-navy">CASA DI BIZ</span>
@@ -263,7 +264,7 @@ export function SiteHeader() {
                 {/* Social Icons */}
                 <div className="flex items-center gap-3 pt-2">
                   <a
-                    href="https://instagram.com"
+                    href="https://www.instagram.com/casadibiz?cplk=cnE5NjQ3ZHRzMHNl"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Instagram"
@@ -334,8 +335,7 @@ export function SiteFooter() {
     },
   ];
   const socials: { Icon: typeof Instagram; href: string; label: string }[] = [
-    { Icon: Instagram, href: "https://instagram.com", label: "Instagram" },
-    { Icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
+    { Icon: Instagram, href: "https://www.instagram.com/casadibiz?cplk=cnE5NjQ3ZHRzMHNl", label: "Instagram" },
     { Icon: MessageCircle, href: "https://wa.me/+971563374248", label: "WhatsApp" },
     { Icon: Mail, href: "mailto:hello@casadibiz.com", label: "Email" },
   ];

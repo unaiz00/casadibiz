@@ -199,6 +199,7 @@ export default function ContactPage() {
               alt="CASA DI BIZ premium packaging products still life"
               className="w-full h-full object-cover object-[50%_46%] sm:object-contain sm:h-auto block"
               loading="eager"
+              fetchPriority="high"
             />
             {/* Subtle top gradient overlay for text legibility on mobile */}
             <div className="absolute inset-0 bg-gradient-to-b from-[#0F2744]/80 via-[#0F2744]/40 to-transparent sm:hidden pointer-events-none" />

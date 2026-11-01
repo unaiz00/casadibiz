@@ -442,6 +442,7 @@ export default function PouchPDP({ product, relatedProducts }: PouchPDPProps) {
                   <img
                     src={product.images[0]?.src || "/assets/pouches/matte-grosgrain.jpg"}
                     alt={`CASA DI BIZ ${product.name} luxury craftsmanship`}
+                    loading="lazy"
                     className="h-full w-full object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0F2744]/80 via-transparent to-transparent flex flex-col justify-end p-6">

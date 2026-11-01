@@ -154,6 +154,7 @@ export default function WrapImageViewer({ src, alt, productName }: WrapImageView
             alt={alt}
             className="absolute inset-0 h-full w-full object-contain p-2.5 sm:p-5 transition-transform duration-700 ease-out group-hover:scale-[1.02]"
             loading="eager"
+            fetchPriority="high"
           />
 
           {/* Subtle Hover Overlay */}

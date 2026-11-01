@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Instagram, Linkedin, MessageCircle, Mail, Phone, MapPin } from "lucide-react";
+import { Instagram, MessageCircle, Mail, Phone, MapPin } from "lucide-react";
 import { Logo } from "./site-chrome";
 
 type FooterItem = { label: string; to?: string; href?: string };
@@ -35,8 +35,7 @@ export function SiteFooter() {
   ];
 
   const socials: { Icon: typeof Instagram; href: string; label: string }[] = [
-    { Icon: Instagram, href: "https://instagram.com", label: "Instagram" },
-    { Icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
+    { Icon: Instagram, href: "https://www.instagram.com/casadibiz?cplk=cnE5NjQ3ZHRzMHNl", label: "Instagram" },
     { Icon: MessageCircle, href: "https://wa.me/+971563374248", label: "WhatsApp" },
     { Icon: Mail, href: "mailto:info@casadibiz.com", label: "Email" },
   ];

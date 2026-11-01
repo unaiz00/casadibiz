@@ -120,6 +120,7 @@ Please share MOQ, sample lead time, and branding options.`;
                     alt={`${material.name} - ${selectedWidth.label} luxury packaging ribbon`}
                     className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                     loading="eager"
+                    fetchPriority="high"
                   />
                   <div className="absolute inset-0 bg-[#0F2744]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
@@ -621,6 +622,7 @@ Please share MOQ, sample lead time, and branding options.`;
                   <img
                     src="/assets/giftim.jpeg"
                     alt={`CASA DI BIZ custom branded ${material.name}`}
+                    loading="lazy"
                     className="h-full w-full object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0F2744]/80 via-transparent to-transparent flex flex-col justify-end p-6">

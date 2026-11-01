@@ -129,6 +129,7 @@ export default function CollectionsGrid({ title, limit, items }: CollectionsGrid
                   src={item.image}
                   alt={item.title}
                   fill
+                  loading="lazy"
                   className="object-cover transition-transform duration-500 hover:scale-105"
                   sizes="(max-width: 768px) 85vw, 176px"
                 />

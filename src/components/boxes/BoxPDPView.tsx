@@ -394,93 +394,74 @@ Selected Specs:
         <section className="max-w-[1600px] mx-auto px-5 sm:px-8 lg:px-12 pt-6 pb-12 lg:pb-16">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
             {/* LEFT: Product Image Gallery */}
-            <div className="lg:col-span-7 flex flex-col gap-4">
-              {/* Desktop gallery: main hero + sub-grid */}
-              <div className="hidden md:flex flex-col gap-4">
-                {/* Large Main Showcase Image */}
-                <div
-                  onClick={() => {
-                    setLightboxOpen(true);
-                  }}
-                  className="group relative aspect-square rounded-xl overflow-hidden border border-[#C7A86A]/25 bg-white cursor-zoom-in shadow-xs transition-all duration-500 hover:border-[#C7A86A]/60"
-                >
-                  <img
-                    key={`desktop-${model.images[activeImageIdx]?.src || "main"}`}
-                    src={model.images[activeImageIdx]?.src || model.images[0]?.src}
-                    alt={model.images[activeImageIdx]?.alt || `${model.name} luxury jewellery box`}
-                    className={`absolute inset-0 h-full w-full ${isBraceletBox || isSetBox || isNecklaceBox || isPendantBox ? "object-contain bg-[#FAF8F5]" : "object-cover"} transition-transform duration-700 ease-out group-hover:scale-[1.02] animate-fade-in`}
-                    loading="eager"
-                  />
+            <div className="lg:col-span-7 flex flex-col gap-3 md:gap-4">
+              {/* Large Main Showcase Image (Single instance for both Desktop and Mobile - Zero duplicate downloads) */}
+              <div
+                onClick={() => {
+                  setLightboxOpen(true);
+                }}
+                className="group relative aspect-square rounded-xl overflow-hidden border border-[#C7A86A]/30 md:border-[#C7A86A]/25 bg-white cursor-zoom-in shadow-xs transition-all duration-500 hover:border-[#C7A86A]/60"
+              >
+                <img
+                  key={`main-${model.images[activeImageIdx]?.src || "main"}`}
+                  src={model.images[activeImageIdx]?.src || model.images[0]?.src}
+                  alt={model.images[activeImageIdx]?.alt || `${model.name} luxury jewellery box`}
+                  className={`absolute inset-0 h-full w-full ${isBraceletBox || isSetBox || isNecklaceBox || isPendantBox ? "object-contain bg-[#FAF8F5]" : "object-cover"} transition-transform duration-700 ease-out group-hover:scale-[1.02] animate-fade-in`}
+                  loading="eager"
+                  fetchPriority="high"
+                />
 
-                  {/* Zoom indicator button */}
-                  <div className="absolute bottom-5 right-5 h-11 w-11 rounded-full bg-[#0F2744]/95 text-[#F6F0E8] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-1 hover:bg-[#C7A86A] hover:text-[#0F2744]">
-                    <Maximize2 className="h-4.5 w-4.5 text-[#C7A86A] group-hover:text-[#0F2744] transition-colors" />
-                  </div>
-                </div>
-
-                {/* Sub-grid of thumbnails / gallery angles */}
-                <div className={`grid ${isSetBox || isNecklaceBox ? "grid-cols-5" : "grid-cols-6"} gap-2.5 sm:gap-3`}>
-                  {model.images.map((img, idx) => (
-                    <button
-                      key={idx}
-                      type="button"
-                      onClick={() => handleImageSelect(idx)}
-                      aria-label={`View ${img.alt || `product image ${idx + 1}`}`}
-                      className={`group relative aspect-square rounded-lg overflow-hidden border transition-all duration-300 cursor-pointer bg-white ${
-                        activeImageIdx === idx
-                          ? "border-[#C7A86A] ring-2 ring-[#C7A86A]/40 scale-[0.98]"
-                          : "border-[#C7A86A]/20 opacity-75 hover:opacity-100 hover:border-[#C7A86A]/60"
-                      }`}
-                    >
-                      <img
-                        src={img.src}
-                        alt={img.alt}
-                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        loading="lazy"
-                      />
-                    </button>
-                  ))}
+                {/* Zoom indicator button */}
+                <div className="absolute bottom-4 right-4 md:bottom-5 md:right-5 h-9 w-9 md:h-11 md:w-11 rounded-full bg-[#0F2744]/90 md:bg-[#0F2744]/95 text-[#F6F0E8] flex items-center justify-center opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300 md:transform md:translate-y-1 hover:bg-[#C7A86A] hover:text-[#0F2744]">
+                  <Maximize2 className="h-4 w-4 md:h-4.5 md:w-4.5 text-[#C7A86A] md:group-hover:text-[#0F2744] transition-colors" />
                 </div>
               </div>
 
-              {/* Mobile Layout: Active Image + Horizontal Thumbnails */}
-              <div className="md:hidden w-full flex flex-col gap-3">
-                <div
-                  onClick={() => setLightboxOpen(true)}
-                  className="relative aspect-square rounded-xl overflow-hidden border border-[#C7A86A]/30 bg-white shadow-xs"
-                >
-                  <img
-                    key={`mobile-${model.images[activeImageIdx]?.src || "main"}`}
-                    src={model.images[activeImageIdx]?.src || model.images[0]?.src}
-                    alt={model.images[activeImageIdx]?.alt || `${model.name} luxury jewellery box`}
-                    className={`absolute inset-0 h-full w-full ${isBraceletBox || isSetBox || isNecklaceBox || isPendantBox ? "object-contain bg-[#FAF8F5]" : "object-cover"} animate-fade-in`}
-                  />
-                  <div className="absolute bottom-4 right-4 h-9 w-9 rounded-full bg-[#0F2744]/90 text-[#F6F0E8] flex items-center justify-center">
-                    <Maximize2 className="h-4 w-4 text-[#C7A86A]" />
-                  </div>
-                </div>
+              {/* Desktop Sub-grid of thumbnails / gallery angles */}
+              <div className={`hidden md:grid ${isSetBox || isNecklaceBox ? "grid-cols-5" : "grid-cols-6"} gap-2.5 sm:gap-3`}>
+                {model.images.map((img, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={() => handleImageSelect(idx)}
+                    aria-label={`View ${img.alt || `product image ${idx + 1}`}`}
+                    className={`group relative aspect-square rounded-lg overflow-hidden border transition-all duration-300 cursor-pointer bg-white ${
+                      activeImageIdx === idx
+                        ? "border-[#C7A86A] ring-2 ring-[#C7A86A]/40 scale-[0.98]"
+                        : "border-[#C7A86A]/20 opacity-75 hover:opacity-100 hover:border-[#C7A86A]/60"
+                    }`}
+                  >
+                    <img
+                      src={img.src}
+                      alt={img.alt}
+                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                  </button>
+                ))}
+              </div>
 
-                {/* Horizontal scrollable thumbnails */}
-                <div className="flex gap-2.5 overflow-x-auto py-1 scrollbar-none snap-x w-full">
-                  {model.images.map((img, idx) => (
-                    <button
-                      key={idx}
-                      type="button"
-                      onClick={() => handleImageSelect(idx)}
-                      aria-label={`View ${img.alt || `product image ${idx + 1}`}`}
-                      className={`relative h-16 w-16 sm:h-20 sm:w-20 rounded-lg overflow-hidden border transition-all duration-300 shrink-0 snap-start cursor-pointer bg-white ${
-                        activeImageIdx === idx
-                          ? "border-[#C7A86A] ring-2 ring-[#C7A86A]/50"
-                          : "border-[#C7A86A]/20 opacity-75 hover:opacity-100"
-                      }`}
-                    >
-                      <img src={img.src} alt={img.alt} className="h-full w-full object-cover" />
-                    </button>
-                  ))}
-                </div>
+              {/* Mobile Horizontal scrollable thumbnails */}
+              <div className="md:hidden flex gap-2.5 overflow-x-auto py-1 scrollbar-none snap-x w-full">
+                {model.images.map((img, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={() => handleImageSelect(idx)}
+                    aria-label={`View ${img.alt || `product image ${idx + 1}`}`}
+                    className={`relative h-16 w-16 sm:h-20 sm:w-20 rounded-lg overflow-hidden border transition-all duration-300 shrink-0 snap-start cursor-pointer bg-white ${
+                      activeImageIdx === idx
+                        ? "border-[#C7A86A] ring-2 ring-[#C7A86A]/50"
+                        : "border-[#C7A86A]/20 opacity-75 hover:opacity-100"
+                    }`}
+                  >
+                    <img src={img.src} alt={img.alt} className="h-full w-full object-cover" loading="lazy" />
+                  </button>
+                ))}
+              </div>
 
-                {/* Mobile Material & Texture Selector - Directly after Gallery & Thumbnails */}
-                <div className="w-full mt-2 pt-3 border-t border-[#0F2744]/10 min-w-0">
+              {/* Mobile Material & Texture Selector - Directly after Gallery & Thumbnails */}
+              <div className="md:hidden w-full mt-2 pt-3 border-t border-[#0F2744]/10 min-w-0">
                   <div className="flex justify-between items-baseline mb-2.5">
                     <span className="text-[11px] font-semibold text-[#0F2744] tracking-[0.2em] uppercase">
                       MATERIAL & TEXTURE
@@ -525,7 +506,6 @@ Selected Specs:
                   </div>
                 </div>
               </div>
-            </div>
 
             {/* RIGHT: Product Information & Interactive Configurator */}
             <div className="lg:col-span-5 flex flex-col items-start text-left">

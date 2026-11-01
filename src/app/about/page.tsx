@@ -93,7 +93,7 @@ export default function AboutPage() {
               src="/assets/imagesec.jpeg"
               alt="Cinematic showcase of luxury packaging details"
               fill
-              priority
+              loading="lazy"
               className="object-cover brightness-[0.35] contrast-[1.05]"
             />
             <div className="absolute inset-0 bg-[#0F2744]/25 mix-blend-multiply" />

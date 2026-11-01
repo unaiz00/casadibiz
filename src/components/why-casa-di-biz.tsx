@@ -64,6 +64,7 @@ function ChapterRow({
         <img
           src={imageSrc}
           alt={imageAlt}
+          loading="lazy"
           className="w-full h-full object-cover"
         />
       </div>

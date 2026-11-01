@@ -68,7 +68,7 @@ export default function SubCategoryDetailClient({
       <main>
         {/* HERO */}
         <section className="relative w-full overflow-hidden min-h-[60vh] sm:min-h-[75vh] flex items-center">
-          <img src={category.image} alt={category.title} className="absolute inset-0 h-full w-full object-cover" loading="eager" />
+          <img src={category.image} alt={category.title} className="absolute inset-0 h-full w-full object-cover" loading="eager" fetchPriority="high" />
           <div className="absolute inset-0 bg-gradient-to-r from-navy/90 via-navy/65 to-navy/30" />
           <div className="relative mx-auto max-w-7xl px-5 sm:px-8 lg:px-12 py-16 sm:py-24 w-full">
             <div className="max-w-2xl animate-fade-up">

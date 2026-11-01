@@ -162,6 +162,7 @@ export default function PouchImageViewer({ src, alt, productName }: PouchImageVi
             alt={alt}
             className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
             loading="eager"
+            fetchPriority="high"
           />
 
           {/* Subtle Hover Overlay */}

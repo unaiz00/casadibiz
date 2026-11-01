@@ -127,6 +127,7 @@ export default function StorageCasePDP({
                   alt={primaryImage.alt}
                   className="block w-full h-auto object-contain transition-transform duration-700 ease-out group-hover:scale-[1.01] animate-fade-in"
                   loading="eager"
+                  fetchPriority="high"
                 />
                 {/* Clean Zoom Indicator */}
                 <div className="absolute bottom-4 right-4 sm:bottom-5 sm:right-5 h-10 w-10 sm:h-11 sm:w-11 rounded-full bg-white/95 text-[#0F2744] flex items-center justify-center shadow-md group-hover:bg-[#0F2744] group-hover:text-[#FAF8F5] transition-all duration-300">
@@ -151,6 +152,7 @@ export default function StorageCasePDP({
                       <img
                         src={img.src}
                         alt={img.alt}
+                        loading="lazy"
                         className="h-full w-full object-cover rounded"
                       />
                     </button>
@@ -404,6 +406,7 @@ export default function StorageCasePDP({
                       <img
                         src={rel.image}
                         alt={rel.title}
+                        loading="lazy"
                         className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                       />
                     </div>
@@ -516,6 +519,7 @@ export default function StorageCasePDP({
                   <img
                     src={img.src}
                     alt={img.alt || `Thumbnail ${idx + 1}`}
+                    loading="lazy"
                     className="h-full w-full object-cover"
                   />
                 </button>

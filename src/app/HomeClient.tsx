@@ -31,7 +31,8 @@ function Hero() {
             height={1200}
             className={`absolute inset-0 w-full h-full object-cover object-[72%_75%] sm:object-center transition-opacity duration-[900ms] ease-in-out ${i === idx ? "opacity-100" : "opacity-0"
               }`}
-            loading="eager"
+            loading={idx === 0 ? "eager" : "lazy"}
+            fetchPriority={idx === 0 ? "high" : "low"}
           />
         ))}
         {/* Subtle localized top fade behind text area only on mobile — stops at 176px (h-44) and fades completely to transparent before products */}
@@ -114,7 +115,7 @@ function Categories() {
                       alt={label}
                       width={96}
                       height={96}
-                      loading="lazy"
+                      loading="eager"
                       className="relative h-full w-full object-contain"
                     />
                   )}
@@ -218,6 +219,9 @@ function Statement() {
               <img
                 src="/assets/imagesec.jpeg"
                 alt="Luxury magnetic packaging"
+                width={1402}
+                height={1122}
+                loading="lazy"
                 className="w-full h-[260px] sm:h-[360px] lg:h-[440px] object-cover transition-transform duration-[400ms] ease-out group-hover:scale-[1.03]"
               />
             </div>
@@ -236,6 +240,9 @@ function Statement() {
                 <img
                   src="/assets/boxim.jpeg"
                   alt="Jewelry packaging set"
+                  width={1402}
+                  height={1122}
+                  loading="lazy"
                   className="w-full h-[180px] sm:h-[240px] lg:h-[300px] object-cover transition-transform duration-[400ms] ease-out group-hover:scale-[1.03]"
                 />
               </div>
@@ -245,6 +252,9 @@ function Statement() {
                 <img
                   src="/assets/giftim.jpeg"
                   alt="Branded packaging details"
+                  width={1402}
+                  height={1122}
+                  loading="lazy"
                   className="w-full h-[140px] sm:h-[180px] lg:h-[220px] object-cover transition-transform duration-[400ms] ease-out group-hover:scale-[1.03]"
                 />
               </div>
@@ -259,6 +269,9 @@ function Statement() {
                 <img
                   src="/assets/allimages.jpeg"
                   alt="Hand-tied ribbon box"
+                  width={1535}
+                  height={1024}
+                  loading="lazy"
                   className="w-full h-[240px] sm:h-[280px] lg:h-[320px] object-cover transition-transform duration-[400ms] ease-out group-hover:scale-[1.03]"
                 />
               </div>
@@ -329,6 +342,9 @@ function AboutUs() {
               <img
                 src="/assets/about2.png"
                 alt="Luxury packaging design by Casa Di Biz"
+                width={1122}
+                height={1402}
+                loading="lazy"
                 className="w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.02]"
               />
             </div>

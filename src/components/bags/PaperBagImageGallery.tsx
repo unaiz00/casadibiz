@@ -431,6 +431,7 @@ export default function PaperBagImageGallery({
                   alt={img.alt}
                   draggable={false}
                   loading={idx === 0 ? "eager" : "lazy"}
+                  fetchPriority={idx === 0 ? "high" : "low"}
                   className="h-full w-full object-cover pointer-events-none transition-transform duration-700 ease-out group-hover:scale-[1.02]"
                 />
               </div>

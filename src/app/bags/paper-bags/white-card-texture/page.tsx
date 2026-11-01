@@ -404,6 +404,7 @@ export default function WhiteCardTexturePage() {
                 <img
                   src={product.handleDetail.image}
                   alt={`${product.handleDetail.title} handle close-up`}
+                  loading="lazy"
                   className="w-full aspect-[4/3] object-cover rounded-tl-[14px] rounded-tr-[80px] rounded-br-[14px] rounded-bl-[14px] overflow-hidden shadow-xs"
                 />
               </div>
