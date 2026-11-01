@@ -17,9 +17,8 @@ const product = {
   longDescription: "Our Special Paper bags represent the pinnacle of boutique presentation. Using papers colored directly in the pulp mill, they maintain a solid color across fold-lines and corners, eliminating the raw white paper edges typical of standard bags. Ideal for luxury watchmakers, heritage jewelers, and elite boutiques seeking maximum texture and visual depth.",
 
   images: [
-    { src: "/assets/special1.jpeg", alt: "Special Paper Bag luxury product view 1" },
-    { src: "/assets/special2.jpeg", alt: "Special Paper Bag luxury product view 2" },
-    { src: "/assets/special1.jpeg", alt: "Special Paper Bag luxury product view 3" }
+    { src: "/assets/bags/special1.jpeg", alt: "Special Paper Bag luxury product view 1" },
+    { src: "/assets/bags/special2.jpeg", alt: "Special Paper Bag luxury product view 2" },
   ],
 
   highlights: [
@@ -188,15 +187,14 @@ export default function SpecialPaperPage() {
               {/* Sizes Section */}
               <div className="w-full mb-8">
                 <div
-                  className={`grid ${
-                    product.sizes.length === 1
-                      ? "grid-cols-1"
-                      : product.sizes.length === 2
+                  className={`grid ${product.sizes.length === 1
+                    ? "grid-cols-1"
+                    : product.sizes.length === 2
                       ? "grid-cols-2"
                       : product.sizes.length === 3
-                      ? "grid-cols-3"
-                      : "grid-cols-2 sm:grid-cols-3"
-                  } gap-2 w-full lg:flex lg:flex-row lg:gap-3 lg:w-auto`}
+                        ? "grid-cols-3"
+                        : "grid-cols-2 sm:grid-cols-3"
+                    } gap-2 w-full lg:flex lg:flex-row lg:gap-3 lg:w-auto`}
                 >
                   {product.sizes.map((size, idx) => (
                     <div
@@ -276,11 +274,10 @@ export default function SpecialPaperPage() {
                       key={tab.id}
                       type="button"
                       onClick={() => setActiveDetailTab(tab.id)}
-                      className={`flex items-center justify-center py-2.5 px-1 rounded-xl text-center transition-all duration-300 cursor-pointer min-h-[44px] ${
-                        isActive
-                          ? "bg-[#FAF8F5] text-[#0F2744] border border-[#C7A86A]/40 shadow-xs"
-                          : "bg-transparent text-[#0F2744]/65 hover:text-[#0F2744] border border-transparent"
-                      }`}
+                      className={`flex items-center justify-center py-2.5 px-1 rounded-xl text-center transition-all duration-300 cursor-pointer min-h-[44px] ${isActive
+                        ? "bg-[#FAF8F5] text-[#0F2744] border border-[#C7A86A]/40 shadow-xs"
+                        : "bg-transparent text-[#0F2744]/65 hover:text-[#0F2744] border border-transparent"
+                        }`}
                     >
                       <span className="text-[10px] xs:text-[10.5px] sm:text-[11px] font-bold tracking-[0.03em] sm:tracking-[0.08em] uppercase leading-tight text-center block break-words">
                         {tab.label}
@@ -298,11 +295,10 @@ export default function SpecialPaperPage() {
                   key={tab.id}
                   type="button"
                   onClick={() => setActiveDetailTab(tab.id)}
-                  className={`pb-4 text-xs font-semibold tracking-[0.2em] uppercase transition-all duration-300 relative whitespace-nowrap cursor-pointer ${
-                    activeDetailTab === tab.id
-                      ? "text-[#0F2744] font-bold"
-                      : "text-[#0F2744]/50 hover:text-[#0F2744]"
-                  }`}
+                  className={`pb-4 text-xs font-semibold tracking-[0.2em] uppercase transition-all duration-300 relative whitespace-nowrap cursor-pointer ${activeDetailTab === tab.id
+                    ? "text-[#0F2744] font-bold"
+                    : "text-[#0F2744]/50 hover:text-[#0F2744]"
+                    }`}
                 >
                   {tab.label}
                   {activeDetailTab === tab.id && (

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { getSiteUrl, isPreviewDeployment } from '@/lib/site-config';
 import '../styles.css';
+import { Analytics } from "@vercel/analytics/next"
 
 export const metadata: Metadata = {
     metadataBase: new URL(getSiteUrl()),
@@ -8,26 +9,26 @@ export const metadata: Metadata = {
     description: 'Custom luxury packaging solutions',
     robots: isPreviewDeployment()
         ? {
-              index: false,
-              follow: false,
-              nocache: true,
-              googleBot: {
-                  index: false,
-                  follow: false,
-                  noimageindex: true,
-              },
-          }
+            index: false,
+            follow: false,
+            nocache: true,
+            googleBot: {
+                index: false,
+                follow: false,
+                noimageindex: true,
+            },
+        }
         : {
-              index: true,
-              follow: true,
-              googleBot: {
-                  index: true,
-                  follow: true,
-                  'max-video-preview': -1,
-                  'max-image-preview': 'large',
-                  'max-snippet': -1,
-              },
-          },
+            index: true,
+            follow: true,
+            googleBot: {
+                index: true,
+                follow: true,
+                'max-video-preview': -1,
+                'max-image-preview': 'large',
+                'max-snippet': -1,
+            },
+        },
 };
 
 export const viewport: Viewport = {
@@ -41,7 +42,9 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body>{children}</body>
+            <body>{children}
+                <Analytics />
+            </body>
         </html>
     );
 }

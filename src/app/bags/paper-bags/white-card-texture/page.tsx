@@ -17,9 +17,8 @@ const product = {
   longDescription: "Designed to engage the senses, our White Card with Texture Press bags apply specialty embossing rolls onto thick card stock after printing. The textured grain (linen, ribbed, canvas, or pebble skin) adds a premium tactile friction and diffuse light reflection that elevates simple graphics into luxury.",
 
   images: [
-    { src: "/assets/whitetext1.jpeg", alt: "White Card Texture Press Bag premium showcase 1" },
-    { src: "/assets/whitetext2.jpeg", alt: "White Card Texture Press Bag premium showcase 2" },
-    { src: "/assets/whitetext2.jpeg", alt: "White Card Texture Press Bag premium showcase 3" }
+    { src: "/assets/bags/whitetext1.jpeg", alt: "White Card Texture Press Bag premium showcase 1" },
+    { src: "/assets/bags/whitetext2.jpeg", alt: "White Card Texture Press Bag premium showcase 2" },
   ],
 
   highlights: [
@@ -180,15 +179,14 @@ export default function WhiteCardTexturePage() {
               {/* Sizes Section */}
               <div className="w-full mb-8">
                 <div
-                  className={`grid ${
-                    product.sizes.length === 1
-                      ? "grid-cols-1"
-                      : product.sizes.length === 2
+                  className={`grid ${product.sizes.length === 1
+                    ? "grid-cols-1"
+                    : product.sizes.length === 2
                       ? "grid-cols-2"
                       : product.sizes.length === 3
-                      ? "grid-cols-3"
-                      : "grid-cols-2 sm:grid-cols-3"
-                  } gap-2 w-full lg:flex lg:flex-row lg:gap-3 lg:w-auto`}
+                        ? "grid-cols-3"
+                        : "grid-cols-2 sm:grid-cols-3"
+                    } gap-2 w-full lg:flex lg:flex-row lg:gap-3 lg:w-auto`}
                 >
                   {product.sizes.map((size, idx) => (
                     <div
@@ -242,11 +240,10 @@ export default function WhiteCardTexturePage() {
                       key={tab.id}
                       type="button"
                       onClick={() => setActiveDetailTab(tab.id)}
-                      className={`flex items-center justify-center py-2.5 px-1 rounded-xl text-center transition-all duration-300 cursor-pointer min-h-[44px] ${
-                        isActive
-                          ? "bg-[#FAF8F5] text-[#0F2744] border border-[#C7A86A]/40 shadow-xs"
-                          : "bg-transparent text-[#0F2744]/65 hover:text-[#0F2744] border border-transparent"
-                      }`}
+                      className={`flex items-center justify-center py-2.5 px-1 rounded-xl text-center transition-all duration-300 cursor-pointer min-h-[44px] ${isActive
+                        ? "bg-[#FAF8F5] text-[#0F2744] border border-[#C7A86A]/40 shadow-xs"
+                        : "bg-transparent text-[#0F2744]/65 hover:text-[#0F2744] border border-transparent"
+                        }`}
                     >
                       <span className="text-[10px] xs:text-[10.5px] sm:text-[11px] font-bold tracking-[0.03em] sm:tracking-[0.08em] uppercase leading-tight text-center block break-words">
                         {tab.label}
@@ -264,11 +261,10 @@ export default function WhiteCardTexturePage() {
                   key={tab.id}
                   type="button"
                   onClick={() => setActiveDetailTab(tab.id)}
-                  className={`pb-4 text-xs font-semibold tracking-[0.2em] uppercase transition-all duration-300 relative whitespace-nowrap cursor-pointer ${
-                    activeDetailTab === tab.id
-                      ? "text-[#0F2744] font-bold"
-                      : "text-[#0F2744]/50 hover:text-[#0F2744]"
-                  }`}
+                  className={`pb-4 text-xs font-semibold tracking-[0.2em] uppercase transition-all duration-300 relative whitespace-nowrap cursor-pointer ${activeDetailTab === tab.id
+                    ? "text-[#0F2744] font-bold"
+                    : "text-[#0F2744]/50 hover:text-[#0F2744]"
+                    }`}
                 >
                   {tab.label}
                   {activeDetailTab === tab.id && (

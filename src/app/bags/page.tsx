@@ -8,25 +8,25 @@ export const BAG_PRODUCTS = [
     slug: "special-paper",
     title: "Special Paper Bags",
     short: "Bespoke retail carriers crafted from colored-through pulp, specialty stocks and paperboard wraps.",
-    image: "/assets/special1.jpeg",
+    image: "/assets/bags/special1.jpeg",
   },
   {
     slug: "white-card",
     title: "White Card Bags",
     short: "High-density white solid bleached artboard carriers providing high graphic resolution and color printing.",
-    image: "/assets/white1.jpeg",
+    image: "/assets/bags/white1.jpeg",
   },
   {
     slug: "white-card-texture",
     title: "White Card with Texture Press Bags",
     short: "Heavy white artboards embossed with felt, or custom textures to provide tactile depth.",
-    image: "/assets/whitetext1.jpeg",
+    image: "/assets/bags/whitetext1.jpeg",
   },
   {
     slug: "kraft-bag",
     title: "Kraft Bags",
     short: "Durable, unbleached brown kraft paper carriers providing high tear resistance.",
-    image: "/assets/kraft3.png",
+    image: "/assets/bags/kraftmain.webp",
   },
 ];
 

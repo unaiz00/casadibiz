@@ -12,7 +12,7 @@ import CollectionsGrid from "@/components/CollectionsGrid";
 
 /* ---------------- Hero ---------------- */
 function Hero() {
-  const slides = ["/assets/contactim.png", "/assets/hero/herod.jpeg"];
+  const slides = ["/assets/contactim1.png", "/assets/hero/herobrow.webp"];
   const [i, setI] = useState(0);
   useEffect(() => {
     const t = setInterval(() => setI((v) => (v + 1) % slides.length), 2800);
@@ -34,8 +34,8 @@ function Hero() {
             loading="eager"
           />
         ))}
-        {/* Subtle top gradient overlay for text legibility on mobile */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0F2744]/80 via-[#0F2744]/40 to-transparent sm:hidden pointer-events-none" />
+        {/* Subtle localized top fade behind text area only on mobile — stops at 176px (h-44) and fades completely to transparent before products */}
+        <div className="absolute top-0 inset-x-0 h-44 bg-gradient-to-b from-black/50 via-black/20 to-transparent sm:hidden pointer-events-none" />
         {/* Soft overall ambient gradient on desktop */}
         <div className="hidden sm:block absolute inset-0 bg-gradient-to-r from-navy/25 via-navy/10 to-transparent pointer-events-none" />
       </div>
@@ -44,14 +44,17 @@ function Hero() {
       <div className="relative mx-auto max-w-7xl px-5 sm:px-8 lg:px-12 py-0 sm:py-36 w-full text-center sm:text-left flex flex-col items-center sm:items-start z-10">
         <div className="relative max-w-3xl animate-fade-up text-center sm:text-left mx-auto sm:mx-0 flex flex-col items-center sm:items-start">
           <div className="relative z-10 max-w-[340px] xs:max-w-[380px] sm:max-w-[580px] lg:max-w-[620px] flex flex-col items-center sm:items-start">
+            {/* Subtle localized vignette behind mobile text area only — zero tint or overlay on product photography */}
+            <div className="absolute -inset-x-6 -inset-y-3 bg-black/20 rounded-3xl blur-2xl pointer-events-none sm:hidden -z-10" />
+
             {/* Heading */}
-            <h1 className="animate-hero-heading-luxe font-display font-medium text-[28px] xs:text-[32px] sm:text-6xl lg:text-7xl leading-[1.16] sm:leading-[1.1] tracking-tight mb-2 sm:mb-0 text-center sm:text-left">
+            <h1 className="animate-hero-heading-luxe font-display font-medium text-[28px] xs:text-[32px] sm:text-6xl lg:text-7xl leading-[1.16] sm:leading-[1.1] tracking-tight mb-2 sm:mb-0 text-center sm:text-left drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)] sm:drop-shadow-none">
               <span className="text-[#FAF8F5] block">Packaging worth</span>
               <span className="italic text-[#C7A86A] block">unwrapping.</span>
             </h1>
 
             {/* Supporting text */}
-            <p className="animate-hero-support-luxe text-[13px] xs:text-[14px] sm:text-lg lg:text-xl text-[#FAF8F5] sm:text-[#FAF8F5]/90 font-light leading-snug sm:leading-relaxed max-w-[300px] xs:max-w-[340px] sm:max-w-[560px] mt-2 sm:mt-6 text-center sm:text-left drop-shadow-sm sm:drop-shadow-none">
+            <p className="animate-hero-support-luxe text-[13px] xs:text-[14px] sm:text-lg lg:text-xl text-[#FAF8F5] sm:text-[#FAF8F5]/90 font-light leading-snug sm:leading-relaxed max-w-[300px] xs:max-w-[340px] sm:max-w-[560px] mt-2 sm:mt-6 text-center sm:text-left drop-shadow-[0_1px_6px_rgba(0,0,0,0.85)] sm:drop-shadow-none">
               Boxes, bags and ribbons made for brands people keep on the shelf.
             </p>
 
