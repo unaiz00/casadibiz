@@ -45,7 +45,7 @@ const product = {
   ],
 
   handleDetail: {
-    image: "/assets/white2.jpeg",
+    image: "/assets/bags/white2.jpeg",
     label: "HANDLE & RIBBON DETAILS",
     title: "Bespoke Ties & Handles",
     description: "We offer curated handles, ribbons, and custom closures crafted from premium cords, satin, and grosgrain fibers designed to elevate carrying utility."
@@ -180,12 +180,12 @@ export default function WhiteCardPage() {
               <div className="w-full mb-8">
                 <div
                   className={`grid ${product.sizes.length === 1
-                      ? "grid-cols-1"
-                      : product.sizes.length === 2
-                        ? "grid-cols-2"
-                        : product.sizes.length === 3
-                          ? "grid-cols-3"
-                          : "grid-cols-2 sm:grid-cols-3"
+                    ? "grid-cols-1"
+                    : product.sizes.length === 2
+                      ? "grid-cols-2"
+                      : product.sizes.length === 3
+                        ? "grid-cols-3"
+                        : "grid-cols-2 sm:grid-cols-3"
                     } gap-2 w-full lg:flex lg:flex-row lg:gap-3 lg:w-auto`}
                 >
                   {product.sizes.map((size, idx) => (
@@ -241,8 +241,8 @@ export default function WhiteCardPage() {
                       type="button"
                       onClick={() => setActiveDetailTab(tab.id)}
                       className={`flex items-center justify-center py-2.5 px-1 rounded-xl text-center transition-all duration-300 cursor-pointer min-h-[44px] ${isActive
-                          ? "bg-[#FAF8F5] text-[#0F2744] border border-[#C7A86A]/40 shadow-xs"
-                          : "bg-transparent text-[#0F2744]/65 hover:text-[#0F2744] border border-transparent"
+                        ? "bg-[#FAF8F5] text-[#0F2744] border border-[#C7A86A]/40 shadow-xs"
+                        : "bg-transparent text-[#0F2744]/65 hover:text-[#0F2744] border border-transparent"
                         }`}
                     >
                       <span className="text-[10px] xs:text-[10.5px] sm:text-[11px] font-bold tracking-[0.03em] sm:tracking-[0.08em] uppercase leading-tight text-center block break-words">
@@ -262,8 +262,8 @@ export default function WhiteCardPage() {
                   type="button"
                   onClick={() => setActiveDetailTab(tab.id)}
                   className={`pb-4 text-xs font-semibold tracking-[0.2em] uppercase transition-all duration-300 relative whitespace-nowrap cursor-pointer ${activeDetailTab === tab.id
-                      ? "text-[#0F2744] font-bold"
-                      : "text-[#0F2744]/50 hover:text-[#0F2744]"
+                    ? "text-[#0F2744] font-bold"
+                    : "text-[#0F2744]/50 hover:text-[#0F2744]"
                     }`}
                 >
                   {tab.label}

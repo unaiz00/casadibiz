@@ -19,6 +19,7 @@ import {
   Truck,
 } from "lucide-react";
 import { SiteHeader, SiteFooter } from "@/components/site-chrome";
+import { PhoneInputField, formatFullInternationalPhone } from "@/components/PhoneInputField";
 
 /* ---------------- Company details ---------------- */
 const COMPANY = {
@@ -161,11 +162,13 @@ export default function ContactPage() {
       specs = `\n- Type of Packaging: ${formData.customType || "N/A"}\n- Estimated Quantity: ${formData.estimatedQuantity || "N/A"}`;
     }
 
+    const fullPhone = formatFullInternationalPhone(formData.phone, "AE");
+
     const message = `New B2B Packaging Enquiry — CASA DI BIZ\n\n` +
       `Name: ${formData.name.trim()}\n` +
       `Company/Brand: ${formData.company.trim()}\n` +
       `Email: ${formData.email.trim()}\n` +
-      `Phone/WhatsApp: ${formData.phone.trim() || "N/A"}\n` +
+      `Phone/WhatsApp: ${fullPhone || "N/A"}\n` +
       `Packaging Required: ${formData.packaging || "N/A"}${specs}\n` +
       `Requirements: ${formData.requirements.trim() || "N/A"}`;
 
@@ -226,122 +229,6 @@ export default function ContactPage() {
               >
                 CONTACT US <span className="text-xs">→</span>
               </button>
-            </div>
-          </div>
-        </section>
-
-        {/* reach us */}
-        <SectionHeader eyebrow="REACH US" title="Four ways to start a conversation" bg="cream" />
-        <section className="w-full bg-[#F6F0E8]">
-          <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12 pb-14 sm:pb-20">
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              <InfoCard
-                Icon={Phone}
-                title="Call Us"
-                lines={[COMPANY.phone]}
-                actionLabel="CALL NOW"
-                href={`tel:${COMPANY.phoneRaw}`}
-                delay={0}
-              />
-              <InfoCard
-                Icon={Mail}
-                title="Mail Us"
-                lines={[COMPANY.email]}
-                actionLabel="SEND EMAIL"
-                href={`mailto:${COMPANY.email}`}
-                delay={0.08}
-              />
-              <InfoCard
-                Icon={MapPin}
-                title="Visit Us"
-                lines={[COMPANY.address]}
-                actionLabel="GET DIRECTIONS"
-                href={mapLink}
-                external
-                delay={0.16}
-              />
-              <InfoCard
-                Icon={Clock}
-                title="Business Hours"
-                lines={COMPANY.hours.map((h) => `${h.day} — ${h.time}`)}
-                delay={0.24}
-              />
-            </div>
-          </div>
-        </section>
-
-        {/* MAP */}
-        <SectionHeader eyebrow="OUR STUDIO" title="Find us in Dubai" bg="ivory" />
-        <section className="w-full bg-ivory">
-          <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12 pb-14 sm:pb-20">
-            <div className="overflow-hidden rounded-[14px]">
-              <iframe
-                title="CASA DI BIZ location map"
-                src={mapSrc}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="w-full h-[320px] sm:h-[440px] border-0"
-                allowFullScreen
-              />
-            </div>
-            <div className="mt-6 text-center">
-              <a
-                href={mapLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 rounded-full px-8 py-3.5 text-[11px] tracking-[0.28em] font-medium border border-gold/60 text-navy hover:bg-gold hover:text-navy transition"
-              >
-                OPEN IN GOOGLE MAPS <ArrowRight className="h-4 w-4" />
-              </a>
-            </div>
-          </div>
-        </section>
-
-        {/* WHY CONTACT US */}
-        <SectionHeader eyebrow="WHY CONTACT US" title="What you get when you write in" bg="cream" />
-        <section className="w-full bg-[#F6F0E8]">
-          <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12 pb-14 sm:pb-20">
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {WHY.map(({ Icon, title, text }, i) => (
-                <div
-                  key={title}
-                  className="bg-[#FAF8F5] rounded-[14px] p-6 sm:p-7 hover:-translate-y-1.5 transition-all duration-500 animate-fade-up"
-                  style={{ animationDelay: `${i * 0.07}s` }}
-                >
-                  <Icon className="h-6 w-6 text-gold" />
-                  <h3 className="mt-4 font-display text-lg sm:text-xl text-navy leading-tight">{title}</h3>
-                  <p className="mt-3 text-sm text-muted-luxe leading-relaxed">{text}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* FAQ */}
-        <SectionHeader eyebrow="FAQ" title="Frequently asked" bg="ivory" />
-        <section className="w-full bg-ivory">
-          <div className="mx-auto max-w-3xl px-5 sm:px-8 pb-14 sm:pb-20">
-            <div className="divide-y divide-border-luxe">
-              {FAQS.map((f, i) => {
-                const open = openFaq === i;
-                return (
-                  <div key={f.q} className="py-4 sm:py-5">
-                    <button
-                      onClick={() => setOpenFaq(open ? null : i)}
-                      className="flex w-full items-start justify-between gap-6 text-left group"
-                    >
-                      <span className="flex items-start gap-3 font-display text-base sm:text-lg text-navy group-hover:text-gold transition">
-                        <HelpCircle className="h-5 w-5 text-gold shrink-0 mt-0.5" />
-                        {f.q}
-                      </span>
-                      <ChevronDown className={`h-5 w-5 text-gold shrink-0 mt-1 transition-transform ${open ? "rotate-180" : ""}`} />
-                    </button>
-                    <div className={`overflow-hidden transition-all duration-300 ${open ? "max-h-60 mt-3" : "max-h-0"}`}>
-                      <p className="text-sm text-muted-luxe leading-relaxed pl-8">{f.a}</p>
-                    </div>
-                  </div>
-                );
-              })}
             </div>
           </div>
         </section>
@@ -407,16 +294,16 @@ export default function ContactPage() {
                     {formErrors.email && <span className="mt-1.5 block text-xs text-red-600">{formErrors.email}</span>}
                   </label>
 
-                  <label className="block">
+                  <div>
                     <span className="block text-[10px] tracking-[0.2em] font-semibold text-[#0F2744]/70 mb-1 uppercase">PHONE / WHATSAPP</span>
-                    <input
-                      type="tel"
-                      className="w-full border-b border-[#0F2744]/20 focus:border-[#0F2744] bg-transparent py-2.5 outline-none text-sm text-[#0F2744] placeholder-[#0F2744]/40 transition"
-                      placeholder="+971 50 000 0000"
+                    <PhoneInputField
+                      variant="underline"
                       value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      onChange={(phone) => setFormData({ ...formData, phone })}
+                      placeholder="50 000 0000"
+                      error={formErrors.phone}
                     />
-                  </label>
+                  </div>
                 </div>
 
                 <div>
@@ -707,6 +594,122 @@ export default function ContactPage() {
             </div>
           </div>
         </section>
+
+        {/* reach us */}
+        <SectionHeader eyebrow="REACH US" title="Four ways to start a conversation" bg="cream" />
+        <section className="w-full bg-[#F6F0E8]">
+          <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12 pb-14 sm:pb-20">
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              <InfoCard
+                Icon={Phone}
+                title="Call Us"
+                lines={[COMPANY.phone]}
+                actionLabel="CALL NOW"
+                href={`tel:${COMPANY.phoneRaw}`}
+                delay={0}
+              />
+              <InfoCard
+                Icon={Mail}
+                title="Mail Us"
+                lines={[COMPANY.email]}
+                actionLabel="SEND EMAIL"
+                href={`mailto:${COMPANY.email}`}
+                delay={0.08}
+              />
+              <InfoCard
+                Icon={MapPin}
+                title="Visit Us"
+                lines={[COMPANY.address]}
+                actionLabel="GET DIRECTIONS"
+                href={mapLink}
+                external
+                delay={0.16}
+              />
+              <InfoCard
+                Icon={Clock}
+                title="Business Hours"
+                lines={COMPANY.hours.map((h) => `${h.day} — ${h.time}`)}
+                delay={0.24}
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* MAP */}
+        <SectionHeader eyebrow="OUR STUDIO" title="Find us in Dubai" bg="ivory" />
+        <section className="w-full bg-ivory">
+          <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12 pb-14 sm:pb-20">
+            <div className="overflow-hidden rounded-[14px]">
+              <iframe
+                title="CASA DI BIZ location map"
+                src={mapSrc}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="w-full h-[320px] sm:h-[440px] border-0"
+                allowFullScreen
+              />
+            </div>
+            <div className="mt-6 text-center">
+              <a
+                href={mapLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 rounded-full px-8 py-3.5 text-[11px] tracking-[0.28em] font-medium border border-gold/60 text-navy hover:bg-gold hover:text-navy transition"
+              >
+                OPEN IN GOOGLE MAPS <ArrowRight className="h-4 w-4" />
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* WHY CONTACT US */}
+        <SectionHeader eyebrow="WHY CONTACT US" title="What you get when you write in" bg="cream" />
+        <section className="w-full bg-[#F6F0E8]">
+          <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12 pb-14 sm:pb-20">
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {WHY.map(({ Icon, title, text }, i) => (
+                <div
+                  key={title}
+                  className="bg-[#FAF8F5] rounded-[14px] p-6 sm:p-7 hover:-translate-y-1.5 transition-all duration-500 animate-fade-up"
+                  style={{ animationDelay: `${i * 0.07}s` }}
+                >
+                  <Icon className="h-6 w-6 text-gold" />
+                  <h3 className="mt-4 font-display text-lg sm:text-xl text-navy leading-tight">{title}</h3>
+                  <p className="mt-3 text-sm text-muted-luxe leading-relaxed">{text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ */}
+        <SectionHeader eyebrow="FAQ" title="Frequently asked" bg="ivory" />
+        <section className="w-full bg-ivory">
+          <div className="mx-auto max-w-3xl px-5 sm:px-8 pb-14 sm:pb-20">
+            <div className="divide-y divide-border-luxe">
+              {FAQS.map((f, i) => {
+                const open = openFaq === i;
+                return (
+                  <div key={f.q} className="py-4 sm:py-5">
+                    <button
+                      onClick={() => setOpenFaq(open ? null : i)}
+                      className="flex w-full items-start justify-between gap-6 text-left group"
+                    >
+                      <span className="flex items-start gap-3 font-display text-base sm:text-lg text-navy group-hover:text-gold transition">
+                        <HelpCircle className="h-5 w-5 text-gold shrink-0 mt-0.5" />
+                        {f.q}
+                      </span>
+                      <ChevronDown className={`h-5 w-5 text-gold shrink-0 mt-1 transition-transform ${open ? "rotate-180" : ""}`} />
+                    </button>
+                    <div className={`overflow-hidden transition-all duration-300 ${open ? "max-h-60 mt-3" : "max-h-0"}`}>
+                      <p className="text-sm text-muted-luxe leading-relaxed pl-8">{f.a}</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
       </main>
       <SiteFooter />
 
@@ -874,7 +877,7 @@ function EnquiryModal({ onClose }: { onClose: () => void }) {
       ["Estimated Quantity", form.estimatedQuantity],
       ["Best Time to Contact", form.bestTimeToContact],
       ["Additional Information", form.additionalInfo],
-      ["Phone / WhatsApp Number", form.phone],
+      ["Phone / WhatsApp Number", formatFullInternationalPhone(form.phone, "AE")],
     ];
     const body = rows
       .filter(([, v]) => v && v.trim())
@@ -1033,16 +1036,17 @@ function EnquiryModal({ onClose }: { onClose: () => void }) {
 
               {/* 8. Phone / WhatsApp Number — required */}
               <div className="sm:col-span-2">
-                <Field label="Phone / WhatsApp Number" required error={errors.phone}>
-                  <input
-                    type="tel"
-                    className={inputCls}
-                    maxLength={25}
-                    value={form.phone}
-                    onChange={(e) => set("phone", e.target.value)}
-                    placeholder="+971 50 000 0000"
-                  />
-                </Field>
+                <span className="block text-[10px] tracking-[0.24em] font-semibold text-[#0F2744]/75 mb-1.5 uppercase">
+                  Phone / WhatsApp Number <span className="text-[#C7A86A] font-bold">*</span>
+                </span>
+                <PhoneInputField
+                  variant="outline"
+                  value={form.phone}
+                  onChange={(val) => set("phone", val)}
+                  placeholder="50 000 0000"
+                  required
+                  error={errors.phone}
+                />
               </div>
             </div>
 

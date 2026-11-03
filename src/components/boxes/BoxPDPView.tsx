@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -9,11 +9,13 @@ import {
   ChevronRight,
   X,
   Maximize2,
+  Check,
 } from "lucide-react";
 import { SiteHeader, SiteFooter, Breadcrumbs } from "@/components/site-chrome";
 import type { BoxModel } from "@/data/boxes-data";
 import ProductCTAButtons from "@/components/pdp/ProductCTAButtons";
 import { BOX_LISTING_IMAGES } from "@/app/boxes/BoxesClient";
+import MobileBoxMaterialSelector from "./MobileBoxMaterialSelector";
 
 const BOX_TABS = [
   {
@@ -43,6 +45,7 @@ export default function BoxPDPView({ model, relatedModels }: BoxPDPViewProps) {
   const isSetBox = model.slug === "set-box" || model.id === "set-box";
   const isNecklaceBox = model.slug === "necklace-box" || model.id === "necklace-box";
   const isPendantBox = model.slug === "pendant-box" || model.id === "pendant-box";
+  const isRingBox = model.slug === "ring-box" || model.id === "ring-box";
 
   // Dedicated Finish-to-Material & Image mapping for all Box PDPs
   const BOX_FINISH_MAPS: Record<string, Record<string, { src: string; matId: string }>> = {
@@ -214,10 +217,42 @@ export default function BoxPDPView({ model, relatedModels }: BoxPDPViewProps) {
   const [activeFinishId, setActiveFinishId] = useState(initialFinishId);
   const [openFaqIdx, setOpenFaqIdx] = useState<number | null>(0);
   const [activeDetailTab, setActiveDetailTab] = useState<"description" | "specifications" | "customization">("description");
+  const [mobileMaterialOpen, setMobileMaterialOpen] = useState(false);
+  const [activeSizeIdx, setActiveSizeIdx] = useState(0);
+  const [sizeDropdownOpen, setSizeDropdownOpen] = useState(false);
+  const sizeDropdownRef = useRef<HTMLDivElement>(null);
 
-  const activeSize = model.sizes[0];
+  const activeSize = model.sizes[activeSizeIdx] || model.sizes[0];
   const activeMaterial = model.materials.find((m) => m.id === activeMaterialId) || model.materials[0];
   const activeFinish = model.finishes.find((f) => f.id === activeFinishId) || model.finishes[0];
+
+  // Reset size selection when model changes
+  useEffect(() => {
+    setActiveSizeIdx(0);
+    setSizeDropdownOpen(false);
+  }, [model.slug, model.id]);
+
+  // Close size dropdown when clicking outside or pressing Escape
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (sizeDropdownRef.current && !sizeDropdownRef.current.contains(e.target as Node)) {
+        setSizeDropdownOpen(false);
+      }
+    };
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setSizeDropdownOpen(false);
+      }
+    };
+    if (sizeDropdownOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("keydown", handleKeyDown);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [sizeDropdownOpen]);
 
   // Material selection handler (links material to main product image and logo finish)
   const handleMaterialSelect = (materialId: string) => {
@@ -462,49 +497,17 @@ Selected Specs:
 
               {/* Mobile Material & Texture Selector - Directly after Gallery & Thumbnails */}
               <div className="md:hidden w-full mt-2 pt-3 border-t border-[#0F2744]/10 min-w-0">
-                  <div className="flex justify-between items-baseline mb-2.5">
-                    <span className="text-[11px] font-semibold text-[#0F2744] tracking-[0.2em] uppercase">
-                      MATERIAL & TEXTURE
-                    </span>
-                    <span className="text-[11px] text-[#C7A86A] font-semibold">
-                      {activeMaterial?.name}
-                    </span>
-                  </div>
-                  <div className="flex flex-nowrap gap-2.5 overflow-x-auto py-1.5 scrollbar-none snap-x snap-mandatory w-full min-w-0 touch-pan-x [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-                    {model.materials.map((mat) => {
-                      const isSelected = activeMaterialId === mat.id;
-                      return (
-                        <button
-                          key={mat.id}
-                          type="button"
-                          onClick={() => handleMaterialSelect(mat.id)}
-                          aria-label={`Select ${mat.name} material`}
-                          className={`flex items-center gap-2.5 px-3.5 py-2 rounded-xl border text-left transition-all duration-200 cursor-pointer shrink-0 snap-start whitespace-nowrap ${
-                            isSelected
-                              ? "border-[#C7A86A] bg-[#F6F0E8] ring-1 ring-[#C7A86A] shadow-xs"
-                              : "border-[#0F2744]/15 bg-white hover:border-[#C7A86A]/50"
-                          }`}
-                        >
-                          <div className="h-7 w-7 rounded-md overflow-hidden border border-[#0F2744]/10 bg-[#F6F0E8] shrink-0">
-                            <img
-                              src={mat.image}
-                              alt={mat.name}
-                              className="h-full w-full object-cover"
-                              loading="lazy"
-                            />
-                          </div>
-                          <span
-                            className={`text-xs leading-tight ${
-                              isSelected ? "text-[#0F2744] font-semibold" : "text-[#0F2744]/80 font-medium"
-                            }`}
-                          >
-                            {mat.name}
-                          </span>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
+                <MobileBoxMaterialSelector
+                  materials={model.materials}
+                  activeMaterialId={activeMaterialId}
+                  isOpen={mobileMaterialOpen}
+                  onToggle={() => setMobileMaterialOpen((prev) => !prev)}
+                  onSelectMaterial={(matId) => {
+                    handleMaterialSelect(matId);
+                    setMobileMaterialOpen(false);
+                  }}
+                />
+              </div>
               </div>
 
             {/* RIGHT: Product Information & Interactive Configurator */}
@@ -536,60 +539,122 @@ Selected Specs:
               </p>
 
               {/* SECTION 1: AVAILABLE SIZES */}
-              <div className="w-full mb-6">
+              <div className="w-full mb-6 relative" ref={sizeDropdownRef}>
                 <div className="flex justify-between items-baseline mb-2.5">
-                  <label htmlFor="mobile-size-select" className="text-xs font-semibold text-[#0F2744] tracking-[0.2em] uppercase">
+                  <span className="text-xs font-semibold text-[#0F2744] tracking-[0.2em] uppercase">
                     AVAILABLE SIZES
-                  </label>
+                  </span>
                   <span className="text-[11px] text-[#C7A86A] font-semibold font-mono">
                     Selected: {activeSize?.dimensions}
                   </span>
                 </div>
 
-                {/* Mobile View (<md): Premium Minimal Dropdown */}
-                <div className="block md:hidden w-full">
-                  <div className="relative w-full">
-                    <select
-                      id="mobile-size-select"
-                      defaultValue={0}
-                      tabIndex={-1}
-                      aria-label="Available Size"
-                      className="w-full appearance-none bg-[#FAF8F5] border border-[#C7A86A]/30 text-[#0F2744] text-xs font-medium py-3 pl-3.5 pr-10 rounded-[10px] shadow-2xs pointer-events-none"
-                    >
-                      {model.sizes.map((size, idx) => {
-                        const labelText =
-                          size.label && size.label !== size.dimensions
-                            ? `${size.dimensions} — ${size.label}`
-                            : size.dimensions;
-                        return (
-                          <option key={idx} value={idx} className="bg-white text-[#0F2744]">
-                            {labelText}
-                          </option>
-                        );
-                      })}
-                    </select>
-                    <div className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 flex items-center text-[#0F2744]/70">
-                      <ChevronDown className="h-4 w-4 text-[#0F2744]" />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Desktop & Tablet View (md+): Grid Selector */}
-                <div className="hidden md:grid grid-cols-2 sm:grid-cols-3 gap-2 w-full max-h-56 overflow-y-auto pr-1">
-                  {model.sizes.map((size, idx) => (
-                    <div
-                      key={idx}
-                      className="p-2.5 border border-[#C7A86A]/20 bg-white/70 rounded-lg text-left relative"
-                    >
-                      <div className="flex justify-between items-center mb-0.5">
-                        <span className="text-[11px] font-bold text-[#0F2744] font-mono leading-none">{size.dimensions}</span>
-                      </div>
-                      <span className="text-[9px] text-[#0F2744]/65 block truncate">
-                        {size.label !== size.dimensions ? size.label : size.description}
+                {/* Dropdown Selector Trigger */}
+                <button
+                  type="button"
+                  onClick={() => setSizeDropdownOpen((prev) => !prev)}
+                  aria-expanded={sizeDropdownOpen}
+                  aria-haspopup="listbox"
+                  aria-label="Available size selector"
+                  className="w-full flex items-center justify-between p-3 rounded-xl border border-[#C7A86A]/40 bg-white hover:border-[#C7A86A] transition-all duration-200 shadow-2xs cursor-pointer text-left"
+                >
+                  <div className="flex flex-col min-w-0 pr-2">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs sm:text-sm font-bold text-[#0F2744] font-mono leading-none">
+                        {activeSize?.dimensions}
                       </span>
+                      {activeSize?.label && activeSize.label !== activeSize.dimensions && (
+                        <span className="text-[10px] font-semibold text-[#C7A86A] uppercase tracking-wider truncate">
+                          {activeSize.label}
+                        </span>
+                      )}
                     </div>
+                    {activeSize?.description && (
+                      <span className="text-[10px] sm:text-[11px] text-[#0F2744]/65 mt-1 truncate">
+                        {activeSize.description}
+                      </span>
+                    )}
+                  </div>
+                  <div className="h-8 w-8 rounded-full bg-[#FAF8F5] border border-[#0F2744]/10 flex items-center justify-center shrink-0 text-[#0F2744] transition-colors">
+                    <ChevronDown
+                      className={`h-4 w-4 text-[#0F2744]/70 transition-transform duration-300 ${
+                        sizeDropdownOpen ? "rotate-180 text-[#C7A86A]" : ""
+                      }`}
+                    />
+                  </div>
+                </button>
+
+                {/* Dropdown Options List */}
+                {sizeDropdownOpen && (
+                  <div
+                    role="listbox"
+                    aria-label="Available sizes options"
+                    className="absolute top-full left-0 right-0 mt-1.5 z-40 max-h-60 overflow-y-auto bg-white border border-[#C7A86A]/40 rounded-xl shadow-lg p-1.5 space-y-1 animate-fade-in"
+                  >
+                    {model.sizes.map((size, idx) => {
+                      const isSelected = activeSizeIdx === idx;
+                      return (
+                        <button
+                          key={idx}
+                          role="option"
+                          aria-selected={isSelected}
+                          type="button"
+                          onClick={() => {
+                            setActiveSizeIdx(idx);
+                            setSizeDropdownOpen(false);
+                          }}
+                          className={`w-full flex items-center justify-between p-2.5 rounded-lg text-left transition-all duration-150 cursor-pointer ${
+                            isSelected
+                              ? "bg-[#F6F0E8] border border-[#C7A86A] text-[#0F2744] shadow-2xs"
+                              : "border border-transparent hover:border-[#C7A86A]/30 hover:bg-[#FAF8F5] text-[#0F2744]"
+                          }`}
+                        >
+                          <div className="flex flex-col min-w-0 pr-2">
+                            <div className="flex items-center gap-2">
+                              <span
+                                className={`text-xs sm:text-sm font-mono ${
+                                  isSelected ? "font-bold text-[#0F2744]" : "font-medium text-[#0F2744]"
+                                }`}
+                              >
+                                {size.dimensions}
+                              </span>
+                              {size.label && size.label !== size.dimensions && (
+                                <span className="text-[10px] font-semibold text-[#C7A86A] uppercase tracking-wider truncate">
+                                  {size.label}
+                                </span>
+                              )}
+                            </div>
+                            {size.description && (
+                              <span className="text-[10px] sm:text-[11px] text-[#0F2744]/65 mt-0.5 line-clamp-1">
+                                {size.description}
+                              </span>
+                            )}
+                          </div>
+                          {isSelected && (
+                            <div className="h-5 w-5 rounded-full bg-[#C7A86A] text-[#0F2744] flex items-center justify-center shrink-0 shadow-xs">
+                              <Check className="h-3 w-3 stroke-[2.5]" />
+                            </div>
+                          )}
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
+
+                {/* Accessible hidden select for form compatibility */}
+                <select
+                  aria-hidden="true"
+                  tabIndex={-1}
+                  className="sr-only"
+                  value={activeSizeIdx}
+                  onChange={(e) => setActiveSizeIdx(Number(e.target.value))}
+                >
+                  {model.sizes.map((size, idx) => (
+                    <option key={idx} value={idx}>
+                      {size.dimensions}
+                    </option>
                   ))}
-                </div>
+                </select>
 
                 {/* Active Size Description */}
                 {activeSize?.description && (
@@ -609,95 +674,119 @@ Selected Specs:
                     {activeMaterial?.name}
                   </span>
                 </div>
-                {/* Mobile / Tablet View (<lg): Horizontally scrollable row */}
-                <div className="flex lg:hidden flex-nowrap gap-2.5 overflow-x-auto py-1.5 scrollbar-none snap-x snap-mandatory w-full min-w-0 touch-pan-x [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-                  {model.materials.map((mat) => {
-                    const isSelected = activeMaterialId === mat.id;
-                    return (
-                      <button
-                        key={mat.id}
-                        type="button"
-                        onClick={() => handleMaterialSelect(mat.id)}
-                        aria-label={`Select ${mat.name} material`}
-                        className={`flex items-center gap-2.5 px-3.5 py-2 rounded-xl border text-left transition-all duration-200 cursor-pointer shrink-0 snap-start whitespace-nowrap ${
-                          isSelected
-                            ? "border-[#C7A86A] bg-[#F6F0E8] ring-1 ring-[#C7A86A] shadow-xs"
-                            : "border-[#0F2744]/15 bg-white hover:border-[#C7A86A]/50"
-                        }`}
-                      >
-                        <div className="h-7 w-7 rounded-md overflow-hidden border border-[#0F2744]/10 bg-[#F6F0E8] shrink-0">
-                          <img
-                            src={mat.image}
-                            alt={mat.name}
-                            className="h-full w-full object-cover"
-                            loading="lazy"
-                          />
-                        </div>
-                        <span
-                          className={`text-xs leading-tight ${
-                            isSelected ? "text-[#0F2744] font-semibold" : "text-[#0F2744]/80 font-medium"
+                {isRingBox ? (
+                  /* Permanently expanded 3-column grid for Ring Box on desktop/tablet */
+                  <div className="grid grid-cols-3 gap-2.5 w-full">
+                    {model.materials.map((mat) => {
+                      const isSelected = activeMaterialId === mat.id;
+                      return (
+                        <button
+                          key={mat.id}
+                          type="button"
+                          onClick={() => handleMaterialSelect(mat.id)}
+                          aria-label={`Select ${mat.name} material`}
+                          className={`p-2.5 rounded-xl border flex items-center gap-3 text-left transition-all duration-200 cursor-pointer min-w-0 ${
+                            isSelected
+                              ? "border-[#C7A86A] border-[1.5px] bg-[#F6F0E8] shadow-xs ring-1 ring-[#C7A86A]"
+                              : "border-[#0F2744]/15 bg-white hover:border-[#C7A86A]/60 hover:bg-[#FAF8F5]"
                           }`}
                         >
-                          {mat.name}
-                        </span>
-                      </button>
-                    );
-                  })}
-                </div>
+                          {/* Larger, clearly visible texture thumbnail */}
+                          <div className="h-11 w-11 sm:h-12 sm:w-12 rounded-lg overflow-hidden border border-[#0F2744]/10 bg-[#F6F0E8] shrink-0 relative shadow-2xs">
+                            <img
+                              src={mat.image}
+                              alt={mat.name}
+                              className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+                              loading="lazy"
+                            />
+                          </div>
+                          {/* Full material name without truncation */}
+                          <span
+                            className={`text-xs leading-tight min-w-0 break-words ${
+                              isSelected ? "text-[#0F2744] font-semibold" : "text-[#0F2744]/85 font-medium"
+                            }`}
+                          >
+                            {mat.name}
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <>
+                    {/* Mobile / Tablet View (<lg): Horizontally scrollable row */}
+                    <div className="flex lg:hidden flex-nowrap gap-2.5 overflow-x-auto py-1.5 scrollbar-none snap-x snap-mandatory w-full min-w-0 touch-pan-x [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                      {model.materials.map((mat) => {
+                        const isSelected = activeMaterialId === mat.id;
+                        return (
+                          <button
+                            key={mat.id}
+                            type="button"
+                            onClick={() => handleMaterialSelect(mat.id)}
+                            aria-label={`Select ${mat.name} material`}
+                            className={`flex items-center gap-2.5 px-3.5 py-2 rounded-xl border text-left transition-all duration-200 cursor-pointer shrink-0 snap-start whitespace-nowrap ${
+                              isSelected
+                                ? "border-[#C7A86A] bg-[#F6F0E8] ring-1 ring-[#C7A86A] shadow-xs"
+                                : "border-[#0F2744]/15 bg-white hover:border-[#C7A86A]/50"
+                            }`}
+                          >
+                            <div className="h-7 w-7 rounded-md overflow-hidden border border-[#0F2744]/10 bg-[#F6F0E8] shrink-0">
+                              <img
+                                src={mat.image}
+                                alt={mat.name}
+                                className="h-full w-full object-cover"
+                                loading="lazy"
+                              />
+                            </div>
+                            <span
+                              className={`text-xs leading-tight ${
+                                isSelected ? "text-[#0F2744] font-semibold" : "text-[#0F2744]/80 font-medium"
+                              }`}
+                            >
+                              {mat.name}
+                            </span>
+                          </button>
+                        );
+                      })}
+                    </div>
 
-                {/* Desktop View (lg+): Grid layout */}
-                <div className="hidden lg:grid grid-cols-2 sm:grid-cols-3 gap-2.5 w-full">
-                  {model.materials.map((mat) => {
-                    const isSelected = activeMaterialId === mat.id;
-                    return (
-                      <button
-                        key={mat.id}
-                        type="button"
-                        onClick={() => handleMaterialSelect(mat.id)}
-                        className={`p-2 sm:p-2.5 rounded-lg border flex items-center gap-2.5 text-left transition-all duration-300 cursor-pointer min-w-0 ${
-                          isSelected
-                            ? "border-[#C7A86A] border-[1.5px] bg-[#F6F0E8] shadow-xs ring-1 ring-[#C7A86A]"
-                            : "border-[#0F2744]/15 bg-white hover:border-[#C7A86A]/60 hover:bg-[#FAF8F5]"
-                        }`}
-                      >
-                        {/* Thumbnail Image */}
-                        <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-md overflow-hidden border border-[#0F2744]/10 bg-[#F6F0E8] shrink-0 relative">
-                          <img
-                            src={mat.image}
-                            alt={mat.name}
-                            className="h-full w-full object-cover"
-                            loading="lazy"
-                          />
-                        </div>
-                        <span className="text-xs font-medium text-[#0F2744] leading-snug truncate min-w-0">
-                          {mat.name}
-                        </span>
-                      </button>
-                    );
-                  })}
-                </div>
+                    {/* Desktop View (lg+): Grid layout */}
+                    <div className="hidden lg:grid grid-cols-2 sm:grid-cols-3 gap-2.5 w-full">
+                      {model.materials.map((mat) => {
+                        const isSelected = activeMaterialId === mat.id;
+                        return (
+                          <button
+                            key={mat.id}
+                            type="button"
+                            onClick={() => handleMaterialSelect(mat.id)}
+                            className={`p-2 sm:p-2.5 rounded-lg border flex items-center gap-2.5 text-left transition-all duration-300 cursor-pointer min-w-0 ${
+                              isSelected
+                                ? "border-[#C7A86A] border-[1.5px] bg-[#F6F0E8] shadow-xs ring-1 ring-[#C7A86A]"
+                                : "border-[#0F2744]/15 bg-white hover:border-[#C7A86A]/60 hover:bg-[#FAF8F5]"
+                            }`}
+                          >
+                            {/* Thumbnail Image */}
+                            <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-md overflow-hidden border border-[#0F2744]/10 bg-[#F6F0E8] shrink-0 relative">
+                              <img
+                                src={mat.image}
+                                alt={mat.name}
+                                className="h-full w-full object-cover"
+                                loading="lazy"
+                              />
+                            </div>
+                            <span className="text-xs font-medium text-[#0F2744] leading-snug truncate min-w-0">
+                              {mat.name}
+                            </span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </>
+                )}
               </div>
 
-              {/* SECTION 3: COLOUR (Bespoke B2B statement, no swatches) */}
-              <div className="w-full mb-6 bg-[#F6F0E8] border border-[#C7A86A]/25 rounded-xl p-4">
-                <div className="flex justify-between items-center mb-1">
-                  <h3 className="text-xs font-semibold text-[#0F2744] tracking-[0.2em] uppercase">
-                    COLOUR
-                  </h3>
-                  <span className="text-[10px] font-semibold text-[#C7A86A] uppercase tracking-wider">
-                    BESPOKE FINISH
-                  </span>
-                </div>
-                <p className="text-xs text-[#0F2744] font-medium mb-1">
-                  Customised to your brand requirements.
-                </p>
-                <p className="text-[11px] text-[#0F2744]/70 leading-relaxed">
-                  Colours and finishes can be customised to your brand requirements. Representative product image shown.
-                </p>
-              </div>
-
-              {/* SECTION 4: LOGO FINISH */}
-              <div className="w-full mb-8">
+              {/* SECTION 3: LOGO FINISH */}
+              <div className="w-full mb-6">
                 <div className="flex justify-between items-baseline mb-2.5">
                   <h3 className="text-xs font-semibold text-[#0F2744] tracking-[0.2em] uppercase">
                     LOGO FINISH
@@ -722,6 +811,24 @@ Selected Specs:
                     </button>
                   ))}
                 </div>
+              </div>
+
+              {/* SECTION 4: COLOUR (Bespoke B2B statement, no swatches) */}
+              <div className="w-full mb-8 bg-[#F6F0E8] border border-[#C7A86A]/25 rounded-xl p-4">
+                <div className="flex justify-between items-center mb-1">
+                  <h3 className="text-xs font-semibold text-[#0F2744] tracking-[0.2em] uppercase">
+                    COLOUR
+                  </h3>
+                  <span className="text-[10px] font-semibold text-[#C7A86A] uppercase tracking-wider">
+                    BESPOKE FINISH
+                  </span>
+                </div>
+                <p className="text-xs text-[#0F2744] font-medium mb-1">
+                  Customised to your brand requirements.
+                </p>
+                <p className="text-[11px] text-[#0F2744]/70 leading-relaxed">
+                  Colours and finishes can be customised to your brand requirements. Representative product image shown.
+                </p>
               </div>
 
               {/* B2B CTAS */}

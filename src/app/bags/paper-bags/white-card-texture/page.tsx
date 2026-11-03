@@ -45,7 +45,7 @@ const product = {
   ],
 
   handleDetail: {
-    image: "/assets/whitetext2.jpeg",
+    image: "/assets/bags/whitetext2.jpeg",
     label: "HANDLE & RIBBON DETAILS",
     title: "Bespoke Ties & Handles",
     description: "We offer curated handles, ribbons, and custom closures crafted from premium cords, satin, and grosgrain fibers designed to elevate carrying utility."
