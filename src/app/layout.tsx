@@ -1,7 +1,15 @@
 import type { Metadata, Viewport } from 'next';
+import { Manrope } from 'next/font/google';
 import { getSiteUrl, isPreviewDeployment } from '@/lib/site-config';
 import '../styles.css';
 import { Analytics } from "@vercel/analytics/next"
+
+const manrope = Manrope({
+    subsets: ['latin'],
+    weight: ['400', '500', '600', '700'],
+    variable: '--font-manrope',
+    display: 'swap',
+});
 
 export const metadata: Metadata = {
     metadataBase: new URL(getSiteUrl()),
@@ -41,7 +49,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="en">
+        <html lang="en" className={manrope.variable}>
             <body>{children}
                 <Analytics />
             </body>

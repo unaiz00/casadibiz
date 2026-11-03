@@ -4,6 +4,8 @@ import Link from "next/link";
 import {
   ArrowRight,
   ArrowUpRight,
+  ChevronDown,
+  HelpCircle,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { SiteHeader, SiteFooter } from "@/components/site-chrome";
@@ -11,65 +13,85 @@ import CollectionsGrid from "@/components/CollectionsGrid";
 
 
 /* ---------------- Hero ---------------- */
+// Desktop hero slides (640px and above)
+const DESKTOP_SLIDES = [
+  "/assets/hero/herof1.webp",
+  "/assets/hero/herof2.webp",
+];
+
+// Mobile hero slides (below 640px) — replace with dedicated mobile image paths when uploaded
+const MOBILE_SLIDES = [
+  "/assets/hero/herom2.webp",
+  "/assets/hero/herom1.webp",
+];
+
 function Hero() {
-  const slides = ["/assets/contactim1.png", "/assets/hero/herobrow.webp"];
   const [i, setI] = useState(0);
+  const slideCount = Math.max(DESKTOP_SLIDES.length, MOBILE_SLIDES.length);
+
   useEffect(() => {
-    const t = setInterval(() => setI((v) => (v + 1) % slides.length), 2800);
+    if (slideCount <= 1) return;
+    const t = setInterval(() => setI((v) => (v + 1) % slideCount), 2800);
     return () => clearInterval(t);
-  }, [slides.length]);
+  }, [slideCount]);
   return (
-    <section className="relative w-full overflow-hidden flex flex-col items-center sm:items-center sm:flex-row h-[390px] xs:h-[420px] sm:h-auto sm:min-h-screen pt-7 xs:pt-9 sm:pt-0 pb-4 sm:pb-0 justify-start sm:justify-center">
-      {/* Background image on mobile (covers controlled hero with products positioned) / Desktop full-screen background */}
+    <section className="relative w-full overflow-hidden flex flex-col items-center sm:flex-row h-[450px] xs:h-[480px] sm:h-auto sm:min-h-screen pt-8 xs:pt-10 sm:pt-0 pb-4 sm:pb-0 justify-start sm:justify-center">
+      {/* Background image on mobile (covers controlled hero with products positioned in lower portion) / Desktop full-screen background */}
       <div className="absolute inset-0 w-full h-full z-0 flex justify-center items-center pointer-events-none animate-hero-image-luxe">
-        {slides.map((src, idx) => (
-          <img
-            key={src}
-            src={src}
-            alt="Luxury CASA DI BIZ packaging"
-            width={1408}
-            height={1200}
-            className={`absolute inset-0 w-full h-full object-cover object-[72%_75%] sm:object-center transition-opacity duration-[900ms] ease-in-out ${i === idx ? "opacity-100" : "opacity-0"
-              }`}
-            loading={idx === 0 ? "eager" : "lazy"}
-            fetchPriority={idx === 0 ? "high" : "low"}
-          />
-        ))}
-        {/* Subtle localized top fade behind text area only on mobile — stops at 176px (h-44) and fades completely to transparent before products */}
-        <div className="absolute top-0 inset-x-0 h-44 bg-gradient-to-b from-black/50 via-black/20 to-transparent sm:hidden pointer-events-none" />
+        {DESKTOP_SLIDES.map((desktopSrc, idx) => {
+          const mobileSrc = MOBILE_SLIDES[idx] || desktopSrc;
+          return (
+            <picture
+              key={desktopSrc}
+              className={`absolute inset-0 w-full h-full block transition-opacity duration-[900ms] ease-in-out ${i === idx ? "opacity-100" : "opacity-0"
+                }`}
+            >
+              <source media="(min-width: 640px)" srcSet={desktopSrc} />
+              <source media="(max-width: 639px)" srcSet={mobileSrc} />
+              <img
+                src={desktopSrc}
+                alt="Luxury CASA DI BIZ packaging"
+                width={1672}
+                height={941}
+                className="w-full h-full object-cover object-[76%_bottom] sm:object-center"
+                loading={idx === 0 ? "eager" : "lazy"}
+                fetchPriority={idx === 0 ? "high" : "low"}
+              />
+            </picture>
+          );
+        })}
+        {/* Subtle top fade behind text area only on mobile — stops at ~200px and fades completely to transparent before products */}
+        <div className="absolute top-0 inset-x-0 h-52 bg-gradient-to-b from-black/55 via-black/25 to-transparent sm:hidden pointer-events-none z-[1]" />
         {/* Soft overall ambient gradient on desktop */}
         <div className="hidden sm:block absolute inset-0 bg-gradient-to-r from-navy/25 via-navy/10 to-transparent pointer-events-none" />
       </div>
 
-      {/* Text Content Block (Layered ON TOP of image on mobile) */}
-      <div className="relative mx-auto max-w-7xl px-5 sm:px-8 lg:px-12 py-0 sm:py-36 w-full text-center sm:text-left flex flex-col items-center sm:items-start z-10">
-        <div className="relative max-w-3xl animate-fade-up text-center sm:text-left mx-auto sm:mx-0 flex flex-col items-center sm:items-start">
-          <div className="relative z-10 max-w-[340px] xs:max-w-[380px] sm:max-w-[580px] lg:max-w-[620px] flex flex-col items-center sm:items-start">
+      {/* Text Content Block (Centered at top on mobile, left-aligned on desktop) */}
+      <div className="relative w-full max-w-[1920px] mx-auto px-4 xs:px-5 sm:px-10 md:px-14 lg:px-16 xl:px-20 2xl:px-[130px] py-0 sm:py-36 text-center sm:text-left flex flex-col items-center sm:items-start z-10 sm:-translate-y-6 lg:-translate-y-10 xl:-translate-y-12">
+        <div className="relative animate-fade-up text-center sm:text-left flex flex-col items-center sm:items-start w-full">
+          <div className="relative z-10 w-full max-w-[320px] xs:max-w-[360px] sm:max-w-[540px] xl:max-w-[550px] mx-auto sm:mx-0 flex flex-col items-center sm:items-start">
             {/* Subtle localized vignette behind mobile text area only — zero tint or overlay on product photography */}
-            <div className="absolute -inset-x-6 -inset-y-3 bg-black/20 rounded-3xl blur-2xl pointer-events-none sm:hidden -z-10" />
+            <div className="absolute -inset-x-4 -inset-y-2 bg-black/15 rounded-3xl blur-xl pointer-events-none sm:hidden -z-10" />
 
             {/* Heading */}
-            <h1 className="animate-hero-heading-luxe font-display font-medium text-[28px] xs:text-[32px] sm:text-6xl lg:text-7xl leading-[1.16] sm:leading-[1.1] tracking-tight mb-2 sm:mb-0 text-center sm:text-left drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)] sm:drop-shadow-none">
-              <span className="text-[#FAF8F5] block">Packaging worth</span>
-              <span className="italic text-[#C7A86A] block">unwrapping.</span>
+            <h1 className="animate-hero-heading-luxe font-hero-headline font-semibold text-[22px] xs:text-[25px] sm:text-[46px] md:text-[50px] lg:text-[54px] xl:text-[58px] leading-[1.2] sm:leading-[1.12] tracking-[-0.02em] text-[#FAF8F5] mb-0 text-center sm:text-left drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)] sm:drop-shadow-none sm:max-w-[540px] xl:max-w-[550px]">
+              <span className="block">Luxury Isn't Just Outside</span>
+              <span className="block">It Starts With the Packaging</span>
             </h1>
 
-            {/* Supporting text */}
-            <p className="animate-hero-support-luxe text-[13px] xs:text-[14px] sm:text-lg lg:text-xl text-[#FAF8F5] sm:text-[#FAF8F5]/90 font-light leading-snug sm:leading-relaxed max-w-[300px] xs:max-w-[340px] sm:max-w-[560px] mt-2 sm:mt-6 text-center sm:text-left drop-shadow-[0_1px_6px_rgba(0,0,0,0.85)] sm:drop-shadow-none">
-              Boxes, bags and ribbons made for brands people keep on the shelf.
+            {/* Supporting description */}
+            <p className="animate-hero-support-luxe font-sans text-[12.5px] xs:text-[14px] sm:text-[16px] text-[#FAF8F5]/85 font-normal leading-relaxed sm:leading-[1.6] max-w-[290px] xs:max-w-[340px] sm:max-w-[430px] mt-2 xs:mt-2.5 sm:mt-6 text-center sm:text-left drop-shadow-[0_1px_6px_rgba(0,0,0,0.85)] sm:drop-shadow-none">
+              Boxes, Bags & Pouches made for brands <br className="hidden xs:inline" /> People keep on the shelf.
             </p>
 
             {/* CTA Button */}
-            <div className="animate-hero-cta flex justify-center sm:justify-start w-full mt-5 sm:mt-10">
-              <button
-                onClick={() => {
-                  const el = document.getElementById("categories");
-                  if (el) el.scrollIntoView({ behavior: "smooth" });
-                }}
-                className="inline-flex items-center justify-center gap-2 sm:gap-3 rounded-full px-6 xs:px-7 sm:px-10 py-3 xs:py-3.5 sm:py-5 text-xs sm:text-sm tracking-[0.25em] font-semibold bg-[#C7A86A] text-[#0F2744] hover:bg-[#FAF8F5] hover:text-[#0F2744] transition-all duration-300 ease-out cursor-pointer shadow-lg sm:shadow-none"
+            <div className="animate-hero-cta flex justify-center sm:justify-start w-full mt-3.5 xs:mt-4 sm:mt-8">
+              <Link
+                href="/collections"
+                className="inline-flex items-center justify-center gap-2 sm:gap-3 rounded-full px-5 xs:px-6 sm:px-10 py-2 xs:py-2.5 sm:py-5 text-[11px] xs:text-xs sm:text-sm tracking-[0.25em] font-semibold bg-[#C7A86A] text-[#0F2744] hover:bg-[#FAF8F5] hover:text-[#0F2744] transition-all duration-300 ease-out cursor-pointer shadow-lg sm:shadow-none"
               >
-                EXPLORE NOW <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5" />
-              </button>
+                EXPLORE NOW <ArrowRight className="h-3.5 w-3.5 sm:h-5 sm:w-5" />
+              </Link>
             </div>
           </div>
         </div>
@@ -303,52 +325,90 @@ function Statement() {
   );
 }
 
-/* ---------------- About Us ---------------- */
-function AboutUs() {
+
+/* ---------------- FAQ ---------------- */
+const HOME_FAQS = [
+  {
+    q: "How can I get a quotation for my packaging requirements?",
+    a: "Simply contact our team through the enquiry form or WhatsApp. Share your preferred packaging type, dimensions, quantity, material preferences and customization requirements. Our team will review your requirements and provide a quotation.",
+  },
+  {
+    q: "Can I customize packaging with my own brand identity?",
+    a: "Yes. We offer bespoke packaging solutions tailored to your brand. Customization options can include logo placement, colors, materials, textures, finishes, ribbons and other detailing to reflect your brand identity.",
+  },
+  {
+    q: "What types of luxury packaging do you offer?",
+    a: "Our packaging range includes rigid boxes, jewelry boxes, boutique shopping bags, velvet pouches, wrapping paper, silk ribbons and bespoke corporate gifting packaging.",
+  },
+  {
+    q: "What is your minimum order quantity (MOQ)?",
+    a: "Minimum order quantities depend on the packaging type, materials, customization and production requirements. Contact our team with your requirements to receive the applicable MOQ.",
+  },
+  {
+    q: "Can I choose the materials, colors and finishes?",
+    a: "Yes. Depending on the product, you can explore different materials, textures, colors and finishing options. Our team can help you select combinations that complement your brand's aesthetic and packaging requirements.",
+  },
+  {
+    q: "Can I request a sample before placing a bulk order?",
+    a: "Sample availability depends on the product and customization requirements. Contact our team to discuss sample options, associated costs and timelines before proceeding with bulk production.",
+  },
+  {
+    q: "What do you need from me to create custom packaging?",
+    a: "Ideally, provide your brand logo in a high-resolution vector format, preferred colors, packaging dimensions, reference images and any specific design requirements. Our team can use these details to understand your vision.",
+  },
+  {
+    q: "How long does custom packaging production take?",
+    a: "Production timelines depend on the product type, order quantity, material availability and customization complexity. An estimated timeline can be provided after reviewing and confirming your requirements.",
+  },
+  {
+    q: "Do you accept international orders and provide shipping?",
+    a: "Contact our team with your destination and order requirements to confirm international shipping availability, delivery arrangements and applicable shipping costs.",
+  },
+];
+
+function HomeFAQ() {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
   return (
-    <section id="about" className="w-full bg-grain-navy py-20 lg:py-24 relative overflow-hidden">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-12 lg:gap-16">
-          {/* Left-side Content (45% width on desktop) */}
-          <div className="w-full lg:w-[45%] flex flex-col space-y-6 text-left">
-            {/* Eyebrow */}
-
-            {/* Heading */}
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-[42px] leading-tight font-normal text-[#FAF8F5]">
-              Crafted for Brands That <span className="text-[#C7A86A]">Stand Out.</span>
-            </h2>
-
-            {/* Body copy */}
-            <p className="text-sm sm:text-base leading-relaxed text-[#FAF8F5]/85 max-w-[520px] font-sans">
-              CASA DI BIZ designs luxury packaging for jewelers, boutiques, and premium brands across the Gulf.
-              From bespoke boxes to hand-finished ribbons, every piece is made to feel like part of the gift itself.
-            </p>
-
-            {/* CTA */}
-            <Link
-              href="/about"
-              className="group inline-flex items-center gap-2 bg-[#F6F0E8] text-[#0F2744] hover:bg-[#C7A86A] transition-all duration-300 px-6 py-3.5 rounded-[4px] text-xs font-semibold tracking-[0.2em] w-fit"
-            >
-              DISCOVER US <span className="text-[#C7A86A] group-hover:text-[#0F2744] inline-block transition-all duration-300 ease-out group-hover:translate-x-1">→</span>
-            </Link>
-          </div>
-
-          {/* Right-side Image (55% width on desktop) */}
-          <div className="w-full lg:w-[55%] flex justify-center lg:justify-end">
-            <div
-              className="w-full max-w-[620px] aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3] overflow-hidden group cursor-pointer"
-              style={{ borderRadius: '12px 64px 64px 12px' }}
-            >
-              <img
-                src="/assets/about2.png"
-                alt="Luxury packaging design by Casa Di Biz"
-                width={1122}
-                height={1402}
-                loading="lazy"
-                className="w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.02]"
-              />
-            </div>
-          </div>
+    <section className="w-full bg-ivory py-16 sm:py-24">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12 text-center mb-10 sm:mb-14">
+        <p className="text-[11px] tracking-[0.32em] text-gold font-medium mb-3 uppercase">FAQ</p>
+        <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-navy leading-tight">
+          Frequently asked
+        </h2>
+      </div>
+      <div className="mx-auto max-w-3xl px-5 sm:px-8">
+        <div className="divide-y divide-border-luxe">
+          {HOME_FAQS.map((f, i) => {
+            const open = openFaq === i;
+            return (
+              <div key={f.q} className="py-4 sm:py-5">
+                <button
+                  type="button"
+                  onClick={() => setOpenFaq(open ? null : i)}
+                  className="flex w-full items-start justify-between gap-6 text-left group cursor-pointer"
+                  aria-expanded={open}
+                >
+                  <span className="flex items-start gap-3 font-display text-base sm:text-lg text-navy group-hover:text-gold transition">
+                    <HelpCircle className="h-5 w-5 text-gold shrink-0 mt-0.5" />
+                    {f.q}
+                  </span>
+                  <ChevronDown
+                    className={`h-5 w-5 text-gold shrink-0 mt-1 transition-transform duration-300 ${open ? "rotate-180" : ""
+                      }`}
+                  />
+                </button>
+                <div
+                  className={`overflow-hidden transition-all duration-300 ${open ? "max-h-96 mt-3 opacity-100" : "max-h-0 opacity-0"
+                    }`}
+                >
+                  <p className="text-sm text-muted-luxe leading-relaxed pl-8 font-sans">
+                    {f.a}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -365,7 +425,7 @@ export default function HomeClient() {
         <Featured />
         <HowItWorks />
         <Statement />
-        <AboutUs />
+        <HomeFAQ />
         <CollectionsGrid />
       </main>
       <SiteFooter />
