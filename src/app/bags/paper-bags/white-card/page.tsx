@@ -125,17 +125,17 @@ export default function WhiteCardPage() {
                 {product.subtitle}
               </span>
 
-              <h1 className="font-display text-4xl sm:text-5xl text-[#0F2744] leading-[1.1] mb-6 font-medium">
+              <h1 className="font-display text-3xl xs:text-4xl sm:text-4xl lg:text-[36px] xl:text-5xl text-[#0F2744] leading-[1.12] mb-4 sm:mb-6 font-medium">
                 {product.name}
               </h1>
-              <p className="text-[#0F2744]/80 text-base leading-relaxed mb-8">
+              <p className="text-[#0F2744]/80 text-base leading-relaxed mb-6 sm:mb-8">
                 {product.shortDescription}
               </p>
 
               {/* Material/Construction Summary */}
-              <div className="w-full bg-[#F6F0E8] border border-[#C7A86A]/25 rounded-xl p-5 sm:p-5 mb-8 space-y-4 sm:space-y-3">
+              <div className="w-full bg-[#F6F0E8] border border-[#C7A86A]/25 rounded-xl p-4 sm:p-5 mb-6 sm:mb-8 space-y-3 sm:space-y-3">
                 {product.material && (
-                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1.5 sm:gap-4 pb-3 sm:pb-2.5 border-b border-[#C7A86A]/15 last:border-b-0 last:pb-0">
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1.5 sm:gap-4 pb-2.5 sm:pb-2.5 border-b border-[#C7A86A]/15 last:border-b-0 last:pb-0">
                     <span className="text-[10px] uppercase font-semibold tracking-[0.2em] text-[#0F2744]/70 shrink-0">
                       MATERIAL
                     </span>
@@ -145,7 +145,7 @@ export default function WhiteCardPage() {
                   </div>
                 )}
                 {product.printing && (
-                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1.5 sm:gap-4 pb-3 sm:pb-2.5 border-b border-[#C7A86A]/15 last:border-b-0 last:pb-0">
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1.5 sm:gap-4 pb-2.5 sm:pb-2.5 border-b border-[#C7A86A]/15 last:border-b-0 last:pb-0">
                     <span className="text-[10px] uppercase font-semibold tracking-[0.2em] text-[#0F2744]/70 shrink-0">
                       PRINTING
                     </span>
@@ -155,7 +155,7 @@ export default function WhiteCardPage() {
                   </div>
                 )}
                 {product.finish && (
-                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1.5 sm:gap-4 pb-3 sm:pb-2.5 border-b border-[#C7A86A]/15 last:border-b-0 last:pb-0">
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1.5 sm:gap-4 pb-2.5 sm:pb-2.5 border-b border-[#C7A86A]/15 last:border-b-0 last:pb-0">
                     <span className="text-[10px] uppercase font-semibold tracking-[0.2em] text-[#0F2744]/70 shrink-0">
                       FINISH
                     </span>
@@ -165,7 +165,7 @@ export default function WhiteCardPage() {
                   </div>
                 )}
                 {product.handle && (
-                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1.5 sm:gap-4 pb-3 sm:pb-2.5 border-b border-[#C7A86A]/15 last:border-b-0 last:pb-0">
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1.5 sm:gap-4 pb-2.5 sm:pb-2.5 border-b border-[#C7A86A]/15 last:border-b-0 last:pb-0">
                     <span className="text-[10px] uppercase font-semibold tracking-[0.2em] text-[#0F2744]/70 shrink-0">
                       HANDLE
                     </span>
@@ -177,7 +177,7 @@ export default function WhiteCardPage() {
               </div>
 
               {/* Sizes Section */}
-              <div className="w-full mb-8">
+              <div className="w-full mb-6 sm:mb-8">
                 <div
                   className={`grid ${product.sizes.length === 1
                     ? "grid-cols-1"
@@ -186,12 +186,12 @@ export default function WhiteCardPage() {
                       : product.sizes.length === 3
                         ? "grid-cols-3"
                         : "grid-cols-2 sm:grid-cols-3"
-                    } gap-2 w-full lg:flex lg:flex-row lg:gap-3 lg:w-auto`}
+                    } gap-2 w-full lg:flex lg:flex-wrap lg:gap-2 xl:gap-3 lg:w-auto`}
                 >
                   {product.sizes.map((size, idx) => (
                     <div
                       key={idx}
-                      className="flex items-center justify-center min-h-[48px] py-2 px-1.5 sm:px-3 lg:px-5 lg:h-12 border border-[#C7A86A]/25 bg-[#F6F0E8] rounded-md text-center"
+                      className="flex items-center justify-center min-h-[46px] sm:min-h-[48px] py-2 px-1.5 sm:px-3 lg:px-2.5 xl:px-5 lg:h-11 xl:h-12 border border-[#C7A86A]/25 bg-[#F6F0E8] rounded-md text-center"
                     >
                       <span className="text-[11px] xs:text-[11.5px] sm:text-[12px] font-medium tracking-[0.02em] sm:tracking-[0.08em] text-[#0F2744] leading-tight text-center whitespace-normal break-words">
                         {size.value}
@@ -205,6 +205,7 @@ export default function WhiteCardPage() {
               <ProductCTAButtons
                 quoteUrl={`/contact?size=${encodeURIComponent(selectedSize)}&product=${encodeURIComponent(product.name)}`}
                 whatsappUrl={dynamicWhatsappUrl}
+                variant="bags"
               />
 
               {/* Supporting Line */}
@@ -231,7 +232,7 @@ export default function WhiteCardPage() {
             </div>
 
             {/* Mobile 3-Column Segmented Control Header (Mobile Only) */}
-            <div className="lg:hidden w-full mb-8 sm:mb-9">
+            <div className="lg:hidden w-full max-w-lg md:max-w-xl mx-auto mb-8 sm:mb-9">
               <div className="grid grid-cols-3 gap-1 bg-[#F6F0E8] border border-[#C7A86A]/25 rounded-2xl p-1.5 w-full min-h-[52px]">
                 {BAG_TABS.map((tab) => {
                   const isActive = activeDetailTab === tab.id;
@@ -289,7 +290,7 @@ export default function WhiteCardPage() {
                   </p>
 
                   {/* highlights */}
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 pt-6 border-t border-[#C7A86A]/20">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 lg:gap-6 pt-6 border-t border-[#C7A86A]/20">
                     {product.highlights.map((hl, idx) => (
                       <div
                         key={idx}
@@ -405,7 +406,7 @@ export default function WhiteCardPage() {
                   src={product.handleDetail.image}
                   alt={`${product.handleDetail.title} handle close-up`}
                   loading="lazy"
-                  className="w-full aspect-[4/3] object-cover rounded-tl-[14px] rounded-tr-[80px] rounded-br-[14px] rounded-bl-[14px] overflow-hidden shadow-xs"
+                  className="w-full aspect-[4/3] max-h-[360px] sm:max-h-[420px] lg:max-h-none object-cover rounded-tl-[14px] rounded-tr-[80px] rounded-br-[14px] rounded-bl-[14px] overflow-hidden shadow-xs"
                 />
               </div>
 

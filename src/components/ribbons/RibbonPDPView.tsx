@@ -113,7 +113,7 @@ Please share MOQ, sample lead time, and branding options.`;
                 {/* Large Main Showcase Image */}
                 <div
                   onClick={() => setLightboxOpen(true)}
-                  className="group relative aspect-[16/11] rounded-2xl overflow-hidden border border-[#C7A86A]/25 bg-white cursor-zoom-in shadow-sm transition-all duration-500 hover:border-[#C7A86A]/60"
+                  className="group relative aspect-[16/11] md:max-h-[460px] lg:max-h-none rounded-2xl overflow-hidden border border-[#C7A86A]/25 bg-white cursor-zoom-in shadow-sm transition-all duration-500 hover:border-[#C7A86A]/60"
                 >
                   <img
                     src={currentImage.src}
@@ -167,7 +167,7 @@ Please share MOQ, sample lead time, and branding options.`;
               </div>
 
               {/* Title */}
-              <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl text-[#0F2744] leading-[1.1] mb-2.5 font-medium">
+              <h1 className="font-display text-3xl sm:text-4xl lg:text-[38px] xl:text-5xl text-[#0F2744] leading-[1.1] mb-2.5 font-medium">
                 {material.name}
               </h1>
 
@@ -200,7 +200,7 @@ Please share MOQ, sample lead time, and branding options.`;
                     AVAILABLE RIBBON WIDTHS
                   </h2>
                 </div>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 w-full">
+                <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4 gap-2.5 w-full">
                   {material.widths.map((w) => (
                     <div
                       key={w.mm}
@@ -241,6 +241,7 @@ Please share MOQ, sample lead time, and branding options.`;
               <ProductCTAButtons
                 quoteUrl={quoteUrl}
                 whatsappUrl={dynamicWhatsappUrl}
+                variant="ribbons"
               />
 
               {/* Supporting B2B Note */}
@@ -267,7 +268,7 @@ Please share MOQ, sample lead time, and branding options.`;
             </div>
 
             {/* Mobile Segmented Control Header (Mobile Only - Single Line 4-Column Row) */}
-            <div className="lg:hidden w-full mb-8">
+            <div className="lg:hidden w-full max-w-xl md:max-w-2xl mx-auto mb-8">
               <div
                 role="tablist"
                 aria-label="Manufacturing Specifications Tabs"
@@ -299,14 +300,14 @@ Please share MOQ, sample lead time, and branding options.`;
               </div>
             </div>
 
-            {/* Desktop Tabs Header (Unchanged on Desktop lg+) */}
-            <div className="hidden lg:flex border-b border-[#0F2744]/10 mb-10 justify-center gap-12">
+            {/* Desktop Tabs Header */}
+            <div className="hidden lg:flex border-b border-[#0F2744]/10 mb-10 justify-center gap-6 xl:gap-12">
               {RIBBON_TABS.map((tab) => (
                 <button
                   key={tab.id}
                   type="button"
                   onClick={() => setActiveTab(tab.id)}
-                  className={`pb-4 text-xs font-semibold tracking-[0.2em] uppercase transition-all duration-300 relative whitespace-nowrap cursor-pointer ${
+                  className={`pb-4 text-xs font-semibold tracking-[0.12em] xl:tracking-[0.2em] uppercase transition-all duration-300 relative whitespace-nowrap cursor-pointer ${
                     activeTab === tab.id
                       ? "text-[#0F2744] font-bold"
                       : "text-[#0F2744]/50 hover:text-[#0F2744]"
@@ -510,7 +511,7 @@ Please share MOQ, sample lead time, and branding options.`;
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 lg:gap-6">
               {material.widths.map((w) => (
                 <div
                   key={w.mm}

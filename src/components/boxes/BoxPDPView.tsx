@@ -46,6 +46,7 @@ export default function BoxPDPView({ model, relatedModels }: BoxPDPViewProps) {
   const isNecklaceBox = model.slug === "necklace-box" || model.id === "necklace-box";
   const isPendantBox = model.slug === "pendant-box" || model.id === "pendant-box";
   const isRingBox = model.slug === "ring-box" || model.id === "ring-box";
+  const isChainBox = model.slug === "chain-box" || model.id === "chain-box";
 
   // Dedicated Finish-to-Material & Image mapping for all Box PDPs
   const BOX_FINISH_MAPS: Record<string, Record<string, { src: string; matId: string }>> = {
@@ -435,7 +436,7 @@ Selected Specs:
                 onClick={() => {
                   setLightboxOpen(true);
                 }}
-                className="group relative aspect-square rounded-xl overflow-hidden border border-[#C7A86A]/30 md:border-[#C7A86A]/25 bg-white cursor-zoom-in shadow-xs transition-all duration-500 hover:border-[#C7A86A]/60"
+                className={`group relative aspect-square ${isChainBox ? "md:max-h-[460px] lg:max-h-none" : ""} rounded-xl overflow-hidden border border-[#C7A86A]/30 md:border-[#C7A86A]/25 bg-white cursor-zoom-in shadow-xs transition-all duration-500 hover:border-[#C7A86A]/60`}
               >
                 <img
                   key={`main-${model.images[activeImageIdx]?.src || "main"}`}
@@ -524,7 +525,7 @@ Selected Specs:
               </div>
 
               {/* Title */}
-              <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl text-[#0F2744] leading-[1.1] mb-3 font-medium">
+              <h1 className={`font-display text-3xl sm:text-4xl ${isChainBox ? "lg:text-[38px] xl:text-5xl" : "lg:text-5xl"} text-[#0F2744] leading-[1.1] mb-3 font-medium`}>
                 {model.name}
               </h1>
 
@@ -666,7 +667,8 @@ Selected Specs:
 
               {/* SECTION 2: MATERIAL & TEXTURE (Desktop only; Mobile is positioned below gallery) */}
               <div className="hidden md:block w-full mb-6">
-                <div className="flex justify-between items-baseline mb-2.5">
+                {/* Desktop Header (Hidden on Tablet <xl where MobileBoxMaterialSelector renders its own header) */}
+                <div className="hidden xl:flex justify-between items-baseline mb-2.5">
                   <h3 className="text-xs font-semibold text-[#0F2744] tracking-[0.2em] uppercase">
                     MATERIAL & TEXTURE
                   </h3>
@@ -674,9 +676,25 @@ Selected Specs:
                     {activeMaterial?.name}
                   </span>
                 </div>
+
+                {/* Tablet / iPad View (md to <xl): Mobile-style dropdown selector for ALL 8 Box PDPs */}
+                <div className="xl:hidden w-full">
+                  <MobileBoxMaterialSelector
+                    materials={model.materials}
+                    activeMaterialId={activeMaterialId}
+                    isOpen={mobileMaterialOpen}
+                    onToggle={() => setMobileMaterialOpen((prev) => !prev)}
+                    onSelectMaterial={(matId) => {
+                      handleMaterialSelect(matId);
+                      setMobileMaterialOpen(false);
+                    }}
+                  />
+                </div>
+
+                {/* Desktop View (xl+): Preserved desktop material cards layout */}
                 {isRingBox ? (
-                  /* Permanently expanded 3-column grid for Ring Box on desktop/tablet */
-                  <div className="grid grid-cols-3 gap-2.5 w-full">
+                  /* Permanently expanded 3-column grid for Ring Box on desktop with larger texture thumbnails */
+                  <div className="hidden xl:grid grid-cols-3 gap-2.5 w-full">
                     {model.materials.map((mat) => {
                       const isSelected = activeMaterialId === mat.id;
                       return (
@@ -713,75 +731,37 @@ Selected Specs:
                     })}
                   </div>
                 ) : (
-                  <>
-                    {/* Mobile / Tablet View (<lg): Horizontally scrollable row */}
-                    <div className="flex lg:hidden flex-nowrap gap-2.5 overflow-x-auto py-1.5 scrollbar-none snap-x snap-mandatory w-full min-w-0 touch-pan-x [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-                      {model.materials.map((mat) => {
-                        const isSelected = activeMaterialId === mat.id;
-                        return (
-                          <button
-                            key={mat.id}
-                            type="button"
-                            onClick={() => handleMaterialSelect(mat.id)}
-                            aria-label={`Select ${mat.name} material`}
-                            className={`flex items-center gap-2.5 px-3.5 py-2 rounded-xl border text-left transition-all duration-200 cursor-pointer shrink-0 snap-start whitespace-nowrap ${
-                              isSelected
-                                ? "border-[#C7A86A] bg-[#F6F0E8] ring-1 ring-[#C7A86A] shadow-xs"
-                                : "border-[#0F2744]/15 bg-white hover:border-[#C7A86A]/50"
-                            }`}
-                          >
-                            <div className="h-7 w-7 rounded-md overflow-hidden border border-[#0F2744]/10 bg-[#F6F0E8] shrink-0">
-                              <img
-                                src={mat.image}
-                                alt={mat.name}
-                                className="h-full w-full object-cover"
-                                loading="lazy"
-                              />
-                            </div>
-                            <span
-                              className={`text-xs leading-tight ${
-                                isSelected ? "text-[#0F2744] font-semibold" : "text-[#0F2744]/80 font-medium"
-                              }`}
-                            >
-                              {mat.name}
-                            </span>
-                          </button>
-                        );
-                      })}
-                    </div>
-
-                    {/* Desktop View (lg+): Grid layout */}
-                    <div className="hidden lg:grid grid-cols-2 sm:grid-cols-3 gap-2.5 w-full">
-                      {model.materials.map((mat) => {
-                        const isSelected = activeMaterialId === mat.id;
-                        return (
-                          <button
-                            key={mat.id}
-                            type="button"
-                            onClick={() => handleMaterialSelect(mat.id)}
-                            className={`p-2 sm:p-2.5 rounded-lg border flex items-center gap-2.5 text-left transition-all duration-300 cursor-pointer min-w-0 ${
-                              isSelected
-                                ? "border-[#C7A86A] border-[1.5px] bg-[#F6F0E8] shadow-xs ring-1 ring-[#C7A86A]"
-                                : "border-[#0F2744]/15 bg-white hover:border-[#C7A86A]/60 hover:bg-[#FAF8F5]"
-                            }`}
-                          >
-                            {/* Thumbnail Image */}
-                            <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-md overflow-hidden border border-[#0F2744]/10 bg-[#F6F0E8] shrink-0 relative">
-                              <img
-                                src={mat.image}
-                                alt={mat.name}
-                                className="h-full w-full object-cover"
-                                loading="lazy"
-                              />
-                            </div>
-                            <span className="text-xs font-medium text-[#0F2744] leading-snug truncate min-w-0">
-                              {mat.name}
-                            </span>
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </>
+                  /* Approved 3-column grid for all other Box PDPs on desktop */
+                  <div className="hidden xl:grid grid-cols-3 gap-2.5 w-full">
+                    {model.materials.map((mat) => {
+                      const isSelected = activeMaterialId === mat.id;
+                      return (
+                        <button
+                          key={mat.id}
+                          type="button"
+                          onClick={() => handleMaterialSelect(mat.id)}
+                          className={`p-2 sm:p-2.5 rounded-lg border flex items-center gap-2.5 text-left transition-all duration-300 cursor-pointer min-w-0 ${
+                            isSelected
+                              ? "border-[#C7A86A] border-[1.5px] bg-[#F6F0E8] shadow-xs ring-1 ring-[#C7A86A]"
+                              : "border-[#0F2744]/15 bg-white hover:border-[#C7A86A]/60 hover:bg-[#FAF8F5]"
+                          }`}
+                        >
+                          {/* Thumbnail Image */}
+                          <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-md overflow-hidden border border-[#0F2744]/10 bg-[#F6F0E8] shrink-0 relative">
+                            <img
+                              src={mat.image}
+                              alt={mat.name}
+                              className="h-full w-full object-cover"
+                              loading="lazy"
+                            />
+                          </div>
+                          <span className="text-xs font-medium text-[#0F2744] leading-snug truncate min-w-0">
+                            {mat.name}
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
                 )}
               </div>
 
@@ -835,6 +815,7 @@ Selected Specs:
               <ProductCTAButtons
                 quoteUrl={quoteUrl}
                 whatsappUrl={dynamicWhatsappUrl}
+                variant={isChainBox ? "boxes" : "default"}
               />
 
               {/* Supporting B2B Note */}
@@ -860,7 +841,7 @@ Selected Specs:
             </div>
 
             {/* Mobile 3-Column Segmented Control Header (Mobile Only) */}
-            <div className="lg:hidden w-full mb-8">
+            <div className={`lg:hidden w-full ${isChainBox ? "max-w-xl md:max-w-2xl mx-auto" : ""} mb-8`}>
               <div className="grid grid-cols-3 gap-1 bg-[#F6F0E8] border border-[#C7A86A]/25 rounded-2xl p-1.5 w-full min-h-[56px]">
                 {BOX_TABS.map((tab) => {
                   const isActive = activeDetailTab === tab.id;
@@ -888,13 +869,13 @@ Selected Specs:
             </div>
 
             {/* Desktop Tabs Header */}
-            <div className="hidden lg:flex border-b border-[#0F2744]/10 mb-10 justify-center gap-12">
+            <div className={`hidden lg:flex border-b border-[#0F2744]/10 mb-10 justify-center ${isChainBox ? "gap-6 xl:gap-12" : "gap-12"}`}>
               {BOX_TABS.map((tab) => (
                 <button
                   key={tab.id}
                   type="button"
                   onClick={() => setActiveDetailTab(tab.id)}
-                  className={`pb-4 text-xs font-semibold tracking-[0.2em] uppercase transition-all duration-300 relative whitespace-nowrap cursor-pointer ${
+                  className={`pb-4 text-xs font-semibold ${isChainBox ? "tracking-[0.14em] xl:tracking-[0.2em]" : "tracking-[0.2em]"} uppercase transition-all duration-300 relative whitespace-nowrap cursor-pointer ${
                     activeDetailTab === tab.id
                       ? "text-[#0F2744] font-bold"
                       : "text-[#0F2744]/50 hover:text-[#0F2744]"

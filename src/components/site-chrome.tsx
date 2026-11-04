@@ -154,7 +154,7 @@ export function SiteHeader() {
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           onClick={toggleMobileMenu}
-          className="lg:hidden text-navy hover:text-gold transition shrink-0 p-1"
+          className="lg:hidden text-navy hover:text-gold transition shrink-0 p-1.5 md:p-2 min-h-[44px] min-w-[44px] flex items-center justify-center cursor-pointer"
         >
           {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
@@ -324,11 +324,11 @@ export function SiteFooter() {
   return (
     <footer className="w-full bg-[#FAF8F5] text-navy border-t border-[#C7A86A]/20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-6 xl:gap-8">
-          {/* 1. BRAND SECTION (Wider, left-aligned) */}
-          <div className="lg:col-span-4 space-y-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 xl:grid-cols-12 gap-8 md:gap-y-10 md:gap-x-10 lg:gap-x-12 xl:gap-8">
+          {/* 1. BRAND SECTION (Wider, left-aligned on desktop; full-width on tablet) */}
+          <div className="sm:col-span-2 md:col-span-12 xl:col-span-4 space-y-4">
             <Logo />
-            <p className="text-xs sm:text-sm text-muted-luxe leading-relaxed max-w-sm">
+            <p className="text-xs sm:text-sm text-muted-luxe leading-relaxed max-w-sm md:max-w-xl xl:max-w-sm">
               Luxury packaging and gifting solutions crafted to perfection for premium brands worldwide.
             </p>
             {/* Social Icons */}
@@ -348,8 +348,8 @@ export function SiteFooter() {
             </div>
           </div>
 
-          {/* 2. CONTACT SECTION (Separate column beside Brand on desktop) */}
-          <div className="lg:col-span-2">
+          {/* 2. CONTACT SECTION (Tablet: Row 1 col 1; Desktop: col 2) */}
+          <div className="md:col-span-6 xl:col-span-2">
             <h4 className="text-[11px] tracking-[0.28em] font-semibold text-gold uppercase mb-4">
               CONTACT
             </h4>
@@ -386,8 +386,8 @@ export function SiteFooter() {
             </ul>
           </div>
 
-          {/* 3. PRODUCTS SECTION */}
-          <div className="lg:col-span-2">
+          {/* 3. PRODUCTS SECTION (Tablet: Row 1 col 2; Desktop: col 3) */}
+          <div className="md:col-span-6 xl:col-span-2">
             <h4 className="text-[11px] tracking-[0.28em] font-semibold text-gold uppercase mb-4">
               PRODUCTS
             </h4>
@@ -405,8 +405,8 @@ export function SiteFooter() {
             </ul>
           </div>
 
-          {/* 4. COMPANY SECTION */}
-          <div className="lg:col-span-2">
+          {/* 4. COMPANY SECTION (Tablet: Row 2 col 1; Desktop: col 4) */}
+          <div className="md:col-span-6 xl:col-span-2">
             <h4 className="text-[11px] tracking-[0.28em] font-semibold text-gold uppercase mb-4">
               COMPANY
             </h4>
@@ -424,8 +424,8 @@ export function SiteFooter() {
             </ul>
           </div>
 
-          {/* 5. HELP SECTION */}
-          <div className="lg:col-span-2">
+          {/* 5. HELP SECTION (Tablet: Row 2 col 2; Desktop: col 5) */}
+          <div className="md:col-span-6 xl:col-span-2">
             <h4 className="text-[11px] tracking-[0.28em] font-semibold text-gold uppercase mb-4">
               HELP
             </h4>

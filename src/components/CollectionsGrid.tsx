@@ -79,24 +79,24 @@ export default function CollectionsGrid({ title, limit, items }: CollectionsGrid
   const displayItems = (items || DEFAULT_COLLECTIONS).slice(0, limit);
 
   return (
-    <section className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-12">
+    <section className="py-16 sm:py-20 md:py-20 lg:py-24 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
         {title !== null && (
-          <div className="mb-12">
+          <div className="mb-10 sm:mb-12">
             <span className="text-[#C7A86A] tracking-[0.3em] font-semibold text-xs uppercase mb-3 block">
               OUR COLLECTIONS
             </span>
-            <h2 className="font-display font-serif text-3xl sm:text-4xl md:text-5xl text-[#0F2744] leading-tight">
+            <h2 className="font-display font-serif text-3xl sm:text-4xl md:text-[42px] lg:text-5xl text-[#0F2744] leading-tight">
               {title || "Packaging Collections"}
             </h2>
           </div>
         )}
 
-        <div className="flex overflow-x-auto snap-x snap-mandatory scroll-pl-4 sm:scroll-pl-6 scrollbar-none gap-4 pb-4 -mx-4 pl-4 pr-4 sm:-mx-6 sm:pl-6 sm:pr-6 md:mx-0 md:px-0 md:pb-0 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div className="flex overflow-x-auto snap-x snap-mandatory scroll-pl-4 sm:scroll-pl-6 scrollbar-none gap-4 pb-4 -mx-4 pl-4 pr-4 sm:-mx-6 sm:pl-6 sm:pr-6 md:mx-0 md:px-0 md:pb-0 md:grid md:grid-cols-2 md:gap-5 lg:gap-5 xl:gap-6 md:overflow-visible [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {displayItems.map((item, index) => (
             <div
               key={index}
-              className={`w-[85vw] max-w-[340px] flex-shrink-0 snap-start md:w-auto md:max-w-none md:flex-shrink rounded-3xl p-5 sm:p-6 md:p-8 flex flex-col sm:flex-row justify-between items-stretch gap-5 sm:gap-6 overflow-hidden transition-all duration-300 md:hover:-translate-y-1 ${item.bgColor} ${item.textColor}`}
+              className={`w-[85vw] max-w-[340px] flex-shrink-0 snap-start md:w-auto md:max-w-none md:flex-shrink rounded-3xl p-5 sm:p-6 md:p-6 lg:p-6 xl:p-8 flex flex-col lg:flex-row justify-between items-stretch gap-5 sm:gap-6 lg:gap-4 xl:gap-6 overflow-hidden transition-all duration-300 md:hover:-translate-y-1 ${item.bgColor} ${item.textColor}`}
             >
               {/* Left Column: Content */}
               <div className="flex flex-col justify-between flex-1 space-y-4 sm:space-y-6">
@@ -104,7 +104,7 @@ export default function CollectionsGrid({ title, limit, items }: CollectionsGrid
                   <span className="text-xs uppercase tracking-[0.2em] opacity-80 font-semibold block mb-1.5 sm:mb-2">
                     {item.tag}
                   </span>
-                  <h3 className="font-display font-serif text-xl sm:text-2xl md:text-3xl leading-tight mb-2 sm:mb-3">
+                  <h3 className="font-display font-serif text-xl sm:text-2xl md:text-2xl lg:text-[25px] xl:text-3xl leading-tight mb-2 sm:mb-3">
                     {item.title}
                   </h3>
                   <p className="text-xs sm:text-sm opacity-90 leading-relaxed max-w-sm">
@@ -123,7 +123,7 @@ export default function CollectionsGrid({ title, limit, items }: CollectionsGrid
               </div>
 
               {/* Right Column: Image */}
-              <div className="relative w-full sm:w-44 h-40 sm:h-auto min-h-[140px] sm:min-h-0 rounded-2xl overflow-hidden bg-white/5 flex items-center justify-center self-center sm:self-stretch shrink-0">
+              <div className="relative w-full h-44 sm:h-48 md:h-48 lg:w-40 xl:w-44 lg:h-auto min-h-[150px] lg:min-h-0 rounded-2xl overflow-hidden bg-white/5 flex items-center justify-center self-center lg:self-stretch shrink-0">
                 {/* IMAGE TODO: Check path */}
                 <Image
                   src={item.image}
@@ -131,7 +131,7 @@ export default function CollectionsGrid({ title, limit, items }: CollectionsGrid
                   fill
                   loading="lazy"
                   className="object-cover transition-transform duration-500 hover:scale-105"
-                  sizes="(max-width: 768px) 85vw, 176px"
+                  sizes="(max-width: 639px) 85vw, (max-width: 1023px) 45vw, (max-width: 1279px) 160px, 176px"
                 />
               </div>
             </div>

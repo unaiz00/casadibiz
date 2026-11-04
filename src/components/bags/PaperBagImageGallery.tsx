@@ -395,7 +395,7 @@ export default function PaperBagImageGallery({
       <div className="w-full flex flex-col gap-3 sm:gap-3.5">
         <div
           ref={galleryRef}
-          className={`group relative aspect-[16/11] sm:aspect-[4/3] w-full rounded-2xl sm:rounded-3xl overflow-hidden bg-white border border-[#C7A86A]/25 shadow-xs select-none touch-pan-y ${
+          className={`group relative aspect-[16/11] sm:aspect-[4/3] md:max-h-[480px] lg:max-h-none w-full rounded-2xl sm:rounded-3xl overflow-hidden bg-white border border-[#C7A86A]/25 shadow-xs select-none touch-pan-y ${
             isDragging ? "cursor-grabbing" : "cursor-grab"
           }`}
           onMouseDown={handleMouseDown}

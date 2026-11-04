@@ -20,6 +20,7 @@ export interface ProductCTAButtonsProps {
   className?: string;
   quoteLabel?: string;
   whatsappLabel?: string;
+  variant?: "default" | "bags" | "ribbons" | "boxes";
 }
 
 export default function ProductCTAButtons({
@@ -28,13 +29,39 @@ export default function ProductCTAButtons({
   className = "",
   quoteLabel = "REQUEST A QUOTE",
   whatsappLabel = "QUICK QUOTE",
+  variant = "default",
 }: ProductCTAButtonsProps) {
+  const isBags = variant === "bags";
+  const isRibbons = variant === "ribbons";
+  const isBoxes = variant === "boxes";
+
+  const containerClasses = isBoxes
+    ? `w-full grid grid-cols-2 gap-2.5 sm:gap-3 lg:gap-2.5 xl:gap-3.5 ${className}`
+    : isRibbons
+    ? `w-full grid grid-cols-2 gap-2.5 sm:gap-3 lg:gap-2.5 xl:gap-3.5 ${className}`
+    : isBags
+    ? `w-full grid grid-cols-2 gap-2.5 sm:gap-3 lg:gap-2.5 xl:gap-3.5 ${className}`
+    : `w-full grid grid-cols-2 gap-2.5 sm:gap-3.5 ${className}`;
+
+  const quoteClasses = isBoxes
+    ? "min-w-0 w-full inline-flex items-center justify-center gap-1.5 sm:gap-2 lg:gap-1.5 xl:gap-2 px-2 sm:px-3 lg:px-2.5 xl:px-6 py-3 sm:py-3.5 rounded-xl bg-[#0F2744] text-[#FAF8F5] text-[10.5px] sm:text-xs font-semibold tracking-[0.03em] sm:tracking-[0.06em] lg:tracking-[0.04em] xl:tracking-[0.14em] uppercase transition-all duration-300 hover:bg-[#16233c] min-h-[46px] sm:min-h-[48px] text-center whitespace-nowrap"
+    : isRibbons
+    ? "min-w-0 w-full inline-flex items-center justify-center gap-1.5 sm:gap-2 lg:gap-1.5 xl:gap-2 px-2 sm:px-3 lg:px-2.5 xl:px-6 py-3 sm:py-3.5 rounded-xl bg-[#0F2744] text-[#FAF8F5] text-[10.5px] sm:text-xs font-semibold tracking-[0.03em] sm:tracking-[0.06em] lg:tracking-[0.04em] xl:tracking-[0.14em] uppercase transition-all duration-300 hover:bg-[#16233c] min-h-[46px] sm:min-h-[48px] text-center whitespace-nowrap"
+    : isBags
+    ? "min-w-0 w-full inline-flex items-center justify-center gap-1.5 sm:gap-2 lg:gap-1.5 xl:gap-2 px-2 sm:px-3 lg:px-2.5 xl:px-6 py-3 sm:py-3.5 rounded-xl bg-[#0F2744] text-[#FAF8F5] text-[10.5px] sm:text-xs font-semibold tracking-[0.03em] sm:tracking-[0.06em] lg:tracking-[0.04em] xl:tracking-[0.14em] uppercase transition-all duration-300 hover:bg-[#16233c] min-h-[46px] sm:min-h-[48px] text-center whitespace-nowrap"
+    : "min-w-0 w-full inline-flex items-center justify-center gap-1.5 sm:gap-2 px-2 sm:px-6 py-3 sm:py-3.5 rounded-xl bg-[#0F2744] text-[#FAF8F5] text-[10.5px] sm:text-xs font-semibold tracking-[0.03em] sm:tracking-[0.14em] uppercase transition-all duration-300 hover:bg-[#16233c] min-h-[46px] sm:min-h-[48px] text-center whitespace-nowrap";
+
+  const whatsappClasses = isBoxes
+    ? "min-w-0 w-full inline-flex items-center justify-center gap-1.5 sm:gap-2 lg:gap-1.5 xl:gap-2 px-2 sm:px-3 lg:px-2.5 xl:px-6 py-3 sm:py-3.5 rounded-xl bg-[#25D366] text-white text-[10.5px] sm:text-xs font-semibold tracking-[0.03em] sm:tracking-[0.06em] lg:tracking-[0.04em] xl:tracking-[0.14em] uppercase transition-all duration-300 hover:bg-[#20ba5a] min-h-[46px] sm:min-h-[48px] text-center whitespace-nowrap"
+    : isRibbons
+    ? "min-w-0 w-full inline-flex items-center justify-center gap-1.5 sm:gap-2 lg:gap-1.5 xl:gap-2 px-2 sm:px-3 lg:px-2.5 xl:px-6 py-3 sm:py-3.5 rounded-xl bg-[#25D366] text-white text-[10.5px] sm:text-xs font-semibold tracking-[0.03em] sm:tracking-[0.06em] lg:tracking-[0.04em] xl:tracking-[0.14em] uppercase transition-all duration-300 hover:bg-[#20ba5a] min-h-[46px] sm:min-h-[48px] text-center whitespace-nowrap"
+    : isBags
+    ? "min-w-0 w-full inline-flex items-center justify-center gap-1.5 sm:gap-2 lg:gap-1.5 xl:gap-2 px-2 sm:px-3 lg:px-2.5 xl:px-6 py-3 sm:py-3.5 rounded-xl bg-[#25D366] text-white text-[10.5px] sm:text-xs font-semibold tracking-[0.03em] sm:tracking-[0.06em] lg:tracking-[0.04em] xl:tracking-[0.14em] uppercase transition-all duration-300 hover:bg-[#20ba5a] min-h-[46px] sm:min-h-[48px] text-center whitespace-nowrap"
+    : "min-w-0 w-full inline-flex items-center justify-center gap-1.5 px-2 sm:px-6 py-3 sm:py-3.5 rounded-xl bg-[#25D366] text-white text-[10.5px] sm:text-xs font-semibold tracking-[0.03em] sm:tracking-[0.14em] uppercase transition-all duration-300 hover:bg-[#20ba5a] min-h-[46px] sm:min-h-[48px] text-center whitespace-nowrap";
+
   return (
-    <div className={`w-full grid grid-cols-2 gap-2.5 sm:gap-3.5 ${className}`}>
-      <Link
-        href={quoteUrl}
-        className="min-w-0 w-full inline-flex items-center justify-center gap-1.5 sm:gap-2 px-2 sm:px-6 py-3 sm:py-3.5 rounded-xl bg-[#0F2744] text-[#FAF8F5] text-[10.5px] sm:text-xs font-semibold tracking-[0.03em] sm:tracking-[0.14em] uppercase transition-all duration-300 hover:bg-[#16233c] min-h-[46px] sm:min-h-[48px] text-center whitespace-nowrap"
-      >
+    <div className={containerClasses}>
+      <Link href={quoteUrl} className={quoteClasses}>
         <FileText className="w-4 h-4 sm:w-[18px] sm:h-[18px] text-[#C7A86A] shrink-0" />
         <span className="truncate">{quoteLabel}</span>
       </Link>
@@ -43,7 +70,7 @@ export default function ProductCTAButtons({
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="min-w-0 w-full inline-flex items-center justify-center gap-1.5 px-2 sm:px-6 py-3 sm:py-3.5 rounded-xl bg-[#25D366] text-white text-[10.5px] sm:text-xs font-semibold tracking-[0.03em] sm:tracking-[0.14em] uppercase transition-all duration-300 hover:bg-[#20ba5a] min-h-[46px] sm:min-h-[48px] text-center whitespace-nowrap"
+        className={whatsappClasses}
       >
         <WhatsAppGlyph className="w-5 h-5 sm:w-[22px] sm:h-[22px] text-white fill-current shrink-0" />
         <span className="truncate">{whatsappLabel}</span>
