@@ -84,6 +84,13 @@ const FAQS = [
   { q: "Do you ship internationally?", a: "Yes. We ship across the GCC, Europe, the UK and the US by air and sea freight, with door delivery available." },
 ];
 
+/* ---------------- Contact Hero Images ---------------- */
+// Desktop hero background image (640px and above)
+export const DESKTOP_CONTACT_HERO_IMAGE = "/assets/contv.webp";
+
+// Mobile hero background image (below 640px) - replace this path when a dedicated mobile image is uploaded
+export const MOBILE_CONTACT_HERO_IMAGE = "/assets/contactmp.webp";
+
 export default function ContactPage() {
   const [formOpen, setFormOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
@@ -194,16 +201,20 @@ export default function ContactPage() {
       <SiteHeader />
       <main>
         {/* HERO */}
-        <section className="relative w-full overflow-hidden sm:bg-[#0F2744] sm:bg-grain-navy flex flex-col items-center h-[450px] xs:h-[480px] sm:min-h-0 sm:h-[780px] lg:h-[850px] pt-8 xs:pt-10 sm:pt-10 lg:pt-12 pb-4 sm:pb-0 justify-start sm:justify-start">
-          {/* Background image on mobile (covers controlled hero cropped at red boundary) / Desktop bottom image */}
-          <div className="absolute inset-0 w-full h-full z-0 sm:top-auto sm:bottom-0 sm:h-auto flex justify-center items-center sm:items-end pointer-events-none animate-hero-image-luxe">
-            <img
-              src="/assets/contactim1.png"
-              alt="CASA DI BIZ premium packaging products still life"
-              className="w-full h-full object-cover object-[50%_46%] sm:object-contain sm:h-auto block"
-              loading="eager"
-              fetchPriority="high"
-            />
+        <section className="relative w-full overflow-hidden bg-[#0A0A0C] flex flex-col items-center h-[450px] xs:h-[480px] sm:min-h-0 sm:h-[720px] md:h-[780px] lg:h-[850px] xl:h-[880px] pt-8 xs:pt-10 sm:pt-10 lg:pt-12 pb-4 sm:pb-0 justify-start sm:justify-start">
+          {/* Background image on mobile (covers controlled hero cropped at red boundary) / Desktop full-coverage hero */}
+          <div className="absolute inset-0 w-full h-full z-0 flex justify-center items-center pointer-events-none animate-hero-image-luxe">
+            <picture className="w-full h-full block">
+              <source media="(min-width: 640px)" srcSet={DESKTOP_CONTACT_HERO_IMAGE} />
+              <source media="(max-width: 639px)" srcSet={MOBILE_CONTACT_HERO_IMAGE} />
+              <img
+                src={DESKTOP_CONTACT_HERO_IMAGE}
+                alt="CASA DI BIZ premium packaging products still life"
+                className="w-full h-full object-cover object-[50%_46%] sm:object-cover sm:object-center block"
+                loading="eager"
+                fetchPriority="high"
+              />
+            </picture>
             {/* Subtle top gradient overlay for text legibility on mobile */}
             <div className="absolute inset-0 bg-gradient-to-b from-[#0F2744]/80 via-[#0F2744]/40 to-transparent sm:hidden pointer-events-none" />
           </div>

@@ -335,16 +335,14 @@ export const PENDANT_BOX_MATERIALS: BoxMaterialOption[] = [
 
 export const PENDANT_BOX_FINISHES: BoxFinishOption[] = STANDARD_BOX_FINISHES;
 
-// Dedicated Chain Box Materials (all exterior material options matching Ring Box PDP + textured paper)
+// Dedicated Chain Box Materials (all exterior material options matching Ring Box PDP)
 export const CHAIN_BOX_MATERIALS: BoxMaterialOption[] = [
   BOX_MATERIAL_REGISTRY.velvet,
-  BOX_MATERIAL_REGISTRY.suede,
   BOX_MATERIAL_REGISTRY["premium-suede"],
   BOX_MATERIAL_REGISTRY.microfiber,
   BOX_MATERIAL_REGISTRY["premium-microfiber"],
   BOX_MATERIAL_REGISTRY.leatherette,
   BOX_MATERIAL_REGISTRY["special-paper"],
-  BOX_MATERIAL_REGISTRY["textured-paper"],
   BOX_MATERIAL_REGISTRY["brown-crocodile"],
   BOX_MATERIAL_REGISTRY["glossy-navy"],
   BOX_MATERIAL_REGISTRY["matt-grey-paint"],
@@ -354,7 +352,7 @@ export const CHAIN_BOX_MATERIALS: BoxMaterialOption[] = [
 
 export const CHAIN_BOX_FINISHES: BoxFinishOption[] = STANDARD_BOX_FINISHES;
 
-// Dedicated Earring Box Materials (all 12 available exterior material/texture options)
+// Dedicated Earring Box Materials (all 11 available exterior material/texture options)
 export const EARRING_BOX_MATERIALS: BoxMaterialOption[] = [
   {
     id: "hairy-velvet",
@@ -397,12 +395,6 @@ export const EARRING_BOX_MATERIALS: BoxMaterialOption[] = [
     name: "Crocodile Texture",
     image: "/assets/earring/Luxury Crocodile Jewelry Box Showcase.png",
     description: "Embossed exotic crocodile relief leatherette with distinctive luxury grain.",
-  },
-  {
-    id: "blue-crocodile",
-    name: "Blue Crocodile",
-    image: "/assets/earring/earring_blue_crocodile.jpeg",
-    description: "Exotic relief crocodile grain in deep oceanic blue lacquer finish.",
   },
   {
     id: "glossy-navy",
@@ -610,7 +602,6 @@ export const BOX_MODELS_DATA: Record<string, BoxModel> = {
       { src: "/assets/earring/erpin_premiumleather.jpeg", alt: "CASA DI BIZ Earring Box - Leatherette Edition", label: "Leatherette" },
       { src: "/assets/earring/earring_special.png", alt: "CASA DI BIZ Earring Box - Special Paper Edition", label: "Special Paper" },
       { src: "/assets/earring/Luxury Crocodile Jewelry Box Showcase.png", alt: "CASA DI BIZ Earring Box - Crocodile Texture Edition", label: "Crocodile Texture" },
-      { src: "/assets/earring/earring_blue_crocodile.jpeg", alt: "CASA DI BIZ Earring Box - Blue Crocodile Edition", label: "Blue Crocodile" },
       { src: "/assets/earring/earring_blueglossy.jpeg", alt: "CASA DI BIZ Earring Box - Glossy Lacquer Edition", label: "Glossy Navy Blue" },
       { src: "/assets/earring/earring_Gray Jewelry Box Collage.png", alt: "CASA DI BIZ Earring Box - Matt Grey Paint Edition", label: "Matt Grey Paint" },
       { src: "/assets/earring/erpin_specialsoft.jpeg", alt: "CASA DI BIZ Earring Box - Soft Touch Edition", label: "Soft Touch" },
@@ -625,7 +616,6 @@ export const BOX_MODELS_DATA: Record<string, BoxModel> = {
       leatherette: "/assets/earring/erpin_premiumleather.jpeg",
       "special-paper": "/assets/earring/earring_special.png",
       "brown-crocodile": "/assets/earring/Luxury Crocodile Jewelry Box Showcase.png",
-      "blue-crocodile": "/assets/earring/earring_blue_crocodile.jpeg",
       "glossy-navy": "/assets/earring/earring_blueglossy.jpeg",
       "matt-grey-paint": "/assets/earring/earring_Gray Jewelry Box Collage.png",
       "soft-touch": "/assets/earring/erpin_specialsoft.jpeg",
@@ -766,11 +756,11 @@ export const BOX_MODELS_DATA: Record<string, BoxModel> = {
     longDescription: "Hand-crafted elongated chain box featuring tensioned interior channels and anti-tarnish lining to ensure fine necklaces and chains remain taut and protected.",
     images: [
       { src: "/assets/chain/chainpn1_velvetchamgne.jpeg", alt: "CASA DI BIZ Chain Box - Velvet Edition" },
-      { src: "/assets/chain/premiumpaper_suede_chain.jpeg", alt: "CASA DI BIZ Chain Box - Suede Edition" },
+      { src: "/assets/chain/premiumpaper_suede_chain.jpeg", alt: "CASA DI BIZ Chain Box - Premium Suede Edition" },
       { src: "/assets/chain/chain_microfiber.jpeg", alt: "CASA DI BIZ Chain Box - Microfiber Edition" },
       { src: "/assets/chain/chain_premiumleather.jpeg", alt: "CASA DI BIZ Chain Box - Premium Leatherette Edition" },
       { src: "/assets/chain/premium_microfiber_chain.jpeg", alt: "CASA DI BIZ Chain Box - Special Paper Edition" },
-      { src: "/assets/chain/chain__special_premium_texture.jpeg", alt: "CASA DI BIZ Chain Box - Textured Paper Edition" },
+      { src: "/assets/chain/chain__special_premium_texture.jpeg", alt: "CASA DI BIZ Chain Box - Ribbed Texture Edition" },
       { src: "/assets/chain/chain_specialsoft.jpeg", alt: "CASA DI BIZ Chain Box - Soft Touch Edition" },
       { src: "/assets/chain/chain__matt grey_paint.jpeg", alt: "CASA DI BIZ Chain Box - Matt Grey Paint Edition" },
       { src: "/assets/chain/chainp_velvetchamgne.jpeg", alt: "CASA DI BIZ Chain Box - Velvet Champagne Closed" },
@@ -778,13 +768,11 @@ export const BOX_MODELS_DATA: Record<string, BoxModel> = {
     materialImages: {
       velvet: "/assets/chain/chainpn1_velvetchamgne.jpeg",
       "hairy-velvet": "/assets/chain/chainpn1_velvetchamgne.jpeg",
-      suede: "/assets/chain/premiumpaper_suede_chain.jpeg",
       "premium-suede": "/assets/chain/premiumpaper_suede_chain.jpeg",
       microfiber: "/assets/chain/chain_microfiber.jpeg",
       "premium-microfiber": "/assets/chain/premium_microfiber_chain.jpeg",
       leatherette: "/assets/chain/chain_premiumleather.jpeg",
       "special-paper": "/assets/chain/premium_microfiber_chain.jpeg",
-      "textured-paper": "/assets/chain/chain__special_premium_texture.jpeg",
       "ribbed-texture": "/assets/chain/chain__special_premium_texture.jpeg",
       "matt-grey-paint": "/assets/chain/chain__matt grey_paint.jpeg",
       "soft-touch": "/assets/chain/chain_specialsoft.jpeg",
