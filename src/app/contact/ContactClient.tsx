@@ -215,8 +215,6 @@ export default function ContactPage() {
                 fetchPriority="high"
               />
             </picture>
-            {/* Subtle top gradient overlay for text legibility on mobile */}
-            <div className="absolute inset-0 bg-gradient-to-b from-[#0F2744]/80 via-[#0F2744]/40 to-transparent sm:hidden pointer-events-none" />
           </div>
 
           {/* Text Content Block (Layered ON TOP of image on mobile) */}
@@ -228,7 +226,7 @@ export default function ContactPage() {
             </h1>
 
             {/* Paragraph */}
-            <p className="animate-hero-support-luxe text-[13px] xs:text-[14px] sm:text-base text-[#FAF8F5] sm:text-[#FAF8F5]/85 font-light leading-snug sm:leading-relaxed max-w-[320px] xs:max-w-[340px] sm:max-w-[700px] mb-5 sm:mb-8 text-center drop-shadow-sm">
+            <p className="animate-hero-support-luxe text-[13px] xs:text-[14px] sm:text-base text-[#FAF8F5] sm:text-[#FAF8F5]/85 font-light leading-snug sm:leading-relaxed max-w-[320px] xs:max-w-[340px] sm:max-w-[700px] mb-5 sm:mb-8 text-center">
               Tell us what you need, and we'll help shape the right packaging for your product from boxes and bags to pouches, ribbons, and finishing details
             </p>
 
@@ -236,7 +234,7 @@ export default function ContactPage() {
             <div className="animate-hero-cta flex justify-center w-full">
               <button
                 onClick={() => setFormOpen(true)}
-                className="w-[185px] xs:w-[195px] h-[46px] xs:h-[50px] sm:w-auto sm:h-auto sm:px-8 sm:py-4 bg-[#F6F0E8] text-[#0F2744] hover:bg-[#FAF8F5] transition-colors duration-300 text-[11px] sm:text-xs font-semibold tracking-[0.25em] rounded-[6px] sm:rounded-[4px] uppercase flex items-center justify-center gap-2 shadow-lg cursor-pointer"
+                className="w-[185px] xs:w-[195px] h-[46px] xs:h-[50px] sm:w-auto sm:h-auto sm:px-8 sm:py-4 bg-[#F6F0E8] text-[#0F2744] hover:bg-[#FAF8F5] transition-colors duration-300 text-[11px] sm:text-xs font-semibold tracking-[0.25em] rounded-[6px] sm:rounded-[4px] uppercase flex items-center justify-center gap-2 cursor-pointer"
               >
                 CONTACT US <span className="text-xs">→</span>
               </button>
