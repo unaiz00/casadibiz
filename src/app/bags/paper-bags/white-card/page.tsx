@@ -5,6 +5,7 @@ import { HelpCircle, ChevronDown, Ribbon } from "lucide-react";
 import { SiteHeader, SiteFooter, Breadcrumbs } from "@/components/site-chrome";
 import PaperBagImageGallery from "@/components/bags/PaperBagImageGallery";
 import ProductCTAButtons from "@/components/pdp/ProductCTAButtons";
+import { EnquiryModal } from "@/components/EnquiryModal";
 
 // =====================================================
 // WHITE CARD BAG — PRODUCT CONTENT
@@ -82,12 +83,26 @@ const BAG_TABS = [
 ];
 
 export default function WhiteCardPage() {
+  const [enquiryOpen, setEnquiryOpen] = useState(false);
   const [openFaqIdx, setOpenFaqIdx] = useState<number | null>(0);
   const [activeDetailTab, setActiveDetailTab] = useState<"description" | "specifications" | "customization">("description");
 
   const selectedSize = product.sizes[0]?.value || "";
   const whatsappMsg = `Hello CASA DI BIZ, I would like to request a quote for the ${product.name} (Size: ${selectedSize})`;
   const dynamicWhatsappUrl = `https://wa.me/+971563374248?text=${encodeURIComponent(whatsappMsg)}`;
+
+  const productEnquiryData = {
+    productName: product.name,
+    category: "Bags",
+    material: product.material,
+    variantOrSize: selectedSize,
+    color: "White",
+    specifications: {
+      "Handle": product.handle,
+      "Printing": product.printing,
+      "Finish": product.finish,
+    },
+  };
 
   return (
     <div className="min-h-screen bg-[#FAF8F5] font-sans selection:bg-[#C7A86A]/20 selection:text-[#0F2744]">
@@ -206,6 +221,7 @@ export default function WhiteCardPage() {
                 quoteUrl={`/contact?size=${encodeURIComponent(selectedSize)}&product=${encodeURIComponent(product.name)}`}
                 whatsappUrl={dynamicWhatsappUrl}
                 variant="bags"
+                onQuoteClick={() => setEnquiryOpen(true)}
               />
 
               {/* Supporting Line */}
@@ -494,6 +510,14 @@ export default function WhiteCardPage() {
 
       {/* FOOTER */}
       <SiteFooter />
+
+      {/* ENQUIRY MODAL */}
+      {enquiryOpen && (
+        <EnquiryModal
+          onClose={() => setEnquiryOpen(false)}
+          product={productEnquiryData}
+        />
+      )}
     </div>
   );
 }

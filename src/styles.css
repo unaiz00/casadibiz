@@ -6,32 +6,35 @@
 
 
 :root {
-  --color-background: #fbf7f0;
-  --color-foreground: #2c2c2c;
+  color-scheme: light;
+
+  --color-background: #FAF8F5;
+  --color-foreground: #0F2744;
   --color-cream: #F6F0E8;
   --color-ivory: #FAF8F5;
-  --color-gold: #c8a15a;
+  --color-gold: #C7A86A;
   --color-gold-soft: #d9bd85;
-  --color-navy: #16233c;
+  --color-navy: #0F2744;
+  --color-navy-bg: #0F2744;
   --color-navy-deep: #0f1a2e;
   --color-border-luxe: #e9dbc1;
   --color-muted-luxe: #8a7f6f;
 
-  --color-primary: #16233c;
-  --color-primary-foreground: #fbf7f0;
-  --color-secondary: #c8a15a;
-  --color-secondary-foreground: #16233c;
-  --color-muted: #f2ead9;
-  --color-muted-foreground: #6b6355;
-  --color-accent: #c8a15a;
-  --color-accent-foreground: #16233c;
+  --color-primary: #0F2744;
+  --color-primary-foreground: #FAF8F5;
+  --color-secondary: #C7A86A;
+  --color-secondary-foreground: #0F2744;
+  --color-muted: #F6F0E8;
+  --color-muted-foreground: #5F6470;
+  --color-accent: #C7A86A;
+  --color-accent-foreground: #0F2744;
   --color-border: #e9dbc1;
   --color-input: #e9dbc1;
-  --color-ring: #c8a15a;
+  --color-ring: #C7A86A;
   --color-card: #ffffff;
-  --color-card-foreground: #2c2c2c;
+  --color-card-foreground: #0F2744;
   --color-popover: #ffffff;
-  --color-popover-foreground: #2c2c2c;
+  --color-popover-foreground: #0F2744;
 
   --font-display: "Playfair Display", ui-serif, Georgia, serif;
   --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
@@ -45,7 +48,7 @@
 
   html,
   body {
-    background-color: var(--color-ivory);
+    background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
@@ -71,7 +74,7 @@
   }
 
   .bg-navy {
-    background-color: var(--color-navy);
+    background-color: var(--color-navy-bg, #0F2744);
   }
 
   .bg-ivory {
@@ -492,5 +495,48 @@
   background-image: url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjUwIDI1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZmlsdGVyIGlkPSJub2lzZUZpbHRlciI+CiAgICA8ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iMC42NSIgbnVtT2N0YXZlcz0iNCIgc3RpdGNoVGlsZXM9InN0aXRjaCIgLz4KICAgIDxmZUNvbG9yTWF0cml4IHR5cGU9InNhdHVyYXRlIiB2YWx1ZXM9IjAiIC8+CiAgPC9maWx0ZXI+CiAgPHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsdGVyPSJ1cmwoI25vaXNlRmlsdGVyKSIgb3BhY2l0eT0iMC4wNjUiIC8+Cjwvc3ZnPg==");
   background-repeat: repeat;
 }
+
+/* ---------------- Dark Reader Extension Compatibility (Narrowly Scoped to #categories) ---------------- */
+html[data-darkreader-mode] #categories,
+html[data-darkreader-mode="dynamic"] #categories,
+html[data-darkreader-mode="filter"] #categories,
+html[data-darkreader-scheme="dark"] #categories,
+html[data-darkreader-scheme] #categories,
+html.darkreader #categories {
+  background-color: #101820 !important;
+  --darkreader-inline-bgcolor: #101820 !important;
+}
+
+html[data-darkreader-mode] #categories .cat-icon-tile,
+html[data-darkreader-mode="dynamic"] #categories .cat-icon-tile,
+html[data-darkreader-mode="filter"] #categories .cat-icon-tile,
+html[data-darkreader-scheme="dark"] #categories .cat-icon-tile,
+html[data-darkreader-scheme] #categories .cat-icon-tile,
+html.darkreader #categories .cat-icon-tile {
+  background-color: #FAF8F5 !important;
+  background-image: linear-gradient(0deg, #FAF8F5, #FAF8F5) !important;
+  --darkreader-inline-bgcolor: #FAF8F5 !important;
+  border-radius: 24px !important;
+}
+
+html[data-darkreader-mode] #categories .cat-icon-label,
+html[data-darkreader-mode="dynamic"] #categories .cat-icon-label,
+html[data-darkreader-mode="filter"] #categories .cat-icon-label,
+html[data-darkreader-scheme="dark"] #categories .cat-icon-label,
+html[data-darkreader-scheme] #categories .cat-icon-label,
+html.darkreader #categories .cat-icon-label {
+  color: #FAF8F5 !important;
+  --darkreader-inline-color: #FAF8F5 !important;
+}
+
+html[data-darkreader-mode] #categories img,
+html[data-darkreader-mode="dynamic"] #categories img,
+html[data-darkreader-mode="filter"] #categories img,
+html[data-darkreader-scheme="dark"] #categories img,
+html[data-darkreader-scheme] #categories img,
+html.darkreader #categories img {
+  filter: none !important;
+}
+
 
 

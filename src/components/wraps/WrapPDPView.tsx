@@ -1,6 +1,10 @@
+"use client";
+
+import { useState } from "react";
 import { SiteHeader, SiteFooter, Breadcrumbs } from "@/components/site-chrome";
 import type { WrapProduct } from "@/data/wraps-data";
 import ProductCTAButtons from "@/components/pdp/ProductCTAButtons";
+import { EnquiryModal } from "@/components/EnquiryModal";
 import WrapImageViewer from "./WrapImageViewer";
 import WrapApplications from "./WrapApplications";
 import WrapSpecifications from "./WrapSpecifications";
@@ -14,9 +18,20 @@ interface WrapPDPViewProps {
 }
 
 export default function WrapPDPView({ product, relatedProducts }: WrapPDPViewProps) {
+  const [enquiryOpen, setEnquiryOpen] = useState(false);
   const whatsappMsg = `Hello CASA DI BIZ, I would like to enquire about ${product.name} for my packaging requirements.`;
   const whatsappUrl = `https://wa.me/+971563374248?text=${encodeURIComponent(whatsappMsg)}`;
   const quoteUrl = `/contact?category=wraps&product=${encodeURIComponent(product.name)}`;
+
+  const productEnquiryData = {
+    productName: product.name,
+    category: "Wraps",
+    material: `${product.materialType}${product.gsm ? ` (${product.gsm})` : ""}`,
+    specifications: {
+      "Finish": product.finish || undefined,
+      "Texture": product.texture || undefined,
+    },
+  };
 
   const breadcrumbItems = [
     { label: "Home", to: "/" },
@@ -117,6 +132,7 @@ export default function WrapPDPView({ product, relatedProducts }: WrapPDPViewPro
               <ProductCTAButtons
                 quoteUrl={quoteUrl}
                 whatsappUrl={whatsappUrl}
+                onQuoteClick={() => setEnquiryOpen(true)}
               />
             </div>
           </div>
@@ -159,6 +175,14 @@ export default function WrapPDPView({ product, relatedProducts }: WrapPDPViewPro
 
       {/* 10. SITE FOOTER */}
       <SiteFooter />
+
+      {/* ENQUIRY MODAL */}
+      {enquiryOpen && (
+        <EnquiryModal
+          onClose={() => setEnquiryOpen(false)}
+          product={productEnquiryData}
+        />
+      )}
     </div>
   );
 }

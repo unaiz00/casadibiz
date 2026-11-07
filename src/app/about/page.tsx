@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-[#FAF8F5]">
+    <div className="min-h-screen bg-ivory text-navy">
       {/* Hide scrollbars for mobile carousels */}
       <style dangerouslySetInnerHTML={{
         __html: `
@@ -31,9 +31,9 @@ export default function AboutPage() {
       `}} />
 
       <SiteHeader />
-      <main className="bg-[#FAF8F5] text-[#0F2744]">
+      <main className="bg-ivory text-navy">
         {/* 1. HERO - Centered Editorial Composition */}
-        <section className="relative overflow-hidden bg-[#FAF8F5] pt-20 lg:pt-28 pb-16 lg:pb-24">
+        <section className="relative overflow-hidden bg-ivory pt-20 lg:pt-28 pb-16 lg:pb-24">
           <AboutHeroTypewriter />
 
           {/* Hero Image */}
@@ -60,22 +60,22 @@ export default function AboutPage() {
         <WhyCasaDiBiz />
 
         {/* 4. MATERIALS & CRAFT */}
-        <section className="pt-8 md:pt-10 pb-8 md:pb-12 bg-[#F6F0E8] border-t border-[#C7A86A]/10 overflow-hidden">
+        <section className="pt-8 md:pt-10 pb-8 md:pb-12 bg-cream border-t border-border-luxe/60 overflow-hidden">
           <MaterialsCarousel />
         </section>
 
         {/* 5. OUR APPROACH */}
-        <section className="py-20 lg:py-28 bg-[#FAF8F5] border-t border-[#C7A86A]/10">
+        <section className="py-20 lg:py-28 bg-ivory border-t border-border-luxe/60">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
             <div className="max-w-3xl mx-auto text-center mb-20 lg:mb-24">
-              <span className="text-[#C7A86A] text-xs uppercase tracking-[0.35em] font-semibold mb-6 block">
+              <span className="text-gold text-xs uppercase tracking-[0.35em] font-semibold mb-6 block">
                 OUR APPROACH
               </span>
-              <h2 className="text-4xl sm:text-5xl lg:text-[56px] lg:leading-[64px] font-serif text-[#0F2744] leading-tight tracking-tight">
+              <h2 className="text-4xl sm:text-5xl lg:text-[56px] lg:leading-[64px] font-serif text-navy leading-tight tracking-tight">
                 From Idea to Finished{" "}
-                <span className="italic font-serif text-[#C7A86A] font-normal">Experience.</span>
+                <span className="italic font-serif text-gold font-normal">Experience.</span>
               </h2>
-              <p className="font-light text-[#0F2744]/75 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto font-sans mt-8">
+              <p className="font-light text-navy/75 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto font-sans mt-8">
                 From the first conversation to the final presentation, every stage is considered with purpose — ensuring the finished packaging feels unmistakably yours.
               </p>
             </div>

@@ -1,10 +1,17 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 
-const MATERIALS = [
+interface MaterialItem {
+  id: number;
+  title: string;
+  category: string;
+  img: string;
+}
+
+const MATERIALS: MaterialItem[] = [
   { id: 1, title: "VELVET", category: "TEXTILES", img: "/assets/materials/velvet.png" },
   { id: 2, title: "HAIRY VELVET", category: "TEXTILES", img: "/assets/materials/hairy_velvet.png" },
   { id: 3, title: "SPECIAL SOFT", category: "TEXTILES", img: "/assets/materials/specialsoft.png" },
@@ -27,7 +34,9 @@ const FILTERS = ["ALL", "TEXTILES", "PAPER"];
 
 export function MaterialsCarousel() {
   const [activeFilter, setActiveFilter] = useState("ALL");
+  const [selectedMaterial, setSelectedMaterial] = useState<MaterialItem | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const savedScrollLeft = useRef<number>(0);
 
   const scroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
@@ -35,6 +44,46 @@ export function MaterialsCarousel() {
       scrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
     }
   };
+
+  const handleOpenPreview = (material: MaterialItem) => {
+    if (scrollRef.current) {
+      savedScrollLeft.current = scrollRef.current.scrollLeft;
+    }
+    setSelectedMaterial(material);
+  };
+
+  const handleClosePreview = () => {
+    setSelectedMaterial(null);
+    // Restore exact carousel scroll position on return
+    requestAnimationFrame(() => {
+      if (scrollRef.current && typeof savedScrollLeft.current === "number") {
+        scrollRef.current.scrollLeft = savedScrollLeft.current;
+      }
+    });
+  };
+
+  // Close preview on Escape key press
+  useEffect(() => {
+    if (!selectedMaterial) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        handleClosePreview();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [selectedMaterial]);
+
+  // Lock background page scroll while preview modal is open
+  useEffect(() => {
+    if (selectedMaterial) {
+      const originalOverflow = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = originalOverflow;
+      };
+    }
+  }, [selectedMaterial]);
 
   const filteredMaterials = activeFilter === "ALL"
     ? MATERIALS
@@ -107,7 +156,17 @@ export function MaterialsCarousel() {
           {filteredMaterials.map(m => (
             <div
               key={m.id}
-              className="snap-start shrink-0 w-[50vw] sm:w-[160px] md:w-[180px] lg:w-[200px] group flex flex-col cursor-pointer bg-[#FDFBF9] rounded-[16px] p-2.5 transition-transform duration-300 hover:scale-110 shadow-[0_2px_10px_rgba(0,0,0,0.03)] border border-[#E8E4DD]"
+              role="button"
+              tabIndex={0}
+              onClick={() => handleOpenPreview(m)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  handleOpenPreview(m);
+                }
+              }}
+              aria-label={`Enlarge ${m.title} material texture`}
+              className="snap-start shrink-0 w-[50vw] sm:w-[160px] md:w-[180px] lg:w-[200px] group flex flex-col cursor-pointer bg-[#FDFBF9] rounded-[16px] p-2.5 transition-transform duration-300 hover:scale-110 shadow-[0_2px_10px_rgba(0,0,0,0.03)] border border-[#E8E4DD] focus:outline-none focus:ring-2 focus:ring-[#C7A86A]"
             >
               <div className="relative w-full aspect-square overflow-hidden rounded-[10px] mb-3 bg-[#EBE5DC]/20">
                 <Image
@@ -127,6 +186,55 @@ export function MaterialsCarousel() {
           ))}
         </div>
       </div>
+
+      {/* Tap-to-Enlarge Centered Image Preview Modal */}
+      {selectedMaterial && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${selectedMaterial.title} Material Preview`}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-8 bg-black/80 backdrop-blur-sm select-none"
+          onClick={handleClosePreview}
+        >
+          {/* Close button in top-right */}
+          <button
+            type="button"
+            onClick={handleClosePreview}
+            aria-label="Close preview"
+            className="absolute top-4 right-4 sm:top-6 sm:right-6 z-20 h-11 w-11 rounded-full bg-white/10 hover:bg-[#C7A86A] text-[#FAF8F5] hover:text-[#0F2744] flex items-center justify-center transition-all border border-white/20 cursor-pointer shadow-lg focus:outline-none focus:ring-2 focus:ring-[#C7A86A]"
+          >
+            <X className="h-5 w-5 sm:h-6 sm:w-6" />
+          </button>
+
+          {/* Modal Container: stop propagation so clicking image or text won't close modal */}
+          <div
+            className="relative flex flex-col items-center justify-center max-w-[90vw] sm:max-w-xl md:max-w-2xl max-h-[85vh] cursor-default"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Enlarged Image Box with object-contain */}
+            <div className="relative w-[85vw] max-w-[460px] sm:max-w-[540px] md:max-w-[600px] h-[50vh] sm:h-[58vh] md:h-[64vh] max-h-[580px] rounded-2xl overflow-hidden bg-black/30 border border-white/10 shadow-2xl flex items-center justify-center p-2 sm:p-4">
+              <Image
+                src={selectedMaterial.img}
+                alt={selectedMaterial.title}
+                fill
+                sizes="(max-width: 640px) 85vw, (max-width: 1024px) 540px, 600px"
+                className="object-contain"
+                priority
+              />
+            </div>
+
+            {/* Material Name & Category Beneath Image */}
+            <div className="mt-4 sm:mt-5 text-center px-4">
+              <p className="text-[10px] sm:text-xs tracking-[0.25em] text-[#C7A86A] uppercase font-semibold mb-1">
+                {selectedMaterial.category}
+              </p>
+              <h3 className="font-sans font-medium text-base sm:text-lg md:text-xl text-[#FAF8F5] tracking-[0.18em] uppercase">
+                {selectedMaterial.title}
+              </h3>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

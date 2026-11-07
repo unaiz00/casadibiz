@@ -190,7 +190,7 @@ function ProductionBeginsIcon({ className = "w-[34px] h-[34px] sm:w-9 sm:h-9" }:
       className={className}
       aria-hidden="true"
     >
-      {/* Luxury Packaging Box Base (Navy) */}
+      {/* Luxury Packaging Box Base (Navy / Themed) */}
       <path
         d="M9 20H39V38C39 39.66 37.66 41 36 41H12C10.34 41 9 39.66 9 38V20Z"
         stroke="#0F2744"
@@ -208,7 +208,7 @@ function ProductionBeginsIcon({ className = "w-[34px] h-[34px] sm:w-9 sm:h-9" }:
         strokeWidth="2.2"
         strokeLinecap="round"
       />
-      {/* Packaging Box Lid (Navy) */}
+      {/* Packaging Box Lid (Navy / Themed) */}
       <path
         d="M7 13C7 11.9 7.9 11 9 11H39C40.1 11 41 11.9 41 13V19C41 19.55 40.55 20 40 20H8C7.45 20 7 19.55 7 19V13Z"
         stroke="#0F2744"
@@ -363,7 +363,7 @@ export function OrderingProcess({
                 key={stepItem.step}
                 className="w-[78vw] xs:w-[74vw] sm:w-[62vw] md:w-auto shrink-0 md:shrink snap-center md:snap-align-none flex"
               >
-                <div className="w-full h-auto md:h-full md:min-h-[215px] lg:h-[225px] bg-white border border-[#E8DFD1] hover:border-[#C7A86A]/60 rounded-[15px] p-6 lg:p-[26px] flex flex-col items-start transition-colors duration-300">
+                <div className="w-full h-auto md:h-full md:min-h-[215px] lg:h-[225px] bg-white border border-[#E8DFD1] hover:border-[#C7A86A]/60 rounded-[15px] p-6 lg:p-[26px] flex flex-col items-start transition-colors duration-200">
                   {/* Top Center: Icon Centered Horizontally at Top of Card */}
                   {showNumbersInsteadOfIcons ? (
                     <div className="w-full flex justify-center mb-5 lg:mb-[22px] shrink-0">

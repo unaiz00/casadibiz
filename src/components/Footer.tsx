@@ -35,7 +35,7 @@ export function SiteFooter() {
   ];
 
   return (
-    <footer className="w-full bg-[#FAF8F5] text-navy border-t border-[#C7A86A]/20">
+    <footer className="w-full bg-ivory text-navy border-t border-border-luxe/60 transition-colors duration-200">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 xl:grid-cols-12 gap-8 md:gap-y-10 md:gap-x-10 lg:gap-x-12 xl:gap-8">
           {/* 1. BRAND SECTION (Wider, left-aligned on desktop; full-width on tablet) */}
@@ -159,7 +159,7 @@ export function SiteFooter() {
       </div>
 
       {/* COPYRIGHT SECTION */}
-      <div className="bg-navy text-gold border-t border-[#C7A86A]/10">
+      <div className="bg-[#0F2744] text-gold border-t border-[#C7A86A]/10">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4 text-center text-xs tracking-wider text-gold">
           © CASA DI BIZ. All Rights Reserved.
         </div>

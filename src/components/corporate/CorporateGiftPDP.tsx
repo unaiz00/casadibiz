@@ -13,6 +13,7 @@ import {
 import { SiteHeader, SiteFooter, Breadcrumbs } from "@/components/site-chrome";
 import type { CorporateGiftProduct } from "@/data/corporate-data";
 import ProductCTAButtons from "@/components/pdp/ProductCTAButtons";
+import { EnquiryModal } from "@/components/EnquiryModal";
 
 const CORPORATE_TABS = [
   {
@@ -41,6 +42,7 @@ export default function CorporateGiftPDP({
   product,
   relatedProducts,
 }: CorporateGiftPDPProps) {
+  const [enquiryOpen, setEnquiryOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<
     "overview" | "specs" | "customisation"
   >("overview");
@@ -63,6 +65,21 @@ export default function CorporateGiftPDP({
     encodeURIComponent(
       `Hello CASA DI BIZ, I would like to request a bespoke quote for ${product.title} (Corporate Gifting Collection).`
     );
+
+  const productEnquiryData = {
+    productName: product.title,
+    category: "Corporate Boxes",
+    material:
+      product.specifications?.find((s) => s.label.toLowerCase().includes("material"))?.value ||
+      product.productType ||
+      undefined,
+    specifications: {
+      Dimensions:
+        product.specifications?.find((s) => s.label.toLowerCase().includes("dimension"))?.value ||
+        undefined,
+      Packaging: product.packagingNotes || undefined,
+    },
+  };
 
   // Keyboard navigation for Lightbox
   useEffect(() => {
@@ -248,6 +265,7 @@ export default function CorporateGiftPDP({
                 quoteUrl={quoteUrl}
                 whatsappUrl={dynamicWhatsappUrl}
                 className="pt-2"
+                onQuoteClick={() => setEnquiryOpen(true)}
               />
             </div>
           </div>
@@ -441,12 +459,13 @@ export default function CorporateGiftPDP({
             </p>
 
             <div className="mt-8 sm:mt-10 flex flex-wrap justify-center gap-4">
-              <Link
-                href={quoteUrl}
-                className="inline-flex items-center justify-center gap-3 rounded-full px-8 py-4 text-xs tracking-[0.24em] font-semibold bg-[#C7A86A] text-[#0F2744] hover:bg-[#FAF8F5] hover:text-[#0F2744] transition-all duration-300 shadow-md"
+              <button
+                type="button"
+                onClick={() => setEnquiryOpen(true)}
+                className="inline-flex items-center justify-center gap-3 rounded-full px-8 py-4 text-xs tracking-[0.24em] font-semibold bg-[#C7A86A] text-[#0F2744] hover:bg-[#FAF8F5] hover:text-[#0F2744] transition-all duration-300 shadow-md cursor-pointer"
               >
                 REQUEST A QUOTE <ArrowRight className="h-4 w-4" />
-              </Link>
+              </button>
               <a
                 href={dynamicWhatsappUrl}
                 target="_blank"
@@ -489,6 +508,13 @@ export default function CorporateGiftPDP({
             />
           </div>
         </div>
+      )}
+      {/* ENQUIRY MODAL */}
+      {enquiryOpen && (
+        <EnquiryModal
+          onClose={() => setEnquiryOpen(false)}
+          product={productEnquiryData}
+        />
       )}
     </div>
   );

@@ -100,10 +100,10 @@ export function SiteHeader() {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-ivory border-b border-border-luxe/60">
+    <header className="sticky top-0 z-50 bg-ivory border-b border-border-luxe/60 transition-colors duration-200">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between gap-4">
         <Logo />
-        <nav className="hidden lg:flex items-center justify-center gap-9 text-sm">
+        <nav className="hidden lg:flex items-center justify-center gap-7 xl:gap-8 text-sm">
           {NAV_LINKS.map((l) =>
             l.hasChevron ? (
               <div key={l.label} className="relative" ref={desktopDropdownRef}>
@@ -148,6 +148,14 @@ export function SiteHeader() {
               </Link>
             ),
           )}
+
+          {/* Desktop Navigation CTA: Custom Inquiry */}
+          <Link
+            href="/contact?enquiry=open"
+            className="ml-1 inline-flex items-center justify-center px-4.5 py-2 text-[11px] xl:text-xs font-semibold tracking-[0.14em] uppercase rounded-[6px] bg-[#0F2744] text-[#FAF8F5] border border-[#C7A86A]/30 hover:bg-[#C7A86A] hover:text-[#0F2744] hover:border-[#C7A86A] transition-all duration-300 shadow-xs cursor-pointer active:scale-[0.98]"
+          >
+            Custom Inquiry
+          </Link>
         </nav>
 
         <button
@@ -173,7 +181,7 @@ export function SiteHeader() {
 
           {/* Bottom Sheet */}
           <div
-            className={`relative z-10 w-full max-w-lg mx-auto bg-[#FAF8F5] rounded-t-[24px] border-t border-x border-border-luxe/70 shadow-[0_-12px_40px_rgba(0,0,0,0.18)] transition-transform duration-350 ease-out transform max-h-[75vh] flex flex-col ${isOpenVisible ? "translate-y-0" : "translate-y-full"
+            className={`relative z-10 w-full max-w-lg mx-auto bg-ivory rounded-t-[24px] border-t border-x border-border-luxe/70 shadow-[0_-12px_40px_rgba(0,0,0,0.18)] transition-transform duration-350 ease-out transform max-h-[75vh] flex flex-col ${isOpenVisible ? "translate-y-0" : "translate-y-full"
               }`}
             role="dialog"
             aria-modal="true"
@@ -184,7 +192,7 @@ export function SiteHeader() {
               type="button"
               onClick={closeMobileMenu}
               aria-label="Close menu"
-              className="absolute -top-14 left-1/2 -translate-x-1/2 h-12 w-12 rounded-full bg-[#FAF8F5] text-navy border border-border-luxe/80 shadow-lg flex items-center justify-center hover:text-gold active:scale-95 transition-all focus:outline-none focus:ring-2 focus:ring-gold/50 cursor-pointer"
+              className="absolute -top-14 left-1/2 -translate-x-1/2 h-12 w-12 rounded-full bg-ivory text-navy border border-border-luxe/80 shadow-lg flex items-center justify-center hover:text-gold active:scale-95 transition-all focus:outline-none focus:ring-2 focus:ring-gold/50 cursor-pointer"
             >
               <X className="h-5 w-5" />
             </button>
@@ -322,7 +330,7 @@ export function SiteFooter() {
   ];
 
   return (
-    <footer className="w-full bg-[#FAF8F5] text-navy border-t border-[#C7A86A]/20">
+    <footer className="w-full bg-ivory text-navy border-t border-border-luxe/60 transition-colors duration-200">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 xl:grid-cols-12 gap-8 md:gap-y-10 md:gap-x-10 lg:gap-x-12 xl:gap-8">
           {/* 1. BRAND SECTION (Wider, left-aligned on desktop; full-width on tablet) */}
@@ -446,7 +454,7 @@ export function SiteFooter() {
       </div>
 
       {/* COPYRIGHT SECTION */}
-      <div className="bg-navy text-gold border-t border-[#C7A86A]/10">
+      <div className="bg-[#0F2744] text-gold border-t border-[#C7A86A]/10">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4 text-center text-xs tracking-wider text-gold">
           © CASA DI BIZ. All Rights Reserved.
         </div>

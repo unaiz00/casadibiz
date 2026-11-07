@@ -15,12 +15,13 @@ export function WhatsAppGlyph({ className = "w-5 h-5 sm:w-[22px] sm:h-[22px]" }:
 }
 
 export interface ProductCTAButtonsProps {
-  quoteUrl: string;
+  quoteUrl?: string;
   whatsappUrl: string;
   className?: string;
   quoteLabel?: string;
   whatsappLabel?: string;
   variant?: "default" | "bags" | "ribbons" | "boxes";
+  onQuoteClick?: () => void;
 }
 
 export default function ProductCTAButtons({
@@ -30,6 +31,7 @@ export default function ProductCTAButtons({
   quoteLabel = "REQUEST A QUOTE",
   whatsappLabel = "QUICK QUOTE",
   variant = "default",
+  onQuoteClick,
 }: ProductCTAButtonsProps) {
   const isBags = variant === "bags";
   const isRibbons = variant === "ribbons";
@@ -61,10 +63,17 @@ export default function ProductCTAButtons({
 
   return (
     <div className={containerClasses}>
-      <Link href={quoteUrl} className={quoteClasses}>
-        <FileText className="w-4 h-4 sm:w-[18px] sm:h-[18px] text-[#C7A86A] shrink-0" />
-        <span className="truncate">{quoteLabel}</span>
-      </Link>
+      {onQuoteClick ? (
+        <button type="button" onClick={onQuoteClick} className={`${quoteClasses} cursor-pointer`}>
+          <FileText className="w-4 h-4 sm:w-[18px] sm:h-[18px] text-[#C7A86A] shrink-0" />
+          <span className="truncate">{quoteLabel}</span>
+        </button>
+      ) : (
+        <Link href={quoteUrl || "/contact"} className={quoteClasses}>
+          <FileText className="w-4 h-4 sm:w-[18px] sm:h-[18px] text-[#C7A86A] shrink-0" />
+          <span className="truncate">{quoteLabel}</span>
+        </Link>
+      )}
 
       <a
         href={whatsappUrl}

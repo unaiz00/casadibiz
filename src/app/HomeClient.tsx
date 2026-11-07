@@ -11,6 +11,7 @@ import { SiteHeader, SiteFooter } from "@/components/site-chrome";
 import CollectionsGrid from "@/components/CollectionsGrid";
 import OrderingProcess from "@/components/OrderingProcess";
 import CategoriesShowcase from "@/components/CategoriesShowcase";
+import HomeCTA from "@/components/HomeCTA";
 
 
 /* ---------------- Hero ---------------- */
@@ -32,11 +33,11 @@ function Hero() {
 
   useEffect(() => {
     if (slideCount <= 1) return;
-    const t = setInterval(() => setI((v) => (v + 1) % slideCount), 2800);
+    const t = setInterval(() => setI((v) => (v + 1) % slideCount), 3000);
     return () => clearInterval(t);
   }, [slideCount]);
   return (
-    <section className="relative w-full overflow-hidden flex flex-col items-center sm:flex-row h-[450px] xs:h-[480px] sm:h-[640px] md:h-[680px] lg:h-auto lg:min-h-screen portrait:lg:min-h-[720px] portrait:lg:h-[72vh] pt-8 xs:pt-10 sm:pt-0 pb-4 sm:pb-0 justify-start sm:justify-center">
+    <section className="relative w-full overflow-hidden flex flex-col items-center sm:flex-row h-[460px] xs:h-[490px] sm:h-[640px] md:h-[680px] lg:h-auto lg:min-h-screen portrait:lg:min-h-[720px] portrait:lg:h-[72vh] pt-7 xs:pt-9 sm:pt-0 pb-4 sm:pb-0 justify-start sm:justify-center">
       {/* Background image on mobile (covers controlled hero with products positioned in lower portion) / Desktop full-screen background */}
       <div className="absolute inset-0 w-full h-full z-0 flex justify-center items-center pointer-events-none animate-hero-image-luxe">
         {DESKTOP_SLIDES.map((desktopSrc, idx) => {
@@ -85,14 +86,44 @@ function Hero() {
               Boxes, Bags & Pouches made for brands <br className="hidden xs:inline" /> People keep on the shelf.
             </p>
 
-            {/* CTA Button */}
-            <div className="animate-hero-cta flex justify-center sm:justify-start w-full mt-3.5 xs:mt-4 sm:mt-6 md:mt-8">
+            {/* CTA Buttons */}
+            <div className="animate-hero-cta flex flex-col items-center sm:items-start w-full mt-3 xs:mt-3.5 sm:mt-6 md:mt-8">
+              {/* Desktop CTA: Single explore button preserved */}
               <Link
                 href="/collections"
-                className="inline-flex items-center justify-center gap-2 sm:gap-2.5 md:gap-3 rounded-full px-5 xs:px-6 sm:px-8 md:px-10 py-2 xs:py-2.5 sm:py-3.5 md:py-4.5 lg:py-5 text-[11px] xs:text-xs sm:text-xs md:text-sm tracking-[0.25em] font-semibold bg-[#C7A86A] text-[#0F2744] hover:bg-[#FAF8F5] hover:text-[#0F2744] active:scale-95 transition-all duration-300 ease-out cursor-pointer shadow-lg sm:shadow-none"
+                className="hidden sm:inline-flex items-center justify-center gap-2.5 md:gap-3 rounded-full sm:w-auto px-8 md:px-10 py-3.5 md:py-4.5 lg:py-5 text-xs md:text-sm tracking-[0.25em] font-semibold bg-[#C7A86A] text-[#0F2744] hover:bg-[#FAF8F5] hover:text-[#0F2744] active:scale-95 transition-all duration-300 ease-out cursor-pointer"
               >
-                EXPLORE NOW <ArrowRight className="h-3.5 w-3.5 sm:h-5 sm:w-5" />
+                EXPLORE NOW <ArrowRight className="h-4 w-4 md:h-5 md:w-5" />
               </Link>
+
+              {/* Mobile CTA: Synchronized with the 3-second carousel */}
+              <div className="relative w-[200px] xs:w-[220px] h-[38px] xs:h-[42px] sm:hidden flex items-center justify-center">
+                {/* Slide 0 CTA: EXPLORE NOW (Gold background, navy text) */}
+                <Link
+                  href="/collections"
+                  tabIndex={i === 0 ? 0 : -1}
+                  aria-hidden={i !== 0}
+                  className={`absolute inset-0 inline-flex items-center justify-center gap-2 rounded-full w-full h-full text-[11px] xs:text-xs tracking-[0.25em] font-semibold bg-[#C7A86A] text-[#0F2744] hover:bg-[#FAF8F5] hover:text-[#0F2744] active:scale-95 transition-all duration-500 ease-in-out cursor-pointer shadow-md ${i === 0
+                      ? "opacity-100 pointer-events-auto scale-100"
+                      : "opacity-0 pointer-events-none scale-95"
+                    }`}
+                >
+                  EXPLORE NOW <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+
+                {/* Slide 1 CTA: CUSTOM INQUIRY (Ivory background, navy text, gold border) */}
+                <Link
+                  href="/contact?enquiry=open"
+                  tabIndex={i === 1 ? 0 : -1}
+                  aria-hidden={i !== 1}
+                  className={`absolute inset-0 inline-flex items-center justify-center gap-2 rounded-full w-full h-full text-[11px] xs:text-xs tracking-[0.25em] font-semibold bg-[#FAF8F5] text-[#0F2744] border border-[#C7A86A] hover:bg-[#F6F0E8] active:bg-[#F6F0E8] active:scale-95 transition-all duration-500 ease-in-out cursor-pointer shadow-md ${i === 1
+                      ? "opacity-100 pointer-events-auto scale-100"
+                      : "opacity-0 pointer-events-none scale-95"
+                    }`}
+                >
+                  CUSTOM INQUIRY <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+              </div>
             </div>
           </div>
         </div>
@@ -133,41 +164,6 @@ function Featured() {
     </section>
   );
 }
-
-/* ---------------- How it works ---------------- */
-function HowItWorks() {
-  const steps = [
-    { n: "01", title: "Pick your packaging", desc: "Choose from boxes, bags, pouches, ribbons and wraps in sizes that fit your product." },
-    { n: "02", title: "Add your finish", desc: "Select materials, foil stamping, embossing, and colours to match your brand." },
-    { n: "03", title: "We make and ship", desc: "Our team produces your order and delivers it to your door, ready for the shelf." },
-  ];
-  return (
-    <section className="w-full bg-white">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-10 lg:px-12 py-10 sm:py-14 md:py-16 lg:py-20">
-        <div className="text-center mb-8 sm:mb-10 md:mb-12">
-          <p className="text-[11px] tracking-[0.32em] text-gold font-medium mb-2.5 sm:mb-3">HOW IT WORKS</p>
-          <h3 className="font-display text-2xl sm:text-3xl md:text-4xl text-navy">Order in three steps</h3>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-6 md:gap-8 lg:gap-10">
-          {steps.map((s) => (
-            <div key={s.n} className="relative">
-              <span className="font-display text-4xl sm:text-5xl md:text-[46px] lg:text-5xl text-gold/30">{s.n}</span>
-              <h4 className="font-display text-lg sm:text-xl text-navy mt-2 mb-2">{s.title}</h4>
-              <p className="text-sm text-muted-luxe leading-relaxed">{s.desc}</p>
-            </div>
-          ))}
-        </div>
-        <div className="text-center mt-8 sm:mt-10 md:mt-12">
-          <Link href="/contact" className="inline-flex items-center gap-3 rounded-full px-6 sm:px-7 py-3 sm:py-3.5 text-xs tracking-[0.28em] font-medium bg-navy text-[#C7A86A] hover:bg-gold hover:text-navy active:scale-95 transition-all duration-200">
-            START YOUR ORDER <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-
 /* ---------------- FAQ ---------------- */
 const HOME_FAQS = [
   {
@@ -257,10 +253,10 @@ export default function HomeClient() {
         <Hero />
         <CategoriesShowcase />
         <Featured />
-        <HowItWorks />
         <OrderingProcess />
         <CollectionsGrid />
         <HomeFAQ />
+        <HomeCTA />
       </main>
       <SiteFooter />
     </div>

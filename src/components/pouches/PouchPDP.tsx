@@ -11,6 +11,7 @@ import { SiteHeader, SiteFooter, Breadcrumbs } from "@/components/site-chrome";
 import PouchImageViewer from "@/components/pouches/PouchImageViewer";
 import type { PouchProduct } from "@/data/pouches-data";
 import ProductCTAButtons from "@/components/pdp/ProductCTAButtons";
+import { EnquiryModal } from "@/components/EnquiryModal";
 
 const POUCH_TABS = [
   {
@@ -36,6 +37,7 @@ interface PouchPDPProps {
 }
 
 export default function PouchPDP({ product, relatedProducts }: PouchPDPProps) {
+  const [enquiryOpen, setEnquiryOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<"overview" | "specs" | "branding">("overview");
   const [openFaqIdx, setOpenFaqIdx] = useState<number | null>(null);
 
@@ -58,6 +60,16 @@ export default function PouchPDP({ product, relatedProducts }: PouchPDPProps) {
     encodeURIComponent(
       `Hello CASA DI BIZ, I would like to request a bespoke quote for ${product.name} (Size: ${selectedSize?.label} - ${selectedSize?.dimensions}).`
     );
+
+  const productEnquiryData = {
+    productName: product.name,
+    category: "Pouches",
+    material: product.material || product.name,
+    variantOrSize: selectedSize ? `${selectedSize.label} (${selectedSize.dimensions})` : undefined,
+    specifications: {
+      "Closure Type": product.closure || undefined,
+    },
+  };
 
   return (
     <div className="min-h-screen bg-[#FAF8F5] text-[#0F2744] font-sans selection:bg-[#C7A86A]/20 selection:text-[#0F2744]">
@@ -199,6 +211,7 @@ export default function PouchPDP({ product, relatedProducts }: PouchPDPProps) {
               <ProductCTAButtons
                 quoteUrl={quoteUrl}
                 whatsappUrl={dynamicWhatsappUrl}
+                onQuoteClick={() => setEnquiryOpen(true)}
               />
 
               {/* Supporting B2B Note */}
@@ -427,13 +440,14 @@ export default function PouchPDP({ product, relatedProducts }: PouchPDPProps) {
                 </div>
 
                 <div className="pt-4 flex items-center gap-4">
-                  <Link
-                    href={quoteUrl}
-                    className="inline-flex items-center gap-2.5 rounded-xl px-6 py-3.5 text-xs tracking-[0.2em] font-bold bg-[#0F2744] text-[#FAF8F5] hover:bg-[#C7A86A] hover:text-[#0F2744] transition-all duration-300"
+                  <button
+                    type="button"
+                    onClick={() => setEnquiryOpen(true)}
+                    className="inline-flex items-center gap-2.5 rounded-xl px-6 py-3.5 text-xs tracking-[0.2em] font-bold bg-[#0F2744] text-[#FAF8F5] hover:bg-[#C7A86A] hover:text-[#0F2744] transition-all duration-300 cursor-pointer"
                   >
                     <span>REQUEST BRANDING PROOFS</span>
                     <ArrowRight className="h-4 w-4" />
-                  </Link>
+                  </button>
                 </div>
               </div>
 
@@ -576,6 +590,14 @@ export default function PouchPDP({ product, relatedProducts }: PouchPDPProps) {
 
       {/* 8. SITE FOOTER */}
       <SiteFooter />
+
+      {/* ENQUIRY MODAL */}
+      {enquiryOpen && (
+        <EnquiryModal
+          onClose={() => setEnquiryOpen(false)}
+          product={productEnquiryData}
+        />
+      )}
     </div>
   );
 }

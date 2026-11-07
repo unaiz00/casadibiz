@@ -15,6 +15,7 @@ import {
 import { SiteHeader, SiteFooter, Breadcrumbs } from "@/components/site-chrome";
 import type { StorageCaseProduct } from "@/data/storage-cases-data";
 import ProductCTAButtons from "@/components/pdp/ProductCTAButtons";
+import { EnquiryModal } from "@/components/EnquiryModal";
 
 const STORAGE_TABS = [
   {
@@ -43,6 +44,7 @@ export default function StorageCasePDP({
   product,
   relatedProducts,
 }: StorageCasePDPProps) {
+  const [enquiryOpen, setEnquiryOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<
     "overview" | "specs" | "customisation"
   >("overview");
@@ -66,6 +68,21 @@ export default function StorageCasePDP({
     encodeURIComponent(
       `Hello CASA DI BIZ, I would like to request a bespoke quote for ${product.title} (Jewellery Storage & Travel Cases Collection).`
     );
+
+  const productEnquiryData = {
+    productName: product.title,
+    category: "Jewellery Storage & Travel Cases",
+    material:
+      product.specifications?.find((s) => s.label.toLowerCase().includes("material"))?.value ||
+      product.productType ||
+      undefined,
+    specifications: {
+      Dimensions:
+        product.specifications?.find((s) => s.label.toLowerCase().includes("dimension"))?.value ||
+        undefined,
+      Packaging: product.packagingNotes || undefined,
+    },
+  };
 
   // Keyboard navigation for Lightbox
   useEffect(() => {
@@ -227,6 +244,7 @@ export default function StorageCasePDP({
                   whatsappUrl={dynamicWhatsappUrl}
                   quoteLabel="REQUEST A QUOTE"
                   whatsappLabel="QUICK QUOTE"
+                  onQuoteClick={() => setEnquiryOpen(true)}
                 />
               </div>
 
@@ -531,6 +549,14 @@ export default function StorageCasePDP({
 
       {/* 8. SITE FOOTER */}
       <SiteFooter />
+
+      {/* ENQUIRY MODAL */}
+      {enquiryOpen && (
+        <EnquiryModal
+          onClose={() => setEnquiryOpen(false)}
+          product={productEnquiryData}
+        />
+      )}
     </div>
   );
 }

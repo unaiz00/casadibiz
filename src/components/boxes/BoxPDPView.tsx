@@ -14,6 +14,7 @@ import {
 import { SiteHeader, SiteFooter, Breadcrumbs } from "@/components/site-chrome";
 import type { BoxModel } from "@/data/boxes-data";
 import ProductCTAButtons from "@/components/pdp/ProductCTAButtons";
+import { EnquiryModal } from "@/components/EnquiryModal";
 import { BOX_LISTING_IMAGES } from "@/app/boxes/BoxesClient";
 import MobileBoxMaterialSelector from "./MobileBoxMaterialSelector";
 
@@ -212,6 +213,7 @@ export default function BoxPDPView({ model, relatedModels }: BoxPDPViewProps) {
   const initialFinishId = getFinishForMaterial(initialMaterialId) || model.finishes[0]?.id || "";
 
   // Active states
+  const [enquiryOpen, setEnquiryOpen] = useState(false);
   const [activeImageIdx, setActiveImageIdx] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [activeMaterialId, setActiveMaterialId] = useState(initialMaterialId);
@@ -386,6 +388,17 @@ Selected Specs:
 
   // Dynamic Contact Page URL with prefilled query
   const quoteUrl = `/contact?category=${encodeURIComponent(model.categorySlug)}&model=${encodeURIComponent(model.name)}&size=${encodeURIComponent(activeSize?.dimensions || "")}&material=${encodeURIComponent(activeMaterial?.name || "")}&finish=${encodeURIComponent(activeFinish?.name || "")}`;
+
+  const productEnquiryData = {
+    productName: model.name,
+    category: "Jewellery Boxes",
+    material: activeMaterial?.name,
+    variantOrSize: activeSize ? `${activeSize.label} (${activeSize.dimensions})` : undefined,
+    specifications: {
+      "Logo Finish": activeFinish?.name,
+      "Interior / Insert": model.specifications?.insertType || model.specifications?.innerMaterial || undefined,
+    },
+  };
 
   // Keyboard navigation & body scroll lock for lightbox
   useEffect(() => {
@@ -816,6 +829,7 @@ Selected Specs:
                 quoteUrl={quoteUrl}
                 whatsappUrl={dynamicWhatsappUrl}
                 variant={isChainBox ? "boxes" : "default"}
+                onQuoteClick={() => setEnquiryOpen(true)}
               />
 
               {/* Supporting B2B Note */}
@@ -1183,6 +1197,14 @@ Selected Specs:
 
       {/* FOOTER */}
       <SiteFooter />
+
+      {/* ENQUIRY MODAL */}
+      {enquiryOpen && (
+        <EnquiryModal
+          onClose={() => setEnquiryOpen(false)}
+          product={productEnquiryData}
+        />
+      )}
     </div>
   );
 }

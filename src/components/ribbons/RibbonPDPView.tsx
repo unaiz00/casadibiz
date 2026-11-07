@@ -15,6 +15,7 @@ import {
 import { SiteHeader, SiteFooter, Breadcrumbs } from "@/components/site-chrome";
 import type { RibbonMaterial, RibbonWidth } from "@/data/ribbons-data";
 import ProductCTAButtons from "@/components/pdp/ProductCTAButtons";
+import { EnquiryModal } from "@/components/EnquiryModal";
 
 const RIBBON_TABS = [
   {
@@ -46,6 +47,7 @@ interface RibbonPDPViewProps {
 
 export default function RibbonPDPView({ material, relatedMaterials }: RibbonPDPViewProps) {
   // Configuration State
+  const [enquiryOpen, setEnquiryOpen] = useState(false);
   const [activeImageIdx, setActiveImageIdx] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [openFaqIdx, setOpenFaqIdx] = useState<number | null>(0);
@@ -64,6 +66,17 @@ Please share MOQ, sample lead time, and branding options.`;
 
   // Dynamic Contact Quote URL (No internal IDs/codes)
   const quoteUrl = `/contact?category=ribbons&material=${encodeURIComponent(material.name)}&width=${encodeURIComponent(selectedWidth.label)}`;
+
+  const productEnquiryData = {
+    productName: material.name,
+    category: "Ribbons",
+    material: material.composition || material.name,
+    variantOrSize: selectedWidth ? `${selectedWidth.label} (${selectedWidth.position})` : undefined,
+    color: "Custom Brand / Pantone matching",
+    specifications: {
+      "Customisation": "Bespoke Branding & Foil Stamping",
+    },
+  };
 
   // Keyboard navigation for image lightbox
   useEffect(() => {
@@ -242,6 +255,7 @@ Please share MOQ, sample lead time, and branding options.`;
                 quoteUrl={quoteUrl}
                 whatsappUrl={dynamicWhatsappUrl}
                 variant="ribbons"
+                onQuoteClick={() => setEnquiryOpen(true)}
               />
 
               {/* Supporting B2B Note */}
@@ -608,13 +622,14 @@ Please share MOQ, sample lead time, and branding options.`;
                 </div>
 
                 <div className="pt-4 flex items-center gap-4">
-                  <Link
-                    href={quoteUrl}
-                    className="inline-flex items-center gap-2.5 rounded-xl px-6 py-3.5 text-xs tracking-[0.2em] font-bold bg-[#0F2744] text-[#FAF8F5] hover:bg-[#C7A86A] hover:text-[#0F2744] transition-all duration-300"
+                  <button
+                    type="button"
+                    onClick={() => setEnquiryOpen(true)}
+                    className="inline-flex items-center gap-2.5 rounded-xl px-6 py-3.5 text-xs tracking-[0.2em] font-bold bg-[#0F2744] text-[#FAF8F5] hover:bg-[#C7A86A] hover:text-[#0F2744] transition-all duration-300 cursor-pointer"
                   >
                     <span>REQUEST BRANDING PROOFS</span>
                     <ArrowRight className="h-4 w-4" />
-                  </Link>
+                  </button>
                 </div>
               </div>
 
@@ -697,13 +712,14 @@ Please share MOQ, sample lead time, and branding options.`;
               Contact our bespoke packaging specialists to request fabric swatches, pre-production digital proofs, and custom volume pricing tailored to your brand.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Link
-                href={quoteUrl}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 rounded-xl px-8 py-4 text-xs tracking-[0.22em] font-bold bg-[#C7A86A] text-[#0F2744] hover:bg-[#FAF8F5] transition-all duration-300 shadow-lg"
+              <button
+                type="button"
+                onClick={() => setEnquiryOpen(true)}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 rounded-xl px-8 py-4 text-xs tracking-[0.22em] font-bold bg-[#C7A86A] text-[#0F2744] hover:bg-[#FAF8F5] transition-all duration-300 shadow-lg cursor-pointer"
               >
                 <span>REQUEST A FORMAL QUOTE</span>
                 <ArrowRight className="h-4 w-4" />
-              </Link>
+              </button>
               <a
                 href={dynamicWhatsappUrl}
                 target="_blank"
@@ -843,6 +859,14 @@ Please share MOQ, sample lead time, and branding options.`;
 
       {/* FOOTER */}
       <SiteFooter />
+
+      {/* ENQUIRY MODAL */}
+      {enquiryOpen && (
+        <EnquiryModal
+          onClose={() => setEnquiryOpen(false)}
+          product={productEnquiryData}
+        />
+      )}
     </div>
   );
 }

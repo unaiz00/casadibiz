@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import * as Lucide from "lucide-react";
 import { SiteHeader, SiteFooter, Breadcrumbs } from "@/components/site-chrome";
+import { EnquiryModal } from "@/components/EnquiryModal";
 
 // Helper to resolve icon components from lucide-react dynamically
 const getIcon = (name: string): React.ComponentType<{ className?: string }> => {
@@ -48,8 +49,15 @@ export default function SubCategoryDetailClient({
   ctaText,
   included,
 }: SubCategoryDetailClientProps) {
+  const [enquiryOpen, setEnquiryOpen] = useState(false);
   const [lightbox, setLightbox] = useState<number | null>(null);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+
+  const productEnquiryData = {
+    productName: category.title,
+    category: categoryPath === "gifting" ? "Gifting Essentials" : "Collections",
+    material: customizations?.find((c) => c.title.toLowerCase().includes("material"))?.desc || undefined,
+  };
 
   useEffect(() => {
     if (lightbox === null) return;
@@ -85,9 +93,13 @@ export default function SubCategoryDetailClient({
               <p className="mt-5 text-sm sm:text-lg text-cream/85 max-w-xl leading-relaxed">
                 {category.short}
               </p>
-              <a href="#quote" className="btn-gold btn-gold-hover mt-8 inline-flex items-center gap-3 rounded-full px-7 sm:px-9 py-3.5 sm:py-4 text-[11px] sm:text-xs tracking-[0.28em] font-semibold bg-gold text-navy">
+              <button
+                type="button"
+                onClick={() => setEnquiryOpen(true)}
+                className="btn-gold btn-gold-hover mt-8 inline-flex items-center gap-3 rounded-full px-7 sm:px-9 py-3.5 sm:py-4 text-[11px] sm:text-xs tracking-[0.28em] font-semibold bg-gold text-navy cursor-pointer"
+              >
                 REQUEST A QUOTE <Lucide.ArrowRight className="h-4 w-4" />
-              </a>
+              </button>
             </div>
           </div>
         </section>
@@ -266,7 +278,7 @@ export default function SubCategoryDetailClient({
 
         {/* FINAL CTA */}
         <section id="quote" className="w-full">
-          <div className="relative overflow-hidden bg-navy">
+          <div className="relative overflow-hidden bg-[#0F2744]">
             <div className="mx-auto max-w-4xl px-5 sm:px-8 py-16 sm:py-24 text-center">
               <p className="text-[11px] tracking-[0.32em] text-gold font-medium mb-5">{ctaText.eyebrow}</p>
               <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-cream leading-tight">
@@ -276,10 +288,14 @@ export default function SubCategoryDetailClient({
                 {ctaText.desc}
               </p>
               <div className="mt-10 flex flex-wrap justify-center gap-4">
-                <a href="#quote" className="btn-gold btn-gold-hover inline-flex items-center gap-3 rounded-full px-8 py-4 text-xs tracking-[0.28em] font-semibold bg-gold text-navy">
+                <button
+                  type="button"
+                  onClick={() => setEnquiryOpen(true)}
+                  className="btn-gold btn-gold-hover inline-flex items-center gap-3 rounded-full px-8 py-4 text-xs tracking-[0.28em] font-semibold bg-gold text-[#0F2744] cursor-pointer"
+                >
                   REQUEST A QUOTE <Lucide.ArrowRight className="h-4 w-4" />
-                </a>
-                <Link href="/contact" className="inline-flex items-center gap-3 rounded-full px-8 py-4 text-xs tracking-[0.28em] font-medium border border-gold/60 text-cream hover:bg-gold hover:text-navy transition">
+                </button>
+                <Link href="/contact" className="inline-flex items-center gap-3 rounded-full px-8 py-4 text-xs tracking-[0.28em] font-medium border border-gold/60 text-cream hover:bg-gold hover:text-[#0F2744] transition">
                   CONTACT US
                 </Link>
               </div>
@@ -318,7 +334,7 @@ export default function SubCategoryDetailClient({
       {/* LIGHTBOX */}
       {lightbox !== null && (
         <div
-          className="fixed inset-0 z-[100] bg-navy/95 backdrop-blur-sm flex items-center justify-center p-4 animate-fade-up"
+          className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-sm flex items-center justify-center p-4 animate-fade-up"
           onClick={() => setLightbox(null)}
         >
           <button
@@ -349,6 +365,14 @@ export default function SubCategoryDetailClient({
             <Lucide.ChevronRight className="h-5 w-5" />
           </button>
         </div>
+      )}
+
+      {/* ENQUIRY MODAL */}
+      {enquiryOpen && (
+        <EnquiryModal
+          onClose={() => setEnquiryOpen(false)}
+          product={productEnquiryData}
+        />
       )}
     </div>
   );

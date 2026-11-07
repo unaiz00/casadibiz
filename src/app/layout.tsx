@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
 import { getSiteUrl, isPreviewDeployment } from '@/lib/site-config';
 import '../styles.css';
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/next";
 
 const manrope = localFont({
     src: [
@@ -61,6 +61,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
     themeColor: '#0F2744',
+    colorScheme: 'light',
 };
 
 export default function RootLayout({
@@ -69,8 +70,12 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="en" className={manrope.variable}>
-            <body>{children}
+        <html lang="en" className={manrope.variable} suppressHydrationWarning>
+            <head>
+                <meta name="color-scheme" content="light" />
+            </head>
+            <body>
+                {children}
                 <Analytics />
             </body>
         </html>
