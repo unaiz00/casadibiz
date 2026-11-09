@@ -40,7 +40,7 @@ export default function AboutPage() {
           <div className="w-full max-w-[1200px] mx-auto px-6">
             <div className="relative h-[320px] sm:h-[450px] lg:h-[580px] w-full rounded-lg overflow-hidden animate-hero-image-luxe">
               <Image
-                src="/assets/about1.png"
+                src="/assets/about1.webp"
                 alt="Bespoke luxury packaging campaign"
                 fill
                 priority

@@ -84,7 +84,7 @@ export function BrandPhilosophy() {
               className="relative w-full aspect-[4/3] sm:aspect-[16/10] lg:aspect-[1.25] overflow-hidden rounded-[24px_64px_64px_8px] lg:rounded-[32px_120px_120px_12px]"
             >
               <img
-                src="/assets/about2.png"
+                src="/assets/about2.webp"
                 alt="Bespoke luxury custom packaging experience"
                 width={1122}
                 height={1402}

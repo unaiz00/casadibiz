@@ -36,12 +36,15 @@ export function SiteFooter() {
 
   return (
     <footer className="w-full bg-ivory text-navy border-t border-border-luxe/60 transition-colors duration-200">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 xl:grid-cols-12 gap-8 md:gap-y-10 md:gap-x-10 lg:gap-x-12 xl:gap-8">
+      <div
+        className="mx-auto max-w-[1480px] py-10 sm:py-12"
+        style={{ paddingInline: "clamp(24px, 4vw, 64px)" }}
+      >
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.35fr_1fr_1.15fr_0.8fr_1fr] gap-8 md:gap-y-10 lg:gap-x-8 xl:gap-x-10 2xl:gap-x-12">
           {/* 1. BRAND SECTION (Wider, left-aligned on desktop; full-width on tablet) */}
-          <div className="sm:col-span-2 md:col-span-12 xl:col-span-4 space-y-4">
+          <div className="sm:col-span-2 lg:col-span-1 space-y-4">
             <Logo />
-            <p className="text-xs sm:text-sm text-muted-luxe leading-relaxed max-w-sm md:max-w-xl xl:max-w-sm">
+            <p className="text-xs sm:text-sm text-muted-luxe leading-relaxed max-w-sm sm:max-w-md lg:max-w-xs xl:max-w-sm">
               Luxury packaging and gifting solutions crafted to perfection for premium brands worldwide.
             </p>
             {/* Social Icons */}
@@ -61,8 +64,8 @@ export function SiteFooter() {
             </div>
           </div>
 
-          {/* 2. CONTACT SECTION (Tablet: Row 1 col 1; Desktop: col 2) */}
-          <div className="md:col-span-6 xl:col-span-2">
+          {/* 2. CONTACT SECTION */}
+          <div className="sm:col-span-1 lg:col-span-1">
             <h4 className="text-[11px] tracking-[0.28em] font-semibold text-gold uppercase mb-4">
               CONTACT
             </h4>
@@ -99,8 +102,8 @@ export function SiteFooter() {
             </ul>
           </div>
 
-          {/* 3. PRODUCTS SECTION (Tablet: Row 1 col 2; Desktop: col 3) */}
-          <div className="md:col-span-6 xl:col-span-2">
+          {/* 3. PRODUCTS SECTION */}
+          <div className="sm:col-span-1 lg:col-span-1">
             <h4 className="text-[11px] tracking-[0.28em] font-semibold text-gold uppercase mb-4">
               PRODUCTS
             </h4>
@@ -118,8 +121,8 @@ export function SiteFooter() {
             </ul>
           </div>
 
-          {/* 4. COMPANY SECTION (Tablet: Row 2 col 1; Desktop: col 4) */}
-          <div className="md:col-span-6 xl:col-span-2">
+          {/* 4. COMPANY SECTION */}
+          <div className="sm:col-span-1 lg:col-span-1">
             <h4 className="text-[11px] tracking-[0.28em] font-semibold text-gold uppercase mb-4">
               COMPANY
             </h4>
@@ -137,8 +140,8 @@ export function SiteFooter() {
             </ul>
           </div>
 
-          {/* 5. HELP SECTION (Tablet: Row 2 col 2; Desktop: col 5) */}
-          <div className="md:col-span-6 xl:col-span-2">
+          {/* 5. HELP SECTION */}
+          <div className="sm:col-span-1 lg:col-span-1">
             <h4 className="text-[11px] tracking-[0.28em] font-semibold text-gold uppercase mb-4">
               HELP
             </h4>
@@ -160,7 +163,10 @@ export function SiteFooter() {
 
       {/* COPYRIGHT SECTION */}
       <div className="bg-[#0F2744] text-gold border-t border-[#C7A86A]/10">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4 text-center text-xs tracking-wider text-gold">
+        <div
+          className="mx-auto max-w-[1480px] py-4 text-center text-xs tracking-wider text-gold"
+          style={{ paddingInline: "clamp(24px, 4vw, 64px)" }}
+        >
           © CASA DI BIZ. All Rights Reserved.
         </div>
       </div>

@@ -123,10 +123,20 @@ export default function ContactPage() {
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
 
   useEffect(() => {
+    const enquiryParam = searchParams.get("enquiry");
+    const windowEnquiry =
+      typeof window !== "undefined"
+        ? new URLSearchParams(window.location.search).get("enquiry")
+        : null;
+
+    if (enquiryParam === "open" || windowEnquiry === "open") {
+      setFormOpen(true);
+    }
+
     if (typeof window !== "undefined") {
       const params = new URLSearchParams(window.location.search);
-      const sizeParam = params.get("size");
-      const productParam = params.get("product");
+      const sizeParam = params.get("size") || searchParams.get("size");
+      const productParam = params.get("product") || searchParams.get("product");
 
       if (sizeParam || productParam) {
         setFormData((prev) => ({
@@ -135,12 +145,14 @@ export default function ContactPage() {
           bagType: productParam === "Kraft Bag" ? "Paper Bags" : prev.bagType,
           requirements: [
             sizeParam ? `Size specification: ${sizeParam}` : "",
-            productParam ? `Product: ${productParam}` : ""
-          ].filter(Boolean).join("\n")
+            productParam ? `Product: ${productParam}` : "",
+          ]
+            .filter(Boolean)
+            .join("\n"),
         }));
       }
     }
-  }, []);
+  }, [searchParams]);
 
   const handleOnPageSubmit = (e: React.FormEvent) => {
     e.preventDefault();

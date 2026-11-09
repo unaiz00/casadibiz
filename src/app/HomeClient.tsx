@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { SiteHeader, SiteFooter } from "@/components/site-chrome";
 import CollectionsGrid from "@/components/CollectionsGrid";
 import OrderingProcess from "@/components/OrderingProcess";
+import ProblemSolution from "@/components/ProblemSolution";
 import CategoriesShowcase from "@/components/CategoriesShowcase";
 import HomeCTA from "@/components/HomeCTA";
 
@@ -136,29 +137,35 @@ function Hero() {
 function Featured() {
   return (
     <section className="w-full">
-      <div className="relative min-h-[60vh] sm:min-h-[65vh] md:min-h-[520px] lg:min-h-[75vh] xl:min-h-[80vh] overflow-hidden flex items-center justify-center p-6 sm:p-10 md:p-12 lg:p-16">
+      <div className="relative min-h-[60vh] sm:min-h-[65vh] md:min-h-[520px] lg:min-h-[75vh] xl:min-h-[80vh] overflow-hidden flex items-center">
 
         <img
           src="/assets/imsec2.jpeg"
           alt="Luxury jewelry packaging with ring box, velvet pouch and shopping bag"
           width={1408} height={1104} loading="lazy"
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full object-cover object-right sm:object-center"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-navy/85 via-navy/60 to-navy/30" />
+        <div className="absolute inset-0 bg-gradient-to-r from-navy/90 via-navy/65 to-navy/25 sm:from-navy/85 sm:via-navy/60 sm:to-navy/20" />
 
-        <div className="relative z-10 text-center max-w-3xl">
-          <p className="text-[11px] tracking-[0.32em] text-gold font-medium mb-4 sm:mb-6">FEATURED COLLECTION</p>
-          <h2 className="font-display text-4xl sm:text-5xl md:text-[54px] lg:text-7xl text-[#F6F0E8] leading-tight">
-            Luxury Jewelry<br />Packaging
-          </h2>
-          <p className="text-[#FAF8F5] italic font-display text-lg sm:text-xl mt-4 sm:mt-6">Minimal. Elegant. Memorable.</p>
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-8 py-12 sm:py-16 md:py-20">
+          <div className="w-full max-w-md sm:max-w-lg lg:max-w-[42%] text-left flex flex-col items-start">
+            <p className="text-[11px] sm:text-xs tracking-[0.32em] text-gold font-medium mb-3 sm:mb-4 uppercase text-left">
+              FEATURED COLLECTION
+            </p>
+            <h2 className="font-display text-3xl xs:text-4xl sm:text-5xl md:text-[52px] lg:text-6xl xl:text-7xl text-[#F6F0E8] leading-tight text-left">
+              Luxury Jewelry<br />Packaging
+            </h2>
+            <p className="text-[#FAF8F5] italic font-display text-base sm:text-lg md:text-xl mt-3 sm:mt-5 text-left">
+              Minimal. Elegant. Memorable.
+            </p>
 
-          <Link
-            href="/collections"
-            className="mt-6 sm:mt-8 inline-flex items-center gap-3 rounded-md bg-gradient-to-r from-[#d9bd85] to-[#c8a15a] text-cream px-6 sm:px-7 py-3 sm:py-3.5 text-xs tracking-[0.28em] font-medium hover:-translate-y-0.5 active:translate-y-0 transition duration-200"
-          >
-            VIEW COLLECTION <ArrowRight className="h-4 w-4" />
-          </Link>
+            <Link
+              href="/collections"
+              className="mt-6 sm:mt-8 inline-flex items-center gap-3 rounded-md bg-gradient-to-r from-[#d9bd85] to-[#c8a15a] text-cream px-6 sm:px-7 py-3 sm:py-3.5 text-xs tracking-[0.28em] font-medium hover:-translate-y-0.5 active:translate-y-0 transition duration-200"
+            >
+              VIEW COLLECTION <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
         </div>
       </div>
     </section>
@@ -254,6 +261,7 @@ export default function HomeClient() {
         <CategoriesShowcase />
         <Featured />
         <OrderingProcess />
+        <ProblemSolution />
         <CollectionsGrid />
         <HomeFAQ />
         <HomeCTA />
