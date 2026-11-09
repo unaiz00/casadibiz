@@ -10,7 +10,6 @@ import { useEffect, useState } from "react";
 import { SiteHeader, SiteFooter } from "@/components/site-chrome";
 import CollectionsGrid from "@/components/CollectionsGrid";
 import OrderingProcess from "@/components/OrderingProcess";
-import ProblemSolution from "@/components/ProblemSolution";
 import CategoriesShowcase from "@/components/CategoriesShowcase";
 import HomeCTA from "@/components/HomeCTA";
 
@@ -105,8 +104,8 @@ function Hero() {
                   tabIndex={i === 0 ? 0 : -1}
                   aria-hidden={i !== 0}
                   className={`absolute inset-0 inline-flex items-center justify-center gap-2 rounded-full w-full h-full text-[11px] xs:text-xs tracking-[0.25em] font-semibold bg-[#C7A86A] text-[#0F2744] hover:bg-[#FAF8F5] hover:text-[#0F2744] active:scale-95 transition-all duration-500 ease-in-out cursor-pointer shadow-md ${i === 0
-                      ? "opacity-100 pointer-events-auto scale-100"
-                      : "opacity-0 pointer-events-none scale-95"
+                    ? "opacity-100 pointer-events-auto scale-100"
+                    : "opacity-0 pointer-events-none scale-95"
                     }`}
                 >
                   EXPLORE NOW <ArrowRight className="h-3.5 w-3.5" />
@@ -118,8 +117,8 @@ function Hero() {
                   tabIndex={i === 1 ? 0 : -1}
                   aria-hidden={i !== 1}
                   className={`absolute inset-0 inline-flex items-center justify-center gap-2 rounded-full w-full h-full text-[11px] xs:text-xs tracking-[0.25em] font-semibold bg-[#FAF8F5] text-[#0F2744] border border-[#C7A86A] hover:bg-[#F6F0E8] active:bg-[#F6F0E8] active:scale-95 transition-all duration-500 ease-in-out cursor-pointer shadow-md ${i === 1
-                      ? "opacity-100 pointer-events-auto scale-100"
-                      : "opacity-0 pointer-events-none scale-95"
+                    ? "opacity-100 pointer-events-auto scale-100"
+                    : "opacity-0 pointer-events-none scale-95"
                     }`}
                 >
                   CUSTOM INQUIRY <ArrowRight className="h-3.5 w-3.5" />
@@ -261,7 +260,6 @@ export default function HomeClient() {
         <CategoriesShowcase />
         <Featured />
         <OrderingProcess />
-        <ProblemSolution />
         <CollectionsGrid />
         <HomeFAQ />
         <HomeCTA />
