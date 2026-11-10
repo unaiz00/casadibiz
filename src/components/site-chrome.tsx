@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
-import { Menu, X, ChevronDown, Instagram, Mail, Phone, MapPin, MessageCircle } from "lucide-react";
+import { Menu, X, ChevronDown, Instagram, Mail, Phone, MapPin } from "lucide-react";
+import { SiWhatsapp } from "react-icons/si";
 
 export function Logo({ className = "" }: { className?: string }) {
   return (
@@ -181,7 +182,7 @@ export function SiteHeader() {
 
           {/* Bottom Sheet */}
           <div
-            className={`relative z-10 w-full max-w-lg mx-auto bg-ivory rounded-t-[24px] border-t border-x border-border-luxe/70 shadow-[0_-12px_40px_rgba(0,0,0,0.18)] transition-transform duration-350 ease-out transform max-h-[75vh] flex flex-col ${isOpenVisible ? "translate-y-0" : "translate-y-full"
+            className={`relative z-10 w-full max-w-lg mx-auto bg-ivory rounded-t-[24px] border-t border-x border-border-luxe/70 shadow-[0_-12px_40px_rgba(0,0,0,0.18)] transition-transform duration-350 ease-out transform max-h-[85vh] flex flex-col ${isOpenVisible ? "translate-y-0" : "translate-y-full"
               }`}
             role="dialog"
             aria-modal="true"
@@ -198,7 +199,7 @@ export function SiteHeader() {
             </button>
 
             {/* Scrollable Sheet Content */}
-            <div className="overflow-y-auto overscroll-contain px-6 pt-6 pb-8 space-y-5">
+            <div className="overflow-y-auto overscroll-contain px-6 pt-5 pb-6 space-y-4">
               <nav className="flex flex-col divide-y divide-border-luxe/50">
                 {NAV_LINKS.map((l) =>
                   l.hasChevron ? (
@@ -207,7 +208,7 @@ export function SiteHeader() {
                         type="button"
                         aria-expanded={mobileProductsOpen}
                         onClick={() => setMobileProductsOpen((v) => !v)}
-                        className="w-full flex items-center justify-between py-3.5 text-base tracking-wide text-navy hover:text-gold transition font-medium"
+                        className="w-full flex items-center justify-between py-3 text-base tracking-wide text-navy hover:text-gold transition font-medium"
                       >
                         <span>{l.label}</span>
                         <ChevronDown
@@ -235,7 +236,7 @@ export function SiteHeader() {
                       key={l.label}
                       href={l.href}
                       onClick={closeMobileMenu}
-                      className="py-3.5 text-base tracking-wide text-navy hover:text-gold transition font-medium"
+                      className="py-3 text-base tracking-wide text-navy hover:text-gold transition font-medium"
                     >
                       {l.label}
                     </Link>
@@ -244,7 +245,7 @@ export function SiteHeader() {
               </nav>
 
               {/* Contact Information & Socials */}
-              <div className="pt-5 border-t border-border-luxe/60 space-y-3 text-sm text-navy/80">
+              <div className="pt-4 border-t border-border-luxe/60 space-y-2.5 text-sm text-navy/80">
                 <a
                   href="tel:+971563374248"
                   className="flex items-center gap-2.5 hover:text-gold transition"
@@ -270,13 +271,13 @@ export function SiteHeader() {
                 </a>
 
                 {/* Social Icons */}
-                <div className="flex items-center gap-3 pt-2">
+                <div className="flex items-center gap-3 pt-1">
                   <a
                     href="https://www.instagram.com/casadibiz?cplk=cnE5NjQ3ZHRzMHNl"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Instagram"
-                    className="h-9 w-9 rounded-full border border-gold/40 flex items-center justify-center text-gold hover:bg-gold hover:text-cream transition"
+                    className="h-9 w-9 rounded-full border border-gold/40 flex items-center justify-center text-gold hover:bg-gold hover:text-cream transition shrink-0"
                   >
                     <Instagram className="h-4 w-4" />
                   </a>
@@ -285,10 +286,21 @@ export function SiteHeader() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="WhatsApp"
-                    className="h-9 w-9 rounded-full border border-gold/40 flex items-center justify-center text-gold hover:bg-gold hover:text-cream transition"
+                    className="h-9 w-9 rounded-full border border-gold/40 flex items-center justify-center text-gold hover:bg-gold hover:text-cream transition shrink-0"
                   >
-                    <MessageCircle className="h-4 w-4" />
+                    <SiWhatsapp className="h-4 w-4" />
                   </a>
+                </div>
+
+                {/* Custom Inquiry Action Button */}
+                <div className="pt-2">
+                  <Link
+                    href="/contact?enquiry=open"
+                    onClick={closeMobileMenu}
+                    className="w-full h-11 inline-flex items-center justify-center px-4 text-xs font-semibold tracking-[0.14em] uppercase rounded-[6px] bg-[#0F2744] text-[#FAF8F5] border border-[#C7A86A]/30 hover:bg-[#C7A86A] hover:text-[#0F2744] hover:border-[#C7A86A] transition-all duration-300 shadow-xs cursor-pointer active:scale-[0.98]"
+                  >
+                    Custom Inquiry
+                  </Link>
                 </div>
               </div>
             </div>

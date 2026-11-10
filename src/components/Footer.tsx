@@ -23,8 +23,6 @@ export function SiteFooter() {
 
   const help: FooterItem[] = [
     { label: "FAQs", to: "/contact" },
-    { label: "Shipping & Delivery", to: "/contact" },
-    { label: "Returns & Exchange", to: "/contact" },
     { label: "Terms & Conditions", to: "/terms-and-conditions" },
     { label: "Privacy Policy", to: "/privacy-policy" },
   ];
