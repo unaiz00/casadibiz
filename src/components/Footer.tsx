@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Instagram, MessageCircle, Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, Instagram } from "lucide-react";
+import { SiWhatsapp } from "react-icons/si";
 import { Logo } from "./site-chrome";
 
 type FooterItem = { label: string; to?: string; href?: string };
@@ -28,12 +29,6 @@ export function SiteFooter() {
     { label: "Privacy Policy", to: "/privacy-policy" },
   ];
 
-  const socials: { Icon: typeof Instagram; href: string; label: string }[] = [
-    { Icon: Instagram, href: "https://www.instagram.com/casadibiz?cplk=cnE5NjQ3ZHRzMHNl", label: "Instagram" },
-    { Icon: MessageCircle, href: "https://wa.me/+971563374248", label: "WhatsApp" },
-    { Icon: Mail, href: "mailto:info@casadibiz.com", label: "Email" },
-  ];
-
   return (
     <footer className="w-full bg-ivory text-navy border-t border-border-luxe/60 transition-colors duration-200">
       <div
@@ -44,23 +39,31 @@ export function SiteFooter() {
           {/* 1. BRAND SECTION (Wider, left-aligned on desktop; full-width on tablet) */}
           <div className="sm:col-span-2 lg:col-span-1 space-y-4">
             <Logo />
-            <p className="text-xs sm:text-sm text-muted-luxe leading-relaxed max-w-sm sm:max-w-md lg:max-w-xs xl:max-w-sm">
-              Luxury packaging and gifting solutions crafted to perfection for premium brands worldwide.
+            <p className="text-xs sm:text-sm text-navy/80 leading-relaxed">
+              Luxury isn&rsquo;t just inside.
+              <br />
+              It starts with the packaging.
             </p>
             {/* Social Icons */}
             <div className="flex items-center gap-2.5 pt-1">
-              {socials.map(({ Icon, href, label }) => (
-                <a
-                  key={label}
-                  href={href}
-                  aria-label={label}
-                  target={href.startsWith("http") ? "_blank" : undefined}
-                  rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="h-8 w-8 rounded-full border border-gold/40 grid place-items-center text-gold hover:bg-gold hover:text-cream transition-colors duration-200"
-                >
-                  <Icon className="h-3.5 w-3.5" />
-                </a>
-              ))}
+              <a
+                href="https://www.instagram.com/casadibiz?cplk=cnE5NjQ3ZHRzMHNl"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="h-8 w-8 rounded-full border border-gold/40 flex items-center justify-center text-gold hover:bg-gold hover:text-cream transition-colors duration-200"
+              >
+                <Instagram className="h-3.5 w-3.5" />
+              </a>
+              <a
+                href="https://wa.me/+971563374248"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="WhatsApp"
+                className="h-8 w-8 rounded-full border border-gold/40 flex items-center justify-center text-gold hover:bg-gold hover:text-cream transition-colors duration-200"
+              >
+                <SiWhatsapp className="h-3.5 w-3.5" />
+              </a>
             </div>
           </div>
 
@@ -76,7 +79,7 @@ export function SiteFooter() {
                   className="inline-flex items-center gap-2 hover:text-gold transition-colors"
                 >
                   <Phone className="h-3.5 w-3.5 text-gold shrink-0" />
-                  <span>+971 563374248</span>
+                  <span>+971 56 337 4248</span>
                 </a>
               </li>
               <li>

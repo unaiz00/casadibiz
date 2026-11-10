@@ -76,7 +76,13 @@ const FINISHES = [
 ];
 
 const sub = "seasonal-collection";
-const c = COLLECTION_CATEGORIES[sub];
+const c = COLLECTION_CATEGORIES[sub] || {
+  title: "Seasonal Collection",
+  short: "Limited-run packaging for festive drops and campaign moments.",
+  long: "Seasonal packaging programmes — festive prints, campaign colourways and limited-edition finishes produced to a fixed calendar so your drops always land on time.",
+  image: "/assets/imagesec.jpeg",
+  href: "/boxes",
+};
 
 export const metadata: Metadata = {
   title: `${c.title} — CASA DI BIZ`,

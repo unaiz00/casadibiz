@@ -42,13 +42,6 @@ export const COLLECTION_CATEGORIES: Record<
     image: "/assets/flat_matte_finish_paperwrap.jpeg",
     href: "/wraps",
   },
-  "seasonal-collection": {
-    title: "Seasonal Collection",
-    short: "Limited-run packaging for festive drops and campaign moments.",
-    long: "Seasonal packaging programmes — festive prints, campaign colourways and limited-edition finishes produced to a fixed calendar so your drops always land on time.",
-    image: "/assets/imagesec.jpeg",
-    href: "/boxes",
-  },
   "pouches": {
     title: "Fabric Pouches",
     short: "Ultra-soft velvet, satin, and suede pouches designed for cherished pieces.",
@@ -68,7 +61,7 @@ export const COLLECTION_CATEGORIES: Record<
 export const metadata: Metadata = {
   title: "Collections — Curated Luxury Packaging Suites | CASA DI BIZ",
   description:
-    "Explore CASA DI BIZ luxury packaging collections — Paper Bags, Jewellery Boxes, Jewellery Storage & Travel Cases, Corporate Gift Boxes, Wrapping Papers, and Seasonal suites.",
+    "Explore CASA DI BIZ luxury packaging collections — Paper Bags, Jewellery Boxes, Jewellery Storage & Travel Cases, Corporate Gift Boxes, Wrapping Papers, Fabric Pouches, and Custom Ribbons.",
   openGraph: {
     title: "Luxury Packaging Collections by CASA DI BIZ",
     description:

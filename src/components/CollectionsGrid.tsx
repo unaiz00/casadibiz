@@ -21,8 +21,8 @@ export interface CollectionItem {
 const DEFAULT_COLLECTIONS: CollectionItem[] = [
   {
     tag: "LUXURY SERIES",
-    title: "Custom Rigid Boxes",
-    desc: "Indestructible structure wrapped in fine art papers, complete with magnetic closure.",
+    title: "Signature Boxes",
+    desc: "Custom-designed boxes with carefully selected materials, refined finishes and personalised branding to reflect your brand identity",
     buttonText: "EXPLORE RANGE",
     image: "/assets/rigidd.jpeg",
     bgColor: "bg-[#0F2744]",
@@ -33,10 +33,10 @@ const DEFAULT_COLLECTIONS: CollectionItem[] = [
   },
   {
     tag: "BOUTIQUE SERIES",
-    title: "Boutique Paper Bags",
-    desc: "Heavyweight paper bags with custom cotton ribbon handles and foil-stamped branding.",
+    title: "Boutique Bags",
+    desc: "Premium paper bags with sturdy construction, quality handles and personalised branding for a refined presentation",
     buttonText: "DISCOVER",
-    image: "/assets/allimages.jpeg",
+    image: "/assets/bags/special2.jpeg",
     bgColor: "bg-[#C7A86A]",
     textColor: "text-[#0F2744]",
     btnBg: "bg-[#0F2744] hover:bg-[#1a385c]",
@@ -45,10 +45,10 @@ const DEFAULT_COLLECTIONS: CollectionItem[] = [
   },
   {
     tag: "ELEGANT SERIES",
-    title: "Pouches & Wraps",
-    desc: "Ultra-soft velvet pouches and silk wrapping paper to protect your finest treasures.",
+    title: "Pouches & Wrapping Paper",
+    desc: "Customised pouches and wrapping paper, thoughtfully finished to complement your products and enhance the unboxing experience.",
     buttonText: "VIEW ALL",
-    image: "/assets/giftim.jpeg",
+    image: "/assets/imsecc5.jpeg",
     bgColor: "bg-[#F6F0E8] border border-[#C7A86A]/20",
     textColor: "text-[#0F2744]",
     btnBg: "bg-[#0F2744] hover:bg-[#1a385c]",
@@ -57,10 +57,10 @@ const DEFAULT_COLLECTIONS: CollectionItem[] = [
   },
   {
     tag: "SIGNATURE SERIES",
-    title: "Gifting Essentials",
-    desc: "Custom printed satin ribbons and greeting cards to complete the unwrapping experience.",
+    title: "The Curated Collections",
+    desc: "Co-ordinated packaging, satin ribbons and greeting cards, brought together to create a consistent and memorable brand experience",
     buttonText: "EXPLORE RANGE",
-    image: "/assets/allllllimm.jpeg",
+    image: "/assets/allimages.jpeg",
     bgColor: "bg-[#0F2744]",
     textColor: "text-[#F6F0E8]",
     btnBg: "bg-[#C7A86A] hover:bg-[#b09156]",
@@ -73,13 +73,14 @@ interface CollectionsGridProps {
   title?: string;
   limit?: number;
   items?: CollectionItem[];
+  className?: string;
 }
 
-export default function CollectionsGrid({ title, limit, items }: CollectionsGridProps) {
+export default function CollectionsGrid({ title, limit, items, className = "" }: CollectionsGridProps) {
   const displayItems = (items || DEFAULT_COLLECTIONS).slice(0, limit);
 
   return (
-    <section className="py-16 sm:py-20 md:py-20 lg:py-24 bg-white">
+    <section className={`pt-4 sm:pt-5 md:pt-5 lg:pt-6 pb-16 sm:pb-20 md:pb-20 lg:pb-24 bg-white ${className}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
         {title !== null && (
           <div className="mb-10 sm:mb-12">

@@ -1,95 +1,62 @@
-"use client";
+import React from "react";
+import Image from "next/image";
 
-import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
-
-export function CraftOfPackaging() {
+export function CraftOfPackaging({ className = "" }: { className?: string }) {
   return (
-    <section className="w-full bg-white py-12 sm:py-16 md:py-20 lg:py-24">
-      <div className="mx-auto max-w-[1200px] px-5 sm:px-8 lg:px-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 md:gap-8 lg:gap-12 items-start">
-          <div className="lg:col-span-7 flex flex-col">
-            <div className="overflow-hidden rounded-[10px] shadow-[0_16px_40px_-20px_rgba(17,17,17,0.2)] group cursor-pointer">
-              <img
-                src="/assets/imagesec.jpeg"
-                alt="Luxury magnetic packaging"
-                width={1402}
-                height={1122}
-                loading="lazy"
-                className="w-full h-[260px] sm:h-[320px] md:h-[280px] lg:h-[440px] object-cover transition-transform duration-[400ms] ease-out group-hover:scale-[1.03]"
-              />
-            </div>
-            <h2 className="mt-6 sm:mt-8 font-display text-[32px] sm:text-[38px] md:text-[36px] lg:text-[52px] font-medium text-[#111] leading-[1.05] lg:leading-[0.98] tracking-[-1px]">
+    <section className={`w-full bg-white pt-10 sm:pt-12 lg:pt-14 pb-4 sm:pb-5 lg:pb-6 overflow-hidden border-t border-[#C7A86A]/20 ${className}`}>
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="flex flex-col lg:grid lg:grid-cols-[29%_42%_29%] items-center gap-8 sm:gap-10 lg:gap-0">
+          {/* LEFT COLUMN — THE CRAFT OF PACKAGING (~29%) */}
+          <div className="w-full text-left flex flex-col justify-center lg:border-r lg:border-[#C7A86A]/25 lg:pr-8 xl:pr-10">
+            {/* Small Accent Rule */}
+            <div className="w-7 sm:w-8 h-[1px] bg-[#C7A86A] mb-3 sm:mb-3.5" aria-hidden="true" />
+
+            {/* Left Heading (Two-line serif, 21–24px on desktop) */}
+            <h2 className="font-display font-medium text-xl sm:text-[22px] lg:text-[23px] xl:text-[24px] text-[#0F2744] tracking-[0.04em] uppercase leading-[1.2] mb-3">
               THE CRAFT OF<br />PACKAGING
             </h2>
-            <p className="mt-4 max-w-md text-[14px] leading-relaxed text-[#777]">
-              Every package is thoughtfully designed with premium materials,
-              precision craftsmanship, and timeless elegance.
+
+            {/* Left Body Text (13–14px, comfortable line height) */}
+            <p className="font-sans text-[13px] sm:text-[13.5px] lg:text-[14px] text-[#0F2744]/80 font-normal leading-[1.65]">
+              Every detail matters. From thoughtful design and carefully selected materials to refined finishing, we create packaging that tells your brand&apos;s story.
             </p>
+          </div>
 
-            {/* Left Overlapping Images composition wrapper */}
-            <div className="relative w-full mt-6 sm:mt-8 pb-[100px] sm:pb-[110px] md:pb-[110px] lg:pb-[160px]">
-              {/* Image 1: Large primary supporting image */}
-              <div className="w-[60%] overflow-hidden rounded-[10px] shadow-[0_16px_40px_-20px_rgba(17,17,17,0.2)] group cursor-pointer">
-                <img
-                  src="/assets/boxim.jpeg"
-                  alt="Jewelry packaging set"
-                  width={1402}
-                  height={1122}
-                  loading="lazy"
-                  className="w-full h-[180px] sm:h-[210px] md:h-[190px] lg:h-[300px] object-cover transition-transform duration-[400ms] ease-out group-hover:scale-[1.03]"
-                />
-              </div>
+          {/* CENTER COLUMN — FEATURE IMAGE (~42%, 360–400px wide, ~2.1:1 landscape aspect ratio) */}
+          <div className="w-full flex items-center justify-center px-2 sm:px-4 lg:px-6">
+            <div className="relative w-full max-w-[380px] h-[170px] sm:h-[180px] lg:h-[180px] xl:h-[185px] rounded-[6px] overflow-hidden bg-[#FAF8F5] border border-[#C7A86A]/30 shadow-xs mx-auto">
+              <Image
+                src="/assets/giftim.jpeg"
+                alt="Coordinated Packaging Details"
+                fill
+                className="object-cover object-center"
+                sizes="(min-width: 1024px) 400px, 380px"
+                priority={false}
+              />
 
-              {/* Image 2: Smaller overlapping image positioned over bottom-right of Image 1 */}
-              <div className="absolute right-[5%] bottom-0 w-[46%] overflow-hidden rounded-[10px] shadow-[0_20px_50px_rgba(17,17,17,0.3)] z-10 group cursor-pointer">
-                <img
-                  src="/assets/giftim.jpeg"
-                  alt="Branded packaging details"
-                  width={1402}
-                  height={1122}
-                  loading="lazy"
-                  className="w-full h-[140px] sm:h-[160px] md:h-[150px] lg:h-[220px] object-cover transition-transform duration-[400ms] ease-out group-hover:scale-[1.03]"
-                />
+              {/* Translucent Dark Caption Bar across bottom */}
+              <div className="absolute inset-x-0 bottom-0 py-2.5 sm:py-3 bg-black/60 backdrop-blur-[2px] text-center z-10 pointer-events-none">
+                <p className="font-sans text-[11px] sm:text-[11.5px] text-[#FAF8F5] tracking-[0.08em] font-medium uppercase drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
+                  Coordinated Packaging Details
+                </p>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Handcrafted Ribbon Finish + Refined Editorial Text block */}
-          <div className="lg:col-span-5 flex flex-col">
-            {/* Top whitespace and ribbon image */}
-            <figure className="group cursor-pointer mt-6 sm:mt-8 md:mt-2 lg:mt-32">
-              <div className="overflow-hidden rounded-[10px] shadow-[0_10px_24px_-14px_rgba(17,17,17,0.2)]">
-                <img
-                  src="/assets/allimages.jpeg"
-                  alt="Hand-tied ribbon box"
-                  width={1535}
-                  height={1024}
-                  loading="lazy"
-                  className="w-full h-[240px] sm:h-[260px] md:h-[220px] lg:h-[320px] object-cover transition-transform duration-[400ms] ease-out group-hover:scale-[1.03]"
-                />
-              </div>
-              <figcaption className="mt-2 text-[11px] uppercase tracking-[2px] text-[#777]">
-                Handcrafted Ribbon Finish
-              </figcaption>
-            </figure>
+          {/* RIGHT COLUMN — MATERIALS THAT MATTER (~29%) */}
+          <div className="w-full text-left flex flex-col justify-center lg:border-l lg:border-[#C7A86A]/25 lg:pl-8 xl:pl-10">
+            {/* Small Accent Rule */}
+            <div className="w-7 sm:w-8 h-[1px] bg-[#C7A86A] mb-3 sm:mb-3.5" aria-hidden="true" />
 
-            {/* Whitespace before materials text block */}
-            <div className="max-w-md lg:max-w-[340px] flex flex-col items-start bg-transparent mt-10 sm:mt-12 md:mt-10 lg:mt-36 xl:mt-48 mb-8 sm:mb-12 lg:mb-0">
-              <h3 className="font-display text-xl sm:text-2xl font-medium text-navy uppercase tracking-[2px] mb-3 sm:mb-4">
-                MATERIALS THAT MATTER
-              </h3>
-              <p className="text-sm leading-relaxed text-[#555] mb-5 sm:mb-6 font-light">
-                Thoughtfully selected materials, refined finishes and considered details come together to create packaging worthy of the brand it represents.
-              </p>
-              <Link
-                href="/about"
-                className="inline-flex items-center justify-center gap-2 bg-[#0F2744] hover:bg-[#18365B] active:scale-95 text-white text-[11px] sm:text-xs tracking-[0.2em] font-semibold uppercase px-4.5 py-2.5 sm:px-5 sm:py-3 rounded-[3px] transition-all duration-300 w-fit"
-              >
-                <span>DISCOVER OUR CRAFT</span>
-                <ArrowUpRight className="h-3.5 w-3.5 text-[#C7A86A]" />
-              </Link>
-            </div>
+            {/* Right Heading (Two-line serif, 20–22px on desktop) */}
+            <h2 className="font-display font-medium text-[19px] sm:text-[20px] lg:text-[21px] xl:text-[22px] text-[#0F2744] tracking-[0.04em] uppercase leading-[1.2] mb-3">
+              MATERIALS THAT<br />MATTER
+            </h2>
+
+            {/* Right Body Text (13–14px, comfortable line height) */}
+            <p className="font-sans text-[13px] sm:text-[13.5px] lg:text-[14px] text-[#0F2744]/80 font-normal leading-[1.65]">
+              Designed to be seen. Made to be remembered. Carefully selected materials, refined finishes and considered details come together to create a lasting impression.
+            </p>
           </div>
         </div>
       </div>
@@ -99,4 +66,3 @@ export function CraftOfPackaging() {
 
 export const Statement = CraftOfPackaging;
 export default CraftOfPackaging;
-

@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { SiteHeader, SiteFooter } from "@/components/site-chrome";
 import CollectionsGrid from "@/components/CollectionsGrid";
 import OrderingProcess from "@/components/OrderingProcess";
+import CraftOfPackaging from "@/components/CraftOfPackaging";
 import CategoriesShowcase from "@/components/CategoriesShowcase";
 import HomeCTA from "@/components/HomeCTA";
 
@@ -77,13 +78,13 @@ function Hero() {
 
             {/* Heading */}
             <h1 className="animate-hero-heading-luxe font-hero-headline font-semibold text-[22px] xs:text-[25px] sm:text-[36px] md:text-[42px] lg:text-[54px] xl:text-[58px] leading-[1.2] sm:leading-[1.16] md:leading-[1.14] lg:leading-[1.12] tracking-[-0.02em] text-[#FAF8F5] mb-0 text-center sm:text-left drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)] sm:drop-shadow-none sm:max-w-[440px] md:max-w-[480px] lg:max-w-[540px] xl:max-w-[550px]">
-              <span className="block">Luxury Isn't Just Outside</span>
+              <span className="block">Luxury Isn't Just Inside</span>
               <span className="block">It Starts With the Packaging</span>
             </h1>
 
             {/* Supporting description */}
             <p className="animate-hero-support-luxe font-sans text-[12.5px] xs:text-[14px] sm:text-[15px] md:text-[16px] text-[#FAF8F5]/85 font-normal leading-relaxed sm:leading-[1.6] max-w-[290px] xs:max-w-[340px] sm:max-w-[400px] md:max-w-[430px] mt-2 xs:mt-2.5 sm:mt-4 md:mt-6 text-center sm:text-left drop-shadow-[0_1px_6px_rgba(0,0,0,0.85)] sm:drop-shadow-none">
-              Boxes, Bags & Pouches made for brands <br className="hidden xs:inline" /> People keep on the shelf.
+              Bespoke packaging & customised gifts <br className="hidden xs:inline" /> Thoughtfully crafted to reflect your brand.
             </p>
 
             {/* CTA Buttons */}
@@ -135,34 +136,43 @@ function Hero() {
 /* ---------------- Featured collection ---------------- */
 function Featured() {
   return (
-    <section className="w-full">
-      <div className="relative min-h-[60vh] sm:min-h-[65vh] md:min-h-[520px] lg:min-h-[75vh] xl:min-h-[80vh] overflow-hidden flex items-center">
+    <section className="w-full bg-[#071526]">
+      <div className="relative min-h-[350px] xs:min-h-[370px] sm:min-h-[65vh] md:min-h-[520px] lg:min-h-[75vh] xl:min-h-[80vh] overflow-hidden flex items-start sm:items-center">
 
-        <img
-          src="/assets/imsec2.jpeg"
-          alt="Luxury jewelry packaging with ring box, velvet pouch and shopping bag"
-          width={1408} height={1104} loading="lazy"
-          className="absolute inset-0 h-full w-full object-cover object-right sm:object-center"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-navy/90 via-navy/65 to-navy/25 sm:from-navy/85 sm:via-navy/60 sm:to-navy/20" />
+        {/* Responsive Background Images: Mobile dedicated ftcp.webp, Desktop imsec2.jpeg */}
+        <picture className="absolute inset-0 h-full w-full block">
+          <source media="(min-width: 640px)" srcSet="/assets/imsec2.jpeg" />
+          <source media="(max-width: 639px)" srcSet="/assets/ftcp.webp" />
+          <img
+            src="/assets/imsec2.jpeg"
+            alt="Luxury jewelry packaging with ring box, velvet pouch and shopping bag"
+            width={1672}
+            height={941}
+            loading="lazy"
+            className="h-full w-full object-cover object-right sm:object-center"
+          />
+        </picture>
 
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-8 py-12 sm:py-16 md:py-20">
-          <div className="w-full max-w-md sm:max-w-lg lg:max-w-[42%] text-left flex flex-col items-start">
-            <p className="text-[11px] sm:text-xs tracking-[0.32em] text-gold font-medium mb-3 sm:mb-4 uppercase text-left">
+        {/* Desktop Gradient Overlay preserved / subtle fade on mobile */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#071526]/85 via-[#071526]/35 to-transparent sm:from-navy/85 sm:via-navy/60 sm:to-navy/20 pointer-events-none" />
+
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-5 xs:px-6 lg:px-8 pt-5 xs:pt-6 sm:pt-0 sm:py-16 md:py-20">
+          <div className="w-full max-w-[58%] xs:max-w-[54%] sm:max-w-lg lg:max-w-[42%] text-left flex flex-col items-start">
+            <p className="text-[11px] xs:text-[12px] sm:text-xs tracking-[0.2em] xs:tracking-[0.24em] sm:tracking-[0.32em] text-gold font-medium mb-1 xs:mb-1.5 sm:mb-4 uppercase text-left">
               FEATURED COLLECTION
             </p>
-            <h2 className="font-display text-3xl xs:text-4xl sm:text-5xl md:text-[52px] lg:text-6xl xl:text-7xl text-[#F6F0E8] leading-tight text-left">
+            <h2 className="font-display text-[27px] xs:text-[28.5px] sm:text-5xl md:text-[52px] lg:text-6xl xl:text-7xl text-[#F6F0E8] leading-[1.12] xs:leading-[1.14] sm:leading-tight text-left">
               Luxury Jewelry<br />Packaging
             </h2>
-            <p className="text-[#FAF8F5] italic font-display text-base sm:text-lg md:text-xl mt-3 sm:mt-5 text-left">
+            <p className="text-[#FAF8F5] italic font-display text-[14px] xs:text-[15px] sm:text-lg md:text-xl mt-1 xs:mt-1.5 sm:mt-5 text-left">
               Minimal. Elegant. Memorable.
             </p>
 
             <Link
               href="/collections"
-              className="mt-6 sm:mt-8 inline-flex items-center gap-3 rounded-md bg-gradient-to-r from-[#d9bd85] to-[#c8a15a] text-cream px-6 sm:px-7 py-3 sm:py-3.5 text-xs tracking-[0.28em] font-medium hover:-translate-y-0.5 active:translate-y-0 transition duration-200"
+              className="mt-2.5 xs:mt-3 sm:mt-8 inline-flex items-center gap-1.5 sm:gap-3 rounded-md bg-gradient-to-r from-[#d9bd85] to-[#c8a15a] text-cream px-3.5 xs:px-4 sm:px-7 py-2 xs:py-2.5 sm:py-3.5 text-[9.5px] xs:text-[10.5px] sm:text-xs tracking-[0.2em] sm:tracking-[0.28em] font-medium hover:-translate-y-0.5 active:translate-y-0 transition duration-200"
             >
-              VIEW COLLECTION <ArrowRight className="h-4 w-4" />
+              VIEW COLLECTION <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4" />
             </Link>
           </div>
         </div>
@@ -181,10 +191,6 @@ const HOME_FAQS = [
     a: "Yes. We offer bespoke packaging solutions tailored to your brand. Customization options can include logo placement, colors, materials, textures, finishes, ribbons and other detailing to reflect your brand identity.",
   },
   {
-    q: "Can I choose the materials, colors and finishes?",
-    a: "Yes. Depending on the product, you can explore different materials, textures, colors and finishing options. Our team can help you select combinations that complement your brand's aesthetic and packaging requirements.",
-  },
-  {
     q: "Can I request a sample before placing a bulk order?",
     a: "Sample availability depends on the product and customization requirements. Contact our team to discuss sample options, associated costs and timelines before proceeding with bulk production.",
   },
@@ -196,10 +202,6 @@ const HOME_FAQS = [
     q: "How long does custom packaging production take?",
     a: "Production timelines depend on the product type, order quantity, material availability and customization complexity. An estimated timeline can be provided after reviewing and confirming your requirements.",
   },
-  {
-    q: "Do you accept international orders and provide shipping?",
-    a: "Contact our team with your destination and order requirements to confirm international shipping availability, delivery arrangements and applicable shipping costs.",
-  },
 ];
 
 function HomeFAQ() {
@@ -210,7 +212,7 @@ function HomeFAQ() {
       <div className="mx-auto max-w-7xl px-5 sm:px-8 md:px-10 lg:px-12 text-center mb-10 sm:mb-12 md:mb-14">
         <p className="text-[11px] tracking-[0.32em] text-gold font-medium mb-3 uppercase">FAQ</p>
         <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-navy leading-tight">
-          Frequently asked
+          Frequently asked Questions
         </h2>
       </div>
       <div className="mx-auto max-w-3xl px-5 sm:px-8 md:px-10 lg:px-8">
@@ -260,6 +262,7 @@ export default function HomeClient() {
         <CategoriesShowcase />
         <Featured />
         <OrderingProcess />
+        <CraftOfPackaging />
         <CollectionsGrid />
         <HomeFAQ />
         <HomeCTA />

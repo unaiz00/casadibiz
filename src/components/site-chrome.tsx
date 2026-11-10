@@ -250,7 +250,7 @@ export function SiteHeader() {
                   className="flex items-center gap-2.5 hover:text-gold transition"
                 >
                   <Phone className="h-4 w-4 text-gold shrink-0" />
-                  <span>+971 563374248</span>
+                  <span>+971 56 337 4248</span>
                 </a>
                 <a
                   href="mailto:info@casadibiz.com"

@@ -65,6 +65,24 @@ export function CategoriesShowcase() {
         className="darkreader"
         dangerouslySetInnerHTML={{
           __html: `
+            @media (min-width: 1024px) {
+              #categories .cat-item:not(:last-child)::after {
+                content: "";
+                position: absolute;
+                right: -8px;
+                top: 38px;
+                width: 1px;
+                height: 65px;
+                background-color: #0F2744;
+                pointer-events: none;
+              }
+            }
+            @media (min-width: 1280px) {
+              #categories .cat-item:not(:last-child)::after {
+                right: -12px;
+                top: 42.5px;
+              }
+            }
             html[data-darkreader-mode] #categories,
             html[data-darkreader-scheme="dark"] #categories,
             html.darkreader #categories {
@@ -90,6 +108,12 @@ export function CategoriesShowcase() {
             html.darkreader #categories img {
               filter: none !important;
             }
+            html[data-darkreader-mode] #categories .cat-item:not(:last-child)::after,
+            html[data-darkreader-scheme="dark"] #categories .cat-item:not(:last-child)::after,
+            html.darkreader #categories .cat-item:not(:last-child)::after {
+              background-color: rgba(229, 213, 181, 0.28) !important;
+              --darkreader-inline-bgcolor: rgba(229, 213, 181, 0.28) !important;
+            }
           `,
         }}
       />
@@ -101,7 +125,7 @@ export function CategoriesShowcase() {
               <Link
                 key={label}
                 href={href}
-                className={`group flex flex-col items-center gap-3 sm:gap-3.5 cursor-pointer text-center ${
+                className={`group relative cat-item flex flex-col items-center gap-3 sm:gap-3.5 cursor-pointer text-center ${
                   isLastOnMobile ? "col-start-2 sm:col-start-auto" : ""
                 }`}
               >

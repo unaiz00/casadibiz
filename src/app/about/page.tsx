@@ -67,16 +67,16 @@ export default function AboutPage() {
         {/* 5. OUR APPROACH */}
         <section className="py-20 lg:py-28 bg-ivory border-t border-border-luxe/60">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <div className="max-w-3xl mx-auto text-center mb-20 lg:mb-24">
-              <span className="text-gold text-xs uppercase tracking-[0.35em] font-semibold mb-6 block">
-                OUR APPROACH
+            <div className="max-w-3xl mx-auto text-center mb-12 lg:mb-14">
+              <span className="text-gold text-xs uppercase tracking-[0.35em] font-semibold mb-4 sm:mb-5 block">
+                HOW WE WORK
               </span>
-              <h2 className="text-4xl sm:text-5xl lg:text-[56px] lg:leading-[64px] font-serif text-navy leading-tight tracking-tight">
-                From Idea to Finished{" "}
-                <span className="italic font-serif text-gold font-normal">Experience.</span>
+              <h2 className="text-4xl sm:text-5xl lg:text-[54px] lg:leading-[62px] font-serif text-navy leading-tight tracking-tight">
+                From Vision to Packaging,<br className="hidden sm:inline" />{" "}
+                <span className="italic font-serif text-gold font-normal">Thoughtfully Delivered.</span>
               </h2>
-              <p className="font-light text-navy/75 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto font-sans mt-8">
-                From the first conversation to the final presentation, every stage is considered with purpose — ensuring the finished packaging feels unmistakably yours.
+              <p className="font-light text-navy/75 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto font-sans mt-6 sm:mt-7">
+                Every great packaging solution begins with understanding your brand. We bring together design, sourcing and customization to turn your requirements into a considered final product.
               </p>
             </div>
 
