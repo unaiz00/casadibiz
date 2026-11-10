@@ -8,7 +8,6 @@ import { ApproachRail } from "@/components/approach-rail";
 import { WhatWeCreate } from "@/components/what-we-create";
 import { WhyCasaDiBiz } from "@/components/why-casa-di-biz";
 import { BrandPhilosophy } from "@/components/brand-philosophy";
-import { AboutHeroTypewriter } from "@/components/about-hero-typewriter";
 
 
 export const metadata: Metadata = {
@@ -32,20 +31,56 @@ export default function AboutPage() {
 
       <SiteHeader />
       <main className="bg-ivory text-navy">
-        {/* 1. HERO - Centered Editorial Composition */}
-        <section className="relative overflow-hidden bg-ivory pt-20 lg:pt-28 pb-16 lg:pb-24">
-          <AboutHeroTypewriter />
+        {/* 1. HERO - Two-Column Editorial Composition */}
+        <section className="relative bg-ivory py-10 sm:py-14 lg:py-16 xl:py-20">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-[42fr_58fr] items-center gap-10 lg:gap-12 xl:gap-16">
+              {/* Left Column: Content (approx. 42% on desktop) */}
+              <div className="flex flex-col justify-center">
+                <span className="text-[#C7A86A] text-xs uppercase tracking-[0.35em] font-semibold mb-3 sm:mb-4 block">
+                  ABOUT CASA DI BIZ
+                </span>
 
-          {/* Hero Image */}
-          <div className="w-full max-w-[1200px] mx-auto px-6">
-            <div className="relative h-[320px] sm:h-[450px] lg:h-[580px] w-full rounded-lg overflow-hidden animate-hero-image-luxe">
-              <Image
-                src="/assets/about1.webp"
-                alt="Bespoke luxury packaging campaign"
-                fill
-                priority
-                className="object-cover"
-              />
+                <h1 className="font-display font-serif text-3xl xs:text-4xl sm:text-[42px] lg:text-[40px] xl:text-[46px] 2xl:text-[50px] text-[#0F2744] leading-[1.16] tracking-tight mb-5 sm:mb-6 font-normal">
+                  Packaging Designed Around Your{" "}
+                  <span className="italic text-[#C7A86A] font-serif font-normal">
+                    Brand.
+                  </span>
+                </h1>
+
+                <p className="font-sans font-light text-navy/80 text-[14.5px] sm:text-base leading-relaxed mb-6 sm:mb-7 max-w-xl">
+                  We bring together thoughtful design, quality materials and
+                  trusted manufacturing partners to create packaging that reflects
+                  your brand. From custom boxes and bags to ribbons and gifting
+                  essentials, we manage the sourcing and customisation process to
+                  deliver packaging tailored to your requirements.
+                </p>
+
+                {/* Supporting Highlights */}
+                <div className="pt-4 sm:pt-5 border-t border-[#C7A86A]/25">
+                  <div className="flex flex-wrap items-center gap-y-2 gap-x-2.5 sm:gap-x-3.5 text-xs sm:text-[13px] font-medium text-navy/85 tracking-wide">
+                    <span>Bespoke Design & Branding</span>
+                    <span className="text-[#C7A86A]/60 select-none font-light" aria-hidden="true">|</span>
+                    <span>Global Product Sourcing</span>
+                    <span className="text-[#C7A86A]/60 select-none font-light" aria-hidden="true">|</span>
+                    <span>Customisation & Bulk Supply</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Column: Hero Image (approx. 58% on desktop) */}
+              <div className="w-full">
+                <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] lg:aspect-[5/4] xl:aspect-[4/3] min-h-[280px] sm:min-h-[360px] lg:min-h-[460px] xl:min-h-[500px] rounded-lg overflow-hidden shadow-sm">
+                  <Image
+                    src="/assets/about1.webp"
+                    alt="Bespoke luxury packaging campaign"
+                    fill
+                    priority
+                    sizes="(min-width: 1024px) 58vw, 100vw"
+                    className="object-cover object-center"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </section>
