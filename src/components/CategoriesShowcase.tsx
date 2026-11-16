@@ -58,7 +58,7 @@ export function CategoriesShowcase() {
   return (
     <section
       id="categories"
-      className="w-full bg-[#FFFFFF] py-10 sm:py-14 md:py-16 lg:py-20 transition-colors duration-200"
+      className="w-full bg-[#FFFFFF] py-5 sm:py-6 md:py-7 lg:py-8 transition-colors duration-200"
     >
       {/* Dark Reader extension protection: class="darkreader" tells the extension not to parse or invert these rules */}
       <style

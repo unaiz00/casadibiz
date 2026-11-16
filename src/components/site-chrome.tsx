@@ -155,7 +155,7 @@ export function SiteHeader() {
             href="/contact?enquiry=open"
             className="ml-1 inline-flex items-center justify-center px-4.5 py-2 text-[11px] xl:text-xs font-semibold tracking-[0.14em] uppercase rounded-[6px] bg-[#0F2744] text-[#FAF8F5] border border-[#C7A86A]/30 hover:bg-[#C7A86A] hover:text-[#0F2744] hover:border-[#C7A86A] transition-all duration-300 shadow-xs cursor-pointer active:scale-[0.98]"
           >
-            Custom Inquiry
+            Request A Quote
           </Link>
         </nav>
 
@@ -299,7 +299,7 @@ export function SiteHeader() {
                     onClick={closeMobileMenu}
                     className="w-full h-11 inline-flex items-center justify-center px-4 text-xs font-semibold tracking-[0.14em] uppercase rounded-[6px] bg-[#0F2744] text-[#FAF8F5] border border-[#C7A86A]/30 hover:bg-[#C7A86A] hover:text-[#0F2744] hover:border-[#C7A86A] transition-all duration-300 shadow-xs cursor-pointer active:scale-[0.98]"
                   >
-                    Custom Inquiry
+                    Request A Quote
                   </Link>
                 </div>
               </div>

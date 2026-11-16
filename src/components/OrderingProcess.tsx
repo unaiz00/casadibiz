@@ -276,7 +276,7 @@ export const PROCESS_STEPS: ProcessStep[] = [
     step: 1,
     stepNumber: "01",
     title: "Share Your Requirements",
-    description: "Tell us your product, quantity, sizes and customization needs.",
+    description: "Tell us your product, quantity, sizes and customisation needs.",
     icon: RequirementsIcon,
   },
   {
@@ -410,11 +410,10 @@ export function OrderingProcess({
               type="button"
               onClick={() => scrollToStep(index)}
               aria-label={`Go to step ${stepItem.step}: ${stepItem.title}`}
-              className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
-                activeSlide === index
+              className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${activeSlide === index
                   ? "w-6 bg-[#C7A86A]"
                   : "w-1.5 bg-[#C7A86A]/30 hover:bg-[#C7A86A]/60"
-              }`}
+                }`}
             />
           ))}
         </div>

@@ -6,7 +6,7 @@ import {
   ChevronDown,
   HelpCircle,
 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { SiteHeader, SiteFooter } from "@/components/site-chrome";
 import CollectionsGrid from "@/components/CollectionsGrid";
 import OrderingProcess from "@/components/OrderingProcess";
@@ -16,53 +16,24 @@ import HomeCTA from "@/components/HomeCTA";
 
 
 /* ---------------- Hero ---------------- */
-// Desktop hero slides (640px and above)
-const DESKTOP_SLIDES = [
-  "/assets/hero/herof1.webp",
-  "/assets/hero/herof2.webp",
-];
-
-// Mobile hero slides (below 640px) — replace with dedicated mobile image paths when uploaded
-const MOBILE_SLIDES = [
-  "/assets/hero/herom2.webp",
-  "/assets/hero/herom1.webp",
-];
-
 function Hero() {
-  const [i, setI] = useState(0);
-  const slideCount = Math.max(DESKTOP_SLIDES.length, MOBILE_SLIDES.length);
-
-  useEffect(() => {
-    if (slideCount <= 1) return;
-    const t = setInterval(() => setI((v) => (v + 1) % slideCount), 3000);
-    return () => clearInterval(t);
-  }, [slideCount]);
   return (
-    <section className="relative w-full overflow-hidden flex flex-col items-center sm:flex-row h-[460px] xs:h-[490px] sm:h-[640px] md:h-[680px] lg:h-auto lg:min-h-screen portrait:lg:min-h-[720px] portrait:lg:h-[72vh] pt-7 xs:pt-9 sm:pt-0 pb-4 sm:pb-0 justify-start sm:justify-center">
-      {/* Background image on mobile (covers controlled hero with products positioned in lower portion) / Desktop full-screen background */}
+    <section className="relative w-full overflow-hidden flex flex-col items-center sm:flex-row h-[525px] xs:h-[560px] sm:h-[640px] md:h-[680px] lg:h-auto lg:min-h-screen portrait:lg:min-h-[720px] portrait:lg:h-[72vh] pt-7 xs:pt-8 sm:pt-0 pb-4 sm:pb-0 justify-start sm:justify-center">
+      {/* Background image: herof2 on desktop, herom2 on mobile */}
       <div className="absolute inset-0 w-full h-full z-0 flex justify-center items-center pointer-events-none animate-hero-image-luxe">
-        {DESKTOP_SLIDES.map((desktopSrc, idx) => {
-          const mobileSrc = MOBILE_SLIDES[idx] || desktopSrc;
-          return (
-            <picture
-              key={desktopSrc}
-              className={`absolute inset-0 w-full h-full block transition-opacity duration-[900ms] ease-in-out ${i === idx ? "opacity-100" : "opacity-0"
-                }`}
-            >
-              <source media="(min-width: 640px)" srcSet={desktopSrc} />
-              <source media="(max-width: 639px)" srcSet={mobileSrc} />
-              <img
-                src={desktopSrc}
-                alt="Luxury CASA DI BIZ packaging"
-                width={1672}
-                height={941}
-                className="w-full h-full object-cover object-[76%_bottom] sm:object-[68%_center] lg:object-center portrait:lg:object-[68%_center]"
-                loading={idx === 0 ? "eager" : "lazy"}
-                fetchPriority={idx === 0 ? "high" : "low"}
-              />
-            </picture>
-          );
-        })}
+        <picture className="absolute inset-0 w-full h-full block">
+          <source media="(min-width: 640px)" srcSet="/assets/hero/herof2.webp" />
+          <source media="(max-width: 639px)" srcSet="/assets/hero/herom2.webp" />
+          <img
+            src="/assets/hero/herof2.webp"
+            alt="Luxury CASA DI BIZ packaging"
+            width={1672}
+            height={941}
+            className="w-full h-full object-cover object-[76%_bottom] sm:object-[68%_center] lg:object-center portrait:lg:object-[68%_center]"
+            loading="eager"
+            fetchPriority="high"
+          />
+        </picture>
         {/* Subtle top fade behind text area only on mobile — stops at ~200px and fades completely to transparent before products */}
         <div className="absolute top-0 inset-x-0 h-52 bg-gradient-to-b from-black/55 via-black/25 to-transparent sm:hidden pointer-events-none z-[1]" />
         {/* Soft overall ambient gradient on desktop */}
@@ -72,59 +43,35 @@ function Hero() {
       {/* Text Content Block (Centered at top on mobile, left-aligned on desktop) */}
       <div className="relative w-full max-w-[1920px] mx-auto px-4 xs:px-5 sm:px-10 md:px-12 lg:px-16 xl:px-20 2xl:px-[130px] py-0 sm:py-24 md:py-28 lg:py-36 portrait:lg:py-28 text-center sm:text-left flex flex-col items-center sm:items-start z-10 sm:-translate-y-4 md:-translate-y-6 lg:-translate-y-10 xl:-translate-y-12 portrait:lg:-translate-y-6">
         <div className="relative animate-fade-up text-center sm:text-left flex flex-col items-center sm:items-start w-full">
-          <div className="relative z-10 w-full max-w-[320px] xs:max-w-[360px] sm:max-w-[440px] md:max-w-[480px] lg:max-w-[540px] xl:max-w-[550px] mx-auto sm:mx-0 flex flex-col items-center sm:items-start">
+          <div className="relative z-10 w-full max-w-[340px] xs:max-w-[380px] sm:max-w-[480px] md:max-w-[520px] lg:max-w-[580px] xl:max-w-[620px] mx-auto sm:mx-0 flex flex-col items-center sm:items-start">
             {/* Subtle localized vignette behind mobile text area only — zero tint or overlay on product photography */}
             <div className="absolute -inset-x-4 -inset-y-2 bg-black/15 rounded-3xl blur-xl pointer-events-none sm:hidden -z-10" />
 
             {/* Heading */}
-            <h1 className="animate-hero-heading-luxe font-hero-headline font-semibold text-[22px] xs:text-[25px] sm:text-[36px] md:text-[42px] lg:text-[54px] xl:text-[58px] leading-[1.2] sm:leading-[1.16] md:leading-[1.14] lg:leading-[1.12] tracking-[-0.02em] text-[#FAF8F5] mb-0 text-center sm:text-left drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)] sm:drop-shadow-none sm:max-w-[440px] md:max-w-[480px] lg:max-w-[540px] xl:max-w-[550px]">
-              <span className="block">Luxury Isn't Just Inside</span>
+            <h1 className="animate-hero-heading-luxe font-hero-headline font-medium text-[28px] xs:text-[30px] sm:text-[36px] md:text-[44px] lg:text-[50px] xl:text-[54px] leading-[1.16] sm:leading-[1.12] tracking-[-0.02em] text-[#FAF8F5] mb-0 text-center sm:text-left drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)] sm:drop-shadow-none sm:max-w-[480px] md:max-w-[520px] lg:max-w-[580px] xl:max-w-[620px]">
+              <span className="block">Luxury Isn&apos;t Just Inside</span>
               <span className="block">It Starts With the Packaging</span>
             </h1>
 
             {/* Supporting description */}
-            <p className="animate-hero-support-luxe font-sans text-[12.5px] xs:text-[14px] sm:text-[15px] md:text-[16px] text-[#FAF8F5]/85 font-normal leading-relaxed sm:leading-[1.6] max-w-[290px] xs:max-w-[340px] sm:max-w-[400px] md:max-w-[430px] mt-2 xs:mt-2.5 sm:mt-4 md:mt-6 text-center sm:text-left drop-shadow-[0_1px_6px_rgba(0,0,0,0.85)] sm:drop-shadow-none">
-              Bespoke packaging & customised gifts <br className="hidden xs:inline" /> Thoughtfully crafted to reflect your brand.
+            <p className="animate-hero-support-luxe font-sans text-[13px] xs:text-[13.5px] sm:text-[15px] md:text-[16px] text-[#FAF8F5]/85 font-normal leading-relaxed sm:leading-[1.6] max-w-[310px] xs:max-w-[350px] sm:max-w-[440px] md:max-w-[480px] mt-2.5 xs:mt-3 sm:mt-4 md:mt-5 text-center sm:text-left drop-shadow-[0_1px_6px_rgba(0,0,0,0.85)] sm:drop-shadow-none">
+              Bespoke packaging and customised gifts, thoughtfully crafted to reflect your brand.
             </p>
 
             {/* CTA Buttons */}
-            <div className="animate-hero-cta flex flex-col items-center sm:items-start w-full mt-3 xs:mt-3.5 sm:mt-6 md:mt-8">
-              {/* Desktop CTA: Single explore button preserved */}
+            <div className="animate-hero-cta flex flex-wrap items-center justify-center sm:justify-start gap-[8px] sm:gap-[16px] w-full mt-4 xs:mt-4.5 sm:mt-6 md:mt-8">
               <Link
                 href="/collections"
-                className="hidden sm:inline-flex items-center justify-center gap-2.5 md:gap-3 rounded-full sm:w-auto px-8 md:px-10 py-3.5 md:py-4.5 lg:py-5 text-xs md:text-sm tracking-[0.25em] font-semibold bg-[#C7A86A] text-[#0F2744] hover:bg-[#FAF8F5] hover:text-[#0F2744] active:scale-95 transition-all duration-300 ease-out cursor-pointer"
+                className="inline-flex items-center justify-center h-[38px] sm:h-[48px] px-3 sm:px-6 rounded-full text-[10.5px] sm:text-[14px] tracking-[0.14em] sm:tracking-[0.18em] font-semibold uppercase bg-[#C7A86A] text-[#0F2744] hover:bg-[#FAF8F5] hover:text-[#0F2744] border border-[#C7A86A] active:scale-95 transition-all duration-300 ease-out cursor-pointer shadow-md sm:shadow-none whitespace-nowrap"
               >
-                EXPLORE NOW <ArrowRight className="h-4 w-4 md:h-5 md:w-5" />
+                EXPLORE NOW
               </Link>
-
-              {/* Mobile CTA: Synchronized with the 3-second carousel */}
-              <div className="relative w-[200px] xs:w-[220px] h-[38px] xs:h-[42px] sm:hidden flex items-center justify-center">
-                {/* Slide 0 CTA: EXPLORE NOW (Gold background, navy text) */}
-                <Link
-                  href="/collections"
-                  tabIndex={i === 0 ? 0 : -1}
-                  aria-hidden={i !== 0}
-                  className={`absolute inset-0 inline-flex items-center justify-center gap-2 rounded-full w-full h-full text-[11px] xs:text-xs tracking-[0.25em] font-semibold bg-[#C7A86A] text-[#0F2744] hover:bg-[#FAF8F5] hover:text-[#0F2744] active:scale-95 transition-all duration-500 ease-in-out cursor-pointer shadow-md ${i === 0
-                    ? "opacity-100 pointer-events-auto scale-100"
-                    : "opacity-0 pointer-events-none scale-95"
-                    }`}
-                >
-                  EXPLORE NOW <ArrowRight className="h-3.5 w-3.5" />
-                </Link>
-
-                {/* Slide 1 CTA: CUSTOM INQUIRY (Ivory background, navy text, gold border) */}
-                <Link
-                  href="/contact?enquiry=open"
-                  tabIndex={i === 1 ? 0 : -1}
-                  aria-hidden={i !== 1}
-                  className={`absolute inset-0 inline-flex items-center justify-center gap-2 rounded-full w-full h-full text-[11px] xs:text-xs tracking-[0.25em] font-semibold bg-[#FAF8F5] text-[#0F2744] border border-[#C7A86A] hover:bg-[#F6F0E8] active:bg-[#F6F0E8] active:scale-95 transition-all duration-500 ease-in-out cursor-pointer shadow-md ${i === 1
-                    ? "opacity-100 pointer-events-auto scale-100"
-                    : "opacity-0 pointer-events-none scale-95"
-                    }`}
-                >
-                  CUSTOM INQUIRY <ArrowRight className="h-3.5 w-3.5" />
-                </Link>
-              </div>
+              <Link
+                href="/contact?enquiry=open"
+                className="inline-flex items-center justify-center h-[38px] sm:h-[48px] px-3 sm:px-6 rounded-full text-[10.5px] sm:text-[14px] tracking-[0.14em] sm:tracking-[0.18em] font-semibold uppercase bg-[#FAF8F5] text-[#0F2744] hover:bg-[#C7A86A] hover:text-[#0F2744] hover:border-[#C7A86A] border border-[#FAF8F5] active:scale-95 transition-all duration-300 ease-out cursor-pointer shadow-md sm:shadow-none whitespace-nowrap"
+              >
+                REQUEST A QUOTE
+              </Link>
             </div>
           </div>
         </div>
@@ -137,7 +84,7 @@ function Hero() {
 function Featured() {
   return (
     <section className="w-full bg-[#071526]">
-      <div className="relative min-h-[350px] xs:min-h-[370px] sm:min-h-[65vh] md:min-h-[520px] lg:min-h-[75vh] xl:min-h-[80vh] overflow-hidden flex items-start sm:items-center">
+      <div className="relative min-h-[350px] xs:min-h-[365px] sm:min-h-[370px] md:min-h-[360px] lg:min-h-[400px] xl:min-h-[410px] sm:h-[370px] md:h-[360px] lg:h-[400px] xl:h-[410px] overflow-hidden flex items-start sm:items-center">
 
         {/* Responsive Background Images: Mobile dedicated ftcp.webp, Desktop imsec2.jpeg */}
         <picture className="absolute inset-0 h-full w-full block">
@@ -156,21 +103,22 @@ function Featured() {
         {/* Desktop Gradient Overlay preserved / subtle fade on mobile */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#071526]/85 via-[#071526]/35 to-transparent sm:from-navy/85 sm:via-navy/60 sm:to-navy/20 pointer-events-none" />
 
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-5 xs:px-6 lg:px-8 pt-5 xs:pt-6 sm:pt-0 sm:py-16 md:py-20">
-          <div className="w-full max-w-[58%] xs:max-w-[54%] sm:max-w-lg lg:max-w-[42%] text-left flex flex-col items-start">
-            <p className="text-[11px] xs:text-[12px] sm:text-xs tracking-[0.2em] xs:tracking-[0.24em] sm:tracking-[0.32em] text-gold font-medium mb-1 xs:mb-1.5 sm:mb-4 uppercase text-left">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-5 xs:px-6 lg:px-8 pt-7 xs:pt-8 sm:pt-0 sm:py-0">
+          <div className="w-full max-w-[58%] xs:max-w-[54%] sm:max-w-lg lg:max-w-[580px] xl:max-w-[680px] 2xl:max-w-[740px] text-left flex flex-col items-start">
+            <p className="text-[11px] xs:text-[12px] sm:text-xs tracking-[0.2em] xs:tracking-[0.24em] sm:tracking-[0.32em] text-gold font-medium mb-1.5 sm:mb-2 lg:mb-2.5 uppercase text-left">
               FEATURED COLLECTION
             </p>
-            <h2 className="font-display text-[27px] xs:text-[28.5px] sm:text-5xl md:text-[52px] lg:text-6xl xl:text-7xl text-[#F6F0E8] leading-[1.12] xs:leading-[1.14] sm:leading-tight text-left">
-              Luxury Jewelry<br />Packaging
+            <h2 className="font-display text-[24px] xs:text-[26px] sm:text-[42px] md:text-[52px] lg:text-[70px] xl:text-[78px] 2xl:text-[82px] text-[#F6F0E8] leading-[1.06] sm:leading-[0.98] lg:leading-[0.96] tracking-tight font-normal text-left">
+              <span className="block">Luxury Jewellery</span>
+              <span className="block">Packaging</span>
             </h2>
-            <p className="text-[#FAF8F5] italic font-display text-[14px] xs:text-[15px] sm:text-lg md:text-xl mt-1 xs:mt-1.5 sm:mt-5 text-left">
+            <p className="text-[#FAF8F5] italic font-display text-[14px] xs:text-[15px] sm:text-lg md:text-xl lg:text-[22px] xl:text-[24px] mt-2 sm:mt-2.5 lg:mt-3 text-left">
               Minimal. Elegant. Memorable.
             </p>
 
             <Link
               href="/collections"
-              className="mt-2.5 xs:mt-3 sm:mt-8 inline-flex items-center gap-1.5 sm:gap-3 rounded-md bg-gradient-to-r from-[#d9bd85] to-[#c8a15a] text-cream px-3.5 xs:px-4 sm:px-7 py-2 xs:py-2.5 sm:py-3.5 text-[9.5px] xs:text-[10.5px] sm:text-xs tracking-[0.2em] sm:tracking-[0.28em] font-medium hover:-translate-y-0.5 active:translate-y-0 transition duration-200"
+              className="mt-3.5 xs:mt-4 sm:mt-5 lg:mt-6 inline-flex items-center gap-1.5 sm:gap-3 rounded-md bg-gradient-to-r from-[#d9bd85] to-[#c8a15a] text-cream px-3.5 xs:px-4 sm:px-7 py-2 xs:py-2.5 sm:py-3.5 text-[9.5px] xs:text-[10.5px] sm:text-xs tracking-[0.2em] sm:tracking-[0.28em] font-medium hover:-translate-y-0.5 active:translate-y-0 transition duration-200"
             >
               VIEW COLLECTION <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4" />
             </Link>
@@ -208,9 +156,9 @@ function HomeFAQ() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
-    <section className="w-full bg-ivory py-16 sm:py-20 md:py-24">
-      <div className="mx-auto max-w-7xl px-5 sm:px-8 md:px-10 lg:px-12 text-center mb-10 sm:mb-12 md:mb-14">
-        <p className="text-[11px] tracking-[0.32em] text-gold font-medium mb-3 uppercase">FAQ</p>
+    <section className="w-full bg-ivory pt-8 sm:pt-10 md:pt-11 lg:pt-12 pb-10 sm:pb-11 md:pb-12 lg:pb-14">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8 md:px-10 lg:px-12 text-center mb-7 sm:mb-8 md:mb-9 lg:mb-10">
+        <p className="text-[11px] tracking-[0.32em] text-gold font-medium mb-2.5 sm:mb-3 uppercase">FAQ</p>
         <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-navy leading-tight">
           Frequently asked Questions
         </h2>
