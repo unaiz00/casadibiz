@@ -18,7 +18,7 @@ import HomeCTA from "@/components/HomeCTA";
 /* ---------------- Hero ---------------- */
 function Hero() {
   return (
-    <section className="relative w-full overflow-hidden flex flex-col items-center sm:flex-row h-[525px] xs:h-[560px] sm:h-[640px] md:h-[680px] lg:h-auto lg:min-h-screen portrait:lg:min-h-[720px] portrait:lg:h-[72vh] pt-7 xs:pt-8 sm:pt-0 pb-4 sm:pb-0 justify-start sm:justify-center">
+    <section className="relative w-full overflow-hidden flex flex-col items-center sm:flex-row h-[540px] xs:h-[575px] sm:h-[640px] md:h-[680px] lg:h-auto lg:min-h-screen portrait:lg:min-h-[720px] portrait:lg:h-[72vh] pt-6 xs:pt-7 sm:pt-0 pb-4 sm:pb-0 justify-start sm:justify-center">
       {/* Background image: herof2 on desktop, herom2 on mobile */}
       <div className="absolute inset-0 w-full h-full z-0 flex justify-center items-center pointer-events-none animate-hero-image-luxe">
         <picture className="absolute inset-0 w-full h-full block">
@@ -54,21 +54,21 @@ function Hero() {
             </h1>
 
             {/* Supporting description */}
-            <p className="animate-hero-support-luxe font-sans text-[13px] xs:text-[13.5px] sm:text-[15px] md:text-[16px] text-[#FAF8F5]/85 font-normal leading-relaxed sm:leading-[1.6] max-w-[310px] xs:max-w-[350px] sm:max-w-[440px] md:max-w-[480px] mt-2.5 xs:mt-3 sm:mt-4 md:mt-5 text-center sm:text-left drop-shadow-[0_1px_6px_rgba(0,0,0,0.85)] sm:drop-shadow-none">
+            <p className="animate-hero-support-luxe font-sans text-[13px] xs:text-[13.5px] sm:text-[15px] md:text-[16px] text-[#FAF8F5]/85 font-normal leading-relaxed sm:leading-[1.6] max-w-[310px] xs:max-w-[350px] sm:max-w-[440px] md:max-w-[480px] mt-2 xs:mt-2.5 sm:mt-4 md:mt-5 text-center sm:text-left drop-shadow-[0_1px_6px_rgba(0,0,0,0.85)] sm:drop-shadow-none">
               Bespoke packaging and customised gifts, thoughtfully crafted to reflect your brand.
             </p>
 
             {/* CTA Buttons */}
-            <div className="animate-hero-cta flex flex-wrap items-center justify-center sm:justify-start gap-[8px] sm:gap-[16px] w-full mt-4 xs:mt-4.5 sm:mt-6 md:mt-8">
+            <div className="animate-hero-cta flex flex-wrap items-center justify-center sm:justify-start gap-[8px] sm:gap-[12px] w-full mt-2.5 xs:mt-3 sm:mt-6 md:mt-8">
               <Link
                 href="/collections"
-                className="inline-flex items-center justify-center h-[38px] sm:h-[48px] px-3 sm:px-6 rounded-full text-[10.5px] sm:text-[14px] tracking-[0.14em] sm:tracking-[0.18em] font-semibold uppercase bg-[#C7A86A] text-[#0F2744] hover:bg-[#FAF8F5] hover:text-[#0F2744] border border-[#C7A86A] active:scale-95 transition-all duration-300 ease-out cursor-pointer shadow-md sm:shadow-none whitespace-nowrap"
+                className="inline-flex items-center justify-center h-[38px] sm:h-[46px] px-3 sm:px-[22px] rounded-full text-[10.5px] sm:text-[12.5px] tracking-[0.14em] sm:tracking-[0.15em] font-semibold uppercase bg-[#C7A86A] text-[#0F2744] hover:bg-[#FAF8F5] hover:text-[#0F2744] border border-[#C7A86A] active:scale-95 transition-all duration-300 ease-out cursor-pointer shadow-md sm:shadow-none whitespace-nowrap"
               >
                 EXPLORE NOW
               </Link>
               <Link
                 href="/contact?enquiry=open"
-                className="inline-flex items-center justify-center h-[38px] sm:h-[48px] px-3 sm:px-6 rounded-full text-[10.5px] sm:text-[14px] tracking-[0.14em] sm:tracking-[0.18em] font-semibold uppercase bg-[#FAF8F5] text-[#0F2744] hover:bg-[#C7A86A] hover:text-[#0F2744] hover:border-[#C7A86A] border border-[#FAF8F5] active:scale-95 transition-all duration-300 ease-out cursor-pointer shadow-md sm:shadow-none whitespace-nowrap"
+                className="inline-flex items-center justify-center h-[38px] sm:h-[46px] px-3 sm:px-[22px] rounded-full text-[10.5px] sm:text-[12.5px] tracking-[0.14em] sm:tracking-[0.15em] font-semibold uppercase bg-[#FAF8F5] text-[#0F2744] hover:bg-[#C7A86A] hover:text-[#0F2744] hover:border-[#C7A86A] border border-[#FAF8F5] active:scale-95 transition-all duration-300 ease-out cursor-pointer shadow-md sm:shadow-none whitespace-nowrap"
               >
                 REQUEST A QUOTE
               </Link>
@@ -121,6 +121,8 @@ function Featured() {
               className="mt-3.5 xs:mt-4 sm:mt-5 lg:mt-6 inline-flex items-center gap-1.5 sm:gap-3 rounded-md bg-gradient-to-r from-[#d9bd85] to-[#c8a15a] text-cream px-3.5 xs:px-4 sm:px-7 py-2 xs:py-2.5 sm:py-3.5 text-[9.5px] xs:text-[10.5px] sm:text-xs tracking-[0.2em] sm:tracking-[0.28em] font-medium hover:-translate-y-0.5 active:translate-y-0 transition duration-200"
             >
               VIEW COLLECTION <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4" />
+
+
             </Link>
           </div>
         </div>
