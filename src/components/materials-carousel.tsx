@@ -96,9 +96,8 @@ export function MaterialsCarousel() {
         <div className="max-w-xl w-full">
           <div className="flex items-center gap-4 mb-4">
             <span className="text-[#C7A86A] tracking-[0.2em] font-semibold text-[13px] uppercase whitespace-nowrap">
-              <span className="mr-2 opacity-75">01</span> MATERIALS & CRAFT
+              MATERIALS & CRAFT
             </span>
-            <div className="h-[1px] w-16 sm:w-24 bg-[#C7A86A]/40" />
           </div>
 
           <h2 className="font-display font-serif text-3xl sm:text-4xl text-[#0F2744] leading-tight mb-4">

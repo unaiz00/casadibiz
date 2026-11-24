@@ -8,6 +8,7 @@ import { ApproachRail } from "@/components/approach-rail";
 import { WhatWeCreate } from "@/components/what-we-create";
 import { WhyCasaDiBiz } from "@/components/why-casa-di-biz";
 import { BrandPhilosophy } from "@/components/brand-philosophy";
+import { VisionMission } from "@/components/vision-mission";
 
 
 export const metadata: Metadata = {
@@ -88,7 +89,10 @@ export default function AboutPage() {
         {/* 2. BRAND PHILOSOPHY */}
         <BrandPhilosophy />
 
-        {/* 3. WHAT WE CREATE */}
+        {/* 3. VISION & MISSION */}
+        <VisionMission />
+
+        {/* 4. WHAT WE CREATE */}
         <WhatWeCreate />
 
         {/* WHY CASA DI BIZ */}
@@ -100,17 +104,17 @@ export default function AboutPage() {
         </section>
 
         {/* 5. OUR APPROACH */}
-        <section className="py-20 lg:py-28 bg-ivory border-t border-border-luxe/60">
+        <section className="py-6 sm:py-8 lg:py-10 bg-ivory border-t border-border-luxe/60">
           <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <div className="max-w-3xl mx-auto text-center mb-12 lg:mb-14">
-              <span className="text-gold text-xs uppercase tracking-[0.35em] font-semibold mb-4 sm:mb-5 block">
+            <div className="max-w-3xl mx-auto text-center mb-8 lg:mb-10">
+              <span className="text-gold text-xs uppercase tracking-[0.35em] font-semibold mb-2.5 sm:mb-3 block">
                 HOW WE WORK
               </span>
               <h2 className="text-4xl sm:text-5xl lg:text-[54px] lg:leading-[62px] font-serif text-navy leading-tight tracking-tight">
                 From Vision to Packaging,<br className="hidden sm:inline" />{" "}
                 <span className="italic font-serif text-gold font-normal">Thoughtfully Delivered.</span>
               </h2>
-              <p className="font-light text-navy/75 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto font-sans mt-6 sm:mt-7">
+              <p className="font-light text-navy/75 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto font-sans mt-4 sm:mt-5">
                 Every great packaging solution begins with understanding your brand. We bring together design, sourcing and customization to turn your requirements into a considered final product.
               </p>
             </div>
