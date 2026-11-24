@@ -43,18 +43,16 @@ export default function AboutPage() {
                 </span>
 
                 <h1 className="font-display font-serif text-3xl xs:text-4xl sm:text-[42px] lg:text-[40px] xl:text-[46px] 2xl:text-[50px] text-[#0F2744] leading-[1.16] tracking-tight mb-5 sm:mb-6 font-normal">
-                  Packaging Designed Around Your{" "}
+                  Packaging That Reflects the Value of Your{" "}
                   <span className="italic text-[#C7A86A] font-serif font-normal">
                     Brand.
                   </span>
                 </h1>
 
                 <p className="font-sans font-light text-navy/80 text-[14.5px] sm:text-base leading-relaxed mb-6 sm:mb-7 max-w-xl">
-                  We bring together thoughtful design, quality materials and
-                  trusted manufacturing partners to create packaging that reflects
-                  your brand. From custom boxes and bags to ribbons and gifting
-                  essentials, we manage the sourcing and customisation process to
-                  deliver packaging tailored to your requirements.
+                  CASA DI BIZ brings together thoughtful design, carefully selected materials to create bespoke packaging for luxury brands,
+                  boutiques and businesses. From custom boxes and bags to ribbons and gifting essentials,
+                  we help bring your brand's packaging vision to life.
                 </p>
 
                 {/* Supporting Highlights */}

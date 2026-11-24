@@ -50,15 +50,17 @@ export function BrandPhilosophy() {
 
             {/* Main Headline */}
             <h2 className="text-4xl sm:text-5xl lg:text-[56px] lg:leading-[1.05] font-serif text-[#F6F0E8] tracking-tight mb-6 font-normal">
-              Custom packaging <br className="hidden lg:inline" />
-              that feels like the <br className="hidden lg:inline" />
-              <span className="text-[#C7A86A]">perfect fit.</span>
+              More Than Packaging. <br className="hidden lg:inline" />
+              An Extension of <br className="hidden lg:inline" />
+              <span className="text-[#C7A86A]">Your Brand.</span>
             </h2>
 
             {/* Supporting Paragraph */}
             <p className="max-w-[540px] text-[15px] lg:text-[16px] font-light leading-[1.7] text-[#F6F0E8]/75 mb-8">
-              Having a hard time finding the right packaging for your product?
-              At CASA DI BIZ, we create bespoke packaging designed around your product, identity and customer experience. From boxes and bags to pouches, ribbons and finishing details, every element can be considered around your brand.
+              Every detail of your packaging contributes to how customers experience your brand.
+              From the choice of material to the finishing touches,
+              we bring together the right elements to create packaging that feels considered,
+              distinctive and unmistakably yours
             </p>
 
             {/* CTA Button */}
