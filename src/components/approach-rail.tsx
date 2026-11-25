@@ -25,7 +25,7 @@ const STEPS: ApproachStep[] = [
     stageName: "DESIGN",
     title: "Create",
     description:
-      "We explore suitable structures, materials, proportions, branding and finishing possibilities.",
+      "We explore suitable structures, materials, proportions, branding and finishing options.",
     Icon: PenTool,
   },
   {
@@ -33,7 +33,7 @@ const STEPS: ApproachStep[] = [
     stageName: "SOURCE & CUSTOMIZE",
     title: "Refine",
     description:
-      "We coordinate with our manufacturing partners to develop your selected specifications, samples and custom details.",
+      "We coordinate with our manufacturing team to develop your selected specifications, samples and custom details.",
     Icon: Layers,
   },
   {
@@ -75,9 +75,8 @@ export function ApproachRail() {
         {STEPS.map((step, idx) => (
           <div
             key={step.stage}
-            className={`group flex flex-col items-center text-center transition-all duration-[1000ms] ease-out motion-reduce:transition-none ${
-              inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-            }`}
+            className={`group flex flex-col items-center text-center transition-all duration-[1000ms] ease-out motion-reduce:transition-none ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+              }`}
             style={{ transitionDelay: `${idx * 150}ms` }}
           >
             {/* Stage Label */}
@@ -89,16 +88,14 @@ export function ApproachRail() {
             <div className="relative w-full flex items-center justify-center my-5">
               {/* Left Line Segment */}
               <div
-                className={`absolute left-0 right-1/2 h-[1px] bg-[#C7A86A]/30 transition-all duration-1000 ${
-                  idx === 0 ? "opacity-0" : "opacity-100"
-                }`}
+                className={`absolute left-0 right-1/2 h-[1px] bg-[#C7A86A]/30 transition-all duration-1000 ${idx === 0 ? "opacity-0" : "opacity-100"
+                  }`}
                 aria-hidden="true"
               />
               {/* Right Line Segment */}
               <div
-                className={`absolute left-1/2 right-0 h-[1px] bg-[#C7A86A]/30 transition-all duration-1000 ${
-                  idx === STEPS.length - 1 ? "opacity-0" : "opacity-100"
-                }`}
+                className={`absolute left-1/2 right-0 h-[1px] bg-[#C7A86A]/30 transition-all duration-1000 ${idx === STEPS.length - 1 ? "opacity-0" : "opacity-100"
+                  }`}
                 aria-hidden="true"
               />
 
@@ -129,9 +126,8 @@ export function ApproachRail() {
             return (
               <div
                 key={step.stage}
-                className={`group relative flex gap-4 sm:gap-6 transition-all duration-[1000ms] ease-out motion-reduce:transition-none ${
-                  inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-                }`}
+                className={`group relative flex gap-4 sm:gap-6 transition-all duration-[1000ms] ease-out motion-reduce:transition-none ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+                  }`}
                 style={{ transitionDelay: `${idx * 150}ms` }}
               >
                 {/* Timeline Column: Icon Node + Vertical Connecting Bar */}

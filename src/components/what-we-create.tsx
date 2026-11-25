@@ -1,246 +1,106 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
 
-interface CardItem {
+interface CategoryCard {
   id: string;
   title: string;
-  copy: string;
   img: string;
   link: string;
 }
 
-const CARDS: CardItem[] = [
+const CATEGORIES: CategoryCard[] = [
   {
     id: "boxes",
-    title: "BOXES",
-    copy: "Structured forms. Refined finishes.",
+    title: "Boxes",
     img: "/assets/rigidd.jpeg",
     link: "/boxes/#jewellery-boxes",
   },
   {
     id: "bags",
-    title: "BAGS",
-    copy: "Signature silhouettes. Effortless presentation.",
+    title: "Bags",
     img: "/assets/papercollct.jpeg",
     link: "/bags",
   },
   {
     id: "pouches",
-    title: "POUCHES",
-    copy: "Soft textures. Considered details.",
-    img: "/assets/allimages.jpeg", // Real pouches photo instead of line art
+    title: "Pouches",
+    img: "/assets/sheer_organza_pouch.jpeg",
     link: "/pouches",
   },
   {
     id: "ribbons",
-    title: "RIBBONS",
-    copy: "The finishing touch that completes the presentation.",
-    img: "/assets/giftim.jpeg", // Real ribbons and box finishing photo instead of gold bow render
+    title: "Ribbons",
+    img: "/assets/giftim.jpeg",
     link: "/ribbons",
+  },
+  {
+    id: "wraps",
+    title: "Wraps",
+    img: "/assets/recycled_brown_kraftpaperwrap.jpeg",
+    link: "/wraps",
   },
 ];
 
 export function WhatWeCreate() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const mobileScrollRef = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(1); // BAGS (idx 1) is active by default on desktop
-
-  // Viewport intersection observer for entrance fade-in
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsVisible(true);
-            observer.disconnect(); // Animate once
-          }
-        });
-      },
-      {
-        threshold: 0.1,
-        rootMargin: "0px 0px -40px 0px",
-      }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
-  // Center active card (BAGS - idx 1) on mobile load
-  useEffect(() => {
-    const container = mobileScrollRef.current;
-    if (container && window.innerWidth < 1024) {
-      setTimeout(() => {
-        const card = container.children[1] as HTMLElement;
-        if (card) {
-          const containerWidth = container.clientWidth;
-          const cardWidth = card.offsetWidth;
-          // Center-align position: card offset minus half the leftover container space
-          const scrollTarget = card.offsetLeft - (containerWidth - cardWidth) / 2;
-          container.scrollTo({
-            left: scrollTarget,
-            behavior: "instant",
-          });
-        }
-      }, 60);
-    }
-  }, []);
-
-  // Scroll handler for mobile to scale cards based on proximity to center
-  const handleMobileScroll = (e: React.UIEvent<HTMLDivElement>) => {
-    if (window.innerWidth >= 1024) return;
-
-    const container = e.currentTarget;
-    const scrollLeft = container.scrollLeft;
-    const width = container.clientWidth;
-    const scrollCenter = scrollLeft + width / 2;
-    const cardsElements = container.children;
-
-    if (cardsElements.length > 0) {
-      let closestIdx = 0;
-      let minDiff = Infinity;
-
-      for (let i = 0; i < cardsElements.length; i++) {
-        const card = cardsElements[i] as HTMLElement;
-        const cardCenter = card.offsetLeft + card.offsetWidth / 2;
-        const diff = Math.abs(scrollCenter - cardCenter);
-        if (diff < minDiff) {
-          minDiff = diff;
-          closestIdx = i;
-        }
-      }
-
-      if (closestIdx !== activeIndex && closestIdx < CARDS.length) {
-        setActiveIndex(closestIdx);
-      }
-    }
-  };
-
-  // Sync scroll on indicator dot click
-  const handleIndicatorClick = (idx: number) => {
-    setActiveIndex(idx);
-    const container = mobileScrollRef.current;
-    if (container) {
-      const card = container.children[idx] as HTMLElement;
-      if (card) {
-        const containerWidth = container.clientWidth;
-        const cardWidth = card.offsetWidth;
-        const scrollTarget = card.offsetLeft - (containerWidth - cardWidth) / 2;
-        container.scrollTo({
-          left: scrollTarget,
-          behavior: "smooth",
-        });
-      }
-    }
-  };
-
   return (
-    <section
-      ref={sectionRef}
-      className={`py-20 md:py-24 bg-[#FAF8F5] border-t border-[#C7A86A]/10 overflow-hidden luxury-cards-wrapper ${isVisible ? "section-visible" : ""
-        }`}
-    >
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    <section className="pt-8 sm:pt-10 lg:pt-12 pb-3 sm:pb-4 lg:pb-6 bg-[#FAF8F5] border-t border-[#C7A86A]/10 overflow-hidden">
+      <div className="w-full max-w-[1580px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
         {/* Section Heading */}
-        <div className="text-center mb-10 md:mb-12 entrance-heading">
-          <span className="text-[#C7A86A] tracking-[0.3em] font-semibold text-xs uppercase mb-3 block">
+        <div className="text-center mb-6 sm:mb-8 lg:mb-10">
+          <span className="text-[#C7A86A] tracking-[0.3em] font-semibold text-xs uppercase mb-2.5 sm:mb-3 block">
             WHAT WE CREATE
           </span>
-          <h2 className="font-display font-serif text-3xl sm:text-4xl md:text-5xl lg:text-[46px] lg:leading-[54px] text-[#0F2744] max-w-3xl mx-auto leading-tight">
+          <h2 className="font-display font-serif text-3xl sm:text-4xl md:text-5xl lg:text-[44px] xl:text-[46px] lg:leading-[52px] text-[#0F2744] max-w-3xl mx-auto leading-tight font-normal">
             Packaging Designed Around Your Brand.
           </h2>
         </div>
 
-        {/* Stable Focal Cards Container */}
-        <div
-          className="relative w-full"
-          onMouseLeave={() => {
-            if (window.innerWidth >= 1024) {
-              setActiveIndex(1); // Revert to BAGS active on mouse leave
-            }
-          }}
-        >
-          <div
-            ref={mobileScrollRef}
-            onScroll={handleMobileScroll}
-            className="luxury-cards-container"
-          >
-            {CARDS.map((card, idx) => {
-              const isActive = idx === activeIndex;
+        {/* Responsive Category Cards Container
+            - Desktop (lg:): 5 cards in a single row
+            - Tablet (md:): 3 + 2 cards (row 1: 3 cards, row 2: 2 cards centered)
+            - Mobile: 2 cards per row (row 1: 2, row 2: 2, row 3: 1 card centered)
+        */}
+        <div className="flex flex-wrap lg:flex-nowrap justify-center gap-3.5 sm:gap-4 md:gap-5 lg:gap-4 xl:gap-5 2xl:gap-6 w-full">
+          {CATEGORIES.map((cat, idx) => (
+            <Link
+              key={cat.id}
+              href={cat.link}
+              className="group relative block w-[calc(50%-8px)] sm:w-[calc(50%-10px)] md:w-[calc((100%-42px)/3)] lg:w-auto lg:flex-1 lg:min-w-0 aspect-[3/4] rounded-[22px] sm:rounded-[26px] lg:rounded-[28px] xl:rounded-[32px] overflow-hidden shadow-xs hover:shadow-xl transition-all duration-500 bg-[#F6F0E8]"
+            >
+              {/* Product Photograph (Fills entire card) */}
+              <Image
+                src={cat.img}
+                alt={cat.title}
+                fill
+                sizes="(min-width: 1280px) 280px, (min-width: 1024px) 240px, (min-width: 768px) 30vw, 50vw"
+                priority={idx < 2}
+                className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+              />
 
-              return (
-                <Link
-                  key={card.id}
-                  href={card.link}
-                  onMouseEnter={() => {
-                    if (window.innerWidth >= 1024) {
-                      setActiveIndex(idx); // Make hovered card active/large
-                    }
-                  }}
-                  className={`group luxury-card ${isActive ? "is-active" : ""}`}
+              {/* Subtle Dark Gradient Overlay at the bottom for text readability */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent pointer-events-none transition-opacity duration-300" />
+
+              {/* Bottom Meta Bar: Category Name & Circular Arrow Button */}
+              <div className="absolute inset-x-0 bottom-0 p-3.5 sm:p-4 md:p-5 xl:p-6 flex items-end justify-between gap-2 sm:gap-3 z-10">
+                <h3 className="font-display font-serif text-lg xs:text-xl sm:text-2xl lg:text-[21px] xl:text-[24px] 2xl:text-[26px] text-white tracking-wide font-normal leading-tight group-hover:text-white transition-colors duration-300">
+                  {cat.title}
+                </h3>
+                <div
+                  className="shrink-0 w-7 h-7 xs:w-8 xs:h-8 sm:w-9 sm:h-9 xl:w-10 xl:h-10 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white flex items-center justify-center transition-all duration-300 group-hover:bg-[#C7A86A] group-hover:border-[#C7A86A] group-hover:text-[#0F2744] group-hover:scale-105 shadow-xs"
+                  aria-hidden="true"
                 >
-                  {/* Product Image Frame */}
-                  <div className="luxury-image-container">
-                    <Image
-                      src={card.img}
-                      alt={card.title}
-                      fill
-                      sizes="(max-w-768px) 70vw, 300px"
-                      priority={card.id === "boxes" || card.id === "bags"}
-                      className="object-cover"
-                    />
-
-                    {/* Dark gradient overlay for text readability */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10" />
-
-                    {/* Subtle Radial Overlay */}
-                    <div className="luxury-gold-overlay z-15" />
-
-                    {/* Card Meta Content (Positioned inside at the bottom-left) */}
-                    <div className="absolute bottom-0 left-0 right-0 p-5 lg:p-6 z-20 text-left card-text-content">
-                      <h3 className="font-display font-serif text-xl lg:text-2xl text-white tracking-wide mb-1 transition-colors duration-300 group-hover:text-[#C7A86A]">
-                        {card.title}
-                      </h3>
-
-                      {/* Short Description: Visible when active */}
-                      <p className={`font-sans text-[12px] text-white/85 leading-relaxed font-light mb-2.5 max-w-[240px] transition-all duration-500 overflow-hidden ${isActive ? "opacity-100 max-h-[80px]" : "opacity-0 max-h-0 pointer-events-none"
-                        }`}>
-                        {card.copy}
-                      </p>
-
-                      {/* Understated Explore Link */}
-                      <div className={`inline-flex items-center gap-1.5 font-sans text-[10px] font-semibold tracking-[0.2em] text-[#C7A86A] uppercase transition-all duration-500 ${isActive ? "opacity-100" : "opacity-0 pointer-events-none"
-                        } group-hover:text-white`}>
-                        EXPLORE <span className="transition-transform duration-300 group-hover:translate-x-1 inline-block">→</span>
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Mobile Swipe Pagination Indicator */}
-        <div className="flex lg:hidden justify-center gap-2 mt-4">
-          {CARDS.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => handleIndicatorClick(idx)}
-              className={`h-1.5 rounded-full transition-all duration-300 ${idx === activeIndex ? "w-6 bg-[#C7A86A]" : "w-1.5 bg-[#0F2744]/25"
-                }`}
-              aria-label={`Go to slide ${idx + 1}`}
-            />
+                  <ArrowUpRight className="w-3.5 h-3.5 xs:w-4 xs:h-4 xl:w-5 xl:h-5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </div>
+              </div>
+            </Link>
           ))}
         </div>
       </div>
     </section>
   );
 }
+
+export default WhatWeCreate;
